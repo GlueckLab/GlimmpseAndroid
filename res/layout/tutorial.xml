@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:id="@+id/tutorial_view">
+    
+    <FrameLayout
+        android:id="@+id/group_panel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+
+        <RelativeLayout
+            android:id="@+id/groupadd"
+            android:layout_width="wrap_content"
+            android:layout_height="85dp"
+            android:orientation="horizontal" >
+
+		    <TextView
+		        android:id="@+id/description_textView_tutorial"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentLeft="true"
+		        android:layout_alignParentTop="true"
+		        android:layout_marginTop="10dp"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginRight="10dp"
+		        android:text="@string/description_tutorial"
+		        android:textAppearance="?android:attr/textAppearanceMedium"
+		        android:textColor="@color/black"
+		        android:textSize="13dp" />
+
+		    <!-- <TextView
+		        android:id="@+id/tutorial_list_header"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignLeft="@+id/description_textView_tutorial"
+		        android:layout_alignParentBottom="true"
+		        android:padding="5dp"
+		        android:text="@string/tutorial_list_header"
+		        android:textColor="@color/black"
+		        android:textSize="13dp"
+		        android:textStyle="bold" /> -->
+
+		</RelativeLayout>        
+    </FrameLayout>
+    
+    <ListView
+        android:id="@+id/tutorial_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/description_textView_tutorial"
+        android:layout_alignParentTop="true"
+        android:headerDividersEnabled="true"
+        android:textColor="@color/black"
+        android:padding="2dp"
+         android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp" >
+    </ListView>
+    
+    
+    
+    <!-- <edu.ucdenver.bios.SlideExpandableListView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/tutorial_list"
+	android:layout_height="match_parent"
+	android:layout_width="wrap_content"
+	android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"/> -->
+   
+</LinearLayout>

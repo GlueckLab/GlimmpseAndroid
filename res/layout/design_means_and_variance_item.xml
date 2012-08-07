@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+    		    
+	<RelativeLayout
+			android:layout_width="wrap_content"
+			android:layout_height="30dip"
+			android:orientation="horizontal"
+			android:id="@+id/design_item">			   	   
+	    
+		<TextView
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:id="@+id/list_item_textView_group"
+				android:textColor="@color/black"
+				android:textSize="11dp"
+				android:padding="6dp"
+				android:gravity="center_vertical"
+				android:text="Hello World"/>
+
+		<EditText
+		    android:id="@+id/variance"
+		    android:layout_width="70dp"
+		    android:layout_height="30dp"
+		    android:layout_alignParentRight="true"
+		    android:layout_alignParentTop="true"
+		    android:layout_marginRight="32dp"
+		    android:ems="2"
+		    android:gravity="center"
+		    android:inputType="number"
+		    android:textColor="@color/black"
+		    android:textSize="12dp" />
+
+		<EditText
+		    android:id="@+id/mean"
+		    android:layout_width="70dp"
+		    android:layout_height="30dp"
+		    android:layout_alignParentTop="true"
+		    android:layout_centerHorizontal="true"
+		    android:ems="4"
+		    android:inputType="numberDecimal"
+		    android:gravity="center"
+		    android:textColor="@color/black"
+		    android:textSize="12dp" />
+		
+	</RelativeLayout>
+	
+</LinearLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="min_groups">2</string>
+    <string name="max_groups">10</string>
+    <string name="defined_max_groups">8</string> <!-- max - min -->
+    <string name="min_alpha">0.01</string>
+    <string name="max_alpha">0.99</string>
+    <string name="max_input_progress">6</string>   
+</resources>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:background="@drawable/tutorial_list_item_selector">
+    		    
+	<RelativeLayout
+			android:layout_width="wrap_content"
+			android:layout_height="30dip"
+			android:orientation="horizontal"
+			android:id="@+id/item">			   	   
+	    
+		<TextView
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:id="@+id/list_item_textView_tutorial"
+				android:textColor="@color/black"
+				android:textSize="11dp"
+				android:padding="6dp"
+				android:gravity="center_vertical"
+				android:text="Hello World"/>
+		
+
+		<ImageButton 
+		    	android:id="@+id/expandable_toggle_button"
+		    	android:contentDescription="@+id/expandable_toggle_button"				
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignBottom="@+id/list_item_textView_tutorial"
+				android:layout_alignParentRight="true"
+				android:layout_alignTop="@id/list_item_textView_tutorial"
+				android:background="@drawable/ic_list_expand"/>
+		
+		<TextView
+		    android:id="@+id/expandable_toggle_button_details"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignBottom="@+id/list_item_textView_tutorial"
+		   android:layout_alignTop="@+id/list_item_textView_tutorial"
+		    android:layout_toLeftOf="@+id/expandable_toggle_button"
+		    android:text="@string/details_tutorial"
+		    android:textColor="@color/black"
+		    android:gravity="center"
+		    android:padding="2dp"
+		    android:textSize="10dp" />
+
+	</RelativeLayout>
+
+	<!-- <LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="50dip"
+			android:orientation="horizontal"
+			android:id="@+id/expandable"
+			android:background="#aaaaaa">
+
+		<TextView
+		    android:id="@+id/tutorial_list_item_description"
+		    android:layout_width="wrap_content"
+		    android:textColor="@color/black"
+		    android:layout_height="wrap_content"
+		    android:text="Small Text"
+		    android:padding="6dp"
+		    android:textSize="9dp"
+		    android:textAppearance="?android:attr/textAppearanceSmall" />
+		
+	</LinearLayout> -->
+</LinearLayout>

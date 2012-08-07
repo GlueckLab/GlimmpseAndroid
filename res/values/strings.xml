@@ -1,0 +1,122 @@
+<resources>
+
+    <!-- Version -->
+    <string name="version">Version 1.0.0</string>
+
+    <!-- Screen Titles -->
+    <string name="title_home">Glimmpse Light</string>
+    <string name="title_design">Inputs</string>
+    <string name="title_aboutus">About Us</string>
+    <string name="title_tutorial">Tutorial</string>
+    <string name="title_groups">Groups</string>
+    <string name="title_solving_for">Solving for</string>
+    <string name="title_smallest_group_size">Smallest Group Size</string>
+    <string name="title_type_i_error">Type I Error</string>
+    <string name="title_means_and_variance">Means and Variance</string>
+    <string name="title_results">Results</string>
+
+    <!-- Menu -->
+    <string name="menu_home">Home</string>
+    <string name="menu_design">Design</string>
+    <string name="menu_tutorial">Tutorial</string>
+    <string name="menu_aboutus">About Us</string>
+    <string name="menu_design_condensed">Design</string>
+    <string name="menu_tutorial_condensed">Learn</string>
+    <string name="menu_aboutus_condensed">AboutUs</string>
+
+    <!-- Back Button Label -->
+    <string name="back_button_label">Back</string>
+
+    <!-- Tutorial Header -->
+    <string name="tutorial_list_header">Tutorial</string>
+    <!-- Tutorial List -->
+    <string name="tutorial_solving_for">Solving For</string>
+    <string name="tutorial_type_one_error">Type I Error</string>
+    <string name="tutorial_number_of_groups">Number Of Groups</string>
+    <string name="tutorial_relative_group_size">Relative Group Size</string>
+    <string name="tutorial_smallest_group_size">Smallest Group Size</string>
+    <string name="tutorial_means_and_variance">Means and Variance</string>
+    <!-- Tutorial Description -->
+    <string name="tutorial_solving_for_description">Solving For</string>
+    <string name="tutorial_type_one_error_description">Type I Error</string>
+    <string name="tutorial_number_of_groups_description">Number Of Groups</string>
+    <string name="tutorial_relative_group_size_description">Relative Group Size</string>
+    <string name="tutorial_smallest_group_size_description">Smallest Group Size</string>
+    <string name="tutorial_means_and_variance_description">Means and Variance</string>
+
+    <!-- Home Screen -->
+    <!-- Text View -->
+    <string name="description_home">		        This application allows researchers to find appropriate power and sample size for one-way ANOVA.
+		        \n\nThe TITLE was developed at the Colorado School of Public Health, Department of Biostatistics and Informatics at the University of Colorado of Denver.           </string>
+    <!-- Button Label -->
+    <string name="design_home">Design</string>
+    <string name="learn_more_home">Learn More</string>
+    <string name="calculate_button">Calculate</string>
+
+    <!-- About Us Screen -->
+    <!-- Text View -->
+    <string name="description_aboutus">   			    The software was written by Sarah Kriedler, Uttara Sakhadeo, Aarti Munjal ..... with support from NCI K07CA88811, a grant from the National Cancer Institute of Science to the Colorado School of Public Health, Dr. Deborah Glueck, Principal Investigator.
+				\n\nThe power calculations are based on the work of Dr. Keith E. Muller at the University of Florida. Appropriate citations for the supporting publications are available on the related publications page.
+				\n\nFor inquiries about the current versionof the application or to report a bug please email ......</string>
+
+    <!-- Tutorial Screen -->
+    <!-- Text View -->
+    <string name="description_tutorial">			    List of inputs. Please click on each tab for more details.</string>
+    <string name="details_tutorial">Details</string>
+
+    <!-- Tutorial Solving For Screen -->
+    <string name="description_tutorial_solving_for">		    To begin your calculation please indicate whether you would like to solve for power or total sample size.
+			\n\nPower: If you know the number of participants you can recruit.
+			\n\nSample Size: If you would like to ensure a well-powered study.</string>
+
+    <!-- Tutorial Type I Error Screen -->
+    <string name="description_tutorial_alpha"><p>Type I error indicates the probability of incorrectly identifying a significant difference when there is none (i.e. rejecting a tru null hypothesis). Type I error values range from 0 to 1. The most commonly used values are 0.01, 0.05 and 0.1</p></string>
+
+    <!-- Tutorial Number Of Groups Screen -->
+    <string name="description_tutorial_groups"><p>To begin your calculation please indicate the total number of groups for the design.</p></string>
+
+    <!-- Tutorial Relative Group Size Screen -->
+    <string name="description_tutorial_relative_size"><p>Specify whether the study subgroups are of equal or unequal size.
+			\n\nFor equal sizes, select a "1" in the drop down list next to each study dubgroup. This is the default study design.
+			\n\nFor unequal group sizes, specify the ratio of the group sizes.</p></string>
+
+    <!-- Tutorial Smallest Group Size Screen -->
+    <string name="description_tutorial_smallest_group"><p>Specify the smallest number of participants in the smallest group</p></string>
+
+    <!-- Tutorial Means And Variance Screen -->
+    <string name="description_tutorial_mean_variance"><p>In power analysis it is necessary to provide mean values for the outcomes. The means are often obtained from published results or pilot data.
+			\n\nMeans: Enter the mean values you expect to observe for each outcome within each study subgroup.
+			\n\nWithin Each Group Variance: Enter standard deviation for the study outcomes. The standard deviation value shout reflect the variability within a study subgroup.</p></string>
+
+    <!-- Groups Screen -->
+    <string name="description_group_count">Enter the number of groups to be analyzed.</string>
+
+    <!-- Type I Error Screen -->
+    <string name="description_alpha">Enter Type I Error for the analysis.</string>
+
+    <!-- Smallest Group Size Screen -->
+    <string name="description_smallest_group_size">Specify the smallest number of participants in the smallest group.</string>
+
+    <!-- Solving For Screen -->
+    <string name="description_solving_for">\nChoose sample size if you have fewer restrictions on recruitment and would like to ensure a well-powered study.        
+			\n\nChose power if you have a rough idea of number of research participants you will be able to recruite.</string>
+	<string name="power">Power</string>
+	<string name="sample_size">Sample Size</string>
+	
+	<!-- Means and Variance Screen -->
+	<string name="description_means_and_variance">..............</string>
+	<string name="means_variance_list_header_group">Group</string>
+	<string name="means_variance_list_header_mean">Mean</string>
+	<string name="means_variance_list_header_variance">Variance</string>
+	
+    <!-- Alert -->
+    <!-- Data won't be saved -->
+    <string name="data_not_saved_alert">This will lose the information. Do you want to proceed?</string>
+
+    <!-- App Name -->
+    <string name="app_name">Glimmpse Light</string>
+
+    <color name="titlebackgroundcolor">#3232CD</color>
+    <color name="titletextcolor">#FFFF00</color>
+
+</resources>
