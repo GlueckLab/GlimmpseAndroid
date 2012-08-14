@@ -27,12 +27,12 @@ public class TutorialSubScreenActivity extends Activity implements OnClickListen
 			 
 			 Button homeButton = (Button) findViewById(R.id.home_button);
 			 homeButton.setOnClickListener(this);
-			 
+			 /*
 			 Button back = (Button) findViewById(R.id.back_button);
-			 back.setOnClickListener(this);
+			 back.setOnClickListener(this);*/
 			 
 			 TextView title = (TextView)findViewById(R.id.window_title);
-			 title.setText(getResources().getString(R.string.title_tutorial));
+			 title.setText(getResources().getString(R.string.menu_tutorial));
 			 
 			 TextView heading = (TextView) findViewById(R.id.title_textView_tutorial_sub_screen);
 			 	 

@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,13 +15,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
-import edu.ucdenver.bios.glimmpseandroid.application.GlobalVariables;
+import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 
 public class SmallestGroupSizeActivity extends Activity implements TextWatcher{
 	
 	static Integer smallestGroupSize;	
 	static EditText value;
 	static Drawable img;
+	static StuyDesignContext stuyDesignContext = StuyDesignContext.getInstance();
 	//static ImageButton clear;
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,9 @@ public class SmallestGroupSizeActivity extends Activity implements TextWatcher{
 		
 		value = (EditText) findViewById(R.id.smallest_group_size);
 		
-		smallestGroupSize = GlobalVariables.getInstance().getSmallestGroupSize();
+		if(stuyDesignContext.getSmallestGroupSize() == 0)
+		    stuyDesignContext.setDefaultSmallestGroupSize();		
+		smallestGroupSize = stuyDesignContext.getSmallestGroupSize();
 		if(smallestGroupSize != null) {
 			if(smallestGroupSize == 0) {
 				value.setText("");	
@@ -140,7 +144,14 @@ public class SmallestGroupSizeActivity extends Activity implements TextWatcher{
 	private void resetText(){
 		if(smallestGroupSize == null)
 			smallestGroupSize = 0;
-		GlobalVariables.getInstance().setSmallestGroupSize(smallestGroupSize);	
+		stuyDesignContext.setSmallestGroupSize(smallestGroupSize);	
 	}
 	
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            return true;
+         }
+         return super.onKeyDown(keyCode, event);
+    }
 }

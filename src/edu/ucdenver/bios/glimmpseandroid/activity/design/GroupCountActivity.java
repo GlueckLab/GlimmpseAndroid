@@ -12,13 +12,13 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
-import edu.ucdenver.bios.glimmpseandroid.application.GlobalVariables;
+import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 
 public class GroupCountActivity extends Activity implements OnClickListener {
 	static SeekBar seekbar;
 	static TextView value;
-	static int groups;	
-	//static GlobalVariables globalVariables;
+	static int groups;		
+	static StuyDesignContext stuyDesignContext = StuyDesignContext.getInstance();
 
 	public void onCreate(Bundle savedInstanceState) {
 
@@ -54,7 +54,10 @@ public class GroupCountActivity extends Activity implements OnClickListener {
 		 * seekbar.setProgress(groups-2);
 		 * value.setText(Integer.toString(groups)); } }
 		 */
-		groups = GlobalVariables.getInstance().getGroups();
+		if(stuyDesignContext.getGroups() == 0) {
+		    stuyDesignContext.setDefaultGroups();
+		}
+		groups = stuyDesignContext.getGroups();
 		seekbar.setProgress(groups
 				- Integer.parseInt(getResources().getString(
 						R.string.default_groups)));
@@ -107,7 +110,7 @@ public class GroupCountActivity extends Activity implements OnClickListener {
 		 * Intent(GroupCountActivity.this,DesignListAdapter.class); //Intent
 		 * result=new Intent(); result.putExtras(bundle); setResult(0, result);
 		 */
-		GlobalVariables.getInstance().setGroups(groups);			
+	    stuyDesignContext.setGroups(groups);			
 		finish();
 	}
 }

@@ -3,6 +3,8 @@ package edu.ucdenver.bios.glimmpseandroid.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -12,7 +14,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
-import edu.ucdenver.bios.glimmpseandroid.application.GlobalVariables;
+import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 
 
 // TODO: Auto-generated Javadoc
@@ -41,6 +43,7 @@ public class MainActivity extends Activity {
 		    useTitleFeature = window
 		        .requestFeature(Window.FEATURE_CUSTOM_TITLE);
 		}
+		
 
 		setContentView(R.layout.home_screen);		
 		
@@ -55,8 +58,7 @@ public class MainActivity extends Activity {
 		homeButton.setVisibility(View.GONE);
 						
 		TextView title = (TextView)findViewById(R.id.window_title);
-		title.setText(res.getString(R.string.app_name));
-		
+		title.setText(res.getString(R.string.title_home));
 		
 		}
 
@@ -94,13 +96,18 @@ public class MainActivity extends Activity {
 	
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-        	GlobalVariables.resetInstance();
+        	//GlobalVariables.resetInstance();
+            StuyDesignContext.resetInstance();
             finish();
             return true;
          }
          return super.onKeyDown(keyCode, event);
 	}
 	
+	/*@Override
+	public void onConfigurationChanged(Configuration newConfig) {       
+	    super.onConfigurationChanged(newConfig);	    
+	}*/
 
 	/*
 	 * @Override public boolean onCreateOptionsMenu(Menu menu) {

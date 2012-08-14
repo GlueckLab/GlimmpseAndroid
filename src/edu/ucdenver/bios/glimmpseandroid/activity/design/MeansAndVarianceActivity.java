@@ -9,15 +9,16 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
 import edu.ucdenver.bios.glimmpseandroid.adapter.MeansAndVarianceAdapter;
 import edu.ucdenver.bios.glimmpseandroid.application.GlobalVariables;
+import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;;
 
 public class MeansAndVarianceActivity extends Activity implements OnClickListener{
-	static List<Double> means;
 	private ListView meanVarianceList;
 	static Drawable img;
 	
@@ -54,7 +55,9 @@ public class MeansAndVarianceActivity extends Activity implements OnClickListene
 		View header =  getLayoutInflater().inflate(R.layout.design_means_and_variance_list_header, null, false);
         if(meanVarianceList.getHeaderViewsCount() == 0)
             meanVarianceList.addHeaderView(header);
-		meanVarianceList.setAdapter(new MeansAndVarianceAdapter(MeansAndVarianceActivity.this,GlobalVariables.getInstance().getGroups(), img));
+        int groups = StuyDesignContext.getInstance().getGroups();
+        if(groups > 0)
+            meanVarianceList.setAdapter(new MeansAndVarianceAdapter(MeansAndVarianceActivity.this,groups, img));
 		
 		
 	}	
@@ -69,7 +72,7 @@ public class MeansAndVarianceActivity extends Activity implements OnClickListene
 	
 	
 	public void onClick(View v) {		
-		GlobalVariables.getInstance().setMeans(means);			
+		//GlobalVariables.getInstance().setMeans(means);		    
 		finish();
 	}
 	

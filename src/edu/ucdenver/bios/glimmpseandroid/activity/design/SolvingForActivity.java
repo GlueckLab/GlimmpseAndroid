@@ -12,12 +12,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
-import edu.ucdenver.bios.glimmpseandroid.application.GlobalVariables;
+import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 
 public class SolvingForActivity extends Activity implements OnClickListener {
 	static RadioGroup values;
 	static RadioButton checked;
 	static String solvingFor;	
+	static StuyDesignContext stuyDesignContext = StuyDesignContext.getInstance();
 	//static GlobalVariables globalVariables;
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class SolvingForActivity extends Activity implements OnClickListener {
 
 		values = (RadioGroup) findViewById(R.id.radioGroup_solvingFor);
 		
-		solvingFor = GlobalVariables.getInstance().getSolvingFor();		
+		solvingFor = stuyDesignContext.getSolvingFor();
 		if(solvingFor != null){
 			if(solvingFor.equals(((RadioButton)values.getChildAt(0)).getText())) {				
 				((RadioButton)values.getChildAt(0)).setSelected(true);
@@ -81,7 +82,7 @@ public class SolvingForActivity extends Activity implements OnClickListener {
 				solvingFor = getResources().getString(R.id.radio_sample_size);
 				break;
 		}*/
-		GlobalVariables.getInstance().setSolvingFor(solvingFor);			
+		stuyDesignContext.setSolvingFor(solvingFor);			
 		finish();
 	}
 }

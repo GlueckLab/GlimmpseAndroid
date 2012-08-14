@@ -18,7 +18,7 @@ import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
 import edu.ucdenver.bios.glimmpseandroid.adapter.DesignListAdapter;
 import edu.ucdenver.bios.glimmpseandroid.adapter.TutorialAdapter;
-import edu.ucdenver.bios.glimmpseandroid.application.GlobalVariables;
+import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 
 /*
  @SuppressWarnings("deprecation")
@@ -148,270 +148,294 @@ import edu.ucdenver.bios.glimmpseandroid.application.GlobalVariables;
  * }
  */
 public class TabViewActivity extends Activity implements TabContentFactory {
-	String[] labels;
-	String[] titles;
-	private ListView tutorialListView;
-	private ListView designListView;
-	private TabHost mTabHost;
-	private final int TAB_HEIGHT = 50; // set desired value here instead of 50
-	private View tabOneContentView;
-	private View tabTwoContentView;
-	private View tabThreeContentView;
-	GlobalVariables globalVariables;
-	
-	protected void onResume()
-	{
-	   super.onResume();
-	   // If current screen is Design
-	   if(mTabHost.getCurrentTab() == 1) {
-		   designListPopulate();
-		   globalVariables = GlobalVariables.getInstance();
-		   ProgressBar inputProgress = (ProgressBar) findViewById(R.id.input_progress);
-		   //System.out.println("Tab View total progress : "+globalVariables.getTotalProgress());
-	       inputProgress.setProgress(globalVariables.getTotalProgress());   
-	   }	   
-	}
+    String[] labels;
+    //String[] titles;
+    private ListView tutorialListView;
+    private ListView designListView;
+    private TabHost mTabHost;
+    private final int TAB_HEIGHT = 50; // set desired value here instead of 50
+    private View tabOneContentView;
+    private View tabTwoContentView;
+    private View tabThreeContentView;
+    StuyDesignContext globalVariables;
 
+    protected void onResume() {
+        super.onResume();
+        // If current screen is Design
+        if (mTabHost.getCurrentTab() == 1) {
+            designListPopulate();
+            globalVariables = StuyDesignContext.getInstance();
+            ProgressBar inputProgress = (ProgressBar) findViewById(R.id.input_progress);
+            // System.out.println("Tab View total progress : "+globalVariables.getTotalProgress());
+            inputProgress.setProgress(globalVariables.getTotalProgress());
+        }
+    }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		// set the view for the activity
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // set the view for the activity
 
-		final Window window = getWindow();
-		boolean useTitleFeature = false;
-		// If the window has a container, then we are not free
-		// to request window features.
-		if (window.getContainer() == null) {
-			useTitleFeature = window
-					.requestFeature(Window.FEATURE_CUSTOM_TITLE);
-		}
-		setContentView(R.layout.main);
-		setupViews();
-		if (useTitleFeature) {
-			window.setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-		}
-		Resources res = getResources();
+        final Window window = getWindow();
+        boolean useTitleFeature = false;
+        // If the window has a container, then we are not free
+        // to request window features.
+        if (window.getContainer() == null) {
+            useTitleFeature = window
+                    .requestFeature(Window.FEATURE_CUSTOM_TITLE);
+        }
+        setContentView(R.layout.main);
+        setupViews();
+        if (useTitleFeature) {
+            window.setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
+        }
+        Resources res = getResources();
 
-		labels = res.getStringArray(R.array.tab_labels);
-		titles = res.getStringArray(R.array.tabed_window_titles);
+        labels = res.getStringArray(R.array.tab_labels);
+        //titles = res.getStringArray(R.array.tabed_window_titles);
 
-		Button homeButton = (Button) findViewById(R.id.home_button);
-		homeButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				//GlobalVariables.resetInstance();
-				finish();
-			}
-		});
-		
-		globalVariables = GlobalVariables.getInstance();
-				
-		// setup Views for each tab
+        Button homeButton = (Button) findViewById(R.id.home_button);
+        homeButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                // GlobalVariables.resetInstance();
+                finish();
+            }
+        });
 
-		// call method to set up tabs
-		mTabHost = (TabHost) findViewById(android.R.id.tabhost);
-		mTabHost.setup(); 
-		// mTabHost.setOnTabChangedListener(this); //use this Activity as the
-		// onTabChangedListener
+        globalVariables = StuyDesignContext.getInstance();
 
-		// setup each individual tab
-		setupTab(labels[0]);
-		setupTab(labels[1]);
-		setupTab(labels[2]);
-		setTabHeight(TAB_HEIGHT);
+        // setup Views for each tab
 
-		TextView title = (TextView) findViewById(R.id.window_title);
+        // call method to set up tabs
+        mTabHost = (TabHost) findViewById(android.R.id.tabhost);
+        mTabHost.setup();
+        // mTabHost.setOnTabChangedListener(this); //use this Activity as the
+        // onTabChangedListener
 
-		Bundle extras = this.getIntent().getExtras();
-		if (extras != null) {
-			//if(extras.containsKey("tab_id")){
-				int tab_id = extras.getInt("tab_id");		
-				for (int i = 2; i >= tab_id; i--) {
-					mTabHost.setCurrentTab(i);
-				}
-				title.setText(titles[tab_id]);			
-		} else {
-			for (int i = 2; i >= 0; i--) {
-				mTabHost.setCurrentTab(i);
-			}
-			title.setText(titles[0]);
-		}
-				
+        // setup each individual tab
+        setupTab(labels[0]);
+        setupTab(labels[1]);
+        setupTab(labels[2]);
+        setTabHeight(TAB_HEIGHT);
 
-		mTabHost.setOnTabChangedListener(new OnTabChangeListener() {
+        TextView title = (TextView) findViewById(R.id.window_title);
 
-			public void onTabChanged(String tabId) {
-				TextView title = (TextView) findViewById(R.id.window_title);
-				if (tabId != null) {
-					if (!tabId.equals(labels[0]))
-						title.setText(tabId);
-					if(tabId.equals(labels[1]))
-						designListPopulate();
+        Bundle extras = this.getIntent().getExtras();
+        if (extras != null) {
+            // if(extras.containsKey("tab_id")){
+            int tab_id = extras.getInt("tab_id");
+            for (int i = 2; i >= tab_id; i--) {
+                mTabHost.setCurrentTab(i);
+            }
+            //title.setText(titles[tab_id]);
+            title.setText(labels[tab_id]);
+        } else {
+            for (int i = 2; i >= 0; i--) {
+                mTabHost.setCurrentTab(i);
+            }
+            //title.setText(titles[0]);
+            title.setText(labels[0]);
+        }
 
-				} else {
-					tutorialListPopulate();
-					title.setText(titles[0]);
-				}
-			}
-		});
-		
-		Button resetButton = (Button) findViewById(R.id.reset);		
-		resetButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				GlobalVariables.resetInstance();
-				designListPopulate();	
-				globalVariables.resetProgress();
-				ProgressBar inputProgress = (ProgressBar) findViewById(R.id.input_progress);
-				   System.out.println("reset progress : "+globalVariables.getTotalProgress());
-				inputProgress.setProgress(globalVariables.getTotalProgress()); 				
-			}
-		});
-				    
-		Button calculateButton = (Button) findViewById(R.id.calculate_button);
-		ProgressBar loadingProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
-		TextView loadingText = (TextView) findViewById(R.id.textView1);
-		loadingProgressBar.setVisibility(View.INVISIBLE);
-		loadingText.setVisibility(View.INVISIBLE);
-		if(GlobalVariables.getInstance().getTotalProgress() != 6) {			
-			calculateButton.setClickable(false);
-			calculateButton.setEnabled(false);
-			
-		}
-		else{
-			calculateButton.setEnabled(true);
-			calculateButton.setClickable(true);			
-		}
-		calculateButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				v.setVisibility(View.INVISIBLE);
-				ProgressBar loadingProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
-				TextView loadingText = (TextView) findViewById(R.id.textView1);
-				loadingProgressBar.setVisibility(View.VISIBLE);
-				loadingText.setVisibility(View.VISIBLE);			
-			}
-		});
-	}
-	
-	private void tutorialListPopulate() {
-		String[] tutorialList = getResources().getStringArray(
-				R.array.tutorial_list);
-		
-		tutorialListView = (ListView) findViewById(R.id.tutorial_list_view);
-		View header1 =  getLayoutInflater().inflate(R.layout.tutorial_list_header, null, false);
-		if(tutorialListView.getHeaderViewsCount() == 0)
-			tutorialListView.addHeaderView(header1);
-		
-		tutorialListView.setAdapter(new TutorialAdapter(getBaseContext(),
-				tutorialList));
-	}
-	
-	private void designListPopulate() {
-		String[] designList = getResources().getStringArray(
-				R.array.tutorial_list);		
+        mTabHost.setOnTabChangedListener(new OnTabChangeListener() {
 
-		designListView = (ListView) findViewById(R.id.design_list_view);
-		
-		designListView.setAdapter(new DesignListAdapter(getBaseContext(),
-				designList));
-	}
-	
+            public void onTabChanged(String tabId) {
+                TextView title = (TextView) findViewById(R.id.window_title);
+                if (tabId != null) {
+                    /*if (!tabId.equals(labels[0]))
+                        title.setText(tabId);
+                    else {
+                        
+                    }*/
+                    title.setText(tabId);
+                    if (tabId.equals(labels[1]))
+                        designListPopulate();
 
-	/**
-	 * Sets up the Views for each tab
-	 */
-	public void setupViews() {
-		tabOneContentView = findViewById(R.id.tutorial_view);
-		tabTwoContentView = findViewById(R.id.start_view);
-		tabThreeContentView = findViewById(R.id.about_us_view);		
-	}
+                } else {
+                    tutorialListPopulate();
+                    //title.setText(titles[0]);
+                    title.setText(labels[0]);
+                }
+            }
+        });
 
-	/**
-	 * Sets up the tabs for this Activity
-	 */
-	public void setupTabs() {
-		/*
-		 * mTabHost = (TabHost) findViewById(android.R.id.tabhost);
-		 * mTabHost.setup(); //must be called
-		 * mTabHost.setOnTabChangedListener(this); //use this Activity as the
-		 * onTabChangedListener //setup each individual tab
-		 * setupTab(TAB_ONE_TAG); setupTab(TAB_TWO_TAG);
-		 * setupTab(TAB_THREE_TAG); setTabHeight(TAB_HEIGHT);
-		 */
-		// Workaround for "bleeding-through" overlay issue. Set each tab as
-		// current tab, by index.
-		// Order should not matter, but the first tab to be shown should be set
-		// last.
-		// mTabHost.setCurrentTab(1);
-		// mTabHost.setCurrentTab(0);
-	}
+        Button resetButton = (Button) findViewById(R.id.reset);
+        resetButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                StuyDesignContext.resetInstance();
+                designListPopulate();
+                globalVariables.resetProgress();
+                ProgressBar inputProgress = (ProgressBar) findViewById(R.id.input_progress);
+                System.out.println("reset progress : "
+                        + globalVariables.getTotalProgress());
+                inputProgress.setProgress(globalVariables.getTotalProgress());
+            }
+        });
 
-	/**
-	 * Sets up a new tab with given tag by creating a View for the tab (via
-	 * createTabView() ) and adding it to the tab host
-	 * 
-	 * @param tag
-	 *            The tag of the tab to setup
-	 */
-	public void setupTab(String tag) {
-		View tabView = createTabView(mTabHost.getContext(), tag);
-		mTabHost.addTab(mTabHost.newTabSpec(tag).setIndicator(tabView)
-				.setContent(this));
-	}
+        Button calculateButton = (Button) findViewById(R.id.calculate_button);
+        ProgressBar loadingProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
+        TextView loadingText = (TextView) findViewById(R.id.textView1);
+        loadingProgressBar.setVisibility(View.INVISIBLE);
+        loadingText.setVisibility(View.INVISIBLE);
+        if (StuyDesignContext.getInstance().getTotalProgress() != 6) {
+            calculateButton.setClickable(false);
+            calculateButton.setEnabled(false);
 
-	/**
-	 * Creates a View for a tab
-	 * 
-	 * @param context
-	 *            The context from which the LayoutInflater is obtained
-	 * @param tag
-	 *            The tag to be used as the label on the tab
-	 * @return The inflated view to be used by a tab
-	 */
-	private View createTabView(Context context, String tag) {
-		View view = LayoutInflater.from(context)
-				.inflate(R.layout.tabs_bg, null);
-		TextView tv = (TextView) view.findViewById(R.id.tabsText);
-		// this sets the tab's tag as the label that displays on the view, but
-		// can be anything
-		tv.setText(tag);
-		return view;
-	}
+        } else {
+            calculateButton.setEnabled(true);
+            calculateButton.setClickable(true);
+        }
+        calculateButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                v.setVisibility(View.INVISIBLE);
+                ProgressBar loadingProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
+                TextView loadingText = (TextView) findViewById(R.id.textView1);
+                loadingProgressBar.setVisibility(View.VISIBLE);
+                loadingText.setVisibility(View.VISIBLE);
+            }
+        });
+    }
 
-	/**
-	 * Sets a custom height for the TabWidget, in dp-units
-	 * 
-	 * @param height
-	 *            The height value, corresponding to dp-units
-	 */
-	public void setTabHeight(int height) {
-		for (int i = 0; i < mTabHost.getTabWidget().getTabCount(); i++) {
-			mTabHost.getTabWidget().getChildAt(i).getLayoutParams().height = (int) (height * this
-					.getResources().getDisplayMetrics().density);
-		}
-	}
+    private void tutorialListPopulate() {
+        String[] tutorialList = getResources().getStringArray(
+                R.array.tutorial_list);
 
-	public View createTabContent(String tag) {
-		if (tag.compareTo(labels[0]) == 0) {
-			tutorialListPopulate();
-			return tabOneContentView;
-		}
-		else if (tag.compareTo(labels[1]) == 0) {
-			designListPopulate();
-			return tabTwoContentView;
-		}
-		else if (tag.compareTo(labels[2]) == 0)
-			return tabThreeContentView;
-		else
-			return tabOneContentView;
-	}
-	
-	/*public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-        	GlobalVariables.resetInstance();
-            finish();
-            return true;
-         }
-         return super.onKeyDown(keyCode, event);
-	}*/
-	
+        tutorialListView = (ListView) findViewById(R.id.tutorial_list_view);
+        View header1 = getLayoutInflater().inflate(
+                R.layout.tutorial_list_header, null, false);
+        if (tutorialListView.getHeaderViewsCount() == 0)
+            tutorialListView.addHeaderView(header1);
+
+        tutorialListView.setAdapter(new TutorialAdapter(getBaseContext(),
+                tutorialList));
+    }
+
+    private void designListPopulate() {
+        //String solvingFor = StuyDesignContext.getInstance().getStudyDesign().getSolutionTypeEnum().toString();
+        String solvingFor = StuyDesignContext.getInstance().getSolvingFor();
+       
+        String[] designList = getResources().getStringArray(
+                R.array.tutorial_list);
+        //if(solvingFor != null) {
+            String[] temp = new String[7];
+            int index = 6;
+            while(index > 1) {
+                temp[index] = designList[index-1]; 
+                index--;
+            }
+            if(solvingFor != null) 
+             temp[1] = solvingFor;            
+            temp[0] = designList[0];
+            designList = temp;
+        //}
+        /*if(solvingFor != null) {
+            String[] temp = new String[7];
+            int index = 0;
+            while(index < 6) {
+                temp[index+1] = designList[index]; 
+                index++;
+            }
+            temp[6] = solvingFor;
+        }*/
+        
+        designListView = (ListView) findViewById(R.id.design_list_view);
+
+        designListView.setAdapter(new DesignListAdapter(getBaseContext(),
+                designList));
+        
+    }
+
+    /**
+     * Sets up the Views for each tab
+     */
+    public void setupViews() {
+        tabOneContentView = findViewById(R.id.tutorial_view);
+        tabTwoContentView = findViewById(R.id.start_view);
+        tabThreeContentView = findViewById(R.id.about_us_view);
+    }
+
+    /**
+     * Sets up the tabs for this Activity
+     */
+    public void setupTabs() {
+        /*
+         * mTabHost = (TabHost) findViewById(android.R.id.tabhost);
+         * mTabHost.setup(); //must be called
+         * mTabHost.setOnTabChangedListener(this); //use this Activity as the
+         * onTabChangedListener //setup each individual tab
+         * setupTab(TAB_ONE_TAG); setupTab(TAB_TWO_TAG);
+         * setupTab(TAB_THREE_TAG); setTabHeight(TAB_HEIGHT);
+         */
+        // Workaround for "bleeding-through" overlay issue. Set each tab as
+        // current tab, by index.
+        // Order should not matter, but the first tab to be shown should be set
+        // last.
+        // mTabHost.setCurrentTab(1);
+        // mTabHost.setCurrentTab(0);
+    }
+
+    /**
+     * Sets up a new tab with given tag by creating a View for the tab (via
+     * createTabView() ) and adding it to the tab host
+     * 
+     * @param tag
+     *            The tag of the tab to setup
+     */
+    public void setupTab(String tag) {
+        View tabView = createTabView(mTabHost.getContext(), tag);
+        mTabHost.addTab(mTabHost.newTabSpec(tag).setIndicator(tabView)
+                .setContent(this));
+    }
+
+    /**
+     * Creates a View for a tab
+     * 
+     * @param context
+     *            The context from which the LayoutInflater is obtained
+     * @param tag
+     *            The tag to be used as the label on the tab
+     * @return The inflated view to be used by a tab
+     */
+    private View createTabView(Context context, String tag) {
+        View view = LayoutInflater.from(context)
+                .inflate(R.layout.tabs_bg, null);
+        TextView tv = (TextView) view.findViewById(R.id.tabsText);
+        // this sets the tab's tag as the label that displays on the view, but
+        // can be anything
+        tv.setText(tag);
+        return view;
+    }
+
+    /**
+     * Sets a custom height for the TabWidget, in dp-units
+     * 
+     * @param height
+     *            The height value, corresponding to dp-units
+     */
+    public void setTabHeight(int height) {
+        for (int i = 0; i < mTabHost.getTabWidget().getTabCount(); i++) {
+            mTabHost.getTabWidget().getChildAt(i).getLayoutParams().height = (int) (height * this
+                    .getResources().getDisplayMetrics().density);
+        }
+    }
+
+    public View createTabContent(String tag) {
+        if (tag.compareTo(labels[0]) == 0) {
+            tutorialListPopulate();
+            return tabOneContentView;
+        } else if (tag.compareTo(labels[1]) == 0) {
+            designListPopulate();
+            return tabTwoContentView;
+        } else if (tag.compareTo(labels[2]) == 0)
+            return tabThreeContentView;
+        else
+            return tabOneContentView;
+    }
+
+    /*
+     * public boolean onKeyDown(int keyCode, KeyEvent event) { if (keyCode ==
+     * KeyEvent.KEYCODE_BACK) { GlobalVariables.resetInstance(); finish();
+     * return true; } return super.onKeyDown(keyCode, event); }
+     */
+
 }

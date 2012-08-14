@@ -21,13 +21,14 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
 import edu.ucdenver.bios.glimmpseandroid.application.GlobalVariables;
+import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 
 public class TypeIErrorActivity extends Activity implements OnClickListener, TextWatcher {
 	static EditText value;
 	static Double alpha;
 	static Drawable img;
 	static  DecimalFormat format = new DecimalFormat(".##");
-	GlobalVariables globalVariables = GlobalVariables.getInstance();
+	static StuyDesignContext stuyDesignContext = StuyDesignContext.getInstance();
 
 	public void onCreate(Bundle savedInstanceState) {
 
@@ -48,7 +49,7 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
 		
 		img = getResources().getDrawable( R.drawable.clear_button );
         img.setBounds( 0, 0, 32, 32 );
-        
+                
 		Button homeButton = (Button) findViewById(R.id.home_button);
 		homeButton.setOnClickListener(this);
 
@@ -65,7 +66,7 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
             public boolean onTouch(View arg0, MotionEvent arg1) {               
             if (arg1.getX() > value.getWidth()
             - img.getIntrinsicWidth() - 10) {
-                value.setText("");
+                value.setText("0.");
                 resetText();
             }
             return false;
@@ -73,28 +74,26 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
     
         });
 		
-		alpha = globalVariables.getTypeIError();
+		if(stuyDesignContext.getTypeIError() == 0.0)
+		    stuyDesignContext.setDefaultTypeIError();
+		alpha = stuyDesignContext.getTypeIError();
 		if(alpha != null){		    
 		    alpha = Double.parseDouble(format.format(alpha));
-		    value.setText(String.format("%010d", toInt(alpha)));
+		    //value.setText(Double.toString(alpha%1));
+		    //value.setText(String.format("%02d", toInt(alpha)));
+		    value.setText(Double.toString(alpha));
 		    value.setCompoundDrawables( null, null, img, null );
 		}
 		else {
-		    value.setText("");
+		    value.setText("0.");
 		    value.setCompoundDrawables( null, null, null, null );
 		}
 		
 	}	
 	
-	private Double toDouble(int value){
-	    return Double.parseDouble(format.format(new Double(value)));
-	}
-	
-	private int toInt(Double value) {
-	   return new Double(value*100).intValue();
-	   //return Integer.parseInt(data);	   
-	}
-		
+	/*private Double toDouble(int value){
+	    return Double.parseDouble(format.format(new Double(value)/100));
+	}*/	
 	
 	private void resetText(){
         if(alpha == null)
@@ -118,24 +117,30 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
         if(String.valueOf(s) != null || String.valueOf(s).equals("")) {
             value.setCompoundDrawables( null, null, img, null );
             try {
-                alpha = toDouble(Integer.parseInt(String.valueOf(s)));
-                //clear.setVisibility(View.VISIBLE);
+                //alpha = toDouble(Integer.parseInt(String.valueOf(s)));
+                alpha = (Double.parseDouble(String.valueOf(s)))%1;                
             }
             catch(Exception e){
                 alpha = Double.parseDouble(format.format(0));
-                value.setCompoundDrawables( null, null, null, null );
-                //clear.setVisibility(View.INVISIBLE);
+                value.setCompoundDrawables( null, null, null, null );                
             }
         }
         else {
-            value.setCompoundDrawables( null, null, null, null );
-            //clear.setVisibility(View.INVISIBLE);
+            value.setCompoundDrawables( null, null, null, null );            
         }
     }
     
     public void onClick(View v) {   
-        globalVariables.setTypeIError(alpha);       
+        stuyDesignContext.setTypeIError(alpha);       
         finish();
+    }
+    
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            return true;
+         }
+         return super.onKeyDown(keyCode, event);
     }
 
 }
