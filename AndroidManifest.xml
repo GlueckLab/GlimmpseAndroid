@@ -4,53 +4,107 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="9"
         android:targetSdkVersion="15" />
+    
+    <uses-permission android:name="android.permission.INTERNET" />
 
-    <application 
+    <application
+        android:debuggable="true"
         android:icon="@drawable/ic_launcher_glimmpse"
         android:label="@string/app_name"
         android:theme="@style/MyTheme" >
+        
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/app_name" >
+            android:configChanges="keyboardHidden"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
         <!-- Input Screen -->
-        <activity android:name=".activity.StartActivity"></activity>
-        
+        <activity
+            android:name=".activity.StartActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" >
+        </activity>
+
         <!-- About Us Screen -->
-        <activity android:name=".activity.LearnMoreActivity"></activity>
-        
-         <!-- Tutorial Screen -->
-         <activity android:name=".activity.TutorialActivity"></activity>
-         
-         <!-- Tutorial Screen -->
-         <activity android:name=".activity.TabViewActivity"></activity>
-                  
-         <!-- Type I Error Tutorial Screen -->
-         <activity android:name=".activity.TutorialSubScreenActivity"></activity>
-         
-         <!-- Number of Groups - Design Screen -->
-         <activity android:name=".activity.design.GroupCountActivity"></activity>
-         
-         <!-- Type I Error - Design Screen -->
-         <activity android:name=".activity.design.TypeIErrorActivity"></activity>
-         
-         <!-- Smallest Group Size - Design Screen -->
-         <activity android:name=".activity.design.SmallestGroupSizeActivity"></activity>
-         
-         <!-- Solving For - Design Screen -->
-         <activity android:name=".activity.design.SolvingForActivity"></activity>
-         
-         <!-- Means and Variance - Design Screen -->
-         <activity android:name=".activity.design.MeansAndVarianceActivity"></activity>
-         
+        <activity
+            android:name=".activity.LearnMoreActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- Tutorial Screen -->
+        <activity
+            android:name=".activity.TutorialActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- Tutorial Screen -->
+        <activity
+            android:name=".activity.TabViewActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- Type I Error Tutorial Screen -->
+        <activity
+            android:name=".activity.TutorialSubScreenActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- Number of Groups - Design Screen -->
+        <activity
+            android:name=".activity.design.GroupCountActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- Type I Error - Design Screen -->
+        <activity
+            android:name=".activity.design.TypeIErrorActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- Smallest Group Size - Design Screen -->
+        <activity
+            android:name=".activity.design.SmallestGroupSizeActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+
+        <!-- Solving For - Design Screen -->
+        <activity
+            android:name=".activity.design.SolvingForActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- Means and Variance - Design Screen -->
+        <activity
+            android:name=".activity.design.MeansAndVarianceActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+
+        <!-- Relative Group Size - Design Screen -->
+        <activity
+            android:name=".activity.design.RelativeGroupSizeActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>
