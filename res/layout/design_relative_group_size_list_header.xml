@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#D7D7D7" >
+
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/list_header_group"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#D7D7D7"
+        android:paddingBottom="2dip"
+        android:paddingLeft="5dip"
+        android:paddingTop="2dip"
+        android:text="@string/relative_group_size_list_header_group"
+        android:textColor="@color/black" />
+
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/list_header_relative_group_size"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="71dp"
+        android:layout_toRightOf="@+id/list_header_group"
+        android:background="#D7D7D7"
+        android:paddingBottom="2dip"
+        android:paddingLeft="5dip"
+        android:paddingTop="2dip"
+        android:text="@string/relative_group_size_list_header_value"
+        android:textColor="@color/black" />
+
+</RelativeLayout> 

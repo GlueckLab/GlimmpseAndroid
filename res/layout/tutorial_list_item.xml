@@ -7,7 +7,7 @@
     		    
 	<RelativeLayout
 			android:layout_width="wrap_content"
-			android:layout_height="30dip"
+			android:layout_height="40dip"
 			android:orientation="horizontal"
 			android:id="@+id/item">			   	   
 	    
@@ -16,7 +16,7 @@
 				android:layout_height="fill_parent"
 				android:id="@+id/list_item_textView_tutorial"
 				android:textColor="@color/black"
-				android:textSize="11dp"
+				android:textSize="13dp"
 				android:padding="6dp"
 				android:gravity="center_vertical"
 				android:text="Hello World"/>

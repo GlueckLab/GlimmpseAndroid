@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/start_view"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:id="@+id/start_view">
-    
+    android:orientation="vertical" >
+
     <FrameLayout
         android:id="@+id/group_panel"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
-
+
         <RelativeLayout
             android:id="@+id/groupadd"
             android:layout_width="wrap_content"
             android:layout_height="62dp"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal" >
 
             <Button
@@ -44,30 +45,31 @@
                 android:layout_alignParentRight="true"
                 android:text="Loading please wait ...."
                 android:textAppearance="?android:attr/textAppearanceSmall" />
-
         </RelativeLayout>
-        
     </FrameLayout>
-    
+
     <ListView
         android:id="@+id/design_list_view"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="280dp"
         android:layout_alignParentTop="true"
-        android:headerDividersEnabled="true"
-        android:textColor="@color/black"        
-         android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp" >
+        android:layout_marginTop="10dp"
+        android:divider="@color/white"
+        android:dividerHeight="0px"
+        android:headerDividersEnabled="true"
+        android:textColor="@color/black"
+        android:cacheColorHint="#0000" >
     </ListView>
-
+
     <RelativeLayout
         android:id="@+id/bottom_panel"
         android:layout_width="fill_parent"
-        android:layout_height="70dp"
-       	android:layout_marginTop="25dp"
-        android:layout_marginBottom="5dp" >
-
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="20dp" >
+
         <ProgressBar
             android:id="@+id/input_progress"
             style="?android:attr/progressBarStyleHorizontal"
@@ -76,29 +78,28 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:progress="0"
-            android:max="@string/max_input_progress" />
+            android:max="@string/max_input_progress"
+            android:progress="0" />
 
         <Button
             android:id="@+id/reset"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:text="Reset"
-            android:textSize="10dp" />
-
+            android:textSize="13dp" />
     </RelativeLayout>
-    
-    <!-- <edu.ucdenver.bios.SlideExpandableListView
+
+    <!--
+    <edu.ucdenver.bios.SlideExpandableListView
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/tutorial_list"
 	android:layout_height="match_parent"
 	android:layout_width="wrap_content"
 	android:layout_marginTop="10dp"
     android:layout_marginRight="10dp"
-    android:layout_marginLeft="10dp"/> -->
+    android:layout_marginLeft="10dp"/>
+    -->
 
-    
-   
 </LinearLayout>

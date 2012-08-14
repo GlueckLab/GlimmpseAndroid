@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
-              android:orientation="vertical"
+              android:orientation="vertical"              
               android:background="@drawable/tutorial_list_item_selector">
     		    
 	<RelativeLayout
 			android:layout_width="wrap_content"
-			android:layout_height="30dip"
+			android:layout_height="40dip"
 			android:orientation="horizontal"
 			android:id="@+id/design_item">			   	   
 	    
@@ -16,33 +16,33 @@
 				android:layout_height="fill_parent"
 				android:id="@+id/list_item_textView_design"
 				android:textColor="@color/black"
-				android:textSize="11dp"
+				android:textSize="13dp"
 				android:padding="6dp"
 				android:gravity="center_vertical"
 				android:text="Hello World"/>
 		
 
-		<ImageButton 
+		<!-- <ImageButton 
 		    	android:id="@+id/details_toggle_button"
 		    	android:contentDescription="@+id/details_toggle_button"				
 				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
+				android:layout_height="
 				android:layout_alignBottom="@+id/list_item_textView_design"
 				android:layout_alignParentRight="true"
 				android:layout_alignTop="@id/list_item_textView_design"
-				android:background="@drawable/ic_list_expand"/>
-		
-		<TextView		    
+				android:background="@drawable/ic_list_expand"/> -->
+
+		<TextView
 		    android:id="@+id/text_view_value_design"
 		    android:layout_width="wrap_content"
 		    android:layout_height="30dp"
+		    android:layout_alignBaseline="@+id/list_item_textView_design"
 		    android:layout_alignBottom="@+id/list_item_textView_design"
-		   android:layout_alignTop="@+id/list_item_textView_design"
-		    android:layout_toLeftOf="@+id/details_toggle_button"
-		    android:textColor="@color/black"
-		    android:gravity="center"
+		    android:layout_alignParentRight="true"
+		    android:gravity="center_vertical"
 		    android:padding="2dp"
-		    android:textSize="10dp" />
+		    android:textColor="@color/black"
+		    android:textSize="13dp" />
 
 	</RelativeLayout>
 
