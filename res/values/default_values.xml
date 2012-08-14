@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <string name="default_groups">2</string>
+    <string name="default_relative_group_size">1</string>
     <string name="default_alpha">0.01</string>
 </resources>

@@ -4,13 +4,14 @@
     <string name="version">Version 1.0.0</string>
 
     <!-- Screen Titles -->
-    <string name="title_home">Glimmpse Light</string>
-    <string name="title_design">Inputs</string>
+    <string name="title_home">GLIMMPSE Lite</string>
+    <!-- <string name="title_design">Inputs</string>
     <string name="title_aboutus">About Us</string>
-    <string name="title_tutorial">Tutorial</string>
+    <string name="title_tutorial">Tutorial</string> -->
     <string name="title_groups">Groups</string>
     <string name="title_solving_for">Solving for</string>
     <string name="title_smallest_group_size">Smallest Group Size</string>
+    <string name="title_relative_group_size">Relative Group Size</string>
     <string name="title_type_i_error">Type I Error</string>
     <string name="title_means_and_variance">Means and Variance</string>
     <string name="title_results">Results</string>
@@ -104,17 +105,22 @@
 	<string name="sample_size">Sample Size</string>
 	
 	<!-- Means and Variance Screen -->
-	<string name="description_means_and_variance">..............</string>
+	<string name="description_means_and_variance">Please fill in the details for mean and variance.</string>
 	<string name="means_variance_list_header_group">Group</string>
 	<string name="means_variance_list_header_mean">Mean</string>
 	<string name="means_variance_list_header_variance">Variance</string>
 	
+	<!-- Relative Group Size Screen -->
+	<string name="description_relative_group_size">..............</string>
+	<string name="relative_group_size_list_header_group">Group</string>
+	<string name="relative_group_size_list_header_value">Relative Group Size</string>
+		
     <!-- Alert -->
     <!-- Data won't be saved -->
     <string name="data_not_saved_alert">This will lose the information. Do you want to proceed?</string>
 
     <!-- App Name -->
-    <string name="app_name">Glimmpse Light</string>
+    <string name="app_name">GLIMMPSE Lite</string>
 
     <color name="titlebackgroundcolor">#3232CD</color>
     <color name="titletextcolor">#FFFF00</color>

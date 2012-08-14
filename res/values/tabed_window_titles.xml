@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="tabed_window_titles">
+    <!-- <string-array name="tabed_window_titles">
         <item>@string/title_tutorial</item>
 		<item>@string/title_design</item>
 		<item>@string/title_aboutus</item>		
-    </string-array>
+    </string-array> -->
 </resources>
