@@ -1,7 +1,27 @@
+/*
+ * Mobile - Android, User Interface for the GLIMMPSE Software System.  Allows
+ * users to perform power, sample size calculations. 
+ * 
+ * Copyright (C) 2010 Regents of the University of Colorado.  
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.*/
+ 
 package edu.ucdenver.bios.glimmpseandroid.activity;
 
 
-
+/*
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -11,11 +31,11 @@ import android.widget.ListView;
 import edu.ucdenver.bios.glimmpseandroid.R;
 import edu.ucdenver.bios.glimmpseandroid.adapter.TutorialAdapter;
 
-/*
+
  * The Activity Class handles interaction for Tutorial screen. 
- */
+ 
 public class TutorialActivity extends Activity {
-	/*@Override
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tutorial);
@@ -71,7 +91,7 @@ public class TutorialActivity extends Activity {
 					description
 				)
 			);  
-    }*/
+    }
 	
 	private ListView myList;
 	
@@ -82,14 +102,14 @@ public class TutorialActivity extends Activity {
 
         Resources res = getResources();
 		 		
-		/*String[] description ={
+		String[] description ={
 				res.getString(R.string.tutorial_solving_for_description),
 				res.getString(R.string.tutorial_type_one_error_description),
 				res.getString(R.string.tutorial_number_of_groups_description),
 				res.getString(R.string.tutorial_relative_group_size_description),
 				res.getString(R.string.tutorial_smallest_group_size_description),
 				res.getString(R.string.tutorial_means_and_variance_description)
-		};*/
+		};
 		
 		String[] tutorialList = getResources().getStringArray(R.array.tutorial_list);
 		
@@ -106,7 +126,7 @@ public class TutorialActivity extends Activity {
     }
 	
 	
-	/**
+	*//**
 	 * This method is called when the user clicks the device's Menu button the
 	 * first time for this Activity. Android passes in a Menu object that is
 	 * populated with items.
@@ -114,7 +134,7 @@ public class TutorialActivity extends Activity {
 	 * @param menu
 	 *            the menu
 	 * @return true, if successful
-	 */
+	 *//*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
@@ -122,7 +142,7 @@ public class TutorialActivity extends Activity {
 		return true;
 	}
 
-	/**
+	*//**
 	 * This method is called when a menu item is selected. Android passes in the
 	 * selected item. The switch statement in this method calls the appropriate
 	 * method to perform the action the user chose.
@@ -130,7 +150,7 @@ public class TutorialActivity extends Activity {
 	 * @param item
 	 *            the item
 	 * @return true, if successful
-	 */
+	 *//*
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle item selection
@@ -139,7 +159,7 @@ public class TutorialActivity extends Activity {
 				// finish current activity
 				finish();
 				return true;
-			/*case R.id.menu_start:
+			case R.id.menu_start:
 				return true;
 			case R.id.menu_aboutus:
 				// finish current activity
@@ -156,10 +176,14 @@ public class TutorialActivity extends Activity {
 				Intent tutorialIntent = new Intent(getBaseContext(),
 						TutorialActivity.class);
 				startActivityForResult(tutorialIntent, 0);
-				return true;*/
+				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}
 	}
 
+}
+*/
+public class TutorialActivity{
+    
 }

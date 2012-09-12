@@ -1,3 +1,23 @@
+/*
+ * Mobile - Android, User Interface for the GLIMMPSE Software System.  Allows
+ * users to perform power, sample size calculations. 
+ * 
+ * Copyright (C) 2010 Regents of the University of Colorado.  
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 package edu.ucdenver.bios.glimmpseandroid.activity.design;
 
 import android.app.Activity;
@@ -42,6 +62,7 @@ public class SmallestGroupSizeActivity extends Activity implements TextWatcher{
 			window.setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		}
 		Button homeButton = (Button) findViewById(R.id.home_button);
+		 homeButton.setText(getResources().getString(R.string.title_design));
 		homeButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				exit();		
@@ -57,16 +78,24 @@ public class SmallestGroupSizeActivity extends Activity implements TextWatcher{
 			public void onClick(View v) {
 				exit();	
 			}
-		});			
+		});		
+		
+		Button clear = (Button) findViewById(R.id.clear);
+		clear.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                value.setText("");
+                resetText();
+            }
+        });
 		
 		TextView title = (TextView) findViewById(R.id.window_title);
 		title.setText(getResources().getString(R.string.title_smallest_group_size));			
 		
 		value = (EditText) findViewById(R.id.smallest_group_size);
-		
+		/*
 		if(stuyDesignContext.getSmallestGroupSize() == 0)
 		    stuyDesignContext.setDefaultSmallestGroupSize();		
-		smallestGroupSize = stuyDesignContext.getSmallestGroupSize();
+		smallestGroupSize = stuyDesignContext.getSmallestGroupSize();*/
 		if(smallestGroupSize != null) {
 			if(smallestGroupSize == 0) {
 				value.setText("");	
@@ -144,7 +173,7 @@ public class SmallestGroupSizeActivity extends Activity implements TextWatcher{
 	private void resetText(){
 		if(smallestGroupSize == null)
 			smallestGroupSize = 0;
-		stuyDesignContext.setSmallestGroupSize(smallestGroupSize);	
+		//stuyDesignContext.setSmallestGroupSize(smallestGroupSize);	
 	}
 	
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
