@@ -1,7 +1,28 @@
+/*
+ * Mobile - Android, User Interface for the GLIMMPSE Software System.  Allows
+ * users to perform power, sample size calculations. 
+ * 
+ * Copyright (C) 2010 Regents of the University of Colorado.  
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 package edu.ucdenver.bios.glimmpseandroid.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +31,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageButton;
+import android.widget.TabHost;
 import android.widget.TextView;
-
 import edu.ucdenver.bios.glimmpseandroid.R;
 import edu.ucdenver.bios.glimmpseandroid.activity.TutorialSubScreenActivity;
+import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
+import edu.ucdenver.bios.webservice.common.domain.StudyDesign;
 
 /*public class TutorialAdapter extends BaseAdapter implements Filterable {
 		private LayoutInflater mInflater;
@@ -136,6 +158,8 @@ public class TutorialAdapter extends BaseAdapter implements Filterable{
     private String[] mListItems;
     private LayoutInflater mLayoutInflater;
     private Context mcontext;
+    private static Drawable img;
+    private static StuyDesignContext globalVariables;
  
     public TutorialAdapter(Context context, String[] arrayList){
  
@@ -144,7 +168,12 @@ public class TutorialAdapter extends BaseAdapter implements Filterable{
         //get the layout inflater
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         
-        this.mcontext = context;
+        this.mcontext = context; 
+        
+        globalVariables = StuyDesignContext.getInstance();
+        
+        img = context.getResources().getDrawable( R.drawable.ic_list_expand);
+        img.setBounds(0,0,30,30);  
     }
  
     
@@ -170,15 +199,17 @@ public class TutorialAdapter extends BaseAdapter implements Filterable{
  
     public View getView(final int position, View view, ViewGroup viewGroup) {
  
-    	 ViewHolder holder;    	 
+    	 ViewHolder holder;    	
+    	 View newView = null;
         //check to see if the reused view is null or not, if is not null then reuse it
         if (view == null) {
-            view = mLayoutInflater.inflate(R.layout.tutorial_list_item, null);
+            view = mLayoutInflater.inflate(R.layout.tutorial_list_item, null);                       
             
             holder = new ViewHolder();
             holder.textLine = (TextView) view.findViewById(R.id.list_item_textView_tutorial);
             holder.detailLine = (TextView) view.findViewById(R.id.expandable_toggle_button_details);
-            holder.buttonLine = (ImageButton) view.findViewById(R.id.expandable_toggle_button);
+            holder.detailLine.setCompoundDrawables(null, null, img, null);
+            //holder.buttonLine = (ImageButton) view.findViewById(R.id.expandable_toggle_button);
             
            
             
@@ -206,29 +237,29 @@ public class TutorialAdapter extends BaseAdapter implements Filterable{
             	}
         	});
             	 
-        	holder.buttonLine.setOnClickListener(new OnClickListener() {
+        	/*holder.buttonLine.setOnClickListener(new OnClickListener() {
         		private int pos = position;          
             	//Intent intent;
 	            	 
 	            	public void onClick(View v) {
 	            	//Toast.makeText(mcontext, "Delete-" + String.valueOf(pos), Toast.LENGTH_SHORT).show();
-	            		/*switch(position){
+	            		switch(position){
 	     	            case 0:
 	     	            	intent = new Intent(mcontext, TutorialSolvingForActivity.class);
 	     	            	break;
 	     	           case 1:
 	     	            	intent = new Intent(mcontext, TutorialTypeIErrorActivity.class);
 	     	            	break;
-	            		}*/
-	            		/*intent = new Intent(v.getContext(),TutorialSubScreenActivity.class);
+	            		}
+	            		intent = new Intent(v.getContext(),TutorialSubScreenActivity.class);
 	            		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	    				Bundle bundle = new Bundle();
 	    				bundle.putInt("sub_screen", position);
 	    				intent.putExtras(bundle);
-	            		mcontext.startActivity(intent);*/
+	            		mcontext.startActivity(intent);
 	            		callIntent(v, position);
 	            	}
-        	});
+        	});*/
         }
         //view.setTag(holder);
         //get the string item from the position "position" from array list to put it on the TextView
@@ -257,12 +288,15 @@ public class TutorialAdapter extends BaseAdapter implements Filterable{
 		bundle.putInt("sub_screen", position);
 		intent.putExtras(bundle);
 		mcontext.startActivity(intent);
+		/*View view = v.findViewById(R.id.tutorial_subview);	
+		globalVariables.setTabOneContentView(view);*/
+		
     }
     
     static class ViewHolder {
     	TextView textLine;
     	TextView detailLine;
-    	ImageButton buttonLine;
+    	//ImageButton buttonLine;
     	}
 
 	public Filter getFilter() {

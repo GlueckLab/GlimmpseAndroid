@@ -1,3 +1,23 @@
+/*
+ * Mobile - Android, User Interface for the GLIMMPSE Software System.  Allows
+ * users to perform power, sample size calculations. 
+ * 
+ * Copyright (C) 2010 Regents of the University of Colorado.  
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 package edu.ucdenver.bios.glimmpseandroid.adapter;
 
 import android.content.Context;
@@ -10,18 +30,16 @@ import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
 import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 
-public class MeansAndVarianceAdapter extends BaseAdapter implements Filterable,
-        TextWatcher {
+public class MeansAndVarianceAdapter extends BaseAdapter {
     private int groups;
     private LayoutInflater mLayoutInflater;
     // private Context mcontext;
@@ -66,7 +84,7 @@ public class MeansAndVarianceAdapter extends BaseAdapter implements Filterable,
         ViewHolder holder;
         // check to see if the reused view is null or not, if is not null then
         // reuse it
-        if (view == null) {
+        //if (view == null) {
             view = mLayoutInflater.inflate(
                     R.layout.design_means_and_variance_item, null);
 
@@ -75,6 +93,10 @@ public class MeansAndVarianceAdapter extends BaseAdapter implements Filterable,
                     .findViewById(R.id.list_item_textView_group);
             holder.meanLine = (EditText) view.findViewById(R.id.mean);
             holder.varianceLine = (EditText) view.findViewById(R.id.variance);
+            
+            InputMethodManager imm = (InputMethodManager)mLayoutInflater.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(holder.meanLine.getWindowToken(), 0);
+            imm.hideSoftInputFromWindow(holder.varianceLine.getWindowToken(), 0);
             
             mean = StuyDesignContext.getInstance().getMean(position);
             holder.meanLine.setText(Double.toString(mean));
@@ -122,6 +144,10 @@ public class MeansAndVarianceAdapter extends BaseAdapter implements Filterable,
                 }
             });
             
+           /* if(position == 0) {
+                holder.meanLine.requestFocusFromTouch();
+            }*/
+            
             variance = StuyDesignContext.getInstance().getVariance();
             holder.varianceLine.setText(Double.toString(variance));
             holder.varianceLine.setCompoundDrawables(null, null, img, null);
@@ -134,7 +160,53 @@ public class MeansAndVarianceAdapter extends BaseAdapter implements Filterable,
             }*/
             
 
-            holder.varianceLine.addTextChangedListener(this);
+            holder.varianceLine.addTextChangedListener(new TextWatcher() {
+
+                public void afterTextChanged(Editable s) {
+                    // TODO Auto-generated method stub
+                    /*
+                     * if(variance!=null) {
+                     * holder.varianceLine.setText(variance.toString());
+                     * GlobalVariables.getInstance().setVariance(variance); }
+                     */
+                    if(variance < 1)
+                        variance = 1.0;
+                    StuyDesignContext.getInstance().setVariance(variance);
+                    System.out.println("Variance : "+variance+" getVariance : "+StuyDesignContext.getInstance().getVariance());
+                }
+
+                public void beforeTextChanged(CharSequence s, int start, int count,
+                        int after) {
+                    // TODO Auto-generated method stub
+
+                }
+
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    // TODO Auto-generated method stub
+                    if (String.valueOf(s) != null || String.valueOf(s).equals("")) {
+                        //
+                        try {      
+                            String value = String.valueOf(s);
+                            if(value != null && !value.isEmpty()) {
+                                variance = Double.parseDouble(value);     
+                                varianceText.setCompoundDrawables(null, null, img, null);
+                            }
+                            else {                    
+                                variance = DEFAULT_VARIANCE;    
+                            }
+                            // clear.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
+                            System.out.println("Exception : "+e.getMessage());
+                            variance = DEFAULT_VARIANCE;                
+                            // clear.setVisibility(View.INVISIBLE);
+                        }
+                    } else {
+                        varianceText.setCompoundDrawables(null, null, null, null);
+                        // clear.setVisibility(View.INVISIBLE);
+                    }
+                } 
+                
+            });
             holder.varianceLine.setOnTouchListener(new OnTouchListener() {
 
                 public boolean onTouch(View v, MotionEvent arg1) {
@@ -155,11 +227,11 @@ public class MeansAndVarianceAdapter extends BaseAdapter implements Filterable,
 
                         public void onFocusChange(View v, boolean hasFocus) {
                             // TODO Auto-generated method stub
-                            System.out.println("calling floodVariance()");
+                            //System.out.println("calling floodVariance()");
                             floodVariance();                            
                         }
-                    });
-
+                    });           
+                
             /*
              * holder.varianceLine.setOnKeyListener(new OnKeyListener() {
              * 
@@ -176,7 +248,7 @@ public class MeansAndVarianceAdapter extends BaseAdapter implements Filterable,
              * )); varianceText.setText(data); } } return true; } });
              */
 
-        }
+        //}
         // view.setTag(holder);
         // get the string item from the position "position" from array list to
         // put it on the TextView
@@ -191,6 +263,7 @@ public class MeansAndVarianceAdapter extends BaseAdapter implements Filterable,
                 itemName.setText(stringItem);
             }
         }
+                
 
         // this method must return the view corresponding to the data at the
         // specified position.
@@ -203,60 +276,13 @@ public class MeansAndVarianceAdapter extends BaseAdapter implements Filterable,
         EditText meanLine;
         EditText varianceLine;
     }
-
-    public Filter getFilter() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
+    
     public int getCount() {
         // TODO Auto-generated method stub
         return groups;
     }
 
-    public void afterTextChanged(Editable s) {
-        // TODO Auto-generated method stub
-        /*
-         * if(variance!=null) {
-         * holder.varianceLine.setText(variance.toString());
-         * GlobalVariables.getInstance().setVariance(variance); }
-         */
-        if(variance < 1)
-            variance = 1.0;
-        StuyDesignContext.getInstance().setVariance(variance);
-        System.out.println("Variance : "+variance+" getVariance : "+StuyDesignContext.getInstance().getVariance());
-    }
-
-    public void beforeTextChanged(CharSequence s, int start, int count,
-            int after) {
-        // TODO Auto-generated method stub
-
-    }
-
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-        // TODO Auto-generated method stub
-        if (String.valueOf(s) != null || String.valueOf(s).equals("")) {
-            //
-            try {      
-                String value = String.valueOf(s);
-                if(value != null && !value.isEmpty()) {
-                    variance = Double.parseDouble(value);     
-                    varianceText.setCompoundDrawables(null, null, img, null);
-                }
-                else {                    
-                    variance = DEFAULT_VARIANCE;    
-                }
-                // clear.setVisibility(View.VISIBLE);
-            } catch (Exception e) {
-                System.out.println("Exception : "+e.getMessage());
-                variance = DEFAULT_VARIANCE;                
-                // clear.setVisibility(View.INVISIBLE);
-            }
-        } else {
-            varianceText.setCompoundDrawables(null, null, null, null);
-            // clear.setVisibility(View.INVISIBLE);
-        }
-    }  
+     
 
     private void floodVariance() {
         /*ListView listView = (ListView) ((LinearLayout) ((RelativeLayout) varianceText
