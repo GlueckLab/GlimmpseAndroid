@@ -30,6 +30,7 @@
     <property name="owner" value="University of Colorado Denver, 
 		Department of Biostatistics and Informatics" />
 	<property name="author" value="Uttara Sakhadeo" />
+	<property name="glimmpselite" value="Glimmpse Lite" />
 	<property name="app.name" value="edu.ucdenver.bios.glimmpseandroid" />
 	<property name="debug" value="FALSE" />
 	<property name="source.dir" value="${basedir}/../src" />
@@ -135,60 +136,7 @@
         </javadoc>
     </target>
     
-    <!-- ******************************************************* -->
-    <!-- ******* Target for Javadoc Distribution creation ****** -->
-    <!-- ******************************************************* -->
-    
-	<target name="distribution.javadoc" >
-		<zip destfile="${artifacts.dir}/${app.name}-${app.version}-javadoc.zip" basedir="${javadoc.dir}/.." >
-			<zipfileset dir="${javadoc.dir}" />
-			<zipfileset file="${basedir}/../LICENSE-gpl2.0.txt"/>
-		    <zipfileset file="${basedir}/../README.txt"/>
-		</zip>
-	</target>
-	
-	<!-- ******************************************************* -->
-    <!-- ******* Target for Source Distribution creation ******* -->
-    <!-- ******************************************************* -->
-	
-	<target name="distribution.source">
-		<zip destfile="${artifacts.dir}/${app.name}-${app.version}-source.zip"  >
-			<zipfileset dir="${basedir}/../.."  includes="GlimmpseAndroid/*,
-                    GlimmpseAndroid/build.xml,                    
-                    GlimmpseAndroid/src/**,
-                    GlimmpseAndroid/text/**,
-                    GlimmpseAndroid/libs/**,
-                    GlimmpseAndroid/res/**"
-                    excludes="StudyDesignSvc/bin/**"  />	
-			<zipfileset file="${basedir}/../LICENSE-gpl2.0.txt"/>
-		    <zipfileset file="${basedir}/../README.txt"/>
-		</zip>
-	</target>
-	
-	<!-- ******************************************************* -->
-    <!-- ******* Target for Binary Distribution creation ******* -->
-    <!-- ******************************************************* -->
-	
-	<target name="distribution.binary">
-		<zip destfile="${artifacts.dir}/${app.name}-${app.version}-binary.zip" >
-			<zipfileset file="${artifacts.dir}/${app.name}.war" />	
-			<zipfileset file="${basedir}/../LICENSE-gpl2.0.txt"/>
-		    <zipfileset file="${basedir}/../README.txt"/>
-		</zip>
-	</target>
-	
-	<!-- ******************************************************* -->
-    <!-- ******** Target for building all Distributions ******** -->
-    <!-- ******************************************************* -->
-	
-	<target name="distributions" 
-		depends="
-		distribution.binary,
-		distribution.javadoc,
-		distribution.source"/>	
-		
-	
-   
+    	   
     <!-- ******************************************************* -->
     <!-- **************** Overridable Properties *************** -->
     <!-- ******************************************************* -->
@@ -350,7 +298,7 @@
     <property name="asset.dir" value="assets" />
     <property name="asset.absolute.dir" location="${basedir}/../${asset.dir}" />
     <property name="jar.libs.dir" value="libs" />
-    <property name="jar.libs.absolute.dir" location="${basedir}/../${jar.libs.dir}" />
+    <property name="jar.libs.absolute.dir" location="${jar.libs.dir}" />
     <property name="native.libs.absolute.dir" location="${basedir}/../libs" />
 
     <property name="manifest.file" value="AndroidManifest.xml" />
@@ -773,6 +721,13 @@
 
         <echo level="info">----------</echo>
         <echo level="info">Resolving Dependencies for ${ant.project.name}...</echo>
+        
+        <copy todir="${jar.libs.absolute.dir}">
+	    <fileset 
+	      dir="${basedir}/../libs" 
+	      includes="*.jar" />
+	  	</copy>	    
+        
         <dependency
                 libraryFolderPathOut="project.library.folder.path"
                 libraryPackagesOut="project.library.packages"
@@ -1174,7 +1129,10 @@
     </target>
 
     <target name="-post-package" />
-    <target name="-post-build" />
+    <target name="-post-build">
+        <delete file="${manifest.file}"/>
+        <delete dir="${jar.libs.absolute.dir}"/>        
+    </target>
 
     <target name="-set-mode-check">
         <fail if="build.is.mode.set"
@@ -1187,8 +1145,8 @@
 
     <target name="-set-debug-files" depends="-set-mode-check">
 
-        <property name="out.packaged.file" location="${out.absolute.dir}/${ant.project.name}-debug-unaligned.apk" />
-        <property name="out.final.file" location="${out.absolute.dir}/${ant.project.name}-debug.apk" />
+        <property name="out.packaged.file" location="${out.absolute.dir}/${glimmpselite}-debug-unaligned.apk" />
+        <property name="out.final.file" location="${out.absolute.dir}/${glimmpselite}-debug.apk" />
         <property name="build.is.mode.set" value="true" />
     </target>
 
@@ -1701,7 +1659,58 @@
         <echo>              unless 'nodeps' is used as well.</echo>
     </target>
 
+	<!-- ******************************************************* -->
+    <!-- ******* Target for Javadoc Distribution creation ****** -->
+    <!-- ******************************************************* -->
+    
+	<target name="distribution.javadoc" >
+	    <zip destfile="${artifacts.dir}/${app.name}-${app.version}-javadoc.zip" basedir="${javadoc.dir}/.." >
+			<zipfileset dir="${javadoc.dir}" />
+			<zipfileset file="${basedir}/../LICENSE-gpl2.0.txt"/>
+		    <zipfileset file="${basedir}/../README.txt"/>
+		</zip>
+	</target>
 	
+	<!-- ******************************************************* -->
+    <!-- ******* Target for Source Distribution creation ******* -->
+    <!-- ******************************************************* -->
+	
+	<target name="distribution.source">
+		<zip destfile="${artifacts.dir}/${app.name}-${app.version}-source.zip"  >
+			<zipfileset dir="${basedir}/../.."  includes="GlimmpseAndroid/*,
+                    GlimmpseAndroid/build.xml,                    
+                    GlimmpseAndroid/src/**,
+                    GlimmpseAndroid/text/**,
+                    GlimmpseAndroid/libs/**,
+                    GlimmpseAndroid/res/**"
+                    excludes="GlimmpseAndroid/bin/**"  />	
+			<zipfileset file="${basedir}/../LICENSE-gpl2.0.txt"/>
+		    <zipfileset file="${basedir}/../README.txt"/>
+		</zip>
+	</target>
+	
+	<!-- ******************************************************* -->
+    <!-- ******* Target for Binary Distribution creation ******* -->
+    <!-- ******************************************************* -->
+	
+	<target name="distribution.binary">
+	    <echo>${out.absolute.dir}/${glimmpselite}-debug.apk</echo>		
+		<zip destfile="${artifacts.dir}/${app.name}-${app.version}-binary.zip" >
+			<zipfileset file="${out.absolute.dir}/${glimmpselite}-debug.apk" />	
+			<zipfileset file="${basedir}/../LICENSE-gpl2.0.txt"/>
+		    <zipfileset file="${basedir}/../README.txt"/>
+		</zip>
+	</target>
+	
+	<!-- ******************************************************* -->
+    <!-- ******** Target for building all Distributions ******** -->
+    <!-- ******************************************************* -->
+	
+	<target name="distributions" 
+		depends="
+		distribution.binary,
+		distribution.javadoc,
+		distribution.source"/>	
     
     
 </project>
