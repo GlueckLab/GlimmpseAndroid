@@ -51,11 +51,11 @@ import edu.ucdenver.bios.webservice.common.enums.SolutionTypeEnum;
 import edu.ucdenver.bios.webservice.common.enums.StatisticalTestTypeEnum;
 import edu.ucdenver.bios.webservice.common.enums.StudyDesignViewTypeEnum;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
- * The Class StuyDesignContext.
+ * Wizar context for study design.
+ * 
+ * @author Uttara Sakhadeo
  */
 public class StuyDesignContext {
     /*--------------------
@@ -109,6 +109,7 @@ public class StuyDesignContext {
     /** The Constant DEFAULT_COVARIANCE_TYPE. */
     private static final CovarianceTypeEnum DEFAULT_COVARIANCE_TYPE = CovarianceTypeEnum.UNSTRUCTURED_COVARIANCE;
 
+    /** The Constant DEFAULT_COVARIANCE_NAME. */
     private static final String DEFAULT_COVARIANCE_NAME = "__RESPONSE_COVARIANCE__";
 
     /** The Constant DEFAULT_VARIANCE. */
@@ -128,13 +129,14 @@ public class StuyDesignContext {
     /** The Constant MATRIX_BETA. */
     private static final String MATRIX_BETA = "beta";
 
+    /** The covariance matrix data. */
     private static double[][] covarianceMatrixData = new double[1][1];
 
     /*--------------------
      * Constructors
      *--------------------*/
     /**
-     * Instantiates a new global variables.
+     * Create a new context with an empty study design object.
      */
     StuyDesignContext() {
         studyDesign = new StudyDesign();
@@ -145,8 +147,8 @@ public class StuyDesignContext {
      *--------------------*/
 
     /**
-     * Gets the study design.
-     * 
+     * Get the study design object associated with this context.
+     *
      * @return the study design
      */
     public StudyDesign getStudyDesign() {
@@ -164,7 +166,7 @@ public class StuyDesignContext {
     }
 
     /**
-     * Gets the single instance of GlobalVariables.
+     * Gets the single instance of StudyDesignContext.
      * 
      * @return single instance of GlobalVariables
      */
@@ -188,7 +190,7 @@ public class StuyDesignContext {
     }
 
     /**
-     * Gets the progress.
+     * Measures the completeness of each input in the GUI.
      * 
      * @return the progress
      */
@@ -197,17 +199,15 @@ public class StuyDesignContext {
     }
 
     /**
-     * Gets the total progress.
+     * Measures the completeness of study design.
      * 
      * @return the total progress
      */
     public int getTotalProgress() {
         int sum = 0;
         int index = 0;
-        // System.out.println("-----------------------------");
         while (index < progress.length) {
-            sum = sum + progress[index++];
-            // System.out.println("Index : "+(index-1)+" prohress[index] : "+progress[index-1]+" sum : "+sum);
+            sum = sum + progress[index++];        
         }
         return sum;
     }
@@ -266,21 +266,17 @@ public class StuyDesignContext {
     /*--------------------
      * # Groups
      *--------------------*/
-    /*
-     * Convinienec Method which sets default Number of Groups
-     */
     /**
-     * Sets the default groups.
-     */
+     * convenience Method which sets default Number of Groups.
+     * Stores the between participant factor information to the StudyDesign.
+     */       
     public void setDefaultGroups() {
         setGroups(DEFAULT_GROUPS);
     }
 
-    /*
-     * Convinienec Method which sets given Number of Groups
-     */
     /**
-     * Sets the groups.
+     * convenience Method which sets given Number of Groups.
+     * Stores the between participant factor information to the StudyDesign.
      * 
      * @param groups
      *            the new groups
@@ -306,14 +302,12 @@ public class StuyDesignContext {
         setProgress(MEANS_VARIANCE_ROW);
     }
 
-    /*
-     * Convinienec Method which returns Number of Groups
-     */
     /**
-     * Gets the groups.
-     * 
+     * Convenience Method which returns Number of Groups.
+     *
      * @return the groups
-     */
+     */    
+    
     public int getGroups() {
         List<BetweenParticipantFactor> list = studyDesign
                 .getBetweenParticipantFactorList();
@@ -333,16 +327,9 @@ public class StuyDesignContext {
         return categoryList.size();
     }
 
-    /*
-     * Convinienec Method which returns Number of Groups
-     */
     /**
-     * Creates the category.
-     * 
-     * @param groups
-     *            the groups
-     * @return the between participant factor
-     */
+     * Convenience Method which returns Number of Groups
+     */    
     private BetweenParticipantFactor createCategory(int groups) {
         List<Category> categoryList = new ArrayList<Category>();
         int index = 0;
@@ -356,12 +343,9 @@ public class StuyDesignContext {
     /*--------------------
      * Type I Error
      *--------------------*/
-    /*
-     * Convinienec Method which returns Number of Groups
-     */
     /**
-     * Sets the default type i error.
-     */
+     * Convenience Method which sets default type i error.
+     */   
     public void setDefaultTypeIError() {
         setTypeIError(DEFAULT_ALPHA);
     }
@@ -401,26 +385,7 @@ public class StuyDesignContext {
             }
         }
         return list.get(0).getAlphaValue();
-    }
-
-    /*--------------------
-     * Smallest Group Size
-     *--------------------*/
-    /*
-     * public void setDefaultSmallestGroupSize() {
-     * setSmallestGroupSize(DEFAULT_SMALLEST_GROUP_SIZE); }
-     * 
-     * public void setSmallestGroupSize(int sampleSize) { List<SampleSize> list
-     * = studyDesign.getSampleSizeList(); if (list == null || list.isEmpty()) {
-     * list = new ArrayList<SampleSize>(1); } else { if (list.size() > 0) {
-     * list.set(0, null); System.gc(); } } list.add(0, new
-     * SampleSize(sampleSize)); studyDesign.setSampleSizeList(list); }
-     * 
-     * public int getSmallestGroupSize() { List<SampleSize> list =
-     * studyDesign.getSampleSizeList(); if (list == null || list.isEmpty()) {
-     * return 0; } else { if (list.size() < 1) { return 0; } } return
-     * list.get(0).getValue(); }
-     */
+    }   
 
     /*--------------------
      * Relative Group Size
@@ -455,19 +420,16 @@ public class StuyDesignContext {
     public void setRelativeGroupSize(int relativeGroupSize, int position) {
         List<RelativeGroupSize> list = studyDesign.getRelativeGroupSizeList();
         if (list == null || list.isEmpty()) {
-            // System.out.println("List Empty");
             list = new ArrayList<RelativeGroupSize>(getGroups());
             list.add(position, new RelativeGroupSize(relativeGroupSize));
         } else {
             if (list.size() > position) {
                 if (list.get(position) != null) {
-                    // System.out.println("List.size > position && list(position) != null");
                     list.set(position, new RelativeGroupSize(relativeGroupSize));
                 } else {
                     list.add(position, new RelativeGroupSize(relativeGroupSize));
                 }
             } else {
-                // System.out.println("List.size > position && list(position) != null");
                 list.add(position, new RelativeGroupSize(relativeGroupSize));
             }
         }
@@ -507,7 +469,6 @@ public class StuyDesignContext {
         if (list != null && !list.isEmpty()) {
             index = list.size() - numberOfGroups;
             for (int inc = (numberOfGroups - 1); inc >= 0; inc--) {
-                // System.out.println("deleted  obj at "+(index+inc));
                 studyDesign.getRelativeGroupSizeList().remove(index + inc);
             }
             System.gc();
@@ -585,7 +546,6 @@ public class StuyDesignContext {
         while (index < groups) {
             equalityFlagRelativeGp = ((getRelativeGroupSize(index) == getRelativeGroupSize(index + 1)) ? true
                     : false);
-            // System.out.println("index: "+getRelativeGroupSize(index)+" index+1: "+getRelativeGroupSize(index+1)+"equality flag : "+equalityFlagRelativeGp);
             if (!equalityFlagRelativeGp)
                 return false;
             index++;
@@ -610,8 +570,7 @@ public class StuyDesignContext {
                 studyDesign.setSolutionTypeEnum(SolutionTypeEnum.POWER);
         }
         setProgress(SOLVING_FOR_ROW);
-        resetProgress(POWER_OR_SAMPLE_SIZE_ROW);
-        // System.out.println("Solving For Progress : "+getIndividualProgress(SOLVING_FOR_ROW));
+        resetProgress(POWER_OR_SAMPLE_SIZE_ROW);        
     }
 
     /**
@@ -723,7 +682,6 @@ public class StuyDesignContext {
      * @return the covariance
      */
     public Covariance createCovariance(double variance) {
-        // System.out.println("createVariance");
         Covariance covariance = new Covariance();
         covariance.setType(DEFAULT_COVARIANCE_TYPE);
         covariance.setName(DEFAULT_COVARIANCE_NAME);
@@ -753,22 +711,17 @@ public class StuyDesignContext {
         NamedMatrix beta = studyDesign.getNamedMatrix(MATRIX_BETA);
         double[][] originalData = null;
         if (beta != null) {
-            // System.out.println("BetaMeatrix not null");
             index = beta.getRows();
             originalData = beta.getData().getData();
         } else {
             beta = buildBetaMatrix(numberOfGroups);
         }
         int totalRows = index + numberOfGroups;
-        // System.out.println("new groups "+totalRows);
         double[][] changedData = new double[totalRows][1];
         for (int inc = 0; inc < index; inc++) {
-            // System.out.println("transfering data ....");
             changedData[inc][DEFAULT_MEAN_COLUMN] = originalData[inc][DEFAULT_MEAN_COLUMN];
         }
         for (int inc = index; inc < totalRows; inc++) {
-            // System.out.println("mean added at "+inc);
-            // System.out.println("adding row at "+inc);
             changedData[inc][DEFAULT_MEAN_COLUMN] = DEFAULT_MEAN;
         }
         beta.setDataFromArray(changedData);
@@ -815,8 +768,6 @@ public class StuyDesignContext {
         } else {
             double[][] originalData = beta.getData().getData();
             int originalRows = beta.getRows();
-            // System.out.println("originalRows "+originalRows);
-            // System.out.println("position : "+position);
             if (originalRows > position) {
                 originalData[position][DEFAULT_MEAN_COLUMN] = mean;
                 beta.setDataFromArray(originalData);
@@ -879,7 +830,6 @@ public class StuyDesignContext {
         } else {
             size = powerList.size();
             int additionalIndices = position - size;
-            // System.out.println("additional rows : "+additionalIndices);
             for (int inc = 0; inc < additionalIndices; inc++) {
                 if (position == size + inc) {
                     powerList.add(new NominalPower(power));
@@ -935,7 +885,7 @@ public class StuyDesignContext {
             List<NominalPower> newPowerList = null;
             int size = originalPowerList.size();
             if (size > 1) {
-                // System.out.println("size of original List : "+size);
+                System.out.println("size > 1");
                 newPowerList = new ArrayList<NominalPower>(size - 1);
                 /*
                  * Iterator<NominalPower> iterator =
@@ -951,14 +901,15 @@ public class StuyDesignContext {
                         newPowerList.add(index++, np);
                     }
                     count++;
-                }
-                originalPowerList.clear();
-            } else {
+                }                                
+            }else {
+                System.out.println("size <= 1");
                 newPowerList = null;
                 resetProgress(POWER_OR_SAMPLE_SIZE_ROW);
-            }
-            System.gc();
+            }   
             studyDesign.setNominalPowerList(newPowerList);
+            originalPowerList.clear();
+            System.gc();
         }
     }
 
@@ -991,21 +942,16 @@ public class StuyDesignContext {
         List<SampleSize> sampleSizeList = studyDesign.getSampleSizeList();
         int size;
         if (sampleSizeList == null || sampleSizeList.isEmpty()) {
-            // System.out.println("Empty Sample Size List");
             sampleSizeList = new ArrayList<SampleSize>(5);
             sampleSizeList.add(new SampleSize(sampleSize));
         } else if (sampleSizeList.size() - 1 > position) {
-            // System.out.println("big Sample Size List");
             sampleSizeList.set(position, new SampleSize(sampleSize));
             System.gc();
         } else if (sampleSizeList.size() == position) {
-            // System.out.println("samplesize list size : "+sampleSizeList.size());
             sampleSizeList.add(new SampleSize(sampleSize));
         } else {
             size = sampleSizeList.size();
-            // System.out.println("Sample size list size : "+size+" position : "+position);
             int additionalIndices = position - size;
-            // System.out.println("additional rows : "+additionalIndices);
             for (int inc = 0; inc < additionalIndices; inc++) {
                 if (position == size + inc) {
                     sampleSizeList.add(new SampleSize(sampleSize));
@@ -1013,7 +959,7 @@ public class StuyDesignContext {
                     sampleSizeList.add(new SampleSize());
                 }
             }
-        }        
+        }
         studyDesign.setSampleSizeList(sampleSizeList);
         setProgress(POWER_OR_SAMPLE_SIZE_ROW);
     }
@@ -1047,8 +993,7 @@ public class StuyDesignContext {
     public void clearSampleSizeList() {
         studyDesign.setSampleSizeList(null);
         resetProgress(POWER_OR_SAMPLE_SIZE_ROW);
-        System.gc();
-        // System.out.println("clearing sampleSize list : "+studyDesign.getSampleSizeList());
+        System.gc();        
     }
 
     /**
@@ -1064,7 +1009,6 @@ public class StuyDesignContext {
             List<SampleSize> newSampleSizeList = null;
             int size = originalSampleSizeList.size();
             if (size > 1) {
-                // System.out.println("size of original List : "+size);
                 newSampleSizeList = new ArrayList<SampleSize>(size - 1);
                 /*
                  * Iterator<NominalPower> iterator =
@@ -1141,7 +1085,7 @@ public class StuyDesignContext {
         // Add Sigma Scale List
         List<SigmaScale> sigmaScaleList = new ArrayList<SigmaScale>(1);
         sigmaScaleList.add(new SigmaScale(1.0));
-        studyDesign.setSigmaScaleList(sigmaScaleList);              
+        studyDesign.setSigmaScaleList(sigmaScaleList);
 
         // Add Sigma Scale List
 
@@ -1172,5 +1116,5 @@ public class StuyDesignContext {
         beta.setColumns(1);
         return beta;
     }
-       
+
 }
