@@ -39,20 +39,50 @@ import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
 import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MeansAndVarianceAdapter.
+ * @author Uttara Sakhadeo
+ */
 public class MeansAndVarianceAdapter extends BaseAdapter {
+    
+    /** The groups. */
     private int groups;
+    
+    /** The m layout inflater. */
     private LayoutInflater mLayoutInflater;
     // private Context mcontext;
+    /** The img. */
     static Drawable img;
+    
+    /** The variance. */
     static double variance;
+    
+    /** The mean. */
     static double mean;
+    
+    /** The Constant DEFAULT_VARIANCE. */
     static final double DEFAULT_VARIANCE = 1.0;
+    
+    /** The Constant DEFAULT_MEAN. */
     static final double DEFAULT_MEAN = 0.0;
     // static ViewHolder holder;
+    /** The variance text. */
     static EditText varianceText;
+    
+    /** The mean text. */
     static EditText meanText;
+    
+    /** The v. */
     static View v;
 
+    /**
+     * Instantiates a new means and variance adapter.
+     *
+     * @param context the context
+     * @param groups the groups
+     * @param img the img
+     */
     public MeansAndVarianceAdapter(Context context, int groups, Drawable img) {
 
         this.groups = groups;
@@ -70,15 +100,24 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
 
     // get the data of an item from a specific position
     // i represents the position of the item in the list
+    /* (non-Javadoc)
+     * @see android.widget.Adapter#getItem(int)
+     */
     public Object getItem(int i) {
         return null;
     }
 
     // get the position id of the item from the list
+    /* (non-Javadoc)
+     * @see android.widget.Adapter#getItemId(int)
+     */
     public long getItemId(int i) {
         return 0;
     }
 
+    /* (non-Javadoc)
+     * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+     */
     public View getView(final int position, View view, ViewGroup viewGroup) {
         v = view;
         ViewHolder holder;
@@ -271,12 +310,24 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
 
     }
 
+    /**
+     * The Class ViewHolder.
+     */
     static class ViewHolder {
+        
+        /** The text line. */
         TextView textLine;
+        
+        /** The mean line. */
         EditText meanLine;
+        
+        /** The variance line. */
         EditText varianceLine;
     }
     
+    /* (non-Javadoc)
+     * @see android.widget.Adapter#getCount()
+     */
     public int getCount() {
         // TODO Auto-generated method stub
         return groups;
@@ -284,6 +335,9 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
 
      
 
+    /**
+     * Flood variance.
+     */
     private void floodVariance() {
         /*ListView listView = (ListView) ((LinearLayout) ((RelativeLayout) varianceText
                 .getParent()).getParent()).getParent();*/

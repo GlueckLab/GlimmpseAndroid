@@ -35,13 +35,31 @@ import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RelativeGroupSizeAdapter.
+ * @author Uttara Sakhadeo
+ */
 public class RelativeGroupSizeAdapter extends BaseAdapter{
+    
+    /** The groups. */
     private int groups;
+    
+    /** The m layout inflater. */
     private LayoutInflater mLayoutInflater;
+    
+    /** The relative group size. */
     static int relativeGroupSize;
     //static ViewHolder holder;
+    /** The value text. */
     static TextView valueText;    
     
+    /**
+     * Instantiates a new relative group size adapter.
+     *
+     * @param context the context
+     * @param groups the groups
+     */
     public RelativeGroupSizeAdapter(Context context, int groups){
         
         this.groups = groups;
@@ -50,16 +68,25 @@ public class RelativeGroupSizeAdapter extends BaseAdapter{
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);               
     }
     
+    /* (non-Javadoc)
+     * @see android.widget.Adapter#getItem(int)
+     */
     public Object getItem(int i) {
         return null;
     }
  
     
         //get the position id of the item from the list
-    public long getItemId(int i) {
+    /* (non-Javadoc)
+         * @see android.widget.Adapter#getItemId(int)
+         */
+        public long getItemId(int i) {
         return 0;
     }
     
+    /* (non-Javadoc)
+     * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+     */
     public View getView(final int position, View view, ViewGroup viewGroup) {
         
         ViewHolder holder;      
@@ -136,18 +163,33 @@ public class RelativeGroupSizeAdapter extends BaseAdapter{
 
    }       
    
+   /**
+    * The Class ViewHolder.
+    */
    static class ViewHolder {
+       
+       /** The text line. */
        TextView textLine;
+       
+       /** The value line. */
        SeekBar valueLine;
+       
+       /** The detail line. */
        TextView detailLine;
        }
    
+   /* (non-Javadoc)
+    * @see android.widget.Adapter#getCount()
+    */
    public int getCount() {
        // TODO Auto-generated method stub
        return groups;
    }
 
    
+   /**
+    * Reset variance.
+    */
    private void resetVariance(){
        /*if(relativeGroupSize == null)
            relativeGroupSize = 0;*/

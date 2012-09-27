@@ -46,31 +46,78 @@ import edu.ucdenver.bios.glimmpseandroid.activity.design.TypeIErrorActivity;
 import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 import edu.ucdenver.bios.webservice.common.enums.SolutionTypeEnum;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DesignListAdapter.
+ * @author Uttara Sakhadeo
+ */
 public class DesignListAdapter extends BaseAdapter implements Filterable {
+    
+    /** The m list items. */
     private String[] mListItems;
+    
+    /** The m layout inflater. */
     private LayoutInflater mLayoutInflater;
 
+    /** The SOLVIN g_ fo r_ row. */
     private final int SOLVING_FOR_ROW = 0;
+    
+    /** The POWE r_ o r_ sampl e_ siz e_ row. */
     private final int POWER_OR_SAMPLE_SIZE_ROW = 1;
+    
+    /** The TYP e_ i_ erro r_ row. */
     private final int TYPE_I_ERROR_ROW = 2;
+    
+    /** The NUMBE r_ o f_ group s_ row. */
     private final int NUMBER_OF_GROUPS_ROW = 3;
+    
+    /** The RELATIV e_ grou p_ siz e_ row. */
     private final int RELATIVE_GROUP_SIZE_ROW = 4;
     //private final int SMALLEST_GROUP_SIZE_ROW = 5;
+    /** The MEAN s_ varianc e_ row. */
     private final int MEANS_VARIANCE_ROW = 5;
 
+    /** The groups. */
     private static int groups;
+    
+    /** The solving for. */
     private String solvingFor;
+    
+    /** The equality flag relative gp. */
     private static boolean equalityFlagRelativeGp;
+    
+    /** The COMPLETE. */
     private final String COMPLETE = "Complete";
+    
+    /** The POWER. */
     private final String POWER = "Power";
+    
+    /** The SAMPL e_ size. */
     private final String SAMPLE_SIZE = "Sample Size";
+    
+    /** The RELATIV e_ g p_ siz e_ equal. */
     private final String RELATIVE_GP_SIZE_EQUAL = "Equal";
+    
+    /** The RELATIV e_ g p_ siz e_ unequal. */
     private final String RELATIVE_GP_SIZE_UNEQUAL = "Unequal";
+    
+    /** The global variables. */
     StuyDesignContext globalVariables;
+    
+    /** The img. */
     private static Drawable img;
+    
+    /** The check mark img. */
     private static Drawable checkMarkImg;
+    private static Drawable editImg;
     //private static Drawable notAllowedImg;
 
+    /**
+     * Instantiates a new design list adapter.
+     *
+     * @param context the context
+     * @param arrayList the array list
+     */
     public DesignListAdapter(Context context, String[] arrayList) {
 
         mListItems = arrayList;
@@ -82,11 +129,17 @@ public class DesignListAdapter extends BaseAdapter implements Filterable {
         
         checkMarkImg = context.getResources().getDrawable(R.drawable.green_checkmark);
         checkMarkImg.setBounds(0, 0, 30, 30);     
+
+        editImg = context.getResources().getDrawable(R.drawable.incomplete_icon);
+        editImg.setBounds(0, 0, 30, 30);     
         
         /*notAllowedImg = context.getResources().getDrawable(R.drawable.not_allowed);
         notAllowedImg.setBounds(0, 0, 40, 40);*/
     }
 
+    /* (non-Javadoc)
+     * @see android.widget.Adapter#getCount()
+     */
     public int getCount() {
         // getCount() represents how many items are in the list
         return mListItems.length;
@@ -94,15 +147,24 @@ public class DesignListAdapter extends BaseAdapter implements Filterable {
 
     // get the data of an item from a specific position
     // i represents the position of the item in the list
+    /* (non-Javadoc)
+     * @see android.widget.Adapter#getItem(int)
+     */
     public Object getItem(int i) {
         return null;
     }
 
     // get the position id of the item from the list
+    /* (non-Javadoc)
+     * @see android.widget.Adapter#getItemId(int)
+     */
     public long getItemId(int i) {
         return 0;
     }
 
+    /* (non-Javadoc)
+     * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+     */
     public View getView(final int position, View view, final ViewGroup viewGroup) {
         ViewHolder holder;
         globalVariables = StuyDesignContext.getInstance();
@@ -121,6 +183,10 @@ public class DesignListAdapter extends BaseAdapter implements Filterable {
             if(globalVariables.getIndividualProgress(position) != 0){                
                 holder.textLine.setCompoundDrawables(checkMarkImg, null, null, null);
             }
+            else{
+                holder.textLine.setCompoundDrawables(editImg, null, null, null);
+            }
+            holder.textLine.setCompoundDrawablePadding(3);
             /*else {
                 holder.textLine.setCompoundDrawables(null, null, null, null);
             }*/
@@ -316,6 +382,12 @@ public class DesignListAdapter extends BaseAdapter implements Filterable {
 
     }
 
+    /**
+     * Call intent.
+     *
+     * @param v the v
+     * @param position the position
+     */
     public void callIntent(View v, int position) {
         Intent intent = null;
         switch (position) {
@@ -355,12 +427,22 @@ public class DesignListAdapter extends BaseAdapter implements Filterable {
         }
     }
 
+    /**
+     * The Class ViewHolder.
+     */
     static class ViewHolder {
+        
+        /** The text line. */
         TextView textLine;
+        
+        /** The detail line. */
         TextView detailLine;
         // ImageButton buttonLine;
     }
 
+    /* (non-Javadoc)
+     * @see android.widget.Filterable#getFilter()
+     */
     public Filter getFilter() {
         // TODO Auto-generated method stub
         return null;

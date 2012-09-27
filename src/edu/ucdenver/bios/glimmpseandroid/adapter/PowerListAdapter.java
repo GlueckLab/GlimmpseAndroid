@@ -45,7 +45,7 @@ public class PowerListAdapter extends BaseAdapter{
     /** The m layout inflater. */
     private LayoutInflater mLayoutInflater;
     
-    private List<NominalPower> list;
+    private static List<NominalPower> list;
         
     /** The power. */
     static double power;
