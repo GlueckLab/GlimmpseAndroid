@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
-              android:orientation="vertical"              
-              android:background="@drawable/tutorial_list_item_selector">
+              android:orientation="vertical"
+              android:background="@drawable/list_item_bottom_border" >
     		    
 	<RelativeLayout
 			android:layout_width="wrap_content"
@@ -16,9 +16,10 @@
 				android:layout_height="fill_parent"
 				android:id="@+id/list_item_textView_design"
 				android:textColor="@color/black"
-				android:textSize="13dp"
+				android:textSize="16dp"
 				android:padding="6dp"
 				android:gravity="center_vertical"
+				android:typeface="serif"
 				android:text="Hello World"/>
 		
 
@@ -41,8 +42,8 @@
 		    android:layout_alignParentRight="true"
 		    android:gravity="center_vertical"
 		    android:padding="2dp"
-		    android:textColor="@color/black"
-		    android:textSize="13dp" />
+		    android:textColor="@color/green"
+		    android:textSize="14dp" />
 
 	</RelativeLayout>
 

@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:id="@+id/tutorial_view">
+    android:id="@+id/tutorial_view"
+    android:background="@color/home_screen_gray"
+    >
     
     <FrameLayout
         android:id="@+id/group_panel"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"       
+    	 >
 
 
         <RelativeLayout
             android:id="@+id/groupadd"
-            android:layout_width="wrap_content"
-            android:layout_height="85dp"
-            android:orientation="horizontal" >
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal"            
+             >
 
 		    <TextView
 		        android:id="@+id/description_textView_tutorial"
@@ -23,13 +27,14 @@
 		        android:layout_height="wrap_content"
 		        android:layout_alignParentLeft="true"
 		        android:layout_alignParentTop="true"
-		        android:layout_marginTop="10dp"
+		        android:layout_marginTop="20dp"
 		        android:layout_marginLeft="10dp"
 		        android:layout_marginRight="10dp"
 		        android:text="@string/description_tutorial"
 		        android:textAppearance="?android:attr/textAppearanceMedium"
 		        android:textColor="@color/black"
-		        android:textSize="13dp" />
+		        android:textSize="15dp"
+		        android:lineSpacingExtra="3dp" />
 
 		    <!-- <TextView
 		        android:id="@+id/tutorial_list_header"
@@ -49,15 +54,16 @@
     <ListView
         android:id="@+id/tutorial_list_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="340dp"
         android:layout_alignLeft="@+id/description_textView_tutorial"
         android:layout_alignParentTop="true"
-        android:headerDividersEnabled="true"
         android:textColor="@color/black"
+        android:cacheColorHint="#0000"
         android:padding="2dp"
          android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp" >
+        android:layout_marginLeft="10dp"
+        android:fadeScrollbars="false" >
     </ListView>
     
     

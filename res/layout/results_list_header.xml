@@ -1,25 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="fill_parent"
     android:layout_height="50dp"
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
     android:background="#D7D7D7" >
-
-    <TextView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/list_header_relative_group_size"
-        style="?android:attr/listSeparatorTextViewStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="31dp"
-        android:background="#D7D7D7"
-        android:paddingBottom="2dip"
-        android:paddingRight="25dip"
-        android:paddingTop="2dip"
-        android:text="@string/relative_group_size_list_header_value"
-        android:textColor="@color/black"
-        android:textSize="15dp" />
 
     <TextView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -27,14 +12,31 @@
         style="?android:attr/listSeparatorTextViewStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="4dp"
+        android:layout_marginRight="18dp"
         android:background="#D7D7D7"
         android:paddingBottom="2dip"
-        android:paddingLeft="2dip"
+        android:paddingLeft="5dip"
         android:paddingTop="2dip"
-        android:text="@string/relative_group_size_list_header_group"
+        android:text="@string/sample_size"
+        android:textColor="@color/black"
+        android:textSize="15dp" />
+
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/list_header_mean"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:background="#D7D7D7"
+        android:paddingBottom="2dip"
+        android:paddingLeft="5dip"
+        android:paddingTop="2dip"
+        android:text="@string/power"
         android:textColor="@color/black"
         android:textSize="15dp" />
 

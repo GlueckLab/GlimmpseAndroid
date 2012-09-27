@@ -11,11 +11,12 @@
         android:layout_height="120dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
+        android:lineSpacingExtra="3dp"
         android:text="@string/description_solving_for"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/black"
-        android:textSize="11dp" />
+        android:textSize="15dp" />
 
     <RadioGroup
         android:id="@+id/radioGroup_solvingFor"
@@ -29,30 +30,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
+            android:lineSpacingExtra="3dp"
             android:tag="@string/power"
             android:text="@string/power"
             android:textColor="@color/black"
-            android:textSize="11dp" />
+            android:textSize="16dp" />
 
         <RadioButton
             android:id="@+id/radio_sample_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:lineSpacingExtra="3dp"
             android:tag="@string/sample_size"
             android:text="@string/sample_size"
             android:textColor="@color/black"
-            android:textSize="11dp" />
+            android:textSize="16dp" />
     </RadioGroup>
 
-    <Button
+    <!-- <Button
         android:id="@+id/back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
         android:layout_below="@+id/radioGroup_solvingFor"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="58dp"
+        android:background="@drawable/back_button_selector"
         android:text="@string/back_button_label"
         android:textColor="@color/button_label_black"
-        android:textSize="10dp" />
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:typeface="serif" /> -->
 
 </RelativeLayout>
