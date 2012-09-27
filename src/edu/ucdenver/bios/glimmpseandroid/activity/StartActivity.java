@@ -29,6 +29,7 @@ import edu.ucdenver.bios.glimmpseandroid.R;
 // TODO: Auto-generated Javadoc
 /**
  * The Activity Class handles interaction for Start screen.
+ * @author Uttara Sakhadeo
  */
 public class StartActivity extends Activity {
 

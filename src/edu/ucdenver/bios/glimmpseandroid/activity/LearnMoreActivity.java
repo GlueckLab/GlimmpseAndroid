@@ -30,6 +30,7 @@ import edu.ucdenver.bios.glimmpseandroid.R;
 // TODO: Auto-generated Javadoc
 /**
  * The Activity Class handles interaction for LearMore/AboutUs screen.
+ * @author Uttara Sakhadeo
  */
 public class LearnMoreActivity extends Activity {
 

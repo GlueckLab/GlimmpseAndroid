@@ -22,8 +22,12 @@ package edu.ucdenver.bios.glimmpseandroid.activity.design;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,10 +37,13 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
+import edu.ucdenver.bios.glimmpseandroid.activity.TabViewActivity;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener;
 import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
-
+/*
+ * @author Uttara Sakhadeo
+ */
 public class GroupCountActivity extends Activity implements OnClickListener, SimpleGestureListener {
 	static SeekBar seekbar;
 	static TextView value;
@@ -44,6 +51,14 @@ public class GroupCountActivity extends Activity implements OnClickListener, Sim
 	static StuyDesignContext stuyDesignContext = StuyDesignContext.getInstance();
 	private static GestureFilter detector;
 
+	/**
+     * This method is called by Android when the Activity is first started. From
+     * the incoming Intent, it determines what kind of editing is desired, and
+     * then does it.
+     * 
+     * @param savedInstanceState
+     *            the saved instance state
+     */
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
@@ -174,4 +189,48 @@ public class GroupCountActivity extends Activity implements OnClickListener, Sim
         // TODO Auto-generated method stub
         
     }
+        
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home_screen_menu, menu);
+        return true;
+    }
+    
+    private boolean menuSelection(MenuItem item){
+        switch (item.getItemId()) { 
+        case R.id.menu_tutorial: 
+            stuyDesignContext.setGroups(groups);
+            finish();
+            Intent tabIntent = new Intent(this.getBaseContext(),
+                    TabViewActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("tab_id", 0);
+            tabIntent.putExtras(bundle);
+            tabIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(tabIntent);
+            return true;
+        case R.id.menu_start:           
+            stuyDesignContext.setGroups(groups);
+            finish();           
+            return true;
+        case R.id.menu_aboutus:             
+            stuyDesignContext.setGroups(groups);
+            finish();
+            tabIntent = new Intent(this.getBaseContext(),
+                    TabViewActivity.class);
+            bundle = new Bundle();
+            bundle.putInt("tab_id", 2);
+            tabIntent.putExtras(bundle);
+            tabIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(tabIntent);
+            return true;
+        default: 
+            return super.onOptionsItemSelected(item); 
+            }
+    }
+    
+    public boolean onOptionsItemSelected(MenuItem item) { // Handle
+         return menuSelection(item);
+        }
+
 }

@@ -20,12 +20,17 @@
  */
 package edu.ucdenver.bios.glimmpseandroid.activity.design;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,17 +41,35 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import edu.ucdenver.bios.glimmpseandroid.R;
+import edu.ucdenver.bios.glimmpseandroid.activity.TabViewActivity;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter;
-import edu.ucdenver.bios.glimmpseandroid.adapter.PowerListAdapter;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener;
+import edu.ucdenver.bios.glimmpseandroid.adapter.PowerListAdapter;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PowerActivity.
+ * @author Uttara Sakhadeo
+ */
 public class PowerActivity extends Activity implements OnClickListener, SimpleGestureListener{
+    
+    /** The power list view. */
     private ListView powerListView;
+    
+    /** The value text. */
     private static EditText valueText;
+    
+    /** The img. */
     static Drawable img;
+    
+    /** The detector. */
     private static GestureFilter detector;
         
+    /* (non-Javadoc)
+     * @see android.app.Activity#onCreate(android.os.Bundle)
+     */
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -92,6 +115,14 @@ public class PowerActivity extends Activity implements OnClickListener, SimpleGe
         
     }              
     
+    private void clearText(){
+        valueText.setText("");   
+        valueText.requestFocusFromTouch();
+    }
+    
+    /**
+     * Power list populate.
+     */
     private void powerListPopulate(){
         powerListView = (ListView)findViewById(R.id.power_list_view);
         View header1 = getLayoutInflater().inflate(
@@ -130,18 +161,18 @@ public class PowerActivity extends Activity implements OnClickListener, SimpleGe
                 //valueText.setCompoundDrawables( null, null, img, null );
                 if (arg1.getX() > valueText.getWidth()
                 - img.getIntrinsicWidth() - 10) {
-                    valueText.setText("");
-                    valueText.setText("");   
-                    valueText.requestFocusFromTouch();
+                    /*valueText.setText("");   
+                    valueText.requestFocusFromTouch();*/
+                    clearText();
                 }
             return false;
             }
     
-        });   
+        });                  
                  
         Button addButton = (Button) findViewById(R.id.add_button);
         addButton.setOnClickListener(new OnClickListener() {            
-            public void onClick(View v) {
+            public void onClick(View v) {                
                 addValue();
             }
         });
@@ -166,48 +197,71 @@ public class PowerActivity extends Activity implements OnClickListener, SimpleGe
         Button clearAllButton = (Button) findViewById(R.id.delete_all_button);
         clearAllButton.setOnClickListener(new OnClickListener() {
             
+            @SuppressLint("NewApi")
             public void onClick(View v) {
-                EditText valueText = (EditText) findViewById(R.id.power_value);
-                valueText.setText("");
+                valueText = (EditText) findViewById(R.id.power_value);
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);    
+                //System.out.println("inputmethod manager : "+imm.getLastInputMethodSubtype());                
+                imm.hideSoftInputFromWindow(valueText.getWindowToken(), 0);                
                 powerListView.setAdapter(new PowerListAdapter(PowerActivity.this, -1.0));
-                valueText.requestFocusFromTouch();
-                
+                /*valueText.setText("");                
+                valueText.requestFocusFromTouch();  */
+                clearText();
             }
         });
         
         powerListView.setAdapter(new PowerListAdapter(PowerActivity.this, null));      
     }
     
+    /**
+     * Adds the value.
+     */
     private void addValue(){
         valueText = (EditText) findViewById(R.id.power_value);        
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(valueText.getWindowToken(), 0);
         //imm.hideSoftInputFromWindow(valueText.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);        
         String data = String.valueOf(valueText.getText());
+        System.out.println("Data : "+data);
         if(data != null && !data.isEmpty()) {
             if(!data.equals(".")){               
                 Double value = Double.parseDouble(data);
-                if(value <= 1) {
+                if(value <= 1) {                    
                     powerListView.setAdapter(new PowerListAdapter(PowerActivity.this, value));
-                }                
+                }  
+                else{
+                    (Toast.makeText(getBaseContext(),
+                            "Please type a decimal number in the range of 0 to 1 !!!",
+                            Toast.LENGTH_SHORT)).show();
+                }
             }
-            valueText.setText("");
-            valueText.requestFocusFromTouch();
+            /*valueText.setText("");
+            valueText.requestFocusFromTouch();*/
+            clearText();
             //
         }
     }
        
     
+    /* (non-Javadoc)
+     * @see android.view.View.OnClickListener#onClick(android.view.View)
+     */
     public void onClick(View v) {
         finish();
      }
     
+    /* (non-Javadoc)
+     * @see android.app.Activity#dispatchTouchEvent(android.view.MotionEvent)
+     */
     public boolean dispatchTouchEvent(MotionEvent me){
         //System.out.println("dispatchTouchEvent");
         detector.onTouchEvent(me);
        return super.dispatchTouchEvent(me);
       }
 
+    /* (non-Javadoc)
+     * @see edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener#onSwipe(int)
+     */
     public void onSwipe(int direction) {
         // TODO Auto-generated method stub
         /*if(direction == 3)
@@ -231,8 +285,54 @@ public class PowerActivity extends Activity implements OnClickListener, SimpleGe
              //Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 
+    /* (non-Javadoc)
+     * @see edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener#onDoubleTap()
+     */
     public void onDoubleTap() {
         // TODO Auto-generated method stub
         
     }
+    
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home_screen_menu, menu);
+        return true;
+    }
+    
+    private boolean menuSelection(MenuItem item){
+        switch (item.getItemId()) { 
+        case R.id.menu_tutorial:    
+            addValue();
+            finish();
+            Intent tabIntent = new Intent(this.getBaseContext(),
+                    TabViewActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("tab_id", 0);
+            tabIntent.putExtras(bundle);
+            tabIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(tabIntent);
+            return true;
+        case R.id.menu_start:
+            addValue();
+            finish();           
+            return true;
+        case R.id.menu_aboutus:
+            addValue();
+            finish();
+            tabIntent = new Intent(this.getBaseContext(),
+                    TabViewActivity.class);
+            bundle = new Bundle();
+            bundle.putInt("tab_id", 2);
+            tabIntent.putExtras(bundle);
+            tabIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(tabIntent);
+            return true;
+        default: 
+            return super.onOptionsItemSelected(item); 
+            }
+    }
+    
+    public boolean onOptionsItemSelected(MenuItem item) { // Handle
+         return menuSelection(item);
+        }
 }

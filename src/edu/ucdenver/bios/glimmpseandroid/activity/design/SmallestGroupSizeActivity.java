@@ -37,14 +37,34 @@ import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
 import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SmallestGroupSizeActivity.
+ * @author Uttara Sakhadeo
+ */
 public class SmallestGroupSizeActivity extends Activity implements TextWatcher{
 	
+	/** The smallest group size. */
 	static Integer smallestGroupSize;	
+	
+	/** The value. */
 	static EditText value;
+	
+	/** The img. */
 	static Drawable img;
+	
+	/** The stuy design context. */
 	static StuyDesignContext stuyDesignContext = StuyDesignContext.getInstance();
 	//static ImageButton clear;
 	
+	/**
+     * This method is called by Android when the Activity is first started. From
+     * the incoming Intent, it determines what kind of editing is desired, and
+     * then does it.
+     * 
+     * @param savedInstanceState
+     *            the saved instance state
+     */
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
@@ -134,17 +154,26 @@ public class SmallestGroupSizeActivity extends Activity implements TextWatcher{
 	}
 		
 
+	/* (non-Javadoc)
+	 * @see android.text.TextWatcher#afterTextChanged(android.text.Editable)
+	 */
 	public void afterTextChanged(Editable s) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see android.text.TextWatcher#beforeTextChanged(java.lang.CharSequence, int, int, int)
+	 */
 	public void beforeTextChanged(CharSequence s, int start, int count,
 			int after) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see android.text.TextWatcher#onTextChanged(java.lang.CharSequence, int, int, int)
+	 */
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
 		// TODO Auto-generated method stub		
 		if(String.valueOf(s) != null || String.valueOf(s).equals("")) {
@@ -165,17 +194,26 @@ public class SmallestGroupSizeActivity extends Activity implements TextWatcher{
 		}
 	}
 	
+	/**
+	 * Exit.
+	 */
 	private void exit(){
 		resetText();	
 		finish();
 	}
 	
+	/**
+	 * Reset text.
+	 */
 	private void resetText(){
 		if(smallestGroupSize == null)
 			smallestGroupSize = 0;
 		//stuyDesignContext.setSmallestGroupSize(smallestGroupSize);	
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+	 */
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             finish();

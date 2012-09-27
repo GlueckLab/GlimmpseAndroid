@@ -22,8 +22,12 @@ package edu.ucdenver.bios.glimmpseandroid.activity.design;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,20 +37,42 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
+import edu.ucdenver.bios.glimmpseandroid.activity.TabViewActivity;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener;
 import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
-import edu.ucdenver.bios.webservice.common.enums.SolutionTypeEnum;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SolvingForActivity.
+ * @author Uttara Sakhadeo
+ */
 public class SolvingForActivity extends Activity implements OnClickListener,SimpleGestureListener {
+    
+    /** The values. */
     private static RadioGroup values;
+    
+    /** The checked. */
     private static RadioButton checked;
+    
+    /** The solving for. */
     private static String solvingFor;	
 	//private static final String SAMPLE_SIZE = "Sample Size";
+	/** The stuy design context. */
 	private static StuyDesignContext stuyDesignContext = StuyDesignContext.getInstance();
+	
+	/** The detector. */
 	private static GestureFilter detector;
 	//static GlobalVariables globalVariables;
 
+	/**
+     * This method is called by Android when the Activity is first started. From
+     * the incoming Intent, it determines what kind of editing is desired, and
+     * then does it.
+     * 
+     * @param savedInstanceState
+     *            the saved instance state
+     */
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
@@ -89,6 +115,9 @@ public class SolvingForActivity extends Activity implements OnClickListener,Simp
 				
 	}	
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+	 */
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             finish();
@@ -97,6 +126,9 @@ public class SolvingForActivity extends Activity implements OnClickListener,Simp
          return super.onKeyDown(keyCode, event);
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
 	public void onClick(View v) {	
 		/*int selected = values.getCheckedRadioButtonId();
 		checked = (RadioButton) findViewById(selected);
@@ -123,12 +155,18 @@ public class SolvingForActivity extends Activity implements OnClickListener,Simp
 	    exit();
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#dispatchTouchEvent(android.view.MotionEvent)
+	 */
 	public boolean dispatchTouchEvent(MotionEvent me){
         //System.out.println("dispatchTouchEvent");
         detector.onTouchEvent(me);
        return super.dispatchTouchEvent(me);
       }
 
+    /* (non-Javadoc)
+     * @see edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener#onSwipe(int)
+     */
     public void onSwipe(int direction) {
        // TODO Auto-generated method stub
        /*if(direction == 3)
@@ -151,11 +189,17 @@ public class SolvingForActivity extends Activity implements OnClickListener,Simp
             //Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
     
+    /* (non-Javadoc)
+     * @see edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener#onDoubleTap()
+     */
     public void onDoubleTap() {
        // TODO Auto-generated method stub
        
     }
     
+    /**
+     * Exit.
+     */
     private void exit(){
         int selected = values.getCheckedRadioButtonId();
         checked = (RadioButton) findViewById(selected);
@@ -186,4 +230,44 @@ public class SolvingForActivity extends Activity implements OnClickListener,Simp
         
         finish();
     }
+    
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home_screen_menu, menu);
+        return true;
+    }
+    
+    private boolean menuSelection(MenuItem item){
+        switch (item.getItemId()) { 
+        case R.id.menu_tutorial:            
+            exit();
+            Intent tabIntent = new Intent(this.getBaseContext(),
+                    TabViewActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("tab_id", 0);
+            tabIntent.putExtras(bundle);
+            tabIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);            
+            startActivity(tabIntent);
+            return true;
+        case R.id.menu_start:           
+            exit();         
+            return true;
+        case R.id.menu_aboutus:             
+            exit();
+            tabIntent = new Intent(this.getBaseContext(),
+                    TabViewActivity.class);
+            bundle = new Bundle();
+            bundle.putInt("tab_id", 2);
+            tabIntent.putExtras(bundle);
+            tabIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);          
+            startActivity(tabIntent);
+            return true;
+        default: 
+            return super.onOptionsItemSelected(item); 
+            }
+    }
+    
+    public boolean onOptionsItemSelected(MenuItem item) { // Handle
+         return menuSelection(item);
+        }
 }

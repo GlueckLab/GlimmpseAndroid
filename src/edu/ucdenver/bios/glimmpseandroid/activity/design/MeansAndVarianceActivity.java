@@ -20,33 +20,43 @@
  */
 package edu.ucdenver.bios.glimmpseandroid.activity.design;
 
-import java.util.List;
-
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
+import edu.ucdenver.bios.glimmpseandroid.activity.TabViewActivity;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter;
-import edu.ucdenver.bios.glimmpseandroid.adapter.MeansAndVarianceAdapter;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener;
-import edu.ucdenver.bios.glimmpseandroid.application.GlobalVariables;
-import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;;
-
+import edu.ucdenver.bios.glimmpseandroid.adapter.MeansAndVarianceAdapter;
+import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
+/*
+ * @author Uttara Sakhadeo
+ */
 public class MeansAndVarianceActivity extends Activity implements OnClickListener, SimpleGestureListener{
 	private ListView meanVarianceList;
 	static Drawable img;
 	private static GestureFilter detector;
 	
-	
+	/**
+     * This method is called by Android when the Activity is first started. From
+     * the incoming Intent, it determines what kind of editing is desired, and
+     * then does it.
+     * 
+     * @param savedInstanceState
+     *            the saved instance state
+     */
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
@@ -135,4 +145,44 @@ public class MeansAndVarianceActivity extends Activity implements OnClickListene
         // TODO Auto-generated method stub
         
     }
+    
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home_screen_menu, menu);
+        return true;
+    }
+    
+    private boolean menuSelection(MenuItem item){
+        switch (item.getItemId()) { 
+        case R.id.menu_tutorial: 
+            finish();
+            Intent tabIntent = new Intent(this.getBaseContext(),
+                    TabViewActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("tab_id", 0);
+            tabIntent.putExtras(bundle);
+            tabIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(tabIntent);
+            return true;
+        case R.id.menu_start:           
+            finish();           
+            return true;
+        case R.id.menu_aboutus:             
+            finish();
+            tabIntent = new Intent(this.getBaseContext(),
+                    TabViewActivity.class);
+            bundle = new Bundle();
+            bundle.putInt("tab_id", 2);
+            tabIntent.putExtras(bundle);
+            tabIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(tabIntent);
+            return true;
+        default: 
+            return super.onOptionsItemSelected(item); 
+            }
+    }
+    
+    public boolean onOptionsItemSelected(MenuItem item) { // Handle
+         return menuSelection(item);
+        }   
 }
