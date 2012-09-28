@@ -44,7 +44,6 @@ import edu.ucdenver.bios.glimmpseandroid.R;
 import edu.ucdenver.bios.glimmpseandroid.activity.TabViewActivity;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener;
-import edu.ucdenver.bios.glimmpseandroid.application.GlobalVariables;
 import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 
 // TODO: Auto-generated Javadoc
@@ -119,7 +118,7 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
             if (arg1.getX() > value.getWidth()
             - img.getIntrinsicWidth() - 10) {
                 value.setText("0.");
-                resetText();
+                resetText();                
             }
             return false;
             }
@@ -136,11 +135,13 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
 		    value.setText(Double.toString(alpha));
 		    value.setCompoundDrawables( null, null, img, null );
 		    value.requestFocus();
+		    value.setSelection(value.getText().length());
 		}
 		else {
 		    value.setText("0.");
 		    value.setCompoundDrawables( null, null, null, null );
 		    value.requestFocus();
+		    value.setSelection(value.getText().length());
 		}
 		
 	}	
@@ -155,8 +156,9 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
 	private void resetText(){
         if(alpha == null)
             alpha = Double.parseDouble(format.format(0));
-        GlobalVariables.getInstance().setTypeIError(alpha);
+        stuyDesignContext.setTypeIError(alpha);
         value.requestFocus();
+        value.setSelection(value.getText().length());
     }
 		
     /* (non-Javadoc)

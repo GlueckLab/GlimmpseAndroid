@@ -20,9 +20,6 @@
  */
 package edu.ucdenver.bios.glimmpseandroid.activity;
 
-import java.io.File;
-
-import org.codehaus.jackson.map.ObjectMapper;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 
@@ -76,7 +73,8 @@ public class TabViewActivity extends Activity implements Runnable,
     //private static final String SERVICE_URL = "http://10.0.2.2:8080/power/";
     String[] labels;
     // String[] titles;
-    private static Button calculateButton;
+    private Button calculateButton;
+    private Button resetButton;
     /*
      * private static ProgressBar loadingProgressBar; private static TextView
      * loadingText;
@@ -100,8 +98,10 @@ public class TabViewActivity extends Activity implements Runnable,
     
     protected void onResume() {
         super.onResume();
+        System.out.println("Tab View On Resume");
         // If current screen is Design
         if (mTabHost.getCurrentTab() == 1) {
+            System.out.println("start tab ...");
             designListPopulate();
             globalVariables = StuyDesignContext.getInstance();
             // ProgressBar inputProgress = (ProgressBar)
@@ -112,6 +112,12 @@ public class TabViewActivity extends Activity implements Runnable,
             if (progress == 6) {
                 calculateButton.setEnabled(true);
                 calculateButton.setClickable(true);
+            }
+        }
+        else if(mTabHost.getCurrentTab()==2){
+            aboutUsPopulate();
+            for (int i = 0; i <= 2; i++) {
+                mTabHost.setCurrentTab(i);
             }
         }
     }
@@ -265,7 +271,51 @@ public class TabViewActivity extends Activity implements Runnable,
             }
         });
 
-        Button resetButton = (Button) findViewById(R.id.reset);
+                /*
+         * loadingProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
+         * loadingText = (TextView) findViewById(R.id.textView1);
+         * loadingProgressBar.setVisibility(View.INVISIBLE);
+         * loadingText.setVisibility(View.INVISIBLE);
+         */
+
+    }
+
+    private void resetButtonFunctionality() {
+        StuyDesignContext.resetInstance();
+        designListPopulate();
+        globalVariables.resetProgress();
+        // ProgressBar inputProgress = (ProgressBar)
+        // findViewById(R.id.input_progress);
+        System.out.println("reset progress : "
+                + globalVariables.getTotalProgress());
+        // inputProgress.setProgress(globalVariables.getTotalProgress());
+        calculateButton.setEnabled(false);
+        calculateButton.setClickable(false);
+        /*
+         * loadingProgressBar.setVisibility(View.INVISIBLE);
+         * loadingText.setVisibility(View.INVISIBLE);
+         */
+    }
+
+    private void tutorialListPopulate() {
+        String[] tutorialList = getResources().getStringArray(
+                R.array.tutorial_list);
+
+        tutorialListView = (ListView) findViewById(R.id.tutorial_list_view);
+        /*
+         * View header1 = getLayoutInflater().inflate(
+         * R.layout.tutorial_list_header, null, false); if
+         * (tutorialListView.getHeaderViewsCount() == 0)
+         * tutorialListView.addHeaderView(header1);
+         */
+
+        tutorialListView.setAdapter(new TutorialAdapter(getBaseContext(),
+                tutorialList));
+    }
+
+    private void designListPopulate() {
+        
+        resetButton = (Button) findViewById(R.id.reset);
         resetButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
 
@@ -308,12 +358,7 @@ public class TabViewActivity extends Activity implements Runnable,
         });
 
         calculateButton = (Button) findViewById(R.id.calculate_button);
-        /*
-         * loadingProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
-         * loadingText = (TextView) findViewById(R.id.textView1);
-         * loadingProgressBar.setVisibility(View.INVISIBLE);
-         * loadingText.setVisibility(View.INVISIBLE);
-         */
+
         if (StuyDesignContext.getInstance().getTotalProgress() != 6) {
             calculateButton.setClickable(false);
             calculateButton.setEnabled(false);
@@ -419,42 +464,7 @@ public class TabViewActivity extends Activity implements Runnable,
                  */
             }
         });
-    }
-
-    private void resetButtonFunctionality() {
-        StuyDesignContext.resetInstance();
-        designListPopulate();
-        globalVariables.resetProgress();
-        // ProgressBar inputProgress = (ProgressBar)
-        // findViewById(R.id.input_progress);
-        System.out.println("reset progress : "
-                + globalVariables.getTotalProgress());
-        // inputProgress.setProgress(globalVariables.getTotalProgress());
-        calculateButton.setEnabled(false);
-        calculateButton.setClickable(false);
-        /*
-         * loadingProgressBar.setVisibility(View.INVISIBLE);
-         * loadingText.setVisibility(View.INVISIBLE);
-         */
-    }
-
-    private void tutorialListPopulate() {
-        String[] tutorialList = getResources().getStringArray(
-                R.array.tutorial_list);
-
-        tutorialListView = (ListView) findViewById(R.id.tutorial_list_view);
-        /*
-         * View header1 = getLayoutInflater().inflate(
-         * R.layout.tutorial_list_header, null, false); if
-         * (tutorialListView.getHeaderViewsCount() == 0)
-         * tutorialListView.addHeaderView(header1);
-         */
-
-        tutorialListView.setAdapter(new TutorialAdapter(getBaseContext(),
-                tutorialList));
-    }
-
-    private void designListPopulate() {
+        
         // String solvingFor =
         // StuyDesignContext.getInstance().getStudyDesign().getSolutionTypeEnum().toString();
         String solvingFor = StuyDesignContext.getInstance().getSolvingFor();
@@ -556,7 +566,6 @@ public class TabViewActivity extends Activity implements Runnable,
         // last.
         // mTabHost.setCurrentTab(1);
         // mTabHost.setCurrentTab(0);
-        mTabHost = (TabHost) findViewById(android.R.id.tabhost);      
     }
 
     /**
@@ -673,8 +682,7 @@ public class TabViewActivity extends Activity implements Runnable,
                      * mapper1.writeValue(System.out, studyDesign); }
                      * catch(Exception e){ System.out.println(e.getMessage()); }
                      */
-                    
-                    //System.out.println(studyDesign);
+                    System.out.println(studyDesign);
 
                     // org.restlet.Context context = new org.restlet.Context();
                     // context.setParameters(parameters).parameters.add
@@ -690,8 +698,7 @@ public class TabViewActivity extends Activity implements Runnable,
                      * "120"); ClientResource cr = new
                      * ClientResource(context1,URL);
                      */
-                     
-                    
+
                     Representation repr = cr.post(studyDesign);
 
                     jsonStr = repr.getText();
