@@ -2,7 +2,7 @@
 <resources>
     <string-array name="tab_labels">
         <item>@string/menu_tutorial</item>
-		<item>@string/menu_design</item>
+		<item>@string/menu_start</item>
 		<item>@string/menu_aboutus</item>		
     </string-array>
 </resources>

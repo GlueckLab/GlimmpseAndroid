@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <color name="start_button_bkg">#701421</color>
   <color name="actionbar_title_color">#224894</color> 
   <!-- Button Label -->
   	<!-- Black -->
   	<color name="button_label_black">#000000</color>
+  	<color name="button_label_white">#ffffff</color>
+  	<color name="learn_more_button_label_color">#701421</color>
   	
   <!-- Text -->
   	<!-- Black -->
@@ -12,8 +15,11 @@
   	
   <!-- Backgroud -->
   	<!-- Dard Gray -->
+  	<color name="home_screen_gray">#cccccc</color>
   	<color name="dark_gray_bk">#686868</color>
   	<color name="blue_bk">#aaaaaa</color>
   	
   	<color name="transparent">#00000000</color>
+  	
+  	<color name="green">#002200</color>
  </resources>

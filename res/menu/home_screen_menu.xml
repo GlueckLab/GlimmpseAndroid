@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_tutorial"
+        android:title="@string/menu_tutorial"
+        android:alphabeticShortcut='t'
+        android:icon="@drawable/tutorial"        
+        android:showAsAction="always"/>
+    <item android:id="@+id/menu_start"
+        android:title="@string/menu_start"
+        android:alphabeticShortcut='s'
+        android:icon="@drawable/design"
+        android:showAsAction="always"/>
+    <item android:id="@+id/menu_aboutus"
+        android:title="@string/menu_aboutus"
+        android:alphabeticShortcut='a'
+        android:icon="@drawable/aboutus"
+        android:showAsAction="always"/>
+</menu>

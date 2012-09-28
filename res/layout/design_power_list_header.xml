@@ -37,7 +37,9 @@
         android:singleLine="true"
         android:textSize="15dp"
         android:focusable="true"
-        android:textStyle="bold" />
+        android:textStyle="bold" >
+        <requestFocus />
+        </EditText>
 
     <Button
         android:id="@+id/add_button"
