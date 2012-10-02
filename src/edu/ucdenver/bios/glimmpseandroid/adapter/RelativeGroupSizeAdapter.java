@@ -20,6 +20,8 @@
  */
 package edu.ucdenver.bios.glimmpseandroid.adapter;
 
+import java.util.List;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +33,9 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
+import edu.ucdenver.bios.glimmpseandroid.adapter.PowerListAdapter.ViewHolder;
 import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
+import edu.ucdenver.bios.webservice.common.domain.RelativeGroupSize;
 
 
 
@@ -43,7 +47,9 @@ import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 public class RelativeGroupSizeAdapter extends BaseAdapter{
     
     /** The groups. */
-    private int groups;
+    //private int groups;
+    
+    //private static List<RelativeGroupSize> list;
     
     /** The m layout inflater. */
     private LayoutInflater mLayoutInflater;
@@ -52,7 +58,9 @@ public class RelativeGroupSizeAdapter extends BaseAdapter{
     static int relativeGroupSize;
     //static ViewHolder holder;
     /** The value text. */
-    static TextView valueText;    
+    static TextView valueText; 
+    /** The global variables. */
+    private static StuyDesignContext globalVariables;
     
     /**
      * Instantiates a new relative group size adapter.
@@ -60,29 +68,17 @@ public class RelativeGroupSizeAdapter extends BaseAdapter{
      * @param context the context
      * @param groups the groups
      */
-    public RelativeGroupSizeAdapter(Context context, int groups){
+    public RelativeGroupSizeAdapter(Context context){
         
-        this.groups = groups;
- 
+        //this.groups = groups;
+
         //get the layout inflater
-        mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);               
-    }
-    
-    /* (non-Javadoc)
-     * @see android.widget.Adapter#getItem(int)
-     */
-    public Object getItem(int i) {
-        return null;
-    }
- 
-    
-        //get the position id of the item from the list
-    /* (non-Javadoc)
-         * @see android.widget.Adapter#getItemId(int)
-         */
-        public long getItemId(int i) {
-        return 0;
-    }
+        mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE); 
+        globalVariables = StuyDesignContext.getInstance();
+        /*list = globalVariables.getStudyDesign().getRelativeGroupSizeList();
+        for(RelativeGroupSize a : list)
+            System.out.println("value "+a.getValue());*/
+    }       
     
     /* (non-Javadoc)
      * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
@@ -90,59 +86,64 @@ public class RelativeGroupSizeAdapter extends BaseAdapter{
     public View getView(final int position, View view, ViewGroup viewGroup) {
         
         ViewHolder holder;      
-       //check to see if the reused view is null or not, if is not null then reuse it
-       if (view == null) {
+        
+       /*if (view == null) {
+           System.out.println("view null");*/
            view = mLayoutInflater.inflate(R.layout.design_relative_group_size_item, null);
            
            holder = new ViewHolder();
            holder.textLine = (TextView) view.findViewById(R.id.list_item_textView_relative_group_size);
            holder.valueLine = (SeekBar) view.findViewById(R.id.relativeSize);
-           holder.detailLine = (TextView) view.findViewById(R.id.see_progress);
-                      
-           if(StuyDesignContext.getInstance().getRelativeGroupSize(position) == 0) {
-               StuyDesignContext.getInstance().setDefaultRelativeGroupSize(position);
+           holder.detailLine = (TextView) view.findViewById(R.id.see_progress); 
+           //int tempRelGpSize = list.get(position).getValue();
+           int tempRelGpSize = globalVariables.getRelativeGroupSize(position);
+           if(tempRelGpSize == 0) {
+               globalVariables.setDefaultRelativeGroupSize(position);
+               relativeGroupSize = globalVariables.getRelativeGroupSize(position);
                //holder.valueLine.setText(Double.toString(variance));               
-               //clear.setVisibility(View.VISIBLE);                
-           }           
-           relativeGroupSize = StuyDesignContext.getInstance().getRelativeGroupSize(position);
-           holder.valueLine.setProgress(relativeGroupSize - 1);
-           holder.detailLine.setText(""+relativeGroupSize);
-           holder.valueLine.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
-                
-               public void onProgressChanged(SeekBar seekBar, int progress,
-                       boolean fromUser) {
-                   // TODO Auto-generated method stub                   
-                   relativeGroupSize = progress+ 1;
-                   RelativeLayout mlayout=(RelativeLayout) seekBar.getParent();
-                   if (mlayout.getChildCount() > 0) {                   
-                   valueText = (TextView) mlayout.getChildAt(0);                   
-                   valueText.setText(""+relativeGroupSize);
-                   StuyDesignContext.getInstance().setRelativeGroupSize(relativeGroupSize,position);
-                // GlobalVariableApplication.globalVariables.getPowerResult().set   
-                   }
-                               
-                   
-               }
-
-               public void onStartTrackingTouch(SeekBar seekBar) {
-                   // TODO Auto-generated method stub
-               }
-
-               public void onStopTrackingTouch(SeekBar seekBar) {
-                   // TODO Auto-generated method stub
-               }
-           });
+               //clear.setVisibility(View.VISIBLE);       
+               //relativeGroupSize = list.get(position).getValue();
+           }
+           else{
+               relativeGroupSize = tempRelGpSize;
+           }
            
-           /*view.setOnClickListener(new OnClickListener() {
-               private int pos = position;          
-               //Intent intent;
-               
-               public void onClick(View v) {               
-                   
-               }
-           });*/
-                           
+           /*view.setTag(holder);                
        }
+       else {
+           holder = (ViewHolder) view.getTag();
+       }*/          
+       //relativeGroupSize = list.get(position).getValue();
+       
+       System.out.println("getView() position : "+position+" value : "+relativeGroupSize);
+       holder.valueLine.setProgress(relativeGroupSize - 1);
+       holder.detailLine.setText(""+relativeGroupSize);
+       holder.valueLine.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
+            
+           public void onProgressChanged(SeekBar seekBar, int progress,
+                   boolean fromUser) {
+               // TODO Auto-generated method stub                   
+               relativeGroupSize = progress+ 1;
+               RelativeLayout mlayout=(RelativeLayout) seekBar.getParent();
+               if (mlayout.getChildCount() > 0) {                   
+               valueText = (TextView) mlayout.getChildAt(0);                   
+               valueText.setText(""+relativeGroupSize);
+               globalVariables.setRelativeGroupSize(relativeGroupSize,position);
+            // GlobalVariableApplication.globalVariables.getPowerResult().set   
+               }
+                           
+               
+           }
+
+           public void onStartTrackingTouch(SeekBar seekBar) {
+               // TODO Auto-generated method stub
+           }
+
+           public void onStopTrackingTouch(SeekBar seekBar) {
+               // TODO Auto-generated method stub
+           }
+       });     
+       
        //view.setTag(holder);
        //get the string item from the position "position" from array list to put it on the TextView
        String stringItem = "Group "+(position+1);
@@ -154,9 +155,7 @@ public class RelativeGroupSizeAdapter extends BaseAdapter{
                //set the item name on the TextView
                itemName.setText(stringItem);
            }
-       }              
-       
-       
+       }                           
 
        //this method must return the view corresponding to the data at the specified position.
        return view;
@@ -169,30 +168,36 @@ public class RelativeGroupSizeAdapter extends BaseAdapter{
    static class ViewHolder {
        
        /** The text line. */
-       TextView textLine;
-       
+       TextView textLine;       
        /** The value line. */
-       SeekBar valueLine;
-       
+       SeekBar valueLine;       
        /** The detail line. */
        TextView detailLine;
-       }
+    }
+   
+   /* (non-Javadoc)
+    * @see android.widget.Adapter#getItem(int)
+    */
+   public Object getItem(int i) {
+       //return list.get(i).getValue();
+       return globalVariables.getRelativeGroupSize(i);
+   }
+
+   
+       //get the position id of the item from the list
+   /* (non-Javadoc)
+        * @see android.widget.Adapter#getItemId(int)
+        */
+       public long getItemId(int i) {
+       return i;
+   }
    
    /* (non-Javadoc)
     * @see android.widget.Adapter#getCount()
     */
    public int getCount() {
        // TODO Auto-generated method stub
-       return groups;
+       return globalVariables.getGroups();
    }
-
-   
-   /**
-    * Reset variance.
-    */
-   private void resetVariance(){
-       /*if(relativeGroupSize == null)
-           relativeGroupSize = 0;*/
-       //GlobalVariables.getInstance().setRelatirelativeGroupSize(relativeGroupSize);    
-   }
+     
 }
