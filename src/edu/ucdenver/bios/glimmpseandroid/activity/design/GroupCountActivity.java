@@ -47,7 +47,7 @@ import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 public class GroupCountActivity extends Activity implements OnClickListener, SimpleGestureListener {
 	static SeekBar seekbar;
 	static TextView value;
-	static int groups;		
+	int groups;		
 	static StuyDesignContext stuyDesignContext = StuyDesignContext.getInstance();
 	private static GestureFilter detector;
 

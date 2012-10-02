@@ -96,12 +96,11 @@ public class TabViewActivity extends Activity implements Runnable,
     private Context context;
     
     
-    protected void onResume() {
+    protected void onRestart() {
         super.onResume();
         System.out.println("Tab View On Resume");
         // If current screen is Design
         if (mTabHost.getCurrentTab() == 1) {
-            System.out.println("start tab ...");
             designListPopulate();
             globalVariables = StuyDesignContext.getInstance();
             // ProgressBar inputProgress = (ProgressBar)

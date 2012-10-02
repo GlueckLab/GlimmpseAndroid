@@ -134,12 +134,10 @@ private ListView relativeGroupSizeListView;
         View header =  getLayoutInflater().inflate(R.layout.design_relative_group_size_list_header, null, false);
         if(relativeGroupSizeListView.getHeaderViewsCount() == 0)
             relativeGroupSizeListView.addHeaderView(header);
-        int groups = StuyDesignContext.getInstance().getGroups();
-        if(groups > 0)
-            relativeGroupSizeListView.setAdapter(new RelativeGroupSizeAdapter(RelativeGroupSizeActivity.this,groups));
-        else{
-            
-        }
+        //int groups = StuyDesignContext.getInstance().getGroups();
+        //if(groups > 0)
+            //relativeGroupSizeListView.setAdapter(new RelativeGroupSizeAdapter(RelativeGroupSizeActivity.this,groups));
+        relativeGroupSizeListView.setAdapter(new RelativeGroupSizeAdapter(RelativeGroupSizeActivity.this));        
     }
     
     /* (non-Javadoc)

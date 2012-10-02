@@ -95,7 +95,7 @@ public class SampleSizeActivity extends Activity implements OnClickListener,Simp
         img.setBounds( 0, 0, 32, 32 );
         
         TextView title = (TextView) findViewById(R.id.window_title);
-        title.setText(getResources().getString(R.string.title_sample_size));
+        title.setText(getResources().getString(R.string.title_smallest_group_size));
         
         Button homeButton = (Button) findViewById(R.id.home_button);
         homeButton.setText(getResources().getString(R.string.title_design));
@@ -176,7 +176,6 @@ public class SampleSizeActivity extends Activity implements OnClickListener,Simp
                 //valueText.setCompoundDrawables( null, null, img, null );
                 if (arg1.getX() > valueText.getWidth()
                 - img.getIntrinsicWidth() - 10) {
-                    valueText.setText("");
                     valueText.setText("");   
                     valueText.requestFocusFromTouch();
                 }
@@ -214,7 +213,7 @@ public class SampleSizeActivity extends Activity implements OnClickListener,Simp
             
             public void onClick(View v) {
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(valueText.getWindowToken(), 0);
+                //imm.hideSoftInputFromWindow(valueText.getWindowToken(), 0);
                 EditText valueText = (EditText) findViewById(R.id.sample_size_value);
                 valueText.setText("");
                 sampleSizeListView.setAdapter(new SampleSizeAdapter(SampleSizeActivity.this, -1));

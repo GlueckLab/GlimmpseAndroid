@@ -170,7 +170,7 @@ public class PowerActivity extends Activity implements OnClickListener, SimpleGe
     
         });                  
                  
-        Button addButton = (Button) findViewById(R.id.add_button);
+        Button addButton = (Button) findViewById(R.id.power_add_button);
         addButton.setOnClickListener(new OnClickListener() {            
             public void onClick(View v) {                
                 addValue();
@@ -230,6 +230,7 @@ public class PowerActivity extends Activity implements OnClickListener, SimpleGe
                     powerListView.setAdapter(new PowerListAdapter(PowerActivity.this, value));
                 }  
                 else{
+                    //powerListView.setAdapter(new PowerListAdapter(PowerActivity.this, value));
                     (Toast.makeText(getBaseContext(),
                             "Please type a decimal number in the range of 0 to 1 !!!",
                             Toast.LENGTH_SHORT)).show();

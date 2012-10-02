@@ -23,6 +23,7 @@ package edu.ucdenver.bios.glimmpseandroid.activity.design;
 import java.text.DecimalFormat;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -70,6 +72,8 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
 	
 	/** The detector. */
 	private static GestureFilter detector;
+	
+	private static InputMethodManager imm;
 
 	/**
      * This method is called by Android when the Activity is first started. From
@@ -125,6 +129,10 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
     
         });
 		
+		imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+
+		
 		if(stuyDesignContext.getTypeIError() == 0.0)
 		    stuyDesignContext.setDefaultTypeIError();
 		alpha = stuyDesignContext.getTypeIError();
@@ -133,17 +141,14 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
 		    //value.setText(Double.toString(alpha%1));
 		    //value.setText(String.format("%02d", toInt(alpha)));
 		    value.setText(Double.toString(alpha));
-		    value.setCompoundDrawables( null, null, img, null );
-		    value.requestFocus();
-		    value.setSelection(value.getText().length());
+		    value.setCompoundDrawables( null, null, img, null );		    
 		}
 		else {
 		    value.setText("0.");
-		    value.setCompoundDrawables( null, null, null, null );
-		    value.requestFocus();
-		    value.setSelection(value.getText().length());
+		    value.setCompoundDrawables( null, null, null, null );		    
 		}
-		
+		value.requestFocus();
+        value.setSelection(value.getText().length());
 	}	
 	
 	/*private Double toDouble(int value){
@@ -199,12 +204,21 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
         }
     }
     
+    private void exit(){
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+        if(stuyDesignContext.getTypeIError() == 0.0)
+            stuyDesignContext.setDefaultTypeIError();
+        else
+            stuyDesignContext.setTypeIError(alpha); 
+        finish();
+    }
+
+    
     /* (non-Javadoc)
      * @see android.view.View.OnClickListener#onClick(android.view.View)
      */
     public void onClick(View v) {   
-        stuyDesignContext.setTypeIError(alpha);       
-        finish();
+        exit();
     }
     
     /* (non-Javadoc)
@@ -212,6 +226,10 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
      */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if(stuyDesignContext.getTypeIError() == 0.0)
+                stuyDesignContext.setDefaultTypeIError();
+            else
+                stuyDesignContext.setTypeIError(alpha); 
             finish();
             return true;
          }
@@ -239,8 +257,7 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
            switch (direction) {
             
            case GestureFilter.SWIPE_RIGHT : str = "Swipe Right";
-               stuyDesignContext.setTypeIError(alpha);  
-               finish();
+               exit();
                 break;
            /*case GestureFilter.SWIPE_LEFT :  str = "Swipe Left";
                                                           break;
@@ -270,8 +287,7 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
     private boolean menuSelection(MenuItem item){
         switch (item.getItemId()) { 
         case R.id.menu_tutorial:     
-            stuyDesignContext.setTypeIError(alpha);
-            finish();
+            exit();
             Intent tabIntent = new Intent(this.getBaseContext(),
                     TabViewActivity.class);
             Bundle bundle = new Bundle();
@@ -281,12 +297,10 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
             startActivity(tabIntent);
             return true;
         case R.id.menu_start:           
-            stuyDesignContext.setTypeIError(alpha);
-            finish();           
+            exit();           
             return true;
         case R.id.menu_aboutus:             
-            stuyDesignContext.setTypeIError(alpha);
-            finish();
+            exit();
             tabIntent = new Intent(this.getBaseContext(),
                     TabViewActivity.class);
             bundle = new Bundle();
