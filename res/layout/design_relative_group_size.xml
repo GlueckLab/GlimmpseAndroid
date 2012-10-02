@@ -26,7 +26,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
                 android:lineSpacingExtra="3dp"
-                android:textSize="15dp" />
+                android:textSize="17dp" />
 
             <!-- <Button
                 android:id="@+id/back_button"
@@ -48,11 +48,11 @@
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/back_button_selector"
                 android:text="@string/reset_button_label"
-                android:textSize="15dp" />
+                android:textSize="17dp" />
 
-            <ListView
+            <!-- <ListView
                 android:id="@+id/relative_group_size_list_view"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="320dp"
                 android:layout_above="@+id/reset_button"
                 android:layout_centerHorizontal="true"
@@ -61,6 +61,21 @@
                 android:layout_marginLeft="10dp"
         		android:layout_marginRight="10dp"
         		android:layout_marginTop="10dp"
+        		android:layout_marginBottom="10dp"        		
+                android:textColor="@color/black" >
+            </ListView> -->
+            <ListView
+                android:id="@+id/relative_group_size_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/reset_button"
+                android:layout_below="@+id/description_textView_relative_group_size"
+                android:layout_centerHorizontal="true"
+                android:cacheColorHint="#0000"
+                android:headerDividersEnabled="true"
+                android:layout_marginLeft="10dp"
+        		android:layout_marginRight="10dp"
+        		android:layout_marginTop="25dp"
         		android:layout_marginBottom="10dp"        		
                 android:textColor="@color/black" >
             </ListView>

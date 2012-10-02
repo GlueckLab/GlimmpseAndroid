@@ -18,7 +18,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/black"
         android:lineSpacingExtra="3dp"
-        android:textSize="15dp" />
+        android:textSize="17dp" />
 
     <ListView
         android:id="@+id/sample_size_list_view"
