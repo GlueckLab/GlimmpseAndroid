@@ -8,15 +8,15 @@
     <string name="title_design">Design</string>
     <!-- <string name="title_aboutus">About Us</string> -->
     <string name="title_tutorial">Tutorial</string>
-    <string name="title_groups">Groups</string>
-    <string name="title_solving_for">Solving for</string>
+    <string name="title_groups">Number of Groups</string>
+    <string name="title_solving_for">Solving For</string>
     <string name="title_smallest_group_size">Smallest Group Size</string>
     <string name="title_relative_group_size">Relative Group Size</string>
-    <string name="title_type_i_error">Type I Error</string>
+    <string name="title_type_i_error">Type I Error Rate</string>
     <string name="title_means_and_variance">Means and Variance</string>
     <string name="title_results">Results</string>
     <string name="title_power">Power</string>
-    <string name="title_sample_size">Sample Size</string>
+    <!-- <string name="title_sample_size">Sample Size</string> -->
 
     <!-- Menu -->
     <string name="menu_home">Home</string>
@@ -35,7 +35,7 @@
     <string name="delete_all_button_label">Delete All</string>
     <string name="add_button_label">Add</string>
     <string name="email_button_label">Email</string>
-    <string name="contact_button_label">Contact</string>
+    <string name="contact_button_label">Contact Us</string>
     <string name="save_email_button_label">Save/Email</string>
 
     <!-- Tutorial Header -->
@@ -76,7 +76,8 @@
       \n-Producing power calculations for designs with a single Gaussian covariate.
       \n-Supporting designs with unequal group sizes and complicated covariance structures.
       \n-Creating basic power curves.
-      \n\nAdditional documentation, publications and related software products are available from <a href="http://samplesizeshop.com">http://samplesizeshop.com</a></string>
+      \n\nAdditional documentation, publications and related software products are available from <a href="http://samplesizeshop.com">http://samplesizeshop.com</a>
+      \n\nFor questions or report a bug, please contact us.</string>
 
     <!-- Tutorial Screen -->
     <!-- Text View -->
