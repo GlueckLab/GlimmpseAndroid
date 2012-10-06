@@ -107,7 +107,7 @@ public class SampleSizeAdapter extends BaseAdapter{
      */
     public int getCount() {
         // TODO Auto-generated method stub
-        return globalVariables.getSampleSizeListSize();
+        return globalVariables.getSampleSizeListSize();        
     }
 
     /* (non-Javadoc)

@@ -242,6 +242,27 @@ public class PowerActivity extends Activity implements OnClickListener, SimpleGe
             //
         }
     }
+    
+    /*
+    // Called at the end of full lifetime.
+    @Override
+    protected void onDestroy() {       
+        if(powerListView != null)
+            powerListView = null;
+                
+        if(valueText != null)
+            valueText = null;
+        
+        if(img != null)
+            img = null;
+        
+        if(detector != null)
+            detector = null;
+        
+        System.gc();
+        
+        super.onDestroy();
+    }*/
        
     
     /* (non-Javadoc)

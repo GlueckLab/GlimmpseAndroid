@@ -56,24 +56,24 @@ import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 public class TypeIErrorActivity extends Activity implements OnClickListener, TextWatcher, SimpleGestureListener {
 	
 	/** The value. */
-	static EditText value;
+	private EditText value;
 	
 	/** The alpha. */
-	static Double alpha;
+	private Double alpha;
 	
 	/** The img. */
-	static Drawable img;
+	private Drawable img;
 	
 	/** The format. */
-	static  DecimalFormat format = new DecimalFormat(".##");
+	private  DecimalFormat format = new DecimalFormat(".##");
 	
 	/** The stuy design context. */
-	static StuyDesignContext stuyDesignContext = StuyDesignContext.getInstance();
+	private StuyDesignContext stuyDesignContext = StuyDesignContext.getInstance();
 	
 	/** The detector. */
-	private static GestureFilter detector;
+	private GestureFilter detector;
 	
-	private static InputMethodManager imm;
+	private InputMethodManager imm;
 
 	/**
      * This method is called by Android when the Activity is first started. From
@@ -204,15 +204,73 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
         }
     }
     
+    private void garbageCollection(){
+        if(value != null)
+            value = null;
+                 
+         if(alpha != null)
+             alpha = null;
+                 
+         if(img != null)
+             img = null;
+         
+         if(imm != null)
+             imm = null;
+         
+         if(format != null)
+             format = null;
+         
+         if(stuyDesignContext != null)
+             stuyDesignContext = null;
+         
+         if(detector != null)
+             detector = null;
+         
+         System.gc();
+    }
+    
     private void exit(){
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
         if(stuyDesignContext.getTypeIError() == 0.0)
             stuyDesignContext.setDefaultTypeIError();
         else
             stuyDesignContext.setTypeIError(alpha); 
+                      
+        garbageCollection();
+         
         finish();
     }
 
+    /*
+    // Called at the end of full lifetime.
+    @Override
+    protected void onDestroy() {
+        
+        if(value != null)
+           value = null;
+                
+        if(alpha != null)
+            alpha = null;
+                
+        if(img != null)
+            img = null;
+        
+        if(format != null)
+            format = null;
+        
+        if(imm != null)
+            imm = null;
+        
+        if(stuyDesignContext != null)
+            stuyDesignContext = null;
+        
+        if(detector != null)
+            detector = null;
+        
+        System.gc();
+        
+        super.onDestroy();
+    }*/
     
     /* (non-Javadoc)
      * @see android.view.View.OnClickListener#onClick(android.view.View)
@@ -229,7 +287,8 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
             if(stuyDesignContext.getTypeIError() == 0.0)
                 stuyDesignContext.setDefaultTypeIError();
             else
-                stuyDesignContext.setTypeIError(alpha); 
+                stuyDesignContext.setTypeIError(alpha);
+            garbageCollection();
             finish();
             return true;
          }

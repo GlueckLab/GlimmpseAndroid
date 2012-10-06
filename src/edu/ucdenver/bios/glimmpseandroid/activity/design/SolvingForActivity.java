@@ -50,19 +50,20 @@ import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 public class SolvingForActivity extends Activity implements OnClickListener,SimpleGestureListener {
     
     /** The values. */
-    private static RadioGroup values;
+    //private static RadioGroup values;
+    private RadioGroup values;
     
     /** The checked. */
-    private static RadioButton checked;
+    private RadioButton checked;
     
     /** The solving for. */
-    private static String solvingFor;	
+    private String solvingFor;	
 	//private static final String SAMPLE_SIZE = "Sample Size";
 	/** The stuy design context. */
-	private static StuyDesignContext stuyDesignContext = StuyDesignContext.getInstance();
+	private StuyDesignContext stuyDesignContext = StuyDesignContext.getInstance();
 	
 	/** The detector. */
-	private static GestureFilter detector;
+	private GestureFilter detector;
 	//static GlobalVariables globalVariables;
 
 	/**
@@ -76,6 +77,9 @@ public class SolvingForActivity extends Activity implements OnClickListener,Simp
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
+		
+		System.out.println("Solving For onCreate()");
+		
 		final Window window = getWindow();
 		boolean useTitleFeature = false;
 		detector = new GestureFilter(this,this);
@@ -120,13 +124,15 @@ public class SolvingForActivity extends Activity implements OnClickListener,Simp
 	 */
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            finish();
+            //finish();
+            exit();
             return true;
          }
          return super.onKeyDown(keyCode, event);
 	}
-	
-	/* (non-Javadoc)
+			
+
+    /* (non-Javadoc)
 	 * @see android.view.View.OnClickListener#onClick(android.view.View)
 	 */
 	public void onClick(View v) {	
@@ -197,6 +203,31 @@ public class SolvingForActivity extends Activity implements OnClickListener,Simp
        
     }
     
+    
+    
+    @Override
+    protected void onStop() {
+        // TODO Auto-generated method stub
+        System.out.println("Solving For onStop()");
+        super.onStop();
+    }
+    
+    
+
+    @Override
+    protected void onRestart() {
+        // TODO Auto-generated method stub
+        System.out.println("Solving For onRestart()");
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResume() {
+        // TODO Auto-generated method stub
+        System.out.println("Solving For onResume()");
+        super.onResume();
+    }
+
     /**
      * Exit.
      */
@@ -227,6 +258,23 @@ public class SolvingForActivity extends Activity implements OnClickListener,Simp
         if(stuyDesignContext.getSampleSizeListSize() > 0){
             stuyDesignContext.clearSampleSizeList();
         }
+        
+        if(values != null)
+            values = null;
+                 
+         if(checked != null)
+             checked = null;
+                 
+         if(solvingFor != null)
+             solvingFor = null;
+         
+         if(stuyDesignContext != null)
+             stuyDesignContext = null;
+         
+         if(detector != null)
+             detector = null;
+         
+         System.gc();
         
         finish();
     }

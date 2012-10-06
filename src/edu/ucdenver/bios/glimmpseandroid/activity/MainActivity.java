@@ -24,6 +24,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Debug;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -54,6 +55,9 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         /* Initialize required activity. */
         super.onCreate(savedInstanceState);
+        
+        //Debug.startMethodTracing("GllimpseLiteTrace");
+        
         /* Setting custom title bar. */
         final Window window = getWindow();
         boolean useTitleFeature = false;
@@ -106,6 +110,18 @@ public class MainActivity extends Activity {
 
         });
     }
+    
+    
+
+    @Override
+    protected void onStop() {
+        // TODO Auto-generated method stub
+        super.onStop();
+        
+        //Debug.stopMethodTracing();
+    }
+
+
 
     /**
      * Method called when a new hardware key event occurs.

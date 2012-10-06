@@ -57,13 +57,13 @@ public class SampleSizeActivity extends Activity implements OnClickListener,Simp
     private ListView sampleSizeListView;
     
     /** The value text. */
-    private static EditText valueText;
+    private EditText valueText;
     
     /** The img. */
-    static Drawable img;
+    private Drawable img;
     
     /** The detector. */
-    private static GestureFilter detector;
+    private GestureFilter detector;
      
     /**
      * This method is called by Android when the Activity is first started. From
@@ -225,6 +225,24 @@ public class SampleSizeActivity extends Activity implements OnClickListener,Simp
         sampleSizeListView.setAdapter(new SampleSizeAdapter(SampleSizeActivity.this, null));      
     }
     
+    private void onExit(){
+        
+        if(sampleSizeListView != null)
+            sampleSizeListView = null;
+        
+        if(valueText != null)
+                valueText = null;
+        
+        if(img != null)
+            img = null;
+        
+        if(detector!= null)
+            detector = null;
+        
+        System.gc();
+        finish();
+    }
+    
     /**
      * Adds the value.
      */
@@ -242,13 +260,35 @@ public class SampleSizeActivity extends Activity implements OnClickListener,Simp
             //
         }
     }
-       
+    /*   
+    // Called at the end of full lifetime.
+    @Override
+    protected void onDestroy() {       
+        if(sampleSizeListView != null){           
+            sampleSizeListView.setAdapter(null);
+           sampleSizeListView = null;
+        }
+                
+        if(valueText != null)
+            valueText = null;
+        
+        if(img != null)
+            img = null;
+        
+        if(detector != null)
+            detector = null;
+        
+        System.gc();
+        
+        super.onDestroy();
+    }*/
     
     /* (non-Javadoc)
      * @see android.view.View.OnClickListener#onClick(android.view.View)
      */
     public void onClick(View v) {
-        finish();
+        //finish();
+        onExit();
      }
     
     /* (non-Javadoc)
@@ -273,7 +313,8 @@ public class SampleSizeActivity extends Activity implements OnClickListener,Simp
              
             case GestureFilter.SWIPE_RIGHT : str = "Swipe Right";
                 addValue();
-                finish();
+                //finish();
+                onExit();
                 break;
             /*case GestureFilter.SWIPE_LEFT :  str = "Swipe Left";
                                                            break;
@@ -304,7 +345,8 @@ public class SampleSizeActivity extends Activity implements OnClickListener,Simp
         switch (item.getItemId()) { 
         case R.id.menu_tutorial:    
             addValue();
-            finish();
+            //finish();
+            onExit();
             Intent tabIntent = new Intent(this.getBaseContext(),
                     TabViewActivity.class);
             Bundle bundle = new Bundle();
@@ -315,11 +357,13 @@ public class SampleSizeActivity extends Activity implements OnClickListener,Simp
             return true;
         case R.id.menu_start:
             addValue();
-            finish();           
+            //finish();
+            onExit();
             return true;
         case R.id.menu_aboutus:
             addValue();
-            finish();
+            //finish();
+            onExit();
             tabIntent = new Intent(this.getBaseContext(),
                     TabViewActivity.class);
             bundle = new Bundle();

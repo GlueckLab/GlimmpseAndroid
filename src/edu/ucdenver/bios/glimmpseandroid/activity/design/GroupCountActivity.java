@@ -142,6 +142,27 @@ public class GroupCountActivity extends Activity implements OnClickListener, Sim
          return super.onKeyDown(keyCode, event);
 	}
 	
+	/*// Called at the end of full lifetime.
+    @Override
+    protected void onDestroy() {       
+       
+       if(seekbar != null)
+           seekbar = null;
+                
+        if(value != null)
+            value = null;
+        
+        if(stuyDesignContext != null)
+            stuyDesignContext = null;
+        
+        if(detector != null)
+            detector = null;
+        
+        System.gc();
+        
+        super.onDestroy();
+    }*/
+	
 	public void onClick(View v) {
 		/*
 		 * // TODO Auto-generated method stub Bundle bundle = new Bundle();

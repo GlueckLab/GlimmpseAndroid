@@ -26,8 +26,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import android.view.View;
-
 import edu.ucdenver.bios.webservice.common.domain.BetaScale;
 import edu.ucdenver.bios.webservice.common.domain.BetweenParticipantFactor;
 import edu.ucdenver.bios.webservice.common.domain.Blob2DArray;
@@ -113,10 +111,10 @@ public class StuyDesignContext {
     private static final String DEFAULT_COVARIANCE_NAME = "__RESPONSE_COVARIANCE__";
 
     /** The Constant DEFAULT_VARIANCE. */
-    private static final double DEFAULT_VARIANCE = 1.0;
+    private static final double DEFAULT_VARIANCE = 1;
 
     /** The Constant DEFAULT_MEAN. */
-    private static final double DEFAULT_MEAN = 0.0;
+    private static final double DEFAULT_MEAN = 0;
 
     /** The Constant DEFAULT_MEAN_COLUMN. */
     private static final int DEFAULT_MEAN_COLUMN = 0;
@@ -424,17 +422,46 @@ public class StuyDesignContext {
             list.add(position, new RelativeGroupSize(relativeGroupSize));
         } else {
             if (list.size() > position) {
+                System.out.println("list.size > position");
                 if (list.get(position) != null) {
+                    System.out.println("list.get(position) != null");
                     list.set(position, new RelativeGroupSize(relativeGroupSize));
+                    System.out.println("list size "+list.size());
                 } else {
+                    System.out.println("list.get(position) == null");
                     list.add(position, new RelativeGroupSize(relativeGroupSize));
                 }
             } else {
+                System.out.println("list.size !> position");
                 list.add(position, new RelativeGroupSize(relativeGroupSize));
             }
         }
         studyDesign.setRelativeGroupSizeList(list);
         setProgress(RELATIVE_GROUP_SIZE_ROW);
+        
+        /*List<RelativeGroupSize> relGpSzList = studyDesign.getRelativeGroupSizeList();
+        int size;
+        if (relGpSzList == null || relGpSzList.isEmpty()) {
+            relGpSzList = new ArrayList<RelativeGroupSize>(getGroups());
+            relGpSzList.add(new RelativeGroupSize(relativeGroupSize));
+        } else if (relGpSzList.size() - 1 > position) {
+            relGpSzList.set(position, new RelativeGroupSize(relativeGroupSize));
+            System.gc();
+        } else if (relGpSzList.size() == position) {
+            relGpSzList.add(new RelativeGroupSize(relativeGroupSize));
+        } else {
+            size = relGpSzList.size();
+            int additionalIndices = position - size;
+            for (int inc = 0; inc < additionalIndices; inc++) {
+                if (position == size + inc) {
+                    relGpSzList.add(new RelativeGroupSize(relativeGroupSize));
+                } else {
+                    relGpSzList.add(new RelativeGroupSize());
+                }
+            }
+        }
+        studyDesign.setRelativeGroupSizeList(relGpSzList);
+        setProgress(RELATIVE_GROUP_SIZE_ROW);*/
     }
 
     /**
@@ -564,7 +591,7 @@ public class StuyDesignContext {
      */
     public void setSolvingFor(String solutionType) {
         if (solutionType != null) {
-            if (SolutionTypeEnum.SAMPLE_SIZE.getId().equals(solutionType))
+            if (SolutionTypeEnum.SAMPLE_SIZE.getIdx().equals(solutionType))
                 studyDesign.setSolutionTypeEnum(SolutionTypeEnum.SAMPLE_SIZE);
             else
                 studyDesign.setSolutionTypeEnum(SolutionTypeEnum.POWER);
@@ -583,7 +610,7 @@ public class StuyDesignContext {
         if (solvingFor == null || solvingFor.equals("")) {
             return null;
         }
-        return solvingFor.getId();
+        return solvingFor.getIdx();
     }
 
     /*--------------------
@@ -760,7 +787,7 @@ public class StuyDesignContext {
             double[][] data = new double[groups][1];
             for (int index = 0; index < groups; index++) {
                 if (index != position)
-                    data[index][DEFAULT_MEAN_COLUMN] = 0.0;
+                    data[index][DEFAULT_MEAN_COLUMN] = DEFAULT_MEAN;
                 else
                     data[index][DEFAULT_MEAN_COLUMN] = mean;
             }

@@ -2,17 +2,16 @@ package edu.ucdenver.bios.glimmpseandroid.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
+import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 import edu.ucdenver.bios.webservice.common.domain.PowerResult;
 import edu.ucdenver.bios.webservice.common.domain.PowerResultList;
 import edu.ucdenver.bios.webservice.common.enums.SolutionTypeEnum;
-import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -106,7 +105,7 @@ public class ResultsListAdapter extends BaseAdapter{
         
         String solvingFor = StuyDesignContext.getInstance().getSolvingFor();
         if(solvingFor != null){
-         if(solvingFor.equals(SolutionTypeEnum.POWER.getId())){
+         if(solvingFor.equals(SolutionTypeEnum.POWER.getIdx())){
              //holder.powerLine.setBackgroundColor(Color.BLUE);
              holder.powerLine.setBackgroundColor(Color.argb(10, 10, 10, 10));
          }

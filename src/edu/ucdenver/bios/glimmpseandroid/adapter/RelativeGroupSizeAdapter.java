@@ -20,22 +20,17 @@
  */
 package edu.ucdenver.bios.glimmpseandroid.adapter;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
-import edu.ucdenver.bios.glimmpseandroid.adapter.PowerListAdapter.ViewHolder;
 import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
-import edu.ucdenver.bios.webservice.common.domain.RelativeGroupSize;
 
 
 
