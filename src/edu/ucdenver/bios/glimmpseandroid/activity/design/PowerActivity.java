@@ -20,7 +20,6 @@
  */
 package edu.ucdenver.bios.glimmpseandroid.activity.design;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -170,7 +169,7 @@ public class PowerActivity extends Activity implements OnClickListener, SimpleGe
         Button clearAllButton = (Button) findViewById(R.id.delete_all_button);
         clearAllButton.setOnClickListener(new OnClickListener() {
             
-            @SuppressLint("NewApi")
+            //@SuppressLint("NewApi")
             public void onClick(View v) {
                 valueText = (EditText) findViewById(R.id.power_value);
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);    
