@@ -23,10 +23,12 @@ package edu.ucdenver.bios.glimmpseandroid.activity.design;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -45,6 +47,7 @@ import edu.ucdenver.bios.glimmpseandroid.activity.TabViewActivity;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener;
 import edu.ucdenver.bios.glimmpseandroid.adapter.SampleSizeAdapter;
+import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -213,19 +216,19 @@ public class SampleSizeActivity extends Activity implements OnClickListener,Simp
             
             public void onClick(View v) {
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                //imm.hideSoftInputFromWindow(valueText.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(valueText.getWindowToken(), 0);
                 EditText valueText = (EditText) findViewById(R.id.sample_size_value);
                 valueText.setText("");
                 sampleSizeListView.setAdapter(new SampleSizeAdapter(SampleSizeActivity.this, -1));
                 valueText.requestFocusFromTouch();
-                
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);   
             }
         });
         
         sampleSizeListView.setAdapter(new SampleSizeAdapter(SampleSizeActivity.this, null));      
     }
     
-    private void onExit(){
+    /*private void onExit(){
         
         if(sampleSizeListView != null)
             sampleSizeListView = null;
@@ -241,7 +244,7 @@ public class SampleSizeActivity extends Activity implements OnClickListener,Simp
         
         System.gc();
         finish();
-    }
+    }*/
     
     /**
      * Adds the value.
@@ -257,7 +260,7 @@ public class SampleSizeActivity extends Activity implements OnClickListener,Simp
             sampleSizeListView.setAdapter(new SampleSizeAdapter(SampleSizeActivity.this, value));                                   
             valueText.setText("");
             valueText.requestFocusFromTouch();
-            //
+            //imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);  
         }
     }
     /*   
@@ -287,8 +290,9 @@ public class SampleSizeActivity extends Activity implements OnClickListener,Simp
      * @see android.view.View.OnClickListener#onClick(android.view.View)
      */
     public void onClick(View v) {
-        //finish();
-        onExit();
+        addValue();
+        finish();
+        //onExit();
      }
     
     /* (non-Javadoc)
@@ -313,8 +317,8 @@ public class SampleSizeActivity extends Activity implements OnClickListener,Simp
              
             case GestureFilter.SWIPE_RIGHT : str = "Swipe Right";
                 addValue();
-                //finish();
-                onExit();
+                finish();
+                //onExit();
                 break;
             /*case GestureFilter.SWIPE_LEFT :  str = "Swipe Left";
                                                            break;
@@ -335,6 +339,15 @@ public class SampleSizeActivity extends Activity implements OnClickListener,Simp
         
     }
     
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            addValue();
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.home_screen_menu, menu);
@@ -345,8 +358,8 @@ public class SampleSizeActivity extends Activity implements OnClickListener,Simp
         switch (item.getItemId()) { 
         case R.id.menu_tutorial:    
             addValue();
-            //finish();
-            onExit();
+            finish();
+            //onExit();
             Intent tabIntent = new Intent(this.getBaseContext(),
                     TabViewActivity.class);
             Bundle bundle = new Bundle();
@@ -357,13 +370,13 @@ public class SampleSizeActivity extends Activity implements OnClickListener,Simp
             return true;
         case R.id.menu_start:
             addValue();
-            //finish();
-            onExit();
+            finish();
+            //onExit();
             return true;
         case R.id.menu_aboutus:
             addValue();
-            //finish();
-            onExit();
+            finish();
+            //onExit();
             tabIntent = new Intent(this.getBaseContext(),
                     TabViewActivity.class);
             bundle = new Bundle();

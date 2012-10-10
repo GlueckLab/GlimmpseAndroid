@@ -20,10 +20,8 @@
  */
 package edu.ucdenver.bios.glimmpseandroid.activity;
 
-import org.restlet.data.Cookie;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
-import org.restlet.util.Series;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -45,7 +43,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.webkit.CookieManager;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TabHost;
@@ -87,7 +84,6 @@ public class TabViewActivity extends Activity implements Runnable,
     private ListView designListView;
     private TabHost mTabHost;
     private final int TAB_HEIGHT = 50; // set desired value here instead of 50
-    private final String GLIMMPSE_COOKIE = "GLIMMPSELite";
     private View tabOneContentView;
     private View tabTwoContentView;
     private View tabThreeContentView;
@@ -137,7 +133,8 @@ public class TabViewActivity extends Activity implements Runnable,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+        // set the view for the activity
+
         final Window window = getWindow();
         boolean useTitleFeature = false;
 
@@ -161,7 +158,11 @@ public class TabViewActivity extends Activity implements Runnable,
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } else {
-                    
+                    /*
+                     * Toast.makeText(TabViewActivity.this,
+                     * "Internet Connection Not available",
+                     * Toast.LENGTH_SHORT).show();
+                     */
                     AlertDialog.Builder builder = new AlertDialog.Builder(
                             context);
                     builder.setTitle("No internet Connection");
@@ -174,7 +175,7 @@ public class TabViewActivity extends Activity implements Runnable,
 
                                         }
                                     });
-                    
+                    // AlertDialog alert = builder.create();
                     builder.show();
                 }
                 super.handleMessage(msg);
@@ -182,7 +183,9 @@ public class TabViewActivity extends Activity implements Runnable,
 
         };
 
-        
+        // detector = new GestureFilter(this,this);
+        // If the window has a container, then we are not free
+        // to request window features.
         if (window.getContainer() == null) {
             useTitleFeature = window
                     .requestFeature(Window.FEATURE_CUSTOM_TITLE);
@@ -195,12 +198,12 @@ public class TabViewActivity extends Activity implements Runnable,
         Resources res = getResources();
 
         labels = res.getStringArray(R.array.tab_labels);
-        
+        // titles = res.getStringArray(R.array.tabed_window_titles);
 
         Button homeButton = (Button) findViewById(R.id.home_button);
         homeButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                
+                // GlobalVariables.resetInstance();
                 finish();
             }
         });
@@ -246,7 +249,13 @@ public class TabViewActivity extends Activity implements Runnable,
             public void onTabChanged(String tabId) {
                 System.out.println("in on tabchanged listener .....");
                 TextView title = (TextView) findViewById(R.id.window_title);
-                if (tabId != null) {                                                      
+                if (tabId != null) {
+                    /*
+                     * if (!tabId.equals(labels[0])) title.setText(tabId); else
+                     * {
+                     * 
+                     * }
+                     */                                      
                     
                     title.setText(tabId);
                     if (tabId.equals(labels[1])) {                        
@@ -272,9 +281,7 @@ public class TabViewActivity extends Activity implements Runnable,
     }
 
     private void resetButtonFunctionality() {
-       /* CookieManager cookieManager = 
-        StuyDesignContext.resetInstance();*/
-        
+        StuyDesignContext.resetInstance();
         designListPopulate();
         globalVariables.resetProgress();
         // ProgressBar inputProgress = (ProgressBar)
@@ -294,7 +301,8 @@ public class TabViewActivity extends Activity implements Runnable,
         String[] tutorialList = getResources().getStringArray(
                 R.array.tutorial_list);
 
-        tutorialListView = (ListView) findViewById(R.id.tutorial_list_view);        
+        tutorialListView = (ListView) findViewById(R.id.tutorial_list_view);
+        
 
         tutorialListView.setAdapter(new TutorialAdapter(getBaseContext(),
                 tutorialList));
@@ -324,9 +332,11 @@ public class TabViewActivity extends Activity implements Runnable,
                                             int id) {
                                         dialog.cancel();
                                     }
-                                });                
+                                });
+                // AlertDialog alert = builder.create();
                 builder.show();
-                
+
+               
             }
         });
 
@@ -347,15 +357,16 @@ public class TabViewActivity extends Activity implements Runnable,
                         "Loading ...", true, false);
 
                 Thread thread = new Thread(TabViewActivity.this, "Loading");
-
+                
                 thread.start();
                 try {
                     thread.join(2);
                 } catch (InterruptedException e) {
-                    
+                    // TODO Auto-generated catch block
                     System.out.println("Inturrupted Exception : "
                             + e.getMessage());
                 }
+
                 
             }
         });
@@ -365,7 +376,8 @@ public class TabViewActivity extends Activity implements Runnable,
         String solvingFor = StuyDesignContext.getInstance().getSolvingFor();
 
         String[] designList = getResources().getStringArray(
-                R.array.design_list);        
+                R.array.design_list);
+        
 
         if (solvingFor != null) {
             if (solvingFor.equals(SolutionTypeEnum.SAMPLE_SIZE.getIdx())) {
@@ -419,13 +431,15 @@ public class TabViewActivity extends Activity implements Runnable,
         tabOneContentView = findViewById(R.id.tutorial_view);
         tabTwoContentView = findViewById(R.id.start_view);
         tabThreeContentView = findViewById(R.id.about_us_view);
-       
+        
     }
 
     /**
      * Sets up the tabs for this Activity
      */
-    public void setupTabs() {}
+    public void setupTabs() {
+        
+    }
 
     /**
      * Sets up a new tab with given tag by creating a View for the tab (via
@@ -505,7 +519,6 @@ public class TabViewActivity extends Activity implements Runnable,
     }
 
     public void run() {
-        
         String service = Context.WIFI_SERVICE;
         WifiManager wifi = (WifiManager)getSystemService(service);
         
@@ -550,8 +563,6 @@ public class TabViewActivity extends Activity implements Runnable,
 
                     jsonStr = repr.getText();        
                     
-                    
-
                 }
 
             } catch (Exception e) {                
@@ -561,78 +572,6 @@ public class TabViewActivity extends Activity implements Runnable,
         }
         handler.sendEmptyMessage(0);
         
-        
-        /*ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);        
-        // For Wifi
-        NetworkInfo activeNetwork = connManager
-                .getActiveNetworkInfo();
-        int networkType = activeNetwork.getType();
-        System.out.println("------------------------------");
-        System.out.println(networkType);
-        System.out.println("------------------------------");
-        switch(networkType){
-        case (ConnectivityManager.TYPE_WIFI)  :
-            NetworkInfo mWifi = connManager
-            .getNetworkInfo(ConnectivityManager.TYPE_WIFI);   
-            if (mWifi.isConnected()) {
-                
-                try {
-                    String solvingFor = globalVariables.getSolvingFor();
-                    if (solvingFor != null && !solvingFor.isEmpty()) {
-                        String URL;
-                        if (solvingFor.equals(SolutionTypeEnum.POWER.getId()))
-                            URL = SERVICE_URL + "power";
-                        else
-                            URL = SERVICE_URL + "samplesize";
-                        
-                        ClientResource cr = new ClientResource(URL);
-                        
-                        StudyDesign studyDesign = globalVariables.getStudyDesign();
-                        globalVariables.setDefaults();
-                        
-                        System.out.println(studyDesign);
-                        
-                        Representation repr = cr.post(studyDesign);
-                        
-                        jsonStr = repr.getText();                   
-                        
-                    }
-                    
-                } catch (Exception e) {                
-                    System.out.println("testPower Failed to retrieve: "
-                            + e.getMessage());
-                }
-            }
-            handler.sendEmptyMessage(0);
-            break;
-        case (ConnectivityManager.TYPE_MOBILE) :
-            AlertDialog.Builder builder = new AlertDialog.Builder(
-                    context);
-            builder.setTitle("3G Connection");
-            builder.setMessage("Using Mobile 3G for internate connection")
-                    .setCancelable(false)
-                    .setPositiveButton("Ok",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,
-                                            int id) {
-                                        
-                                    }
-                                })
-                        .setNegativeButton("Cancel",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,
-                                            int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-            
-            builder.show();
-            break;
-        default :
-            break;
-        }*/
-        
     }
 
- 
-}
+ }

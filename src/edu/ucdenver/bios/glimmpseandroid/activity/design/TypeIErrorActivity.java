@@ -25,6 +25,7 @@ import java.text.DecimalFormat;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -74,6 +75,8 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
 	private GestureFilter detector;
 	
 	private InputMethodManager imm;
+	
+	private boolean isKeyboardVisible = true; 
 
 	/**
      * This method is called by Android when the Activity is first started. From
@@ -130,7 +133,11 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
         });
 		
 		imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+		//imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+		if(imm != null){
+		    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+		    isKeyboardVisible = true;
+        }
 
 		
 		if(stuyDesignContext.getTypeIError() == 0.0)
@@ -229,8 +236,17 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
          System.gc();
     }
     
-    private void exit(){
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+    private void exit(){  
+        if(imm != null){
+            if(isKeyboardVisible)
+            {                   
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);                
+            }
+            else{
+                System.out.println("else ...");
+                //imm.hideSoftInputFromInputMethod(value.getWindowToken(), 0);
+            }
+        }
         if(stuyDesignContext.getTypeIError() == 0.0)
             stuyDesignContext.setDefaultTypeIError();
         else
@@ -278,12 +294,20 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
     public void onClick(View v) {   
         exit();
     }
-    
+          
+    @Override
+    public void onBackPressed() {
+        // TODO Auto-generated method stub
+        isKeyboardVisible = false;
+        super.onBackPressed();
+    }
+
     /* (non-Javadoc)
      * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
      */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+            System.out.println("key -> back");            
             if(stuyDesignContext.getTypeIError() == 0.0)
                 stuyDesignContext.setDefaultTypeIError();
             else
@@ -300,7 +324,8 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
      */
     public boolean dispatchTouchEvent(MotionEvent me){
         //System.out.println("dispatchTouchEvent");
-        detector.onTouchEvent(me);
+        if(detector != null)
+            detector.onTouchEvent(me);
        return super.dispatchTouchEvent(me);
       }
 

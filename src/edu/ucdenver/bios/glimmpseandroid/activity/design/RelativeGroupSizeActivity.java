@@ -172,7 +172,8 @@ private ListView relativeGroupSizeListView;
      */
     public boolean dispatchTouchEvent(MotionEvent me){
         //System.out.println("dispatchTouchEvent");
-        detector.onTouchEvent(me);
+        if(detector != null)
+            detector.onTouchEvent(me);
        return super.dispatchTouchEvent(me);
       }
 

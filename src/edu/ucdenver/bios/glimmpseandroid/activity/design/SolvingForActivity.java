@@ -166,7 +166,8 @@ public class SolvingForActivity extends Activity implements OnClickListener,Simp
 	 */
 	public boolean dispatchTouchEvent(MotionEvent me){
         //System.out.println("dispatchTouchEvent");
-        detector.onTouchEvent(me);
+	    if(detector != null)
+	        detector.onTouchEvent(me);
        return super.dispatchTouchEvent(me);
       }
 
@@ -205,7 +206,7 @@ public class SolvingForActivity extends Activity implements OnClickListener,Simp
     
     
     
-    @Override
+   /* @Override
     protected void onStop() {
         // TODO Auto-generated method stub
         System.out.println("Solving For onStop()");
@@ -226,7 +227,7 @@ public class SolvingForActivity extends Activity implements OnClickListener,Simp
         // TODO Auto-generated method stub
         System.out.println("Solving For onResume()");
         super.onResume();
-    }
+    }*/
 
     /**
      * Exit.

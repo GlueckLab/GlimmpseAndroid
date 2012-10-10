@@ -28,6 +28,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -98,18 +99,6 @@ public class PowerActivity extends Activity implements OnClickListener, SimpleGe
         homeButton.setText(getResources().getString(R.string.title_design));
         homeButton.setOnClickListener(this);
         
-        /*Button resetButton = (Button) findViewById(R.id.reset_button);
-        resetButton.setOnClickListener(new OnClickListener() {
-            
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                StuyDesignContext.getInstance().setDefaultRelativeGroupSize();
-                powerListPopulate();
-            }
-        });*/                          
-
-        /*Button back = (Button) findViewById(R.id.back_button);
-        back.setOnClickListener(this);*/                       
         
         powerListPopulate();
         
@@ -176,23 +165,7 @@ public class PowerActivity extends Activity implements OnClickListener, SimpleGe
                 addValue();
             }
         });
-        
-        /*Button addButtonExtra = (Button) findViewById(R.id.add_button_extra);
-        addButtonExtra.setOnClickListener(new OnClickListener() {            
-            public void onClick(View v) {
-                addValue();   
-            }
-        });*/
-        
-        /*Button clearButton = (Button) findViewById(R.id.clear_button);
-        clearButton.setOnClickListener(new OnClickListener() {
-            
-            public void onClick(View v) {
-                EditText valueText = (EditText) findViewById(R.id.power_value);
-                valueText.setText("");   
-                valueText.requestFocusFromTouch();
-            }
-        });*/
+               
         
         Button clearAllButton = (Button) findViewById(R.id.delete_all_button);
         clearAllButton.setOnClickListener(new OnClickListener() {
@@ -207,6 +180,7 @@ public class PowerActivity extends Activity implements OnClickListener, SimpleGe
                 /*valueText.setText("");                
                 valueText.requestFocusFromTouch();  */
                 clearText();
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);  
             }
         });
         
@@ -264,26 +238,28 @@ public class PowerActivity extends Activity implements OnClickListener, SimpleGe
         super.onDestroy();
     }*/
        
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            addValue();
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
     
-    /* (non-Javadoc)
-     * @see android.view.View.OnClickListener#onClick(android.view.View)
-     */
     public void onClick(View v) {
+        addValue();
         finish();
      }
     
-    /* (non-Javadoc)
-     * @see android.app.Activity#dispatchTouchEvent(android.view.MotionEvent)
-     */
+    
     public boolean dispatchTouchEvent(MotionEvent me){
         //System.out.println("dispatchTouchEvent");
         detector.onTouchEvent(me);
        return super.dispatchTouchEvent(me);
       }
 
-    /* (non-Javadoc)
-     * @see edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener#onSwipe(int)
-     */
+   
     public void onSwipe(int direction) {
         // TODO Auto-generated method stub
         /*if(direction == 3)

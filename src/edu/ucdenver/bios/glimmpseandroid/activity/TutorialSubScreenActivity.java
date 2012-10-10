@@ -173,7 +173,8 @@ public class TutorialSubScreenActivity extends Activity implements
 
     public boolean dispatchTouchEvent(MotionEvent me) {
         // System.out.println("dispatchTouchEvent");
-        detector.onTouchEvent(me);
+        if(detector != null)
+            detector.onTouchEvent(me);
         return super.dispatchTouchEvent(me);
     }
 
