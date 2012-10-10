@@ -45,8 +45,7 @@
 		
 	
 	<!-- Third party libraries -->
-	<fileset id="thirdparty.libs" dir="${thirdparty.dir}">
-	    <include name="ApacheCommonsMath/2.1/lib/commons-math-2.1.jar" />
+	<fileset id="thirdparty.libs" dir="${thirdparty.dir}">	    
 		<!-- Begin : JSON jars -->
         <include name="jackson/1.9.4/lib/jackson-all-1.9.4.jar" />
         <!-- End : JSON jars -->
