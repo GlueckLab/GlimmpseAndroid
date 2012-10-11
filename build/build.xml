@@ -104,7 +104,7 @@
     </target>
 	
 	<!-- Build the project's war file. MIGHT BE ABLE TO DELETE? -->
-    <target name="compress" depends="compile">
+    <target name="compress" depends="compile,javadoc">
     	         
     </target>
     
@@ -112,7 +112,7 @@
     <!-- ************* Target for Javadoc creation ************* -->
     <!-- ******************************************************* -->
     
-    <target name="javadoc" depends="compress" 
+    <target name="javadoc"
     	description="Generates the API specification (javadoc)">
         <javadoc packagenames="edu.cudenver.bios.*"
                  access="public"
