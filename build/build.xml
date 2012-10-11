@@ -66,7 +66,7 @@
     <!-- *** Target for remove artifacts from previous build *** -->
     <!-- ******************************************************* -->
     
-    <target name="dirclean">
+    <target name="dirclean" depends="debug">
     	<delete dir="${tmp.dir}"/>
         <delete dir="${artifacts.dir}"/>
     </target>
@@ -500,7 +500,7 @@
                     verbose="${verbose}" />
         </sequential>
     </macrodef>
-
+    
     <macrodef name="run-tests-helper">
         <attribute name="emma.enabled" default="false" />
         <element name="extra-instrument-args" optional="yes" />
@@ -1706,7 +1706,7 @@
     <!-- ******************************************************* -->
 	
 	<target name="distributions" 
-		depends="
+		depends="compress,
 		distribution.binary,
 		distribution.javadoc,
 		distribution.source"/>	
