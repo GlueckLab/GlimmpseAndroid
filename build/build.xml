@@ -39,8 +39,10 @@
 	<property name="javadoc.dir" value="${tmp.dir}/${app.name}-${app.version}-javadoc" />
 	<property name="thirdparty.dir" value="${basedir}/../../thirdparty" />
 	<property name="gen.dir" value="${basedir}/../gen" />
+	<!-- <property name="webservicecommon.lib" 
+		value="${basedir}/../../WebServiceCommon/build/artifacts/edu.ucdenver.bios.webservice.common-android-dev.jar" /> -->
 	<property name="webservicecommon.lib" 
-		value="${basedir}/../../WebServiceCommon/build/artifacts/edu.ucdenver.bios.webservice.common-android-dev.jar" />
+		value="${basedir}/../../WebServiceCommon/build/artifacts/edu.ucdenver.bios.webservice.common-android-1.0.0.jar" />
 		
 		
 	
