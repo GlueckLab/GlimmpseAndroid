@@ -68,9 +68,9 @@ import edu.ucdenver.bios.webservice.common.enums.SolutionTypeEnum;
 // TabContentFactory,SimpleGestureListener, Runnable{
 public class TabViewActivity extends Activity implements Runnable,
         TabContentFactory {
-    // private static final String SERVICE_URL =
-    // "http://glimmpse.samplesizeshop.com/power/";
-    private static final String SERVICE_URL = "http://140.226.53.117:8080/power/";
+     private static final String SERVICE_URL =
+     "http://glimmpse.samplesizeshop.com/power/";
+    //private static final String SERVICE_URL = "http://140.226.53.117:8080/power/";
     //private static final String SERVICE_URL = "http://10.0.2.2:8080/power/";
     String[] labels;
     // String[] titles;
@@ -380,8 +380,8 @@ public class TabViewActivity extends Activity implements Runnable,
         
 
         if (solvingFor != null) {
-            if (solvingFor.equals(SolutionTypeEnum.SAMPLE_SIZE.getIdx())) {
-                designList[1] = SolutionTypeEnum.POWER.getIdx();
+            if (solvingFor.equals(SolutionTypeEnum.SAMPLE_SIZE.getId())) {
+                designList[1] = SolutionTypeEnum.POWER.getId();
             } else {
                 designList[1] = "Smallest Group Size";
             }
@@ -537,7 +537,7 @@ public class TabViewActivity extends Activity implements Runnable,
                 String solvingFor = globalVariables.getSolvingFor();
                 if (solvingFor != null && !solvingFor.isEmpty()) {
                     String URL;
-                    if (solvingFor.equals(SolutionTypeEnum.POWER.getIdx()))
+                    if (solvingFor.equals(SolutionTypeEnum.POWER.getId()))
                         URL = SERVICE_URL + "power";
                     else
                         URL = SERVICE_URL + "samplesize";
