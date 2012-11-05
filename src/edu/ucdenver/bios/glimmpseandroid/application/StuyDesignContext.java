@@ -49,6 +49,8 @@ import edu.ucdenver.bios.webservice.common.enums.SolutionTypeEnum;
 import edu.ucdenver.bios.webservice.common.enums.StatisticalTestTypeEnum;
 import edu.ucdenver.bios.webservice.common.enums.StudyDesignViewTypeEnum;
 
+
+
 // TODO: Auto-generated Javadoc
 /**
  * Wizar context for study design.
@@ -96,7 +98,7 @@ public class StuyDesignContext {
     private static final int DEFAULT_GROUPS = 2;
 
     /** The Constant DEFAULT_ALPHA. */
-    private static final double DEFAULT_ALPHA = 0.01;
+    private static final double DEFAULT_ALPHA = 0.05;
 
     /** The Constant DEFAULT_RESPONSE. */
     private static final String DEFAULT_RESPONSE = "Response";
@@ -118,6 +120,10 @@ public class StuyDesignContext {
 
     /** The Constant DEFAULT_MEAN_COLUMN. */
     private static final int DEFAULT_MEAN_COLUMN = 0;
+    
+    private static final String ENUM_POWER_VALUE = "Power";
+    
+    private static final String ENUM_SAMPLE_SIZE_VALUE = "Sample Size";
 
     /** The Constant DEFAULT_CORELATION_MATRIX. */
     /*
@@ -591,7 +597,8 @@ public class StuyDesignContext {
      */
     public void setSolvingFor(String solutionType) {
         if (solutionType != null) {
-            if (SolutionTypeEnum.SAMPLE_SIZE.getIdx().equals(solutionType))
+            //if (SolutionTypeEnum.SAMPLE_SIZE.getId().equals(solutionType))            
+            if (ENUM_SAMPLE_SIZE_VALUE.equals(solutionType))
                 studyDesign.setSolutionTypeEnum(SolutionTypeEnum.SAMPLE_SIZE);
             else
                 studyDesign.setSolutionTypeEnum(SolutionTypeEnum.POWER);
@@ -610,7 +617,10 @@ public class StuyDesignContext {
         if (solvingFor == null || solvingFor.equals("")) {
             return null;
         }
-        return solvingFor.getIdx();
+        else if(solvingFor.equals(SolutionTypeEnum.POWER))
+                return ENUM_POWER_VALUE;
+        else
+            return ENUM_SAMPLE_SIZE_VALUE;         
     }
 
     /*--------------------

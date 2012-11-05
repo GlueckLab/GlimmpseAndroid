@@ -1,4 +1,28 @@
+/*
+ * Mobile - Android, User Interface for the GLIMMPSE Software System.  Allows
+ * users to perform power, sample size calculations. 
+ * 
+ * Copyright (C) 2010 Regents of the University of Colorado.  
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 package edu.ucdenver.bios.glimmpseandroid.adapter;
+
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -11,7 +35,6 @@ import edu.ucdenver.bios.glimmpseandroid.R;
 import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 import edu.ucdenver.bios.webservice.common.domain.PowerResult;
 import edu.ucdenver.bios.webservice.common.domain.PowerResultList;
-import edu.ucdenver.bios.webservice.common.enums.SolutionTypeEnum;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -28,6 +51,9 @@ public class ResultsListAdapter extends BaseAdapter{
     
     /** The list. */
     private static PowerResultList list;
+    
+    private static final int MAX_PRECISION = 3;
+    private static final MathContext mc = new MathContext(MAX_PRECISION, RoundingMode.HALF_EVEN);
 
     /**
      * Instantiates a new results list adapter.
@@ -96,16 +122,18 @@ public class ResultsListAdapter extends BaseAdapter{
                 .findViewById(R.id.list_item_textView_power);
         holder.sampleSizeLine = (TextView) view.findViewById(R.id.list_item_textView_sample_size);
         
-        PowerResult result = list.get(position);
-        double power = result.getActualPower();
+        PowerResult result = list.get(position);        
+        double power = new BigDecimal(result.getActualPower(), mc).doubleValue();
         int sampleSize = result.getTotalSampleSize();
                 
         holder.powerLine.setText(Double.toString(power));
-        holder.sampleSizeLine.setText(Integer.toString(sampleSize));
+        holder.sampleSizeLine.setText(Integer.toString(sampleSize));        
         
         String solvingFor = StuyDesignContext.getInstance().getSolvingFor();
         if(solvingFor != null){
-         if(solvingFor.equals(SolutionTypeEnum.POWER.getIdx())){
+         //if(solvingFor.equals(SolutionTypeEnum.POWER.getId())){
+            String enumPower = mLayoutInflater.getContext().getString(R.string.enum_power_value);
+            if (enumPower.equals(solvingFor)) {
              //holder.powerLine.setBackgroundColor(Color.BLUE);
              holder.powerLine.setBackgroundColor(Color.argb(10, 10, 10, 10));
          }

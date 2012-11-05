@@ -1,3 +1,23 @@
+/*
+ * Mobile - Android, User Interface for the GLIMMPSE Software System.  Allows
+ * users to perform power, sample size calculations. 
+ * 
+ * Copyright (C) 2010 Regents of the University of Colorado.  
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 package edu.ucdenver.bios.glimmpseandroid.activity.design;
 
 import java.io.File;
@@ -31,6 +51,8 @@ import edu.ucdenver.bios.webservice.common.domain.PowerResultList;
 public class ResultsActivity extends Activity implements SimpleGestureListener {
     private static GestureFilter detector;
     private static PowerResultList list;
+    //private StuyDesignContext globalVariables;
+    private final String RESULT = "Result";
     private final static String MAIL_BODY = "Thank you for using the GLIMMPSE software.  Your power results are attached to this email. \n\nTo learn more about power and sample size, please visit http://samplesizeshop.org.";
     private final static String MAIL_SUBJECT = "GLIMMPSE Power Results";
     private final static String RESULT_FILE = "GLIMMPSEPowerResults.csv";
@@ -80,6 +102,9 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
                 finish();
             }
         });
+        
+        /*TextView solvingFor = (TextView) findViewById(R.id.textView_solving_for);
+        solvingFor.setText(globalVariables.getSolvingFor()+RESULT);*/
 
         Bundle extras = this.getIntent().getExtras();
         if (extras != null) {

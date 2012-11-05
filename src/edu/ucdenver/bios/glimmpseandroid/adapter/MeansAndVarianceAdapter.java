@@ -20,6 +20,8 @@
  */
 package edu.ucdenver.bios.glimmpseandroid.adapter;
 
+import java.text.DecimalFormat;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
@@ -62,10 +64,10 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
     static double mean;
     
     /** The Constant DEFAULT_VARIANCE. */
-    static final double DEFAULT_VARIANCE = 1.0;
+    static final double DEFAULT_VARIANCE = 1;
     
     /** The Constant DEFAULT_MEAN. */
-    static final double DEFAULT_MEAN = 0.0;
+    static final double DEFAULT_MEAN = 0;
     // static ViewHolder holder;
     /** The variance text. */
     static EditText varianceText;
@@ -138,7 +140,17 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
             imm.hideSoftInputFromWindow(holder.varianceLine.getWindowToken(), 0);
             
             mean = StuyDesignContext.getInstance().getMean(position);
-            holder.meanLine.setText(Double.toString(mean));
+            double temp = mean % 1;
+            //System.out.println(temp);
+            DecimalFormat format = new DecimalFormat("#.0");
+            temp = Double.parseDouble(format.format(temp));            
+            if(temp != 0.0)
+                holder.meanLine.setText(Double.toString(mean));
+            else{
+                //format = new DecimalFormat("#");
+                holder.meanLine.setText(Integer.toString(((Double)mean).intValue()));
+            }
+            holder.meanLine.setSelection(holder.meanLine.getText().length());
             holder.meanLine.setCompoundDrawables(null, null, img, null);
             holder.meanLine.setOnTouchListener(new OnTouchListener() {
 
@@ -156,8 +168,9 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
             holder.meanLine.addTextChangedListener(new TextWatcher() {
                 
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    meanText = (EditText) v.findViewById(R.id.mean);
                     String value = String.valueOf(s);
-                    if (value != null || !value.isEmpty()) {
+                    if (value != null && !value.isEmpty()) {
                         try {                                 
                            mean = Double.parseDouble(value);     
                            meanText.setCompoundDrawables(null, null, img, null);                            
@@ -179,7 +192,7 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
                 
                 public void afterTextChanged(Editable s) {                    
                     StuyDesignContext.getInstance().setMean(mean,position);
-                    //System.out.println("mean : "+mean+" getMean : "+StuyDesignContext.getInstance().getMean(position));
+                    System.out.println("mean : "+mean+" getMean : "+StuyDesignContext.getInstance().getMean(position));
                 }
             });
             
@@ -188,7 +201,17 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
             }*/
             
             variance = StuyDesignContext.getInstance().getVariance();
-            holder.varianceLine.setText(Double.toString(variance));
+            //holder.varianceLine.setText(Double.toString(variance));
+            temp = variance % 1;
+            format = new DecimalFormat("#.0");
+            temp = Double.parseDouble(format.format(temp));            
+            if(temp != 0.0)
+                holder.varianceLine.setText(Double.toString(variance));
+            else{
+                //format = new DecimalFormat("#");
+                holder.varianceLine.setText(Integer.toString(((Double)variance).intValue()));
+            }
+            holder.varianceLine.setSelection(holder.varianceLine.getText().length());
             holder.varianceLine.setCompoundDrawables(null, null, img, null);
             /*if(variance != DEFAULT_VARIANCE) {
                 holder.varianceLine.setText(Double.toString(variance));
@@ -210,8 +233,7 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
                      */
                     if(variance < 1)
                         variance = 1.0;
-                    StuyDesignContext.getInstance().setVariance(variance);
-                    System.out.println("Variance : "+variance+" getVariance : "+StuyDesignContext.getInstance().getVariance());
+                    StuyDesignContext.getInstance().setVariance(variance);                    
                 }
 
                 public void beforeTextChanged(CharSequence s, int start, int count,
@@ -222,6 +244,7 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
 
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                     // TODO Auto-generated method stub
+                    //varianceText = (EditText) v.findViewById(R.id.variance);
                     if (String.valueOf(s) != null || String.valueOf(s).equals("")) {
                         //
                         try {      
@@ -352,7 +375,17 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
                     .getChildAt(index)).getChildAt(0)).getChildAt(1);*/
             EditText text = (EditText) ((RelativeLayout) (listView
                     .getChildAt(index))).getChildAt(1);
-            text.setText(Double.toString(variance));
+            //text.setText(Double.toString(variance));
+            double temp = variance % 1;
+            DecimalFormat format = new DecimalFormat("#.0");
+            temp = Double.parseDouble(format.format(temp));            
+            if(temp != 0.0)
+                text.setText(Double.toString(variance));
+            else{
+                //format = new DecimalFormat("#");
+                text.setText(Integer.toString(((Double)variance).intValue()));
+            }
+            text.setSelection(text.getText().length());
             text.setCompoundDrawables(null, null, img, null);   
             /*EditText text = (EditText) ( listView
                     .getChildAt(index));

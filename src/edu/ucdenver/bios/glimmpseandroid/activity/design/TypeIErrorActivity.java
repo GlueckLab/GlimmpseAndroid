@@ -20,6 +20,9 @@
  */
 package edu.ucdenver.bios.glimmpseandroid.activity.design;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 import android.app.Activity;
@@ -57,24 +60,27 @@ import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 public class TypeIErrorActivity extends Activity implements OnClickListener, TextWatcher, SimpleGestureListener {
 	
 	/** The value. */
-	private EditText value;
+	private static EditText value;
 	
 	/** The alpha. */
 	private Double alpha;
 	
 	/** The img. */
-	private Drawable img;
+	private static Drawable img;
 	
 	/** The format. */
-	private  DecimalFormat format = new DecimalFormat(".##");
+	//private static DecimalFormat format = new DecimalFormat(".##");
+	private static final int MAX_PRECISION = 10;
+    private static final MathContext mc = new MathContext(MAX_PRECISION, RoundingMode.HALF_EVEN);
+
 	
 	/** The stuy design context. */
 	private StuyDesignContext stuyDesignContext = StuyDesignContext.getInstance();
 	
 	/** The detector. */
-	private GestureFilter detector;
+	private static GestureFilter detector;
 	
-	private InputMethodManager imm;
+	private static InputMethodManager imm;
 	
 	private boolean isKeyboardVisible = true; 
 
@@ -144,7 +150,7 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
 		    stuyDesignContext.setDefaultTypeIError();
 		alpha = stuyDesignContext.getTypeIError();
 		if(alpha != null){		    
-		    alpha = Double.parseDouble(format.format(alpha));
+		    //alpha = Double.parseDouble(format.format(alpha));
 		    //value.setText(Double.toString(alpha%1));
 		    //value.setText(String.format("%02d", toInt(alpha)));
 		    value.setText(Double.toString(alpha));
@@ -166,9 +172,11 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
 	 * Reset text.
 	 */
 	private void resetText(){
-        if(alpha == null)
-            alpha = Double.parseDouble(format.format(0));
-        stuyDesignContext.setTypeIError(alpha);
+        if(alpha == null){
+            //alpha = Double.parseDouble(format.format(0));
+            alpha = 0.0;
+        }
+        //stuyDesignContext.setTypeIError(alpha);
         value.requestFocus();
         value.setSelection(value.getText().length());
     }
@@ -195,14 +203,17 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
      */
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         // TODO Auto-generated method stub
-        if(String.valueOf(s) != null || String.valueOf(s).equals("")) {
+        value = (EditText) findViewById(R.id.alpha);
+        if(String.valueOf(s) != null && !String.valueOf(s).equals("")) {
             value.setCompoundDrawables( null, null, img, null );
             try {
                 //alpha = toDouble(Integer.parseInt(String.valueOf(s)));
                 alpha = (Double.parseDouble(String.valueOf(s)))%1;                
             }
             catch(Exception e){
-                alpha = Double.parseDouble(format.format(0));
+                System.out.println("Exception : "+e);
+                //alpha = Double.parseDouble(format.format(0));
+                alpha = 0.0;
                 value.setCompoundDrawables( null, null, null, null );                
             }
         }
@@ -211,7 +222,7 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
         }
     }
     
-    private void garbageCollection(){
+    /*private void garbageCollection(){
         if(value != null)
             value = null;
                  
@@ -234,7 +245,7 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
              detector = null;
          
          System.gc();
-    }
+    }*/
     
     private void exit(){  
         if(imm != null){
@@ -247,12 +258,13 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
                 //imm.hideSoftInputFromInputMethod(value.getWindowToken(), 0);
             }
         }
-        if(stuyDesignContext.getTypeIError() == 0.0)
+        if(alpha == 0.0)
             stuyDesignContext.setDefaultTypeIError();
-        else
-            stuyDesignContext.setTypeIError(alpha); 
+        else {            
+            stuyDesignContext.setTypeIError(new BigDecimal(alpha, mc).doubleValue());
+        }
                       
-        garbageCollection();
+        //garbageCollection();
          
         finish();
     }
@@ -298,8 +310,10 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
     @Override
     public void onBackPressed() {
         // TODO Auto-generated method stub
-        isKeyboardVisible = false;
         super.onBackPressed();
+        isKeyboardVisible = false;
+        System.out.println("On Back Pressed");
+        
     }
 
     /* (non-Javadoc)
@@ -312,7 +326,7 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
                 stuyDesignContext.setDefaultTypeIError();
             else
                 stuyDesignContext.setTypeIError(alpha);
-            garbageCollection();
+            //garbageCollection();
             finish();
             return true;
          }

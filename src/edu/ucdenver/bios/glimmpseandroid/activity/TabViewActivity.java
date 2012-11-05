@@ -56,7 +56,6 @@ import edu.ucdenver.bios.glimmpseandroid.adapter.DesignListAdapter;
 import edu.ucdenver.bios.glimmpseandroid.adapter.TutorialAdapter;
 import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 import edu.ucdenver.bios.webservice.common.domain.StudyDesign;
-import edu.ucdenver.bios.webservice.common.enums.SolutionTypeEnum;
 
 /**
  * The Class TabViewActivity deals with the Screens with Tab view of the
@@ -110,8 +109,7 @@ public class TabViewActivity extends Activity implements Runnable,
             int progress = globalVariables.getTotalProgress();
             // inputProgress.setProgress(progress);
             if (progress == 6) {
-                calculateButton.setEnabled(true);
-                calculateButton.setClickable(true);
+                calculateButtonEnabled();
             }
         }
         else if(mTabHost.getCurrentTab()==2){
@@ -289,8 +287,7 @@ public class TabViewActivity extends Activity implements Runnable,
         System.out.println("reset progress : "
                 + globalVariables.getTotalProgress());
         // inputProgress.setProgress(globalVariables.getTotalProgress());
-        calculateButton.setEnabled(false);
-        calculateButton.setClickable(false);
+        calculateButtonDisabled();
         /*
          * loadingProgressBar.setVisibility(View.INVISIBLE);
          * loadingText.setVisibility(View.INVISIBLE);
@@ -343,12 +340,10 @@ public class TabViewActivity extends Activity implements Runnable,
         calculateButton = (Button) findViewById(R.id.calculate_button);
 
         if (StuyDesignContext.getInstance().getTotalProgress() != 6) {
-            calculateButton.setClickable(false);
-            calculateButton.setEnabled(false);
+            calculateButtonDisabled();
 
         } else {
-            calculateButton.setEnabled(true);
-            calculateButton.setClickable(true);
+            calculateButtonEnabled();
         }
         calculateButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -380,8 +375,10 @@ public class TabViewActivity extends Activity implements Runnable,
         
 
         if (solvingFor != null) {
-            if (solvingFor.equals(SolutionTypeEnum.SAMPLE_SIZE.getId())) {
-                designList[1] = SolutionTypeEnum.POWER.getId();
+            //if (solvingFor.equals(SolutionTypeEnum.SAMPLE_SIZE.getId())){ 
+            String enumSampleSize = getString(R.string.enum_sample_size_value);
+            if (enumSampleSize.equals(solvingFor)) {
+                designList[1] = getString(R.string.enum_power_value);
             } else {
                 designList[1] = "Smallest Group Size";
             }
@@ -408,8 +405,10 @@ public class TabViewActivity extends Activity implements Runnable,
                 i.setType("message/rfc822");
                 // i.putExtra(Intent.EXTRA_EMAIL , new
                 // String[]{"uttara.sakhadeo@ucdenver.edu"});
+                /*i.putExtra(Intent.EXTRA_EMAIL,
+                        new String[] { "uttarasakhadeo@gmail.com" });*/
                 i.putExtra(Intent.EXTRA_EMAIL,
-                        new String[] { "uttarasakhadeo@gmail.com" });
+                        new String[] { "feedback@glimmpse.samplesizeshop.com" });
                 i.putExtra(Intent.EXTRA_SUBJECT, "Glimmpse Lite Queries");
                 // i.putExtra(Intent.EXTRA_TEXT , "");
                 try {
@@ -516,9 +515,9 @@ public class TabViewActivity extends Activity implements Runnable,
             return tabThreeContentView;
         } else
             return tabOneContentView;
-    }
+    }      
 
-    public void run() {
+    /*public void run() {
         String service = Context.WIFI_SERVICE;
         WifiManager wifi = (WifiManager)getSystemService(service);
         
@@ -528,6 +527,7 @@ public class TabViewActivity extends Activity implements Runnable,
         }
         
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);        
+        
         // For Wifi
         NetworkInfo mWifi = connManager
                 .getNetworkInfo(ConnectivityManager.TYPE_WIFI); 
@@ -537,14 +537,16 @@ public class TabViewActivity extends Activity implements Runnable,
                 String solvingFor = globalVariables.getSolvingFor();
                 if (solvingFor != null && !solvingFor.isEmpty()) {
                     String URL;
-                    if (solvingFor.equals(SolutionTypeEnum.POWER.getId()))
+                    //if (solvingFor.equals(SolutionTypeEnum.POWER.getId()))
+                    String enumPower = getString(R.string.enum_power_value);
+                    if (enumPower.equals(solvingFor))
                         URL = SERVICE_URL + "power";
                     else
                         URL = SERVICE_URL + "samplesize";
 
                     ClientResource cr = new ClientResource(URL);
                                         
-                    /*Series<Cookie> cookies= cr.getCookies();
+                    Series<Cookie> cookies= cr.getCookies();
                     if(cookies.getValues(GLIMMPSE_COOKIE) == null){
                         cookies.removeAll(GLIMMPSE_COOKIE);
                     }
@@ -552,7 +554,7 @@ public class TabViewActivity extends Activity implements Runnable,
                     
                     System.out.println("------------------------------");
                     System.out.println("Cookies Saved : "+cr.getCookies().size());
-                    System.out.println("------------------------------");*/
+                    System.out.println("------------------------------");
 
                     StudyDesign studyDesign = globalVariables.getStudyDesign();
                     globalVariables.setDefaults();
@@ -572,6 +574,152 @@ public class TabViewActivity extends Activity implements Runnable,
         }
         handler.sendEmptyMessage(0);
         
+    }*/
+    
+    public void run() {
+        // Setting Default Network type as WIFI. Automaticaly enables WIFI 
+        /*String service = Context.WIFI_SERVICE;
+        WifiManager wifi = (WifiManager)getSystemService(service);
+        
+        if(!wifi.isWifiEnabled()){
+            if(wifi.getWifiState() != WifiManager.WIFI_STATE_ENABLING)
+                wifi.setWifiEnabled(true);
+        }*/
+        
+        final ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);        
+        NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
+        // If any network Available
+        if(activeNetwork != null && activeNetwork.isConnected()){
+            int networkType = activeNetwork.getType();
+            switch (networkType) {
+                case (ConnectivityManager.TYPE_WIFI): 
+                    NetworkInfo nWifi = connManager
+                    .getNetworkInfo(ConnectivityManager.TYPE_WIFI); 
+                    if (nWifi.isConnected()) {
+                        setConnection();
+                    }
+                    break;
+                case (ConnectivityManager.TYPE_MOBILE):
+                    boolean isMobileConn = connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnected();
+                    if(isMobileConn) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setTitle("Possible Data Usage");
+                        builder.setMessage(
+                                "Wifi not available. You might get charged while using this application. Would you like to continue?")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog,
+                                                    int id) {
+                                                NetworkInfo nMobile = connManager
+                                                        .getNetworkInfo(ConnectivityManager.TYPE_MOBILE); 
+                                                        if (nMobile != null && nMobile.isConnected()) {
+                                                            setConnection();
+                                                        }
+                                            }
+                                        })
+                                .setNegativeButton("No",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog,
+                                                    int id) {
+                                                dialog.cancel();
+                                            }
+                                        });
+                        // AlertDialog alert = builder.create();
+                        builder.show();
+                    }
+                    else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setTitle("No Net Connection Available");
+                        builder.setMessage(  
+                                "Not Connected to Network")
+                                .setNegativeButton("No",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog,
+                                                    int id) {
+                                                dialog.cancel();
+                                            }
+                                        });
+                        // AlertDialog alert = builder.create();
+                        builder.show();
+                    }
+                    break;    
+                default:
+                    break;
+            }
+            // For Wifi
+            
+        }
+        /*else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("Not Connected to Network");
+            builder.setMessage(
+                    "No network connection available?")
+                    .setCancelable(false)                    
+                    .setNegativeButton("Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,
+                                        int id) {
+                                    dialog.cancel();
+                                }
+                            });
+            builder.show();
+        }    */        
+        handler.sendEmptyMessage(0);
+    }
+    
+    public void setConnection(){
+        try {
+            String solvingFor = globalVariables.getSolvingFor();
+            if (solvingFor != null && !solvingFor.isEmpty()) {
+                String URL;
+                //if (solvingFor.equals(SolutionTypeEnum.POWER.getId()))
+                String enumPower = getString(R.string.enum_power_value);
+                if (enumPower.equals(solvingFor))
+                    URL = SERVICE_URL + "power";
+                else
+                    URL = SERVICE_URL + "samplesize";
+
+                ClientResource cr = new ClientResource(URL);
+                                    
+                /*Series<Cookie> cookies= cr.getCookies();
+                if(cookies.getValues(GLIMMPSE_COOKIE) == null){
+                    cookies.removeAll(GLIMMPSE_COOKIE);
+                }
+                    cookies.add(GLIMMPSE_COOKIE, "StudyDesign");
+                
+                System.out.println("------------------------------");
+                System.out.println("Cookies Saved : "+cr.getCookies().size());
+                System.out.println("------------------------------");*/
+
+                StudyDesign studyDesign = globalVariables.getStudyDesign();
+                globalVariables.setDefaults();
+               
+                System.out.println(studyDesign);
+
+                Representation repr = cr.post(studyDesign);
+
+                jsonStr = repr.getText();        
+                
+            }
+
+        } catch (Exception e) {                
+            System.out.println("testPower Failed to retrieve: "
+                    + e.getMessage());
+        }
+    }
+    
+    
+    private void calculateButtonDisabled(){
+        calculateButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.inactive_button_selector));
+        calculateButton.setEnabled(false);
+        calculateButton.setClickable(false);
+    }
+    
+    private void calculateButtonEnabled(){ 
+        calculateButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.calculate_button_selector));
+        calculateButton.setEnabled(true);
+        calculateButton.setClickable(true);
     }
 
  }

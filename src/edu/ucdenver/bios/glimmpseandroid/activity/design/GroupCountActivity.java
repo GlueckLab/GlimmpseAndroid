@@ -41,14 +41,28 @@ import edu.ucdenver.bios.glimmpseandroid.activity.TabViewActivity;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener;
 import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
+// TODO: Auto-generated Javadoc
 /*
  * @author Uttara Sakhadeo
  */
+/**
+ * The Class GroupCountActivity.
+ */
 public class GroupCountActivity extends Activity implements OnClickListener, SimpleGestureListener {
+	
+	/** The seekbar. */
 	static SeekBar seekbar;
+	
+	/** The value. */
 	static TextView value;
+	
+	/** The groups. */
 	int groups;		
+	
+	/** The stuy design context. */
 	static StuyDesignContext stuyDesignContext = StuyDesignContext.getInstance();
+	
+	/** The detector. */
 	private static GestureFilter detector;
 
 	/**
@@ -134,6 +148,9 @@ public class GroupCountActivity extends Activity implements OnClickListener, Sim
 		});
 	}	
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+	 */
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             finish();
@@ -163,6 +180,9 @@ public class GroupCountActivity extends Activity implements OnClickListener, Sim
         super.onDestroy();
     }*/
 	
+	/* (non-Javadoc)
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 */
 	public void onClick(View v) {
 		/*
 		 * // TODO Auto-generated method stub Bundle bundle = new Bundle();
@@ -176,6 +196,9 @@ public class GroupCountActivity extends Activity implements OnClickListener, Sim
 		finish();
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#dispatchTouchEvent(android.view.MotionEvent)
+	 */
 	public boolean dispatchTouchEvent(MotionEvent me){
         //System.out.println("dispatchTouchEvent");
         detector.onTouchEvent(me);
@@ -183,6 +206,9 @@ public class GroupCountActivity extends Activity implements OnClickListener, Sim
       }
 
 
+	/* (non-Javadoc)
+	 * @see edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener#onSwipe(int)
+	 */
 	public void onSwipe(int direction) {
         // TODO Auto-generated method stub
         /*if(direction == 3)
@@ -206,17 +232,29 @@ public class GroupCountActivity extends Activity implements OnClickListener, Sim
              //Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 
+    /* (non-Javadoc)
+     * @see edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener#onDoubleTap()
+     */
     public void onDoubleTap() {
         // TODO Auto-generated method stub
         
     }
         
+    /* (non-Javadoc)
+     * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+     */
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.home_screen_menu, menu);
         return true;
     }
     
+    /**
+     * Menu selection.
+     *
+     * @param item the item
+     * @return true, if successful
+     */
     private boolean menuSelection(MenuItem item){
         switch (item.getItemId()) { 
         case R.id.menu_tutorial: 
@@ -250,6 +288,9 @@ public class GroupCountActivity extends Activity implements OnClickListener, Sim
             }
     }
     
+    /* (non-Javadoc)
+     * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+     */
     public boolean onOptionsItemSelected(MenuItem item) { // Handle
          return menuSelection(item);
         }
