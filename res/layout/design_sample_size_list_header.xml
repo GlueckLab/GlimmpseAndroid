@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+	Mobile - Android, User Interface for the GLIMMPSE Software System.  Allows
+  	users to perform power, sample size calculations. 
+  	Copyright (C) 2010 Regents of the University of Colorado.  
+  	
+  	This program is free software; you can redistribute it and/or
+  	modify it under the terms of the GNU General Public License
+  	as published by the Free Software Foundation; either version 2
+  	of the License, or (at your option) any later version.
+
+	  This program is distributed in the hope that it will be useful,
+  	but WITHOUT ANY WARRANTY; without even the implied warranty of
+  	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  	GNU General Public License for more details.
+
+  	You should have received a copy of the GNU General Public License
+  	along with this program; if not, write to the Free Software
+  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="50dp"
@@ -29,14 +48,13 @@
 
     <Button
         android:id="@+id/add_button"
-        android:layout_width="50dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/sample_size_value"
         android:text="@string/add_button_label"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/back_button_selector"
         android:textSize="15dp" />
 
     <Button
@@ -50,7 +68,6 @@
         android:textColor="@color/button_label_black"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/back_button_selector"
         android:textSize="15dp" />
 
 </RelativeLayout>

@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+	Mobile - Android, User Interface for the GLIMMPSE Software System.  Allows
+  	users to perform power, sample size calculations. 
+  	Copyright (C) 2010 Regents of the University of Colorado.  
+  	
+  	This program is free software; you can redistribute it and/or
+  	modify it under the terms of the GNU General Public License
+  	as published by the Free Software Foundation; either version 2
+  	of the License, or (at your option) any later version.
+
+	  This program is distributed in the hope that it will be useful,
+  	but WITHOUT ANY WARRANTY; without even the implied warranty of
+  	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  	GNU General Public License for more details.
+
+  	You should have received a copy of the GNU General Public License
+  	along with this program; if not, write to the Free Software
+  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_marginTop="2dp"
     android:background="@color/white"
     android:scrollbars="vertical" >
-
+    
     <ListView
         android:id="@+id/results_list_view"
         android:layout_width="match_parent"
@@ -13,7 +32,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginTop="30dp"
         android:cacheColorHint="#0000"
-        android:dividerHeight="0px"
+        android:dividerHeight="1dp"        
         android:headerDividersEnabled="true"
         android:textColor="@color/black" >
     </ListView>
@@ -50,10 +69,62 @@
         android:layout_alignLeft="@+id/back_button"
         android:layout_alignParentBottom="true"
         android:background="@drawable/back_button_selector"
-        android:text="@string/save_email_button_label"
+        android:text="@string/email_button_label"
         android:textColor="@color/button_label_black"
         android:textSize="16dp"
         android:textStyle="bold"
         android:typeface="serif" />
+        
+        <!-- <SlidingDrawer
+	     android:id="@+id/drawer"
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:padding="10dip"	
+	     android:handle="@+id/handle"
+	     android:content="@+id/button_container">
+	     
+             <ImageButton 
+                 android:id="@id/handle"
+		         android:layout_width="88dip"
+		         android:layout_height="44dip"
+		         android:src="@drawable/attachment" />
+             
+             <RelativeLayout
+                 android:id="@+id/button_container"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:background="@color/black"
+                 android:gravity="center"
+                 android:scrollbars="vertical" >
+	
+	            <Button
+	                android:id="@+id/back_button"
+	                android:layout_width="220dp"
+	                android:layout_height="45dp"
+	                android:layout_marginTop="20dp"
+	                android:background="@drawable/learn_more_button_selector"
+	                android:text="@string/back_button_label"
+	                android:textColor="@color/learn_more_button_label_color"
+	                android:textSize="18dp"
+	                android:textStyle="bold"
+	                android:typeface="serif" />
+	
+	            <Button
+	                android:id="@+id/save_email_button"
+	                android:layout_width="220dp"
+	                android:layout_height="45dp"
+	                android:layout_below="@+id/back_button"
+	                android:layout_marginTop="20dp"
+	                android:background="@drawable/learn_more_button_selector"
+	                android:gravity="center"
+	                android:text="@string/save_email_button_label"
+	                android:textColor="@color/learn_more_button_label_color"
+	                android:textSize="18dp"
+	                android:textStyle="bold"
+	                android:typeface="serif" />
+        </RelativeLayout>
+
+ 		</SlidingDrawer> -->
+        
 
 </RelativeLayout>

@@ -26,6 +26,13 @@
     <string name="menu_design_condensed">Start</string>
     <string name="menu_tutorial_condensed">Learn</string>
     <string name="menu_aboutus_condensed">AboutUs</string>
+    
+    <!-- Enum for Solving for -->
+    <string name="enum_power">POWER</string>
+    <string name="enum_sample_size">SAMPLE_SIZE</string>
+    <string name="enum_power_value">Power</string>
+    <string name="enum_sample_size_value">Sample Size</string>
+    
 
     <!-- Button Labels -->
     <string name="back_button_label">Back</string>
@@ -34,9 +41,9 @@
     <string name="clear_all_button_label">Clear All</string>
     <string name="delete_all_button_label">Delete All</string>
     <string name="add_button_label">Add</string>
-    <string name="email_button_label">Email</string>
+    <string name="email_button_label">Email Results</string>
     <string name="contact_button_label">Contact Us</string>
-    <string name="save_email_button_label">Save/Email</string>
+    <string name="save_button_label">Save Results</string>
 
     <!-- Tutorial Header -->
     <string name="tutorial_list_header">Tutorial</string>
@@ -160,6 +167,9 @@
 
     <!-- Sample Size Screen -->
     <string name="description_sample_size">Please update the Sample Size details.</string>
+    
+    <!-- Result Screen -->
+    <string name="total_sample_size">Total Sample Size</string>
 
     <!-- Alert -->
     <!-- Data won't be saved -->
