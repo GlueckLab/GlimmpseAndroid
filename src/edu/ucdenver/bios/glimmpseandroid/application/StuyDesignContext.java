@@ -658,8 +658,9 @@ public class StuyDesignContext {
                 Blob2DArray blob = cov.getBlob();
                 if (blob != null) {
                     covarianceMatrixData = blob.getData();
-                    if (covarianceMatrixData != null)
+                    if (covarianceMatrixData != null){                        
                         return covarianceMatrixData[0][0];
+                    }
                 }
             }
 
@@ -706,8 +707,7 @@ public class StuyDesignContext {
                 covarianceSet.clear();
             }
         }
-        covariance = createCovariance(variance);
-        // System.out.println("sd in covariance "+covariance.getStandardDeviationList().get(0).getValue());
+        covariance = createCovariance(variance);        
         studyDesign.addCovariance(covariance);
     }
 
@@ -723,13 +723,9 @@ public class StuyDesignContext {
         covariance.setType(DEFAULT_COVARIANCE_TYPE);
         covariance.setName(DEFAULT_COVARIANCE_NAME);
         covarianceMatrixData[0][0] = variance;
-        covariance.setBlobFromArray(covarianceMatrixData);
-        /*
-         * StandardDeviation sd = new StandardDeviation();
-         * sd.setValue(Math.sqrt(variance)); List<StandardDeviation> sdList =
-         * new ArrayList<StandardDeviation>(1); sdList.add(sd);
-         * covariance.setStandardDeviationList(sdList);
-         */
+        covariance.setBlobFromArray(covarianceMatrixData);    
+        covariance.setRows(1);
+        covariance.setColumns(1);        
         return covariance;
     }
 
@@ -827,16 +823,7 @@ public class StuyDesignContext {
      *            the position
      * @return the mean
      */
-    public double getMean(int position) {
-        /*
-         * List<ResponseNode> responseList = studyDesign.getResponseList();
-         * for(ResponseNode response : responseList) { response.ge }
-         * 
-         * List<RelativeGroupSize> list =
-         * studyDesign.getRelativeGroupSizeList(); if (list == null ||
-         * list.isEmpty()) { return 0; } else { if (list.size() <= position) {
-         * return 0; } } return list.get(position).getValue();
-         */
+    public double getMean(int position) {        
         NamedMatrix beta = studyDesign.getNamedMatrix(MATRIX_BETA);
         double[][] data = beta.getData().getData();
         return data[position][DEFAULT_MEAN_COLUMN];

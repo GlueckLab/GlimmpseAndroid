@@ -111,7 +111,7 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
 
             System.out.println("Extras not null");
             String jsonString = extras.getString("results");
-            System.out.println("JsonString : " + jsonString);
+            System.out.println("JsonString : " + jsonString);            
             ListView resultsListView = (ListView) findViewById(R.id.results_list_view);
             View header1 = getLayoutInflater().inflate(
                     R.layout.results_list_header, null, false);

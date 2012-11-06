@@ -33,6 +33,7 @@ import android.view.View.OnFocusChangeListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -47,6 +48,8 @@ import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
  * @author Uttara Sakhadeo
  */
 public class MeansAndVarianceAdapter extends BaseAdapter {
+    
+    private final int ROW_ONE = 0;
     
     /** The groups. */
     private int groups;
@@ -200,120 +203,81 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
                 holder.meanLine.requestFocusFromTouch();
             }*/
             
-            variance = StuyDesignContext.getInstance().getVariance();
-            //holder.varianceLine.setText(Double.toString(variance));
-            temp = variance % 1;
-            format = new DecimalFormat("#.0");
-            temp = Double.parseDouble(format.format(temp));            
-            if(temp != 0.0)
-                holder.varianceLine.setText(Double.toString(variance));
-            else{
-                //format = new DecimalFormat("#");
-                holder.varianceLine.setText(Integer.toString(((Double)variance).intValue()));
-            }
-            holder.varianceLine.setSelection(holder.varianceLine.getText().length());
-            holder.varianceLine.setCompoundDrawables(null, null, img, null);
-            /*if(variance != DEFAULT_VARIANCE) {
-                holder.varianceLine.setText(Double.toString(variance));
+            if(position == ROW_ONE){
+                variance = StuyDesignContext.getInstance().getVariance();
+                //holder.varianceLine.setText(Double.toString(variance));
+                temp = variance % 1;
+                format = new DecimalFormat("#.0");
+                temp = Double.parseDouble(format.format(temp));            
+                if(temp != 0.0)
+                    holder.varianceLine.setText(Double.toString(variance));
+                else{
+                    //format = new DecimalFormat("#");
+                    holder.varianceLine.setText(Integer.toString(((Double)variance).intValue()));
+                }
+                holder.varianceLine.setSelection(holder.varianceLine.getText().length());
                 holder.varianceLine.setCompoundDrawables(null, null, img, null);
-            } else {
-                holder.varianceLine.setText("");
-                holder.varianceLine.setCompoundDrawables(null, null, null, null);
-            }*/
-            
-
-            holder.varianceLine.addTextChangedListener(new TextWatcher() {
-
-                public void afterTextChanged(Editable s) {
-                    // TODO Auto-generated method stub
-                    /*
-                     * if(variance!=null) {
-                     * holder.varianceLine.setText(variance.toString());
-                     * GlobalVariables.getInstance().setVariance(variance); }
-                     */
-                    if(variance < 1)
-                        variance = 1.0;
-                    StuyDesignContext.getInstance().setVariance(variance);                    
-                }
-
-                public void beforeTextChanged(CharSequence s, int start, int count,
-                        int after) {
-                    // TODO Auto-generated method stub
-
-                }
-
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    // TODO Auto-generated method stub
-                    //varianceText = (EditText) v.findViewById(R.id.variance);
-                    if (String.valueOf(s) != null || String.valueOf(s).equals("")) {
-                        //
-                        try {      
-                            String value = String.valueOf(s);
-                            if(value != null && !value.isEmpty()) {
-                                variance = Double.parseDouble(value);     
-                                varianceText.setCompoundDrawables(null, null, img, null);
+                
+                
+    
+                holder.varianceLine.addTextChangedListener(new TextWatcher() {
+    
+                    public void afterTextChanged(Editable s) {                        
+                        if(variance < 1)
+                            variance = 1.0;
+                        StuyDesignContext.getInstance().setVariance(variance);                    
+                    }
+    
+                    public void beforeTextChanged(CharSequence s, int start, int count,
+                            int after) {                        
+    
+                    }
+    
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        // TODO Auto-generated method stub
+                        //varianceText = (EditText) v.findViewById(R.id.variance);
+                        if (String.valueOf(s) != null || String.valueOf(s).equals("")) {
+                            //
+                            try {      
+                                String value = String.valueOf(s);
+                                if(value != null && !value.isEmpty()) {
+                                    variance = Double.parseDouble(value);     
+                                    varianceText.setCompoundDrawables(null, null, img, null);
+                                }
+                                else {                    
+                                    variance = DEFAULT_VARIANCE;    
+                                }
+                                // clear.setVisibility(View.VISIBLE);
+                            } catch (Exception e) {
+                                System.out.println("Exception : "+e.getMessage());
+                                variance = DEFAULT_VARIANCE;                
+                                // clear.setVisibility(View.INVISIBLE);
                             }
-                            else {                    
-                                variance = DEFAULT_VARIANCE;    
-                            }
-                            // clear.setVisibility(View.VISIBLE);
-                        } catch (Exception e) {
-                            System.out.println("Exception : "+e.getMessage());
-                            variance = DEFAULT_VARIANCE;                
+                        } else {
+                            varianceText.setCompoundDrawables(null, null, null, null);
                             // clear.setVisibility(View.INVISIBLE);
                         }
-                    } else {
-                        varianceText.setCompoundDrawables(null, null, null, null);
-                        // clear.setVisibility(View.INVISIBLE);
-                    }
-                } 
-                
-            });
-            holder.varianceLine.setOnTouchListener(new OnTouchListener() {
-
-                public boolean onTouch(View v, MotionEvent arg1) {
-                    varianceText = (EditText) v.findViewById(R.id.variance);
-                    if (arg1.getX() > varianceText.getWidth()
-                            - img.getIntrinsicWidth() + 10) {
-                        varianceText.setText("");
-                        variance = DEFAULT_VARIANCE;                                              
-                    }
-                    return false;
-                }
-
-            });
-
-            // holder.varianceLine.setOnFocusChangeListener(this);
-            holder.varianceLine
-                    .setOnFocusChangeListener(new OnFocusChangeListener() {
-
-                        public void onFocusChange(View v, boolean hasFocus) {
-                            // TODO Auto-generated method stub
-                            //System.out.println("calling floodVariance()");
-                            floodVariance();                            
+                    } 
+                    
+                });
+                holder.varianceLine.setOnTouchListener(new OnTouchListener() {
+    
+                    public boolean onTouch(View v, MotionEvent arg1) {
+                        varianceText = (EditText) v.findViewById(R.id.variance);
+                        if (arg1.getX() > varianceText.getWidth()
+                                - img.getIntrinsicWidth() + 10) {
+                            varianceText.setText("");
+                            variance = DEFAULT_VARIANCE;                                              
                         }
-                    });           
-                
-            /*
-             * holder.varianceLine.setOnKeyListener(new OnKeyListener() {
-             * 
-             * public boolean onKey(View v, int keyCode, KeyEvent event) { if
-             * (event.getAction() == KeyEvent.ACTION_DOWN) { if (keyCode ==
-             * KeyEvent.KEYCODE_ENTER) { floodVariance(); } else if (keyCode ==
-             * KeyEvent.KEYCODE_0 || keyCode == KeyEvent.KEYCODE_1 || keyCode ==
-             * KeyEvent.KEYCODE_2 || keyCode == KeyEvent.KEYCODE_3 || keyCode ==
-             * KeyEvent.KEYCODE_4 || keyCode == KeyEvent.KEYCODE_5 || keyCode ==
-             * KeyEvent.KEYCODE_6 || keyCode == KeyEvent.KEYCODE_7 || keyCode ==
-             * KeyEvent.KEYCODE_8 || keyCode == KeyEvent.KEYCODE_9) { String
-             * data =
-             * varianceText.getText().toString().concat(String.valueOf(keyCode
-             * )); varianceText.setText(data); } } return true; } });
-             */
-
-        //}
-        // view.setTag(holder);
-        // get the string item from the position "position" from array list to
-        // put it on the TextView
+                        return false;
+                    }
+    
+                });
+            }
+            else{
+                holder.varianceLine.setVisibility(View.GONE);  
+            }
+            
         String stringItem = "Group " + (position + 1);
         if (stringItem != null) {
 
@@ -354,64 +318,6 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
     public int getCount() {
         // TODO Auto-generated method stub
         return groups;
-    }
-
-     
-
-    /**
-     * Flood variance.
-     */
-    private void floodVariance() {
-        /*ListView listView = (ListView) ((LinearLayout) ((RelativeLayout) varianceText
-                .getParent()).getParent()).getParent();*/
-        ListView listView = (ListView) ((RelativeLayout) varianceText
-                .getParent()).getParent();
-        int children = listView.getChildCount();
-        for (int index = 1; index < children; index++) {
-            // System.out.println("children : "+((RelativeLayout)((LinearLayout)listView.getChildAt(1)).getChildAt(0)));
-            // EditText text =
-            // (EditText)((RelativeLayout)listView.getChildAt(index)).getChildAt(0);            
-            /*EditText text = (EditText) ((RelativeLayout) ((LinearLayout) listView
-                    .getChildAt(index)).getChildAt(0)).getChildAt(1);*/
-            EditText text = (EditText) ((RelativeLayout) (listView
-                    .getChildAt(index))).getChildAt(1);
-            //text.setText(Double.toString(variance));
-            double temp = variance % 1;
-            DecimalFormat format = new DecimalFormat("#.0");
-            temp = Double.parseDouble(format.format(temp));            
-            if(temp != 0.0)
-                text.setText(Double.toString(variance));
-            else{
-                //format = new DecimalFormat("#");
-                text.setText(Integer.toString(((Double)variance).intValue()));
-            }
-            text.setSelection(text.getText().length());
-            text.setCompoundDrawables(null, null, img, null);   
-            /*EditText text = (EditText) ( listView
-                    .getChildAt(index));
-            text.setText(Double.toString(variance));
-            text.setCompoundDrawables(null, null, img, null); */            
-        }
-    }
-
-    /*
-     * public void onFocusChange(View v, boolean hasFocus) { // TODO
-     * Auto-generated method stub //LinearLayout mlayout=
-     * (LinearLayout)((RelativeLayout) varianceText.getParent()).getParent();
-     * floodVariance(); }
-     */
-
-    /*public boolean onKeyDown(int keyCode, KeyEvent event) { 
-        System.out.println("abc");
-        //if(EditText == event.getSource()) {
-        if (keyCode == KeyEvent.KEYCODE_ENTER) {
-            System.out.println("Source "+event.getSource());
-            floodVariance();
-            return true;
-        }
-        return true;
-        //}
-        //return false;
-    }*/
+    }    
 
 }

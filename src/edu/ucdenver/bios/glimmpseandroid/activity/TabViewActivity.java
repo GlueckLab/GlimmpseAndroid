@@ -69,6 +69,8 @@ public class TabViewActivity extends Activity implements Runnable,
         TabContentFactory {
      private static final String SERVICE_URL =
      "http://glimmpse.samplesizeshop.com/power/";
+     
+     private static final String CALCULATING_MESSAGE = "Please wait, Calulating ";
     //private static final String SERVICE_URL = "http://140.226.53.117:8080/power/";
     //private static final String SERVICE_URL = "http://10.0.2.2:8080/power/";
     String[] labels;
@@ -348,7 +350,7 @@ public class TabViewActivity extends Activity implements Runnable,
         calculateButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
 
-                progress = ProgressDialog.show(context, "Working..",
+                progress = ProgressDialog.show(context, CALCULATING_MESSAGE+globalVariables.getSolvingFor(),
                         "Loading ...", true, false);
 
                 Thread thread = new Thread(TabViewActivity.this, "Loading");
@@ -696,6 +698,8 @@ public class TabViewActivity extends Activity implements Runnable,
                 globalVariables.setDefaults();
                
                 System.out.println(studyDesign);
+                double[][] d =studyDesign.getCovarianceFromSet("__RESPONSE_COVARIANCE__").getBlob().getData();
+                System.out.println(d[0][0]);
 
                 Representation repr = cr.post(studyDesign);
 
