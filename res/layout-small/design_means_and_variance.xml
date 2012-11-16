@@ -31,7 +31,7 @@
          android:id="@+id/design_item"
          android:layout_width="fill_parent"
          android:layout_height="fill_parent"
-         android:background="@color/white"
+         android:background="@color/home_screen_gray"
          android:orientation="horizontal" >
     
 	   <TextView
@@ -40,7 +40,7 @@
 	       android:layout_height="40dp"
 	       android:layout_alignParentTop="true"
 	       android:layout_centerHorizontal="true"                
-	       android:layout_marginTop="5dp"
+	       android:layout_marginTop="10dp"
 	       android:text="@string/description_means_and_variance"
 	       android:textAppearance="?android:attr/textAppearanceMedium"
 	       android:textColor="@color/black"
@@ -54,10 +54,9 @@
 	        android:layout_below="@+id/description_textView_means_and_variance"	        
 	        android:layout_marginLeft="10dp"
 	        android:layout_marginRight="10dp"
-	        android:layout_marginTop="10dp"
+	        android:layout_marginTop="15dp"
 	        android:cacheColorHint="#0000"
 	        android:headerDividersEnabled="true"
-	        android:layout_above="@+id/reset_button"
 	        android:textColor="@color/black"                          
 	        >
 	    </ListView>
@@ -75,19 +74,6 @@
         android:layout_alignParentBottom="true" 
         android:background="@drawable/back_button_selector"
         android:textSize="15dp" /> -->
-        
-        <Button
-           android:id="@+id/reset_button"
-           android:layout_width="200dp"
-           android:layout_height="30dp"
-           android:layout_alignParentBottom="true"
-           android:layout_centerHorizontal="true"
-           android:layout_marginTop="5dp"
-           android:layout_marginBottom="3dp"
-           android:background="@drawable/start_button_selector"
-           android:textColor="@color/button_label_white"
-           android:text="@string/reset_button_label"
-           android:textSize="17dp" />
     </RelativeLayout>
 
 <!-- </LinearLayout> -->

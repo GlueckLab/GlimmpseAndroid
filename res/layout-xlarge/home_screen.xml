@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Mobile - Android, User Interface for the GLIMMPSE Software System.  Allows
+  	users to perform power, sample size calculations. 
+  	Copyright (C) 2010 Regents of the University of Colorado.  
+  	
+  	This program is free software; you can redistribute it and/or
+  	modify it under the terms of the GNU General Public License
+  	as published by the Free Software Foundation; either version 2
+  	of the License, or (at your option) any later version.
+
+	  This program is distributed in the hope that it will be useful,
+  	but WITHOUT ANY WARRANTY; without even the implied warranty of
+  	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  	GNU General Public License for more details.
+
+  	You should have received a copy of the GNU General Public License
+  	along with this program; if not, write to the Free Software
+  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/home_screen_gray" ><TextView
+        android:id="@+id/version_textView_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="false"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="220dp"
+        android:text="@string/version"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/black"
+        android:textSize="35dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/description_textView_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/version_textView_home"
+        android:layout_below="@+id/version_textView_home"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="80dp"
+        android:lineSpacingExtra="3dp"
+        android:paddingRight="10dp"
+        android:text="@string/description_home"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/black"
+        android:textSize="30dp" />
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/relativeLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="215dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/description_textView_home"
+        android:layout_marginTop="119dp" >
+
+        <Button
+            android:id="@+id/start_button_home"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="42dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/start_button_selector"
+            android:text="@string/design_home"
+            android:textColor="@color/button_label_white"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            android:typeface="serif" />
+
+        <Button
+            android:id="@+id/learn_more_button_home"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_alignLeft="@+id/start_button_home"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/learn_more_button_selector"
+            android:text="@string/learn_more_home"
+            android:textColor="@color/learn_more_button_label_color"
+            android:textSize="37dp"
+            android:textStyle="bold"
+            android:typeface="serif" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

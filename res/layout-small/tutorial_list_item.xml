@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Mobile - Android, User Interface for the GLIMMPSE Software System.  Allows
+  	users to perform power, sample size calculations. 
+  	Copyright (C) 2010 Regents of the University of Colorado.  
+  	
+  	This program is free software; you can redistribute it and/or
+  	modify it under the terms of the GNU General Public License
+  	as published by the Free Software Foundation; either version 2
+  	of the License, or (at your option) any later version.
+
+	  This program is distributed in the hope that it will be useful,
+  	but WITHOUT ANY WARRANTY; without even the implied warranty of
+  	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  	GNU General Public License for more details.
+
+  	You should have received a copy of the GNU General Public License
+  	along with this program; if not, write to the Free Software
+  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:background="@drawable/list_item_bottom_border">
+    		    
+	<RelativeLayout
+			android:layout_width="wrap_content"
+			android:layout_height="40dip"
+			android:orientation="horizontal"
+			android:id="@+id/item">			   	   
+	    
+		<TextView
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:id="@+id/list_item_textView_tutorial"
+				android:textColor="@color/black"
+				android:textSize="16dp"
+				android:typeface="serif"
+				android:padding="6dp"
+				android:gravity="center_vertical"
+				android:text="Hello World"/>
+		
+
+		<!-- <ImageButton 
+		    	android:id="@+id/expandable_toggle_button"
+		    	android:contentDescription="@+id/expandable_toggle_button"				
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignBottom="@+id/list_item_textView_tutorial"
+				android:layout_alignParentRight="true"
+				android:layout_alignTop="@id/list_item_textView_tutorial"
+				android:background="@drawable/ic_list_expand"/> -->
+		
+		<TextView
+		    android:id="@+id/expandable_toggle_button_details"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignBottom="@+id/list_item_textView_tutorial"
+		   android:layout_alignTop="@+id/list_item_textView_tutorial"
+		    android:layout_toLeftOf="@+id/expandable_toggle_button"
+		    android:text="@string/details_tutorial"		    
+		    android:gravity="center"
+		    android:padding="2dp"
+		    android:layout_alignParentRight="true"		    
+		    android:textColor="@color/green"
+		    android:textSize="14dp" />
+
+	</RelativeLayout>
+
+	<!-- <LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="50dip"
+			android:orientation="horizontal"
+			android:id="@+id/expandable"
+			android:background="#aaaaaa">
+
+		<TextView
+		    android:id="@+id/tutorial_list_item_description"
+		    android:layout_width="wrap_content"
+		    android:textColor="@color/black"
+		    android:layout_height="wrap_content"
+		    android:text="Small Text"
+		    android:padding="6dp"
+		    android:textSize="9dp"
+		    android:textAppearance="?android:attr/textAppearanceSmall" />
+		
+	</LinearLayout> -->
+</LinearLayout>

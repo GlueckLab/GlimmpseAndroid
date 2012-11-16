@@ -38,6 +38,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:gravity="center_vertical"
+            android:background="@drawable/learn_more_button_selector"
             android:padding="6dp"
             android:text="Hello World"
             android:textColor="@color/black"

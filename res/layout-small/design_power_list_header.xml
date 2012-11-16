@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="50dp"
+    android:layout_height="40dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
-    android:background="@drawable/list_item_bottom_border"
+    android:background="@color/dark_gray_bk"
     android:orientation="horizontal" >
 
     <!--
@@ -52,7 +52,7 @@
         android:layout_alignParentTop="true"
         android:text="@string/add_button_label"
         android:textColor="@color/button_label_black"
-        android:textSize="14dp" />
+        android:textSize="15dp" />
 
     <Button
         android:id="@+id/delete_all_button"
@@ -63,6 +63,6 @@
         android:layout_toRightOf="@+id/power_add_button"
         android:text="@string/delete_all_button_label"
         android:textColor="@color/button_label_black"
-        android:textSize="14dp" />
+        android:textSize="15dp" />
 
 </RelativeLayout>

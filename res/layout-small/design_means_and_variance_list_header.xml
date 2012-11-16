@@ -21,7 +21,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="50dp"
-    android:background="@drawable/list_item_bottom_border" >
+    android:background="#D7D7D7" >
 
     <TextView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:background="@color/white"
+        android:background="#D7D7D7"
         android:paddingBottom="2dip"
         android:paddingLeft="5dip"
         android:paddingTop="2dip"
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:background="@color/white"
+        android:background="#D7D7D7"
         android:paddingBottom="2dip"
         android:paddingRight="10dip"
         android:paddingTop="2dip"
@@ -63,9 +63,9 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/list_header_group"
         android:layout_alignBottom="@+id/list_header_group"
-        android:layout_marginLeft="60dp"
+        android:layout_marginLeft="75dp"
         android:layout_toRightOf="@+id/list_header_group"
-        android:background="@color/white"
+        android:background="#D7D7D7"
         android:paddingBottom="2dip"
         android:paddingLeft="5dip"
         android:paddingTop="2dip"
