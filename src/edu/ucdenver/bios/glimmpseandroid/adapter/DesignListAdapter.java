@@ -23,6 +23,7 @@ package edu.ucdenver.bios.glimmpseandroid.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,7 +32,6 @@ import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.ucdenver.bios.glimmpseandroid.R;
@@ -40,11 +40,9 @@ import edu.ucdenver.bios.glimmpseandroid.activity.design.MeansAndVarianceActivit
 import edu.ucdenver.bios.glimmpseandroid.activity.design.PowerActivity;
 import edu.ucdenver.bios.glimmpseandroid.activity.design.RelativeGroupSizeActivity;
 import edu.ucdenver.bios.glimmpseandroid.activity.design.SampleSizeActivity;
-import edu.ucdenver.bios.glimmpseandroid.activity.design.SmallestGroupSizeActivity;
 import edu.ucdenver.bios.glimmpseandroid.activity.design.SolvingForActivity;
 import edu.ucdenver.bios.glimmpseandroid.activity.design.TypeIErrorActivity;
 import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
-import edu.ucdenver.bios.webservice.common.enums.SolutionTypeEnum;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -120,18 +118,24 @@ public class DesignListAdapter extends BaseAdapter implements Filterable {
      */
     public DesignListAdapter(Context context, String[] arrayList) {
 
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();        
+        float density = metrics.density;          
+        int measurement = (int)(density*20);
+        
         mListItems = arrayList;
         // get the layout inflater
         mLayoutInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         img = context.getResources().getDrawable(R.drawable.ic_list_expand);
-        img.setBounds(0, 0, 30, 30);
+        //img.setBounds(0, 0, 30, 30);
+        img.setBounds(0, 0,measurement, measurement);
         
         checkMarkImg = context.getResources().getDrawable(R.drawable.green_checkmark);
-        checkMarkImg.setBounds(0, 0, 30, 30);     
+        //checkMarkImg.setBounds(0, 0, 30, 30);
+        checkMarkImg.setBounds(0, 0, measurement, measurement);  
 
         editImg = context.getResources().getDrawable(R.drawable.incomplete_icon);
-        editImg.setBounds(0, 0, 30, 30);     
+        editImg.setBounds(0, 0, measurement, measurement);     
         
         /*notAllowedImg = context.getResources().getDrawable(R.drawable.not_allowed);
         notAllowedImg.setBounds(0, 0, 40, 40);*/

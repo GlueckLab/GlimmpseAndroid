@@ -33,6 +33,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -110,8 +111,12 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
 			window.setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		}
 		
+		DisplayMetrics metrics = getResources().getDisplayMetrics();        
+        float density = metrics.density;          
+        int measurement = (int)(density*20);        
+		
 		img = getResources().getDrawable( R.drawable.clear_button );
-        img.setBounds( 0, 0, 32, 32 );
+        img.setBounds( 0, 0, measurement, measurement );
                 
 		Button homeButton = (Button) findViewById(R.id.home_button);
 		 homeButton.setText(getResources().getString(R.string.title_design));
@@ -141,6 +146,7 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
 		imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		//imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
 		if(imm != null){
+		    //imm.
 		    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
 		    isKeyboardVisible = true;
         }

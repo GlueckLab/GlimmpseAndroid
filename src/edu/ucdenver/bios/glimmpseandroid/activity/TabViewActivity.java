@@ -33,12 +33,15 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.NetworkInfo.State;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -89,6 +92,11 @@ public class TabViewActivity extends Activity implements Runnable,
     private View tabTwoContentView;
     private View tabThreeContentView;
     StuyDesignContext globalVariables;
+    
+    private final int WIFI_AVAILABLE = 1;
+    private final int MOBILE_NETWORK_AVAILABLE = 2;     
+    
+    private boolean NET_CONNECTION = false;
     // private static GestureFilter detector;
 
     private String jsonStr;
@@ -146,8 +154,8 @@ public class TabViewActivity extends Activity implements Runnable,
         progress.setCancelable(false);
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 
-        handler = new Handler() {
-
+        handler = new Handler() {                       
+            
             @Override
             public void handleMessage(Message msg) {
                 progress.dismiss();
@@ -157,7 +165,10 @@ public class TabViewActivity extends Activity implements Runnable,
                     Intent intent = new Intent(context, ResultsActivity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
-                } else {
+                    jsonStr = null;
+                    NET_CONNECTION = false;
+                }               
+                else if(!NET_CONNECTION) {
                     /*
                      * Toast.makeText(TabViewActivity.this,
                      * "Internet Connection Not available",
@@ -283,6 +294,8 @@ public class TabViewActivity extends Activity implements Runnable,
     private void resetButtonFunctionality() {
         StuyDesignContext.resetInstance();
         designListPopulate();
+        jsonStr = null;
+        NET_CONNECTION = false;
         globalVariables.resetProgress();
         // ProgressBar inputProgress = (ProgressBar)
         // findViewById(R.id.input_progress);
@@ -348,23 +361,47 @@ public class TabViewActivity extends Activity implements Runnable,
             calculateButtonEnabled();
         }
         calculateButton.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-
-                progress = ProgressDialog.show(context, CALCULATING_MESSAGE+globalVariables.getSolvingFor(),
-                        "Loading ...", true, false);
-
-                Thread thread = new Thread(TabViewActivity.this, "Loading");
-                
-                thread.start();
-                try {
-                    thread.join(2);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    System.out.println("Inturrupted Exception : "
-                            + e.getMessage());
+            public void onClick(View v) {           
+                calculateButtonDisabled();
+                int network = detectNetwork();
+                if(network == WIFI_AVAILABLE){
+                    //continueFlag = true;
+                    displayLoading();                                                    
                 }
-
-                
+                else if(network == MOBILE_NETWORK_AVAILABLE){                    
+                    /*AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle("Possible Data Usage");
+                    builder.setMessage(
+                            "Wifi not available. You might get charged for Mobile Data Usage. Would you like to continue?")
+                            .setCancelable(false)
+                            .setPositiveButton("Yes",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,
+                                                int id) {
+                                            ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);        
+                                            
+                                            NetworkInfo mWifi = connManager
+                                                    .getNetworkInfo(ConnectivityManager.TYPE_WIFI); 
+                                            if (mWifi.isConnected()){
+                                                connectContinueFlag = true;
+                                            }
+                                            displayLoading();                         
+                                        }
+                                    })
+                            .setNegativeButton("No",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,
+                                                int id) {                                                    
+                                            dialog.cancel();
+                                        }
+                                    });
+                    // AlertDialog alert = builder.create();
+                    builder.show();*/
+                    displayLoading();  
+                } 
+                else{
+                    handler.sendEmptyMessage(0);
+                }
             }
         });
         
@@ -469,20 +506,26 @@ public class TabViewActivity extends Activity implements Runnable,
                 .inflate(R.layout.tabs_bg, null);
         TextView textView = (TextView) view.findViewById(R.id.tabsText);
         Drawable image = null;
+        
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();        
+        float density = metrics.density;          
+        int width = (int)(density*20);
+        int height = width - 10;
+        
         if(tag.compareTo(labels[0]) == 0){
             image = context.getResources().getDrawable(R.drawable.tutorial);
             //image.setBounds(0, 0, 32, 12);            
-            image.setBounds(0, 0, 32, 21);            
+            image.setBounds(0, 0, width, height);            
         }
         else if(tag.compareTo(labels[1])  == 0){
             image = context.getResources().getDrawable(R.drawable.design);
             //image.setBounds(0, 0, 26, 28);            
-            image.setBounds(0, 0, 32, 21);            
+            image.setBounds(0, 0, width, height);            
         }
         else{
             image = context.getResources().getDrawable(R.drawable.aboutus);
             //image.setBounds(0, 0, 24, 21);            
-            image.setBounds(0, 0, 32, 21);            
+            image.setBounds(0, 0, width, height);            
         }        
         //image.setBounds(0,0,image.getIntrinsicWidth(),image.getIntrinsicHeight());
         textView.setCompoundDrawables(null,image,null,null);
@@ -578,80 +621,167 @@ public class TabViewActivity extends Activity implements Runnable,
         
     }*/
     
+    private int detectNetwork(){
+        NET_CONNECTION = false;
+        jsonStr = null;        
+        final ConnectivityManager connMgr = (ConnectivityManager)  
+        this.getSystemService(Context.CONNECTIVITY_SERVICE);   
+        final android.net.NetworkInfo wifi =  connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+       final android.net.NetworkInfo mobile =  connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+       
+       /*String service = Context.WIFI_SERVICE;
+       WifiManager wifi = (WifiManager)getSystemService(service);
+       
+       if(!wifi.isWifiEnabled()){
+           if(wifi.getWifiState() != WifiManager.WIFI_STATE_ENABLING)
+               wifi.setWifiEnabled(true);
+       }*/
+       
+       if( wifi.isAvailable() && wifi.isConnected())
+       { 
+           NET_CONNECTION = true;
+           return WIFI_AVAILABLE;
+       }
+       else if( mobile.isAvailable() && mobile.isConnected())
+       {  
+           NET_CONNECTION = true;
+           return MOBILE_NETWORK_AVAILABLE;
+       }       
+       return 0;
+    }
+    
+    private void displayLoading(){
+        progress = ProgressDialog.show(context, CALCULATING_MESSAGE+globalVariables.getSolvingFor(),
+                "Loading ...", true, false);
+
+        Thread thread = new Thread(TabViewActivity.this, "Loading");
+        
+        thread.start();
+        try {
+            thread.join(2);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            System.out.println("Inturrupted Exception : "
+                    + e.getMessage());
+        }                          
+    }
+    
     public void run() {
         // Setting Default Network type as WIFI. Automaticaly enables WIFI 
-        /*String service = Context.WIFI_SERVICE;
-        WifiManager wifi = (WifiManager)getSystemService(service);
         
-        if(!wifi.isWifiEnabled()){
-            if(wifi.getWifiState() != WifiManager.WIFI_STATE_ENABLING)
-                wifi.setWifiEnabled(true);
-        }*/
-        
-        final ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);        
-        NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
-        // If any network Available
-        if(activeNetwork != null && activeNetwork.isConnected()){
-            int networkType = activeNetwork.getType();
-            switch (networkType) {
-                case (ConnectivityManager.TYPE_WIFI): 
-                    NetworkInfo nWifi = connManager
-                    .getNetworkInfo(ConnectivityManager.TYPE_WIFI); 
-                    if (nWifi.isConnected()) {
-                        setConnection();
-                    }
-                    break;
-                case (ConnectivityManager.TYPE_MOBILE):
-                    boolean isMobileConn = connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnected();
-                    if(isMobileConn) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        builder.setTitle("Possible Data Usage");
-                        builder.setMessage(
-                                "Wifi not available. You might get charged while using this application. Would you like to continue?")
-                                .setCancelable(false)
-                                .setPositiveButton("Yes",
-                                        new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog,
-                                                    int id) {
-                                                NetworkInfo nMobile = connManager
-                                                        .getNetworkInfo(ConnectivityManager.TYPE_MOBILE); 
-                                                        if (nMobile != null && nMobile.isConnected()) {
-                                                            setConnection();
-                                                        }
-                                            }
-                                        })
-                                .setNegativeButton("No",
-                                        new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog,
-                                                    int id) {
-                                                dialog.cancel();
-                                            }
-                                        });
-                        // AlertDialog alert = builder.create();
-                        builder.show();
-                    }
-                    else {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        builder.setTitle("No Net Connection Available");
-                        builder.setMessage(  
-                                "Not Connected to Network")
-                                .setNegativeButton("No",
-                                        new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog,
-                                                    int id) {
-                                                dialog.cancel();
-                                            }
-                                        });
-                        // AlertDialog alert = builder.create();
-                        builder.show();
-                    }
-                    break;    
-                default:
-                    break;
-            }
-            // For Wifi
-            
-        }
+        /*NET_CONNECTION = false;
+        jsonStr = null;
+        final ConnectivityManager connMgr = (ConnectivityManager)  
+        this.getSystemService(Context.CONNECTIVITY_SERVICE);   
+        final android.net.NetworkInfo wifi =  connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+       final android.net.NetworkInfo mobile =  connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+       if( wifi.isAvailable() )
+       { 
+           NET_CONNECTION = true;
+           //Toast.makeText(this, "Wifi" , Toast.LENGTH_LONG).show();
+           System.out.println("Wifi");
+           
+           ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);        
+                      
+           NetworkInfo mWifi = connManager
+                   .getNetworkInfo(ConnectivityManager.TYPE_WIFI); 
+           if (mWifi.isConnected()){
+               setConnection();
+           }  
+           
+           Activity activity=(Activity) this.context;
+           activity.runOnUiThread(new Runnable() {
+               public void run() {
+                   AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                   builder.setTitle("Possible Data Usage");
+                   builder.setMessage(
+                           "Wifi not available. You might get charged for Mobile Data Usage. Would you like to continue?")
+                           .setCancelable(false)
+                           .setPositiveButton("Yes",
+                                   new DialogInterface.OnClickListener() {
+                                       public void onClick(DialogInterface dialog,
+                                               int id) {
+                                           ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);        
+                                           
+                                           NetworkInfo mWifi = connManager
+                                                   .getNetworkInfo(ConnectivityManager.TYPE_WIFI); 
+                                           if (mWifi.isConnected()){
+                                               setConnection();
+                                           }
+                                       }
+                                   })
+                           .setNegativeButton("No",
+                                   new DialogInterface.OnClickListener() {
+                                       public void onClick(DialogInterface dialog,
+                                               int id) {
+                                           dialog.cancel();
+                                       }
+                                   });
+                   // AlertDialog alert = builder.create();
+                   builder.show();
+                 }
+               });
+       }  
+       else if( mobile.isAvailable() )
+       {            
+           NET_CONNECTION = true;
+           System.out.println("Mobile 3G"); 
+           
+           Activity activity=(Activity) this.context;
+           activity.runOnUiThread(new Runnable() {
+               public void run() {
+                   AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                   builder.setTitle("Possible Data Usage");
+                   builder.setMessage(
+                           "Wifi not available. You might get charged for Mobile Data Usage. Would you like to continue?")
+                           .setCancelable(false)
+                           .setPositiveButton("Yes",
+                                   new DialogInterface.OnClickListener() {
+                                       public void onClick(DialogInterface dialog,
+                                               int id) {
+                                           //setConnection();
+                                           ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);        
+                                           
+                                           NetworkInfo mMobile = connManager
+                                                   .getNetworkInfo(ConnectivityManager.TYPE_MOBILE); 
+                                           if (mMobile.isConnected()){
+                                               setConnection();
+                                               handler.sendEmptyMessage(0);
+                                           }                                            
+                                       }
+                                   })
+                           .setNegativeButton("No",
+                                   new DialogInterface.OnClickListener() {
+                                       public void onClick(DialogInterface dialog,
+                                               int id) {
+                                           dialog.cancel();
+                                       }
+                                   });
+                   // AlertDialog alert = builder.create();
+                   builder.show();
+                 }
+               });
+       }*/
+       
+       /*else  
+       {Toast.makeText(this, "No Network " , Toast.LENGTH_LONG).show();} */
+    
+        /*else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("No Net Connection Available");
+            builder.setMessage(  
+                    "Not Connected to Network")
+                    .setNegativeButton("No",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,
+                                        int id) {
+                                    dialog.cancel();
+                                }
+                            });
+            // AlertDialog alert = builder.create();
+            builder.show();            
+       }*/
+             
         /*else{
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Not Connected to Network");
@@ -666,7 +796,8 @@ public class TabViewActivity extends Activity implements Runnable,
                                 }
                             });
             builder.show();
-        }    */        
+        }    */  
+        setConnection();
         handler.sendEmptyMessage(0);
     }
     

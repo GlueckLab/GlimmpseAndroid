@@ -27,6 +27,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -88,8 +89,12 @@ public class PowerActivity extends Activity implements OnClickListener, SimpleGe
             window.setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
         }
         
+        DisplayMetrics metrics = getResources().getDisplayMetrics();        
+        float density = metrics.density;          
+        int measurement = (int)(density*20);    
+        
         img = getResources().getDrawable( R.drawable.clear_button );
-        img.setBounds( 0, 0, 32, 32 );
+        img.setBounds( 0, 0, measurement, measurement );
         
         TextView title = (TextView) findViewById(R.id.window_title);
         title.setText(getResources().getString(R.string.title_power));
@@ -199,7 +204,7 @@ public class PowerActivity extends Activity implements OnClickListener, SimpleGe
         if(data != null && !data.isEmpty()) {
             if(!data.equals(".")){               
                 Double value = Double.parseDouble(data);
-                if(value <= 1) {                    
+                if(value < 1 && value != 0) {                    
                     powerListView.setAdapter(new PowerListAdapter(PowerActivity.this, value));
                 }  
                 else{

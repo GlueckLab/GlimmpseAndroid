@@ -548,7 +548,7 @@ public class StuyDesignContext {
         /* Variance */
         setVariance(getVariance());
         /* Means */
-        setDefaultMeans(numberOfGroups);
+        setOriginalMeans(numberOfGroups);
     }
 
     /**
@@ -734,12 +734,60 @@ public class StuyDesignContext {
      *--------------------*/
 
     /**
+     * Sets the default relative group size.
+     */
+    public void setDefaultMeansAndVariance() {
+        int groups = getGroups();        
+        setDefaultMeans(groups);
+        setDefaultVariance();
+    }
+    
+    /**
      * Sets the default means.
      * 
      * @param numberOfGroups
      *            the new default means
      */
     private void setDefaultMeans(int numberOfGroups) {
+        int index = 0;
+        NamedMatrix beta = studyDesign.getNamedMatrix(MATRIX_BETA);
+        if (beta != null) {
+            index = beta.getRows();            
+        } else {
+            beta = buildBetaMatrix(numberOfGroups);
+        }
+        int totalRows = index + numberOfGroups;
+        double[][] data = new double[totalRows][1];
+        for (int inc = 0; inc < totalRows; inc++) {
+            data[inc][DEFAULT_MEAN_COLUMN] = DEFAULT_MEAN;
+        }
+        beta.setDataFromArray(data);
+        beta.setRows(totalRows);
+        studyDesign.setNamedMatrix(beta);
+
+        /*
+         * index = 0; NamedMatrix beta =
+         * studyDesign.getNamedMatrix(MATRIX_BETA); double[][] originalData =
+         * null; if (beta != null) { System.out.println("BetaMeatrix not null");
+         * index = beta.getRows(); originalData = beta.getData().getData(); }
+         * else { beta = buildBetaMatrix(numberOfGroups); } int totalRows =
+         * index + numberOfGroups; System.out.println("new groups "+totalRows);
+         * double[][] changedData = new double[totalRows][1]; for (int inc = 0;
+         * inc < index ; inc++) { System.out.println("transfering data ....");
+         * changedData[inc][0] = originalData[inc][0]; } for (int inc = index;
+         * inc < totalRows; inc++) { System.out.println("mean added at "+inc);
+         * changedData[inc][0] = DEFAULT_MEAN; }
+         * beta.setDataFromArray(changedData);
+         */
+    }
+    
+    /**
+     * Sets the default means.
+     * 
+     * @param numberOfGroups
+     *            the new default means
+     */
+    private void setOriginalMeans(int numberOfGroups) {
         int index = 0;
         NamedMatrix beta = studyDesign.getNamedMatrix(MATRIX_BETA);
         double[][] originalData = null;

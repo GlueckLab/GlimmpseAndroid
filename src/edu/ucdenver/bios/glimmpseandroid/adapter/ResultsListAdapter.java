@@ -123,7 +123,8 @@ public class ResultsListAdapter extends BaseAdapter{
         holder.sampleSizeLine = (TextView) view.findViewById(R.id.list_item_textView_sample_size);
         
         PowerResult result = list.get(position);        
-        double power = new BigDecimal(result.getActualPower(), mc).doubleValue();
+        //double power = new BigDecimal(result.getActualPower(), mc).doubleValue();
+        double power = new BigDecimal(result.getNominalPower().getValue(), mc).doubleValue();
         int sampleSize = result.getTotalSampleSize();
                 
         holder.powerLine.setText(Double.toString(power));

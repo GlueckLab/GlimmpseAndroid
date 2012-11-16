@@ -25,6 +25,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -89,9 +90,12 @@ public class SmallestGroupSizeActivity extends Activity implements TextWatcher{
 			}
 		});
 		
-		
+		DisplayMetrics metrics = getResources().getDisplayMetrics();        
+        float density = metrics.density;          
+        int measurement = (int)(density*20);    
+        
 		img = getResources().getDrawable( R.drawable.clear_button );
-		img.setBounds( 0, 0, 32, 32 );
+		img.setBounds( 0, 0, measurement, measurement );
 
 		Button back = (Button) findViewById(R.id.back_button);
 		back.setOnClickListener(new OnClickListener() {

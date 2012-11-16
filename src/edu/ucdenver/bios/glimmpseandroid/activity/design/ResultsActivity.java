@@ -30,9 +30,17 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources.Theme;
+import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -58,6 +66,10 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
     private final static String RESULT_FILE = "GLIMMPSEPowerResults.csv";
     private final static String columnString = "\"test\",\"actualPower\",\"sampleSize\",\"betaScale\",\"sigmaScale\",\"alpha\",\"nominalPower\",\"powerMethod\",\"quantile\",\"ciLower\",\"ciUpper\"";
 
+    public ResultsActivity() {
+        // TODO Auto-generated constructor stub
+        
+    }
     /**
      * This method is called by Android when the Activity is first started. From
      * the incoming Intent, it determines what kind of editing is desired, and
@@ -103,6 +115,7 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
             }
         });
         
+                
         /*TextView solvingFor = (TextView) findViewById(R.id.textView_solving_for);
         solvingFor.setText(globalVariables.getSolvingFor()+RESULT);*/
 
@@ -273,6 +286,8 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
         });
 
     }
+    
+    
 
     public void onDoubleTap() {
         // TODO Auto-generated method stub

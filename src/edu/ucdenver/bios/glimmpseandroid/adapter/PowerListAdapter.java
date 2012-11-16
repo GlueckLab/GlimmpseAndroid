@@ -24,6 +24,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -81,9 +82,12 @@ public class PowerListAdapter extends BaseAdapter{
                 globalVariables.setPower(power, getCount());                
             }
         }
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();        
+        float density = metrics.density;          
+        int measurement = (int)(density*20);    
         
         img = context.getResources().getDrawable( R.drawable.clear_button);
-        img.setBounds(0,0,30,30);         
+        img.setBounds(0,0,measurement,measurement);         
     }
     
     /* (non-Javadoc)

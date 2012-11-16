@@ -38,6 +38,7 @@ import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
 import edu.ucdenver.bios.glimmpseandroid.activity.TabViewActivity;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter;
+import edu.ucdenver.bios.glimmpseandroid.adapter.RelativeGroupSizeAdapter;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener;
 import edu.ucdenver.bios.glimmpseandroid.adapter.MeansAndVarianceAdapter;
 import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
@@ -77,6 +78,16 @@ public class MeansAndVarianceActivity extends Activity implements OnClickListene
 		Button homeButton = (Button) findViewById(R.id.home_button);
 		homeButton.setText(getResources().getString(R.string.title_design));
 		homeButton.setOnClickListener(this);
+		
+		Button resetButton = (Button) findViewById(R.id.reset_button);
+        resetButton.setOnClickListener(new OnClickListener() {
+            
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                StuyDesignContext.getInstance().setDefaultMeansAndVariance();
+                listPopulate();
+            }
+        });
 
 		/*Button back = (Button) findViewById(R.id.back_button);
 		back.setOnClickListener(this);*/
@@ -87,16 +98,29 @@ public class MeansAndVarianceActivity extends Activity implements OnClickListene
 		img = getResources().getDrawable( R.drawable.clear_button );
 		img.setBounds( 0, 0, 32, 32 );
 
-		meanVarianceList = (ListView)findViewById(R.id.means_and_variance_list_view);
+		/*meanVarianceList = (ListView)findViewById(R.id.means_and_variance_list_view);
 		View header =  getLayoutInflater().inflate(R.layout.design_means_and_variance_list_header, null, false);
         if(meanVarianceList.getHeaderViewsCount() == 0)
             meanVarianceList.addHeaderView(header);
         int groups = StuyDesignContext.getInstance().getGroups();
         if(groups > 0)
-            meanVarianceList.setAdapter(new MeansAndVarianceAdapter(MeansAndVarianceActivity.this,groups, img));
-		
+            meanVarianceList.setAdapter(new MeansAndVarianceAdapter(MeansAndVarianceActivity.this,groups, img));*/
+		listPopulate();
 		
 	}	
+	
+	/**
+     * Relative group size list populate.
+     */
+    private void listPopulate(){
+        meanVarianceList = (ListView)findViewById(R.id.means_and_variance_list_view);
+        View header =  getLayoutInflater().inflate(R.layout.design_means_and_variance_list_header, null, false);
+        if(meanVarianceList.getHeaderViewsCount() == 0)
+            meanVarianceList.addHeaderView(header);
+        int groups = StuyDesignContext.getInstance().getGroups();
+        if(groups > 0)
+            meanVarianceList.setAdapter(new MeansAndVarianceAdapter(MeansAndVarianceActivity.this,groups, img));        
+    }
 	
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
