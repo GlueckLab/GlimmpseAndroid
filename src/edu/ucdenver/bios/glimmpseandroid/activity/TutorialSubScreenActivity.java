@@ -23,7 +23,6 @@ package edu.ucdenver.bios.glimmpseandroid.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -190,12 +189,10 @@ public class TutorialSubScreenActivity extends Activity implements
         /*
          * if(direction == 3) finish();
          */
-        String str = "";
 
         switch (direction) {
 
         case GestureFilter.SWIPE_RIGHT:
-            str = "Swipe Right";
             finish();
             break;
         /*
