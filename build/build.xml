@@ -68,7 +68,8 @@
     <!-- *** Target for remove artifacts from previous build *** -->
     <!-- ******************************************************* -->
     
-    <target name="dirclean" depends="debug">
+    <!-- <target name="dirclean" depends="debug"> -->
+    <target name="dirclean" depends="release">
     	<delete dir="${tmp.dir}"/>
         <delete dir="${artifacts.dir}"/>
     </target>
