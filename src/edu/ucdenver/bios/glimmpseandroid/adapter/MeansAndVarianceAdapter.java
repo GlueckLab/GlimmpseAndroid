@@ -29,15 +29,11 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
 import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
@@ -88,7 +84,7 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
      * @param groups the groups
      * @param img the img
      */
-    public MeansAndVarianceAdapter(Context context, int groups, Drawable img) {
+    public MeansAndVarianceAdapter(Context context, int groups, Drawable image) {
 
         this.groups = groups;
 
@@ -98,7 +94,7 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
 
         // this.mcontext = context;
 
-        this.img = img;
+        img = image;
         img.setBounds(0, 0, 20, 20);
 
     }
