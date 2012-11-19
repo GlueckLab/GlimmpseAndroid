@@ -171,7 +171,9 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
             holder.meanLine.addTextChangedListener(new TextWatcher() {
                 
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    meanText = (EditText) v.findViewById(R.id.mean);
+                    if(v != null){
+                        meanText = (EditText) v.findViewById(R.id.mean);
+                    }
                     String value = String.valueOf(s);
                     if (value != null && !value.isEmpty()) {
                         try {                                 
@@ -195,7 +197,7 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
                 
                 public void afterTextChanged(Editable s) {                    
                     StuyDesignContext.getInstance().setMean(mean,position);
-                    System.out.println("mean : "+mean+" getMean : "+StuyDesignContext.getInstance().getMean(position));
+                    //System.out.println("mean : "+mean+" getMean : "+StuyDesignContext.getInstance().getMean(position));
                 }
             });
             

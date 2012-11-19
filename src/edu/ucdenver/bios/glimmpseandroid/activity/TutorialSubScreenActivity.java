@@ -50,13 +50,14 @@ public class TutorialSubScreenActivity extends Activity implements
 
     private final int GETTING_STARTED_ROW = 0;
     private final int SOLVING_FOR_ROW = 1;
-    private final int POWER_OR_SAMPLE_SIZE_ROW = 2;
-    private final int TYPE_I_ERROR_ROW = 3;
-    private final int NUMBER_OF_GROUPS_ROW = 4;
-    private final int RELATIVE_GROUP_SIZE_ROW = 5;
+    private final int POWER_ROW = 2;
+    private final int SAMPLE_SIZE_ROW = 3;
+    private final int TYPE_I_ERROR_ROW = 4;
+    private final int NUMBER_OF_GROUPS_ROW = 5;
+    private final int RELATIVE_GROUP_SIZE_ROW = 6;
     // private final int SMALLEST_GROUP_SIZE_ROW = 5;
-    private final int MEANS_VARIANCE_ROW = 6;
-    private final int RESULTS_ROW = 7;
+    private final int MEANS_VARIANCE_ROW = 7;
+    private final int RESULTS_ROW = 8;
 
     /**
      * This method is called by Android when the Activity is first started. From
@@ -118,7 +119,13 @@ public class TutorialSubScreenActivity extends Activity implements
                     data = getResources().getString(
                             R.string.description_tutorial_solving_for);
                     break;
-                case POWER_OR_SAMPLE_SIZE_ROW:
+                case POWER_ROW:
+                    subTitle = getResources().getString(
+                            R.string.tutorial_power);
+                    data = getResources().getString(
+                            R.string.description_tutorial_power);
+                    break;
+                case SAMPLE_SIZE_ROW:
                     subTitle = getResources().getString(
                             R.string.tutorial_smallest_group_size);
                     data = getResources().getString(
