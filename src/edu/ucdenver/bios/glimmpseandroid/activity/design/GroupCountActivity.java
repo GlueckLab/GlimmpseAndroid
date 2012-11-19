@@ -213,11 +213,10 @@ public class GroupCountActivity extends Activity implements OnClickListener, Sim
         // TODO Auto-generated method stub
         /*if(direction == 3)
             finish();*/
-        String str = "";
              
             switch (direction) {
              
-            case GestureFilter.SWIPE_RIGHT : str = "Swipe Right";
+            case GestureFilter.SWIPE_RIGHT : 
                 stuyDesignContext.setGroups(groups);    
                 finish();
                  break;
