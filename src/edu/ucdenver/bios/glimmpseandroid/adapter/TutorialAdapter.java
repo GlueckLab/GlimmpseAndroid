@@ -34,7 +34,6 @@ import android.widget.Filterable;
 import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
 import edu.ucdenver.bios.glimmpseandroid.activity.TutorialSubScreenActivity;
-import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 
 // TODO: Auto-generated Javadoc
 /*
@@ -54,8 +53,6 @@ public class TutorialAdapter extends BaseAdapter implements Filterable{
     /** The img. */
     private static Drawable img;
     
-    /** The global variables. */
-    private static StuyDesignContext globalVariables;
  
     /**
      * Instantiates a new tutorial adapter.
@@ -71,8 +68,6 @@ public class TutorialAdapter extends BaseAdapter implements Filterable{
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         
         this.mcontext = context; 
-        
-        globalVariables = StuyDesignContext.getInstance();
         
         img = context.getResources().getDrawable( R.drawable.ic_list_expand);
         img.setBounds(0,0,30,30);  
@@ -132,7 +127,7 @@ public class TutorialAdapter extends BaseAdapter implements Filterable{
         }
         holder.detailLine.setCompoundDrawables(null, null, img, null);
             view.setOnClickListener(new OnClickListener() {
-            	private int pos = position;          
+            	         
             	//Intent intent;
             	
             	public void onClick(View v) {
