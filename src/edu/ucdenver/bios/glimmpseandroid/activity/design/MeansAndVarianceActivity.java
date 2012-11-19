@@ -38,7 +38,6 @@ import android.widget.TextView;
 import edu.ucdenver.bios.glimmpseandroid.R;
 import edu.ucdenver.bios.glimmpseandroid.activity.TabViewActivity;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter;
-import edu.ucdenver.bios.glimmpseandroid.adapter.RelativeGroupSizeAdapter;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener;
 import edu.ucdenver.bios.glimmpseandroid.adapter.MeansAndVarianceAdapter;
 import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
@@ -147,11 +146,10 @@ public class MeansAndVarianceActivity extends Activity implements OnClickListene
         // TODO Auto-generated method stub
         /*if(direction == 3)
             finish();*/
-        String str = "";
              
             switch (direction) {
              
-            case GestureFilter.SWIPE_RIGHT : str = "Swipe Right";
+            case GestureFilter.SWIPE_RIGHT : 
                                                     finish();
                                                      break;
             /*case GestureFilter.SWIPE_LEFT :  str = "Swipe Left";
