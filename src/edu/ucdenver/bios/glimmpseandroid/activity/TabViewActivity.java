@@ -32,12 +32,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.NetworkInfo.State;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
@@ -101,7 +97,7 @@ public class TabViewActivity extends Activity implements Runnable,
 
     private String jsonStr;
 
-    private Handler handler;
+    private static Handler handler;
     private ProgressDialog progress;
     private Context context;
     
@@ -845,12 +841,14 @@ public class TabViewActivity extends Activity implements Runnable,
     }
     
     
+    @SuppressWarnings("deprecation")
     private void calculateButtonDisabled(){
         calculateButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.inactive_button_selector));
         calculateButton.setEnabled(false);
         calculateButton.setClickable(false);
     }
     
+    @SuppressWarnings("deprecation")
     private void calculateButtonEnabled(){ 
         calculateButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.calculate_button_selector));
         calculateButton.setEnabled(true);
