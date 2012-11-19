@@ -354,11 +354,10 @@ public class TypeIErrorActivity extends Activity implements OnClickListener, Tex
        // TODO Auto-generated method stub
        /*if(direction == 3)
            finish();*/
-       String str = "";
             
            switch (direction) {
             
-           case GestureFilter.SWIPE_RIGHT : str = "Swipe Right";
+           case GestureFilter.SWIPE_RIGHT : 
                exit();
                 break;
            /*case GestureFilter.SWIPE_LEFT :  str = "Swipe Left";

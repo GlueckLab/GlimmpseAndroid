@@ -268,11 +268,10 @@ public class PowerActivity extends Activity implements OnClickListener, SimpleGe
         // TODO Auto-generated method stub
         /*if(direction == 3)
             finish();*/
-        String str = "";
              
             switch (direction) {
              
-            case GestureFilter.SWIPE_RIGHT : str = "Swipe Right";
+            case GestureFilter.SWIPE_RIGHT : 
                 addValue();
                 finish();
                 break;

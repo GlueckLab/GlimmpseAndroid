@@ -178,11 +178,10 @@ public class SolvingForActivity extends Activity implements OnClickListener,Simp
        // TODO Auto-generated method stub
        /*if(direction == 3)
            finish();*/
-       String str = "";
             
            switch (direction) {
             
-           case GestureFilter.SWIPE_RIGHT : str = "Swipe Right";
+           case GestureFilter.SWIPE_RIGHT : 
                                                    exit();
                                                     break;
            /*case GestureFilter.SWIPE_LEFT :  str = "Swipe Left";

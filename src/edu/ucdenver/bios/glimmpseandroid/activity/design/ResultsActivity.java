@@ -30,17 +30,9 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources.Theme;
-import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Point;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -60,10 +52,8 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
     private static GestureFilter detector;
     private static PowerResultList list;
     //private StuyDesignContext globalVariables;
-    private final String RESULT = "Result";
     private final static String MAIL_BODY = "Thank you for using the GLIMMPSE software.  Your power results are attached to this email. \n\nTo learn more about power and sample size, please visit http://samplesizeshop.org.";
     private final static String MAIL_SUBJECT = "GLIMMPSE Power Results";
-    private final static String RESULT_FILE = "GLIMMPSEPowerResults.csv";
     private final static String columnString = "\"test\",\"actualPower\",\"sampleSize\",\"betaScale\",\"sigmaScale\",\"alpha\",\"nominalPower\",\"powerMethod\",\"quantile\",\"ciLower\",\"ciUpper\"";
 
     public ResultsActivity() {
@@ -306,12 +296,10 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
         /*
          * if(direction == 3) finish();
          */
-        String str = "";
 
         switch (direction) {
 
         case GestureFilter.SWIPE_RIGHT:
-            str = "Swipe Right";
             finish();
             break;
         /*

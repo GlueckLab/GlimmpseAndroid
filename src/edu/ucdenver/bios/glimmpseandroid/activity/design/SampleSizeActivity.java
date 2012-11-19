@@ -23,7 +23,6 @@ package edu.ucdenver.bios.glimmpseandroid.activity.design;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -48,7 +47,6 @@ import edu.ucdenver.bios.glimmpseandroid.activity.TabViewActivity;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener;
 import edu.ucdenver.bios.glimmpseandroid.adapter.SampleSizeAdapter;
-import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -316,11 +314,10 @@ public class SampleSizeActivity extends Activity implements OnClickListener,Simp
         // TODO Auto-generated method stub
         /*if(direction == 3)
             finish();*/
-        String str = "";
              
             switch (direction) {
              
-            case GestureFilter.SWIPE_RIGHT : str = "Swipe Right";
+            case GestureFilter.SWIPE_RIGHT :
                 addValue();
                 finish();
                 //onExit();

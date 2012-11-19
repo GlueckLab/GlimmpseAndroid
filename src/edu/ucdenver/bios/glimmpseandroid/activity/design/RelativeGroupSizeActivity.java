@@ -184,19 +184,15 @@ private ListView relativeGroupSizeListView;
         // TODO Auto-generated method stub
         if(direction == 3)
             finish();
-        String str = "";
              
             switch (direction) {
              
-            case GestureFilter.SWIPE_RIGHT : str = "Swipe Right";
+            case GestureFilter.SWIPE_RIGHT :
                                                     finish();
                                                      break;
-            case GestureFilter.SWIPE_LEFT :  str = "Swipe Left";
-                                                           break;
-            case GestureFilter.SWIPE_DOWN :  str = "Swipe Down";
-                                                           break;
-            case GestureFilter.SWIPE_UP :    str = "Swipe Up";
-                                                           break;
+            /*case GestureFilter.SWIPE_LEFT : break;
+            case GestureFilter.SWIPE_DOWN :  break;
+            case GestureFilter.SWIPE_UP :     break;*/
                                                       
             }
              //Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
