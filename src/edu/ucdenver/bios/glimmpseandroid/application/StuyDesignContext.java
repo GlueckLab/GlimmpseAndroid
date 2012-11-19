@@ -92,7 +92,7 @@ public class StuyDesignContext {
     private static final String DEFAULT_GROUP_NAME = "Group";
 
     /** The Constant DEFAULT_SMALLEST_GROUP_SIZE. */
-    private static final int DEFAULT_SMALLEST_GROUP_SIZE = 0;
+    //private static final int DEFAULT_SMALLEST_GROUP_SIZE = 0;
 
     /** The Constant DEFAULT_GROUPS. */
     private static final int DEFAULT_GROUPS = 2;
