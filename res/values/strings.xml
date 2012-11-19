@@ -54,20 +54,23 @@
     <string name="tutorial_number_of_groups">Number Of Groups</string>
     <string name="tutorial_relative_group_size">Relative Group Size</string>
     <string name="tutorial_smallest_group_size">Smallest Group Size</string>
+    <string name="tutorial_power">Power</string>
     <string name="tutorial_means_and_variance">Means and Variance</string>
     <string name="tutorial_results">Results</string>
+    
     <!-- Tutorial Description -->
     <string name="tutorial_solving_for_description">Solving For</string>
     <string name="tutorial_type_one_error_description">Type I Error</string>
     <string name="tutorial_number_of_groups_description">Number Of Groups</string>
     <string name="tutorial_relative_group_size_description">Relative Group Size</string>
     <string name="tutorial_smallest_group_size_description">Smallest Group Size</string>
+    <string name="tutorial_power_description">Power</string>
     <string name="tutorial_means_and_variance_description">Means and Variance</string>
 
     <!-- Home Screen -->
     <!-- Text View -->
-    <string name="description_home">Glimmpse Lite calculates power and sample size for one-way ANOVA designs with normally distributed outcomes.
-        \n\nThe software was developed at the Colorado School of Public Health, Department of Biostatistics and Informatics at the University of Colorado Denver.           	</string>
+    <string name="description_home">Glimmpse Lite calculates power and sample size for one-way ANOVA designs with normally distributed outcomes.The software was developed at the Colorado School of Public Health, Department of Biostatistics and Informatics at the University of Colorado Denver.
+        \n\nFunding was procided by NIDCR 1 R01 DE020832-01A1 to the University of Florida (Keith Muller, PI; Deborah Glueck, University of Colorado site PI).       	</string>
 
     <!-- Button Label -->
     <string name="design_home">Start</string>
@@ -111,7 +114,8 @@
 			\n\nSample Size: If you have fewer restrictions on recruitment and would like to ensure a well-powered study, then solving for sample size is likely to be more useful.</string>
 
     <!-- Tutorial Type I Error Screen -->
-    <string name="description_tutorial_alpha"><p>A Type I error occurs when a scientist declares a difference when none is actually present. The Type I error rate is the probability of a Type I error occuring and is often referred to as a. Type I error rates range from 0 to 1. The most commonly used values are 0.01, 0.05 and 0.1.
+    <string name="description_tutorial_alpha"><p>A Type I error occurs when a scientist declares a difference when none is actually present.
+        \n\nThe Type I error rate is the probability of a Type I error occuring and is often referred to as alpha value. Type I error rates range from 0 to 1. The most commonly used values are 0.01, 0.05 and 0.1.
         \n\nThe Type I error screen allowes you to specify a single Type I error rate.</p></string>
 
     <!-- Tutorial Number Of Groups Screen -->
@@ -126,6 +130,11 @@
     <!-- Tutorial Smallest Group Size Screen -->
     <string name="description_tutorial_smallest_group"><p>If you are solving for power, you will need to specify the sample size for your study.
         \n\nOn the Smallest Group Size screen, you will enter the number of participants in the smallest group in the study. If your group sizes are equal, the value is the same for all groups.</p></string>
+        
+    <!-- Tutorial Power Screen -->
+    <string name="description_tutorial_power"><p>When solving for sample size, you will need to specify the desired power for your study. 
+        \n\nPower values are numbers between 0 and 1. Higher values correspond to a greater likelihood of rejecting the null hypothesis. Common values are 0.8 or 0.9, although 0.9 or higher is usually preferred.
+        \n\nOn the Power screen, enter the desired power for your study in the textbox and click the "Add" button.</p></string>
 
     <!-- Tutorial Means And Variance Screen -->
     <string name="description_tutorial_mean_variance"><p>In power analysis it is necessary to provide means and variances. The values are often obtained from published results or pilot data. Glimmpse Lite currently assumes equal variance across the groups.
