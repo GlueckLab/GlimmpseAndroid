@@ -520,6 +520,7 @@ public class StuyDesignContext {
             }
             beta.setRows(index);
             beta.setDataFromArray(changedData);
+            System.out.println("in synchForRemovedGroups: removed groups="+numberOfGroups+" remaining groups="+index);
         }
         studyDesign.setNamedMatrix(beta);
         System.gc();
@@ -749,22 +750,19 @@ public class StuyDesignContext {
      *            the new default means
      */
     private void setDefaultMeans(int numberOfGroups) {
-        int index = 0;
+        //int index = 0;
         NamedMatrix beta = studyDesign.getNamedMatrix(MATRIX_BETA);
-        if (beta != null) {
-            index = beta.getRows();            
-        } else {
+        if (beta == null) {
             beta = buildBetaMatrix(numberOfGroups);
         }
-        int totalRows = index + numberOfGroups;
-        double[][] data = new double[totalRows][1];
-        for (int inc = 0; inc < totalRows; inc++) {
+        double[][] data = new double[numberOfGroups][1];
+        for (int inc = 0; inc < numberOfGroups; inc++) {
             data[inc][DEFAULT_MEAN_COLUMN] = DEFAULT_MEAN;
         }
         beta.setDataFromArray(data);
-        beta.setRows(totalRows);
+        beta.setRows(numberOfGroups);
         studyDesign.setNamedMatrix(beta);
-
+        System.gc();
         /*
          * index = 0; NamedMatrix beta =
          * studyDesign.getNamedMatrix(MATRIX_BETA); double[][] originalData =
