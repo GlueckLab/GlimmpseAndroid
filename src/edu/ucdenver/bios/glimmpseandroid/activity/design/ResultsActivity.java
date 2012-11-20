@@ -30,6 +30,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -51,11 +52,10 @@ import edu.ucdenver.bios.webservice.common.domain.PowerResultList;
 public class ResultsActivity extends Activity implements SimpleGestureListener {
     private static GestureFilter detector;
     private static PowerResultList list;
+    private Resources resources;
+    public static final String RESULTS_DIR = "/PowerResultData";
     //private StuyDesignContext globalVariables;
-    private final static String MAIL_BODY = "Thank you for using the GLIMMPSE software.  Your power results are attached to this email. \n\nTo learn more about power and sample size, please visit http://samplesizeshop.org.";
-    private final static String MAIL_SUBJECT = "GLIMMPSE Power Results";
-    private final static String columnString = "\"test\",\"actualPower\",\"sampleSize\",\"betaScale\",\"sigmaScale\",\"alpha\",\"nominalPower\",\"powerMethod\",\"quantile\",\"ciLower\",\"ciUpper\"";
-
+    
     public ResultsActivity() {
         // TODO Auto-generated constructor stub
         
@@ -105,7 +105,8 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
             }
         });
         
-                
+        resources = getResources();      
+                        
         /*TextView solvingFor = (TextView) findViewById(R.id.textView_solving_for);
         solvingFor.setText(globalVariables.getSolvingFor()+RESULT);*/
 
@@ -173,7 +174,7 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
                             + ((power.getConfidenceInterval() != null) ? power.getConfidenceInterval().getLowerLimit() : null) + "\",\""
                             + ((power.getConfidenceInterval() != null) ? power.getConfidenceInterval().getUpperLimit() : null) + "\"" + "\n";
                 }
-                String combinedString = columnString;
+                String combinedString = resources.getString(R.string.column_string);
                 if (dataString != null && !dataString.isEmpty())
                     combinedString = combinedString + "\n" + dataString;
                 
@@ -212,10 +213,10 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
                 File root = Environment.getExternalStorageDirectory();
                 if (root.canWrite()) {
                     File dir = new File(root.getAbsolutePath()
-                            + "/PowerResultData");
+                            + RESULTS_DIR);
                     System.out.println(dir);
                     dir.mkdirs();
-                    file = new File(dir, "GLIMMPSEPowerResults.csv");
+                    file = new File(dir, resources.getString(R.string.power_results_file));
                     FileOutputStream out = null;
                     try {
                         out = new FileOutputStream(file);
@@ -234,7 +235,7 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
                     }
                     
                     
-                    file1 = new File(dir, "GLIMMPSEStudyDesign.json");
+                    file1 = new File(dir, resources.getString(R.string.study_design_file));
                     FileOutputStream out1 = null;
                     try {
                         out1 = new FileOutputStream(file1);
@@ -264,8 +265,8 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
                                                
 
                 Intent sendIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT, MAIL_SUBJECT);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, MAIL_BODY);
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, resources.getString(R.string.mail_subject));
+                sendIntent.putExtra(Intent.EXTRA_TEXT, resources.getString(R.string.mail_body));
                 //sendIntent.putExtra(Intent.EXTRA_STREAM, url);
                 sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);                
                 // sendIntent.setType("text/html");
