@@ -76,6 +76,15 @@
     <string name="design_home">Start</string>
     <string name="learn_more_home">Learn More</string>
     <string name="calculate_button">Calculate</string>
+    
+    <!-- TabViewActivity Constants -->
+    <string name="calculating_message">Please wait, calculating </string>       
+    <string name="loading">Loading</string>  
+    <string name="loading_thread">Loading</string> 
+    <string name="confirm_reset">Confirm Reset</string>
+	<string name="reset_message">This action will clear any unsaved study design information.  Continue?</string> 
+	<string name="yes">Yes</string>
+	<string name="no">No</string>
 
     <!-- About Us Screen -->
     <!-- Text View -->
@@ -87,7 +96,7 @@
       \n-Supporting designs with unequal group sizes and complicated covariance structures.
       \n-Creating basic power curves.
       \n\nAdditional documentation, publications and related software products are available from <a href="http://samplesizeshop.com">http://samplesizeshop.com</a>
-      \n\nFor questions or report a bug, please contact us.</string>
+      \n\nFor questions or report a bug, please contact us.</string>         
 
     <!-- Tutorial Screen -->
     <!-- Text View -->
@@ -179,7 +188,12 @@
     
     <!-- Result Screen -->
     <string name="total_sample_size">Total Sample Size</string>
-
+    <string name="mail_body">Thank you for using the GLIMMPSE software.  Your power results are attached to this email. \n\nTo learn more about power and sample size, please visit http://samplesizeshop.org.</string>    
+	<string name="mail_subject">GLIMMPSE Power Results</string>    
+	<string name="column_string">"\"test\",\"actualPower\",\"sampleSize\",\"betaScale\",\"sigmaScale\",\"alpha\",\"nominalPower\",\"powerMethod\",\"quantile\",\"ciLower\",\"ciUpper\""</string>    
+	<string name="power_results_file">GLIMMPSEPowerResults.csv</string>    
+	<string name="study_design_file">GLIMMPSEStudyDesign.json</string>    
+	        
     <!-- Alert -->
     <!-- Data won't be saved -->
     <string name="data_not_saved_alert">This will lose the information. Do you want to proceed?</string>
