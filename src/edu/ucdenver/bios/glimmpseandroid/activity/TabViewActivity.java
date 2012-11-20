@@ -69,13 +69,23 @@ public class TabViewActivity extends Activity implements Runnable,
      private static final String SERVICE_URL =
      "http://glimmpse.samplesizeshop.com/power/";
      
-     private static final String CALCULATING_MESSAGE = "Please wait, Calulating ";
+     public static final String TAB_ID = "tab_id";
+     
+     public static final int TAB_HEIGHT = 50;
+     
+     public static final int WIFI_AVAILABLE = 1;
+     
+     public static final int MOBILE_NETWORK_AVAILABLE = 2;  
+     
+     /*private static final String CALCULATING_MESSAGE = "Please wait, Calulating ";*/
     //private static final String SERVICE_URL = "http://140.226.53.117:8080/power/";
     //private static final String SERVICE_URL = "http://10.0.2.2:8080/power/";
     String[] labels;
     // String[] titles;
     private Button calculateButton;
     private Button resetButton;
+    
+    private Resources resources;
     /*
      * private static ProgressBar loadingProgressBar; private static TextView
      * loadingText;
@@ -83,15 +93,12 @@ public class TabViewActivity extends Activity implements Runnable,
     private ListView tutorialListView;
     private ListView designListView;
     private TabHost mTabHost;
-    private final int TAB_HEIGHT = 50; // set desired value here instead of 50
+     // set desired value here instead of 50
     private View tabOneContentView;
     private View tabTwoContentView;
     private View tabThreeContentView;
     StuyDesignContext globalVariables;
-    
-    private final int WIFI_AVAILABLE = 1;
-    private final int MOBILE_NETWORK_AVAILABLE = 2;     
-    
+           
     private boolean NET_CONNECTION = false;
     // private static GestureFilter detector;
 
@@ -100,8 +107,7 @@ public class TabViewActivity extends Activity implements Runnable,
     private static Handler handler;
     private ProgressDialog progress;
     private Context context;
-    
-    
+        
     protected void onResume() {
         super.onResume();
         System.out.println("Tab View On Resume");
@@ -202,9 +208,9 @@ public class TabViewActivity extends Activity implements Runnable,
         if (useTitleFeature) {
             window.setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
         }
-        Resources res = getResources();
+        resources = getResources();
 
-        labels = res.getStringArray(R.array.tab_labels);
+        labels = resources.getStringArray(R.array.tab_labels);
         // titles = res.getStringArray(R.array.tabed_window_titles);
 
         Button homeButton = (Button) findViewById(R.id.home_button);
@@ -237,7 +243,7 @@ public class TabViewActivity extends Activity implements Runnable,
         Bundle extras = this.getIntent().getExtras();
         if (extras != null) {
             // if(extras.containsKey("tab_id")){
-            int tab_id = extras.getInt("tab_id");
+            int tab_id = extras.getInt(TAB_ID);
             for (int i = 2; i >= tab_id; i--) {
                 mTabHost.setCurrentTab(i);                
             }
@@ -323,18 +329,18 @@ public class TabViewActivity extends Activity implements Runnable,
             public void onClick(View v) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Confirm Reset...");
+                builder.setTitle(resources.getString(R.string.confirm_reset));
                 builder.setMessage(
-                        "This action will clear any unsaved study design information.  Continue?")
+                        resources.getString(R.string.reset_message))
                         .setCancelable(false)
-                        .setPositiveButton("Yes",
+                        .setPositiveButton(resources.getString(R.string.yes),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,
                                             int id) {
                                         resetButtonFunctionality();
                                     }
                                 })
-                        .setNegativeButton("No",
+                        .setNegativeButton(resources.getString(R.string.no),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,
                                             int id) {
@@ -647,10 +653,10 @@ public class TabViewActivity extends Activity implements Runnable,
     }
     
     private void displayLoading(){
-        progress = ProgressDialog.show(context, CALCULATING_MESSAGE+globalVariables.getSolvingFor(),
-                "Loading ...", true, false);
+        progress = ProgressDialog.show(context, resources.getString(R.string.calculating_message)+globalVariables.getSolvingFor(),
+                resources.getString(R.string.loading), true, false);
 
-        Thread thread = new Thread(TabViewActivity.this, "Loading");
+        Thread thread = new Thread(TabViewActivity.this, resources.getString(R.string.loading_thread));
         
         thread.start();
         try {
