@@ -100,22 +100,11 @@
             encoding="ascii"
             extdirs=""
             srcdir="${source.dir}"            
-            target="1.5">      
+            target="1.5"
+            source="1.5">      
             <src path="${source.dir}"/>
             <src path="${gen.dir}"/>            
-        </javac> -->
-        <!-- <javac encoding="${java.encoding}"
-                    source="${java.source}" target="${java.target}"
-                    debug="true" extdirs="" includeantruntime="false"
-                    destdir="${tmp.dir}/classes"
-                    bootclasspathref="project.target.class.path"
-                    verbose="${verbose}"
-                    classpathref="library.path"
-                    fork="${need.javac.fork}">
-                <src path="${source.dir}" />
-                <src path="${gen.dir}" />
-                <compilerarg line="${java.compilerargs}" />
-            </javac> -->
+        </javac> -->        
     </target>
 	
 	<!-- Build the project's war file. MIGHT BE ABLE TO DELETE? -->
@@ -131,7 +120,6 @@
     	description="Generates the API specification (javadoc)">
         <javadoc packagenames="edu.ucdenver.bios.*"
                  access="public"
-                 classpath="${basedir}/tmp/classes" 
                  destdir="${javadoc.dir}"
                  use="true"
                  author="true"
@@ -734,13 +722,7 @@
         </do-only-if-manifest-hasCode>
 
         <echo level="info">----------</echo>
-        <echo level="info">Resolving Dependencies for ${ant.project.name}...</echo>
-        
-        <copy todir="${jar.libs.absolute.dir}">
-	    <fileset 
-	      dir="${basedir}/../libs" 
-	      includes="*.jar" />
-	  	</copy>	    
+        <echo level="info">Resolving Dependencies for ${ant.project.name}...</echo>                  
         
         <dependency
                 libraryFolderPathOut="project.library.folder.path"
