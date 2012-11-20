@@ -42,6 +42,12 @@ import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
  */
 public class MainActivity extends Activity {
 
+    public static final String TAB_ID = "tab_id";
+    
+    public static final int ZERO = 0;
+    
+    public static final int ONE = 1; 
+    
     /**
      * This method is called when the Activity is first started. From the
      * incoming Intent, it determines what kind of editing is desired, and then
@@ -87,7 +93,7 @@ public class MainActivity extends Activity {
                 Intent tabIntent = new Intent(v.getContext(),
                         TabViewActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("tab_id", 1);
+                bundle.putInt(TAB_ID, ONE);
                 tabIntent.putExtras(bundle);
                 startActivity(tabIntent);
             }
@@ -102,7 +108,7 @@ public class MainActivity extends Activity {
                 Intent tabIntent = new Intent(v.getContext(),
                         TabViewActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("tab_id", 0);
+                bundle.putInt(TAB_ID, ZERO);
                 tabIntent.putExtras(bundle);
                 startActivity(tabIntent);
             }
@@ -114,7 +120,6 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onStop() {
-        // TODO Auto-generated method stub
         super.onStop();
         
         //Debug.stopMethodTracing();
@@ -127,25 +132,11 @@ public class MainActivity extends Activity {
      */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            // GlobalVariables.resetInstance();
             StuyDesignContext.resetInstance();
             finish();
             return true;
         }
         return super.onKeyDown(keyCode, event);
     }
-
-    /*
-     * @Override public void onConfigurationChanged(Configuration newConfig) {
-     * super.onConfigurationChanged(newConfig); }
-     */
-
-    /*
-     * @Override public boolean onCreateOptionsMenu(Menu menu) {
-     * getMenuInflater().inflate(R.menu.activity_main, menu); return true; }
-     * 
-     * @Override public boolean onOptionsItemSelected(MenuItem item) { // Handle
-     * item selection switch (item.getItemId()) { case R.id.menu_home: finish();
-     * return true; default: return super.onOptionsItemSelected(item); } }
-     */
+    
 }
