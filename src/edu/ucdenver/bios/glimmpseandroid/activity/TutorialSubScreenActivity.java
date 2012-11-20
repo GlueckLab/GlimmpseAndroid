@@ -45,18 +45,27 @@ import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureList
  */
 public class TutorialSubScreenActivity extends Activity implements
         OnClickListener, SimpleGestureListener {
-    private static GestureFilter detector;
-
-    private final int GETTING_STARTED_ROW = 0;
-    private final int SOLVING_FOR_ROW = 1;
-    private final int POWER_ROW = 2;
-    private final int SAMPLE_SIZE_ROW = 3;
-    private final int TYPE_I_ERROR_ROW = 4;
-    private final int NUMBER_OF_GROUPS_ROW = 5;
-    private final int RELATIVE_GROUP_SIZE_ROW = 6;
+    private static GestureFilter detector;   
+    
+    public static final int GETTING_STARTED_ROW = 0;
+    
+    public static final int SOLVING_FOR_ROW = 1;
+    
+    public static final int POWER_ROW = 2;
+    
+    public static final int SAMPLE_SIZE_ROW = 3;
+    
+    public static final int TYPE_I_ERROR_ROW = 4;
+    
+    public static final int NUMBER_OF_GROUPS_ROW = 5;
+    
+    public static final int RELATIVE_GROUP_SIZE_ROW = 6;
+    
     // private final int SMALLEST_GROUP_SIZE_ROW = 5;
-    private final int MEANS_VARIANCE_ROW = 7;
-    private final int RESULTS_ROW = 8;
+    
+    public static final int MEANS_VARIANCE_ROW = 7;
+    
+    public static final int RESULTS_ROW = 8;
 
     /**
      * This method is called by Android when the Activity is first started. From
