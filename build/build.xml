@@ -92,7 +92,7 @@
     <target
         name="compile"
         depends="setup" >
-        <javac
+        <!-- <javac
             classpathref="library.path"
             bootclasspath="Android/4.0.3/lib/android.jar"
             debug="${debug}"
@@ -103,7 +103,19 @@
             target="1.5">      
             <src path="${source.dir}"/>
             <src path="${gen.dir}"/>            
-        </javac>
+        </javac> -->
+        <!-- <javac encoding="${java.encoding}"
+                    source="${java.source}" target="${java.target}"
+                    debug="true" extdirs="" includeantruntime="false"
+                    destdir="${tmp.dir}/classes"
+                    bootclasspathref="project.target.class.path"
+                    verbose="${verbose}"
+                    classpathref="library.path"
+                    fork="${need.javac.fork}">
+                <src path="${source.dir}" />
+                <src path="${gen.dir}" />
+                <compilerarg line="${java.compilerargs}" />
+            </javac> -->
     </target>
 	
 	<!-- Build the project's war file. MIGHT BE ABLE TO DELETE? -->
@@ -891,7 +903,11 @@
                 <src path="${gen.absolute.dir}" />
                 <compilerarg line="${java.compilerargs}" />
             </javac>
-
+	
+            <copy todir="${tmp.dir}/classes">
+			    <fileset dir="${out.classes.absolute.dir}"/>
+		  	</copy>
+            
             <!-- if the project is instrumented, intrument the classes -->
             <if condition="${build.is.instrumented}">
                 <then>
@@ -1255,8 +1271,9 @@
     </target>
 
     <target name="-set-release-mode" depends="-set-mode-check">
-        <property name="out.packaged.file" location="${out.absolute.dir}/${ant.project.name}-release-unsigned.apk" />
-        <property name="out.final.file" location="${out.absolute.dir}/${ant.project.name}-release.apk" />
+                       
+        <property name="out.packaged.file" location="${out.absolute.dir}/${glimmpselite}-release-unsigned.apk" />
+        <property name="out.final.file" location="${out.absolute.dir}/${glimmpselite}-release.apk" />
         <property name="build.is.mode.set" value="true" />
 
         <!-- record the current build target -->
@@ -1698,7 +1715,10 @@
 	<target name="distribution.binary">
 	    <echo>${out.absolute.dir}/${glimmpselite}-debug.apk</echo>		
 		<zip destfile="${artifacts.dir}/${app.name}-${app.version}-binary.zip" >
-			<zipfileset file="${out.absolute.dir}/${glimmpselite}-debug.apk" />	
+		    <!-- Debug Mode -->
+			<!-- <zipfileset file="${out.absolute.dir}/${glimmpselite}-debug.apk" />	 -->
+			<!-- Release Mode -->
+			<zipfileset file="${out.absolute.dir}/${glimmpselite}-release.apk" />
 			<zipfileset file="${basedir}/../LICENSE-gpl2.0.txt"/>
 		    <zipfileset file="${basedir}/../README.txt"/>
 		</zip>
