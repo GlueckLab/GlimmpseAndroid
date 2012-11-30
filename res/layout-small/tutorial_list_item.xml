@@ -58,7 +58,6 @@
 		    android:layout_height="wrap_content"
 		    android:layout_alignBottom="@+id/list_item_textView_tutorial"
 		   android:layout_alignTop="@+id/list_item_textView_tutorial"
-		    android:layout_toLeftOf="@+id/expandable_toggle_button"
 		    android:text="@string/details_tutorial"		    
 		    android:gravity="center"
 		    android:padding="2dp"
