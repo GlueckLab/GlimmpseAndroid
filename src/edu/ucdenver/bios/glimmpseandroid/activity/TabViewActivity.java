@@ -32,6 +32,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -56,77 +57,104 @@ import edu.ucdenver.bios.glimmpseandroid.adapter.TutorialAdapter;
 import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 import edu.ucdenver.bios.webservice.common.domain.StudyDesign;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class TabViewActivity deals with the Screens with Tab view of the
  * GLIMMPSE LITE Application.
  * 
  * @author Uttara Sakhadeo
  */
-// public class TabViewActivity extends Activity implements
-// TabContentFactory,SimpleGestureListener, Runnable{
 public class TabViewActivity extends Activity implements Runnable,
         TabContentFactory {
+     
+     /** The Constant SERVICE_URL. */
      private static final String SERVICE_URL =
      "http://glimmpse.samplesizeshop.com/power/";
-     
+
+     private static final String FEEDBACK_ADDRESS = "feedback@glimmpse.samplesizeshop.com";
+          
+     /** The Constant TAB_ID. */
      public static final String TAB_ID = "tab_id";
      
+     /** The Constant TAB_HEIGHT. */
      public static final int TAB_HEIGHT = 50;
      
+     /** The Constant WIFI_AVAILABLE. */
      public static final int WIFI_AVAILABLE = 1;
      
-     public static final int MOBILE_NETWORK_AVAILABLE = 2;  
-     
-     /*private static final String CALCULATING_MESSAGE = "Please wait, Calulating ";*/
-    //private static final String SERVICE_URL = "http://140.226.53.117:8080/power/";
-    //private static final String SERVICE_URL = "http://10.0.2.2:8080/power/";
-    String[] labels;
-    // String[] titles;
+     /** The Constant MOBILE_NETWORK_AVAILABLE. */
+     public static final int MOBILE_NETWORK_AVAILABLE = 2; 
+
+     public static final int TUTORIAL_TAB = 0;
+
+     public static final int DESIGN_TAB = 1;
+
+     public static final int ABOUT_US_TAB = 2;
+                    
+    /** The labels. */
+     String[] labels;
+    
+    /** The calculate button. */
     private Button calculateButton;
+    
+    /** The reset button. */
     private Button resetButton;
     
+    /** The resources. */
     private Resources resources;
-    /*
-     * private static ProgressBar loadingProgressBar; private static TextView
-     * loadingText;
-     */
+   
+    /** The tutorial list view. */
     private ListView tutorialListView;
+    
+    /** The design list view. */
     private ListView designListView;
+    
+    /** The m tab host. */
     private TabHost mTabHost;
-     // set desired value here instead of 50
-    private View tabOneContentView;
+    
+    /** The tab one content view. */
+     private View tabOneContentView;
+    
+    /** The tab two content view. */
     private View tabTwoContentView;
+    
+    /** The tab three content view. */
     private View tabThreeContentView;
+    
+    /** The global variables. */
     StuyDesignContext globalVariables;
            
+    /** The NE t_ connection. */
     private boolean NET_CONNECTION = false;
-    // private static GestureFilter detector;
-
+   
+    /** The json str. */
     private String jsonStr;
 
+    /** The handler. */
     private static Handler handler;
+    
+    /** The progress. */
     private ProgressDialog progress;
+    
+    /** The context. */
     private Context context;
         
+    /* (non-Javadoc)
+     * @see android.app.Activity#onResume()
+     */
     protected void onResume() {
         super.onResume();
-        System.out.println("Tab View On Resume");
-        // If current screen is Design
-        if (mTabHost.getCurrentTab() == 1) {
+        if (mTabHost.getCurrentTab() == DESIGN_TAB) {
             designListPopulate();
             globalVariables = StuyDesignContext.getInstance();
-            // ProgressBar inputProgress = (ProgressBar)
-            // findViewById(R.id.input_progress);
-            // System.out.println("Tab View total progress : "+globalVariables.getTotalProgress());
             int progress = globalVariables.getTotalProgress();
-            // inputProgress.setProgress(progress);
             if (progress == 6) {
                 calculateButtonEnabled();
             }
         }
-        else if(mTabHost.getCurrentTab()==2){
+        else if(mTabHost.getCurrentTab() == ABOUT_US_TAB){
             aboutUsPopulate();
-            for (int i = 0; i <= 2; i++) {
+            for (int i = TUTORIAL_TAB; i <= ABOUT_US_TAB; i++) {
                 mTabHost.setCurrentTab(i);
             }
         }
@@ -171,11 +199,7 @@ public class TabViewActivity extends Activity implements Runnable,
                     NET_CONNECTION = false;
                 }               
                 else if(!NET_CONNECTION) {
-                    /*
-                     * Toast.makeText(TabViewActivity.this,
-                     * "Internet Connection Not available",
-                     * Toast.LENGTH_SHORT).show();
-                     */
+                    
                     AlertDialog.Builder builder = new AlertDialog.Builder(
                             context);
                     builder.setTitle("No internet Connection");
@@ -188,7 +212,6 @@ public class TabViewActivity extends Activity implements Runnable,
 
                                         }
                                     });
-                    // AlertDialog alert = builder.create();
                     builder.show();
                 }
                 super.handleMessage(msg);
@@ -211,12 +234,10 @@ public class TabViewActivity extends Activity implements Runnable,
         resources = getResources();
 
         labels = resources.getStringArray(R.array.tab_labels);
-        // titles = res.getStringArray(R.array.tabed_window_titles);
-
+        
         Button homeButton = (Button) findViewById(R.id.home_button);
         homeButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                // GlobalVariables.resetInstance();
                 finish();
             }
         });
@@ -229,88 +250,63 @@ public class TabViewActivity extends Activity implements Runnable,
         mTabHost = (TabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup();
         mTabHost.getTabWidget().setDividerDrawable(R.drawable.tab_divider);
-        // mTabHost.setOnTabChangedListener(this); //use this Activity as the
-        // onTabChangedListener
-
+        
         // setup each individual tab
-        setupTab(labels[0]);
-        setupTab(labels[1]);
-        setupTab(labels[2]);
+        setupTab(labels[TUTORIAL_TAB]);
+        setupTab(labels[DESIGN_TAB]);
+        setupTab(labels[ABOUT_US_TAB]);
         setTabHeight(TAB_HEIGHT);
 
         TextView title = (TextView) findViewById(R.id.window_title);
 
         Bundle extras = this.getIntent().getExtras();
         if (extras != null) {
-            // if(extras.containsKey("tab_id")){
             int tab_id = extras.getInt(TAB_ID);
             for (int i = 2; i >= tab_id; i--) {
                 mTabHost.setCurrentTab(i);                
             }
-            // title.setText(titles[tab_id]);
             title.setText(labels[tab_id]);
         } else {            
-            for (int i = 2; i >= 0; i--) {
+            for (int i = ABOUT_US_TAB; i >= TUTORIAL_TAB; i--) {
                 mTabHost.setCurrentTab(i);
             }
-            // title.setText(titles[0]);
-            title.setText(labels[0]);            
+            title.setText(labels[TUTORIAL_TAB]);            
         }
 
         mTabHost.setOnTabChangedListener(new OnTabChangeListener() {
 
             public void onTabChanged(String tabId) {
-                System.out.println("in on tabchanged listener .....");
                 TextView title = (TextView) findViewById(R.id.window_title);
-                if (tabId != null) {
-                    /*
-                     * if (!tabId.equals(labels[0])) title.setText(tabId); else
-                     * {
-                     * 
-                     * }
-                     */                                      
-                    
+                if (tabId != null) {                                                                            
                     title.setText(tabId);
-                    if (tabId.equals(labels[1])) {                        
+                    if (tabId.equals(labels[DESIGN_TAB])) {                        
                         designListPopulate();                        
                     }
 
                 } else {
                     tutorialListPopulate();
-                    // title.setText(titles[0]);
-                    title.setText(labels[0]);                    
+                    title.setText(labels[TUTORIAL_TAB]);                    
                 }
                 
             }
         });
-
-                /*
-         * loadingProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
-         * loadingText = (TextView) findViewById(R.id.textView1);
-         * loadingProgressBar.setVisibility(View.INVISIBLE);
-         * loadingText.setVisibility(View.INVISIBLE);
-         */
-
     }
 
+    /**
+     * Reset button functionality.
+     */
     private void resetButtonFunctionality() {
         StuyDesignContext.resetInstance();
         designListPopulate();
         jsonStr = null;
         NET_CONNECTION = false;
         globalVariables.resetProgress();
-        // ProgressBar inputProgress = (ProgressBar)
-        // findViewById(R.id.input_progress);
-        System.out.println("reset progress : "
-                + globalVariables.getTotalProgress());
-        // inputProgress.setProgress(globalVariables.getTotalProgress());
-        calculateButtonDisabled();
-        /*
-         * loadingProgressBar.setVisibility(View.INVISIBLE);
-         * loadingText.setVisibility(View.INVISIBLE);
-         */
+        calculateButtonDisabled();        
     }
 
+    /**
+     * Populating Tutorial list.
+     */
     private void tutorialListPopulate() {
         String[] tutorialList = getResources().getStringArray(
                 R.array.tutorial_list);
@@ -322,6 +318,9 @@ public class TabViewActivity extends Activity implements Runnable,
                 tutorialList));
     }
 
+    /**
+     * Populating Design list.
+     */
     private void designListPopulate() {
         
         resetButton = (Button) findViewById(R.id.reset);
@@ -347,7 +346,6 @@ public class TabViewActivity extends Activity implements Runnable,
                                         dialog.cancel();
                                     }
                                 });
-                // AlertDialog alert = builder.create();
                 builder.show();
 
                
@@ -366,49 +364,15 @@ public class TabViewActivity extends Activity implements Runnable,
             public void onClick(View v) {           
                 calculateButtonDisabled();
                 int network = detectNetwork();
-                if(network == WIFI_AVAILABLE){
-                    //continueFlag = true;
+                if(network == WIFI_AVAILABLE || network == MOBILE_NETWORK_AVAILABLE){
                     displayLoading();                                                    
-                }
-                else if(network == MOBILE_NETWORK_AVAILABLE){                    
-                    /*AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setTitle("Possible Data Usage");
-                    builder.setMessage(
-                            "Wifi not available. You might get charged for Mobile Data Usage. Would you like to continue?")
-                            .setCancelable(false)
-                            .setPositiveButton("Yes",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog,
-                                                int id) {
-                                            ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);        
-                                            
-                                            NetworkInfo mWifi = connManager
-                                                    .getNetworkInfo(ConnectivityManager.TYPE_WIFI); 
-                                            if (mWifi.isConnected()){
-                                                connectContinueFlag = true;
-                                            }
-                                            displayLoading();                         
-                                        }
-                                    })
-                            .setNegativeButton("No",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog,
-                                                int id) {                                                    
-                                            dialog.cancel();
-                                        }
-                                    });
-                    // AlertDialog alert = builder.create();
-                    builder.show();*/
-                    displayLoading();  
-                } 
-                else{
+                }else{
+                    calculateButtonEnabled();
                     handler.sendEmptyMessage(0);
                 }
             }
         });
         
-        // String solvingFor =
-        // StuyDesignContext.getInstance().getStudyDesign().getSolutionTypeEnum().toString();
         String solvingFor = StuyDesignContext.getInstance().getSolvingFor();
 
         String[] designList = getResources().getStringArray(
@@ -416,7 +380,6 @@ public class TabViewActivity extends Activity implements Runnable,
         
 
         if (solvingFor != null) {
-            //if (solvingFor.equals(SolutionTypeEnum.SAMPLE_SIZE.getId())){ 
             String enumSampleSize = getString(R.string.enum_sample_size_value);
             if (enumSampleSize.equals(solvingFor)) {
                 designList[1] = getString(R.string.enum_power_value);
@@ -432,6 +395,9 @@ public class TabViewActivity extends Activity implements Runnable,
 
     }
 
+    /**
+     * Populating About Us screen.
+     */
     public void aboutUsPopulate() {
         // Set scrollbar visibility to true.
         TextView text = (TextView) findViewById(R.id.description_textView_aboutus);
@@ -444,19 +410,16 @@ public class TabViewActivity extends Activity implements Runnable,
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("message/rfc822");
-                // i.putExtra(Intent.EXTRA_EMAIL , new
-                // String[]{"uttara.sakhadeo@ucdenver.edu"});
-                /*i.putExtra(Intent.EXTRA_EMAIL,
-                        new String[] { "uttarasakhadeo@gmail.com" });*/
+                
                 i.putExtra(Intent.EXTRA_EMAIL,
-                        new String[] { "feedback@glimmpse.samplesizeshop.com" });
-                i.putExtra(Intent.EXTRA_SUBJECT, "Glimmpse Lite Queries");
-                // i.putExtra(Intent.EXTRA_TEXT , "");
+                        new String[] { FEEDBACK_ADDRESS });
+                i.putExtra(Intent.EXTRA_SUBJECT, resources.getString(R.string.feedback_mail_subject));
+                
                 try {
                     startActivity(Intent.createChooser(i, "Send mail..."));
                 } catch (android.content.ActivityNotFoundException ex) {
                     Toast.makeText(TabViewActivity.this,
-                            "There are no email clients installed.",
+                            resources.getString(R.string.no_mail_client_error),
                             Toast.LENGTH_SHORT).show();
                 }
 
@@ -465,7 +428,7 @@ public class TabViewActivity extends Activity implements Runnable,
     }
 
     /**
-     * Sets up the Views for each tab
+     * Sets up the Views for each tab.
      */
     public void setupViews() {
         tabOneContentView = findViewById(R.id.tutorial_view);
@@ -475,7 +438,7 @@ public class TabViewActivity extends Activity implements Runnable,
     }
 
     /**
-     * Sets up the tabs for this Activity
+     * Sets up the tabs for this Activity.
      */
     public void setupTabs() {
         
@@ -483,10 +446,9 @@ public class TabViewActivity extends Activity implements Runnable,
 
     /**
      * Sets up a new tab with given tag by creating a View for the tab (via
-     * createTabView() ) and adding it to the tab host
-     * 
-     * @param tag
-     *            The tag of the tab to setup
+     * createTabView() ) and adding it to the tab host.
+     *
+     * @param tag The tag of the tab to setup
      */
     public void setupTab(String tag) {
         View tabView = createTabView(mTabHost.getContext(), tag);
@@ -495,12 +457,10 @@ public class TabViewActivity extends Activity implements Runnable,
     }
 
     /**
-     * Creates a View for a tab
-     * 
-     * @param context
-     *            The context from which the LayoutInflater is obtained
-     * @param tag
-     *            The tag to be used as the label on the tab
+     * Creates a View for a tab.
+     *
+     * @param context The context from which the LayoutInflater is obtained
+     * @param tag The tag to be used as the label on the tab
      * @return The inflated view to be used by a tab
      */
     private View createTabView(Context context, String tag) {
@@ -538,10 +498,9 @@ public class TabViewActivity extends Activity implements Runnable,
     }
 
     /**
-     * Sets a custom height for the TabWidget, in dp-units
-     * 
-     * @param height
-     *            The height value, corresponding to dp-units
+     * Sets a custom height for the TabWidget, in dp-units.
+     *
+     * @param height The height value, corresponding to dp-units
      */
     public void setTabHeight(int height) {
         for (int i = 0; i < mTabHost.getTabWidget().getTabCount(); i++) {
@@ -550,110 +509,64 @@ public class TabViewActivity extends Activity implements Runnable,
         }
     }
 
+    /* (non-Javadoc)
+     * @see android.widget.TabHost.TabContentFactory#createTabContent(java.lang.String)
+     */
     public View createTabContent(String tag) {
-        if (tag.compareTo(labels[0]) == 0) {
+        if (tag.compareTo(labels[TUTORIAL_TAB]) == 0) {
             tutorialListPopulate();
             return tabOneContentView;
-        } else if (tag.compareTo(labels[1]) == 0) {
+        } else if (tag.compareTo(labels[DESIGN_TAB]) == 0) {
             designListPopulate();
             return tabTwoContentView;
-        } else if (tag.compareTo(labels[2]) == 0) {
+        } else if (tag.compareTo(labels[ABOUT_US_TAB]) == 0) {
             aboutUsPopulate();
             return tabThreeContentView;
         } else
             return tabOneContentView;
-    }      
-
-    /*public void run() {
-        String service = Context.WIFI_SERVICE;
-        WifiManager wifi = (WifiManager)getSystemService(service);
-        
-        if(!wifi.isWifiEnabled()){
-            if(wifi.getWifiState() != WifiManager.WIFI_STATE_ENABLING)
-                wifi.setWifiEnabled(true);
-        }
-        
-        ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);        
-        
-        // For Wifi
-        NetworkInfo mWifi = connManager
-                .getNetworkInfo(ConnectivityManager.TYPE_WIFI); 
-        if (mWifi.isConnected()) {
-
-            try {
-                String solvingFor = globalVariables.getSolvingFor();
-                if (solvingFor != null && !solvingFor.isEmpty()) {
-                    String URL;
-                    //if (solvingFor.equals(SolutionTypeEnum.POWER.getId()))
-                    String enumPower = getString(R.string.enum_power_value);
-                    if (enumPower.equals(solvingFor))
-                        URL = SERVICE_URL + "power";
-                    else
-                        URL = SERVICE_URL + "samplesize";
-
-                    ClientResource cr = new ClientResource(URL);
-                                        
-                    Series<Cookie> cookies= cr.getCookies();
-                    if(cookies.getValues(GLIMMPSE_COOKIE) == null){
-                        cookies.removeAll(GLIMMPSE_COOKIE);
-                    }
-                        cookies.add(GLIMMPSE_COOKIE, "StudyDesign");
-                    
-                    System.out.println("------------------------------");
-                    System.out.println("Cookies Saved : "+cr.getCookies().size());
-                    System.out.println("------------------------------");
-
-                    StudyDesign studyDesign = globalVariables.getStudyDesign();
-                    globalVariables.setDefaults();
-                   
-                    System.out.println(studyDesign);
-
-                    Representation repr = cr.post(studyDesign);
-
-                    jsonStr = repr.getText();        
-                    
-                }
-
-            } catch (Exception e) {                
-                System.out.println("testPower Failed to retrieve: "
-                        + e.getMessage());
-            }
-        }
-        handler.sendEmptyMessage(0);
-        
-    }*/
+    }          
     
+    /**
+     * Detect network.
+     *
+     * @return the int
+     */
     private int detectNetwork(){
         NET_CONNECTION = false;
         jsonStr = null;        
         final ConnectivityManager connMgr = (ConnectivityManager)  
         this.getSystemService(Context.CONNECTIVITY_SERVICE);   
-        final android.net.NetworkInfo wifi =  connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-       final android.net.NetworkInfo mobile =  connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        final android.net.NetworkInfo wifi_Network =  connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        final android.net.NetworkInfo mobile_Network =  connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);         
        
-       /*String service = Context.WIFI_SERVICE;
+       String service = Context.WIFI_SERVICE;
        WifiManager wifi = (WifiManager)getSystemService(service);
        
        if(!wifi.isWifiEnabled()){
            if(wifi.getWifiState() != WifiManager.WIFI_STATE_ENABLING)
-               wifi.setWifiEnabled(true);
-       }*/
+               wifi.setWifiEnabled(true);           
+       }  
        
-       if( wifi.isAvailable() && wifi.isConnected())
+       if( wifi_Network.isAvailable() && wifi_Network.isConnectedOrConnecting())
        { 
            NET_CONNECTION = true;
            return WIFI_AVAILABLE;
        }
-       else if( mobile.isAvailable() && mobile.isConnected())
-       {  
+       else if( mobile_Network.isAvailable() && mobile_Network.isConnectedOrConnecting()){
            NET_CONNECTION = true;
            return MOBILE_NETWORK_AVAILABLE;
-       }       
+       }                 
+       else{
+           Toast.makeText(getApplicationContext(),"Please make sure your Network Connection is ON ",Toast.LENGTH_SHORT).show();
+       }
        return 0;
     }
     
+    /**
+     * Display loading.
+     */
     private void displayLoading(){
-        progress = ProgressDialog.show(context, resources.getString(R.string.calculating_message)+globalVariables.getSolvingFor(),
+        progress = ProgressDialog.show(context, resources.getString(R.string.calculating_message)+" "+globalVariables.getSolvingFor(),
                 resources.getString(R.string.loading), true, false);
 
         Thread thread = new Thread(TabViewActivity.this, resources.getString(R.string.loading_thread));
@@ -662,177 +575,41 @@ public class TabViewActivity extends Activity implements Runnable,
         try {
             thread.join(2);
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             System.out.println("Inturrupted Exception : "
                     + e.getMessage());
         }                          
     }
     
-    public void run() {
-        // Setting Default Network type as WIFI. Automaticaly enables WIFI 
-        
-        /*NET_CONNECTION = false;
-        jsonStr = null;
-        final ConnectivityManager connMgr = (ConnectivityManager)  
-        this.getSystemService(Context.CONNECTIVITY_SERVICE);   
-        final android.net.NetworkInfo wifi =  connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-       final android.net.NetworkInfo mobile =  connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-       if( wifi.isAvailable() )
-       { 
-           NET_CONNECTION = true;
-           //Toast.makeText(this, "Wifi" , Toast.LENGTH_LONG).show();
-           System.out.println("Wifi");
-           
-           ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);        
-                      
-           NetworkInfo mWifi = connManager
-                   .getNetworkInfo(ConnectivityManager.TYPE_WIFI); 
-           if (mWifi.isConnected()){
-               setConnection();
-           }  
-           
-           Activity activity=(Activity) this.context;
-           activity.runOnUiThread(new Runnable() {
-               public void run() {
-                   AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                   builder.setTitle("Possible Data Usage");
-                   builder.setMessage(
-                           "Wifi not available. You might get charged for Mobile Data Usage. Would you like to continue?")
-                           .setCancelable(false)
-                           .setPositiveButton("Yes",
-                                   new DialogInterface.OnClickListener() {
-                                       public void onClick(DialogInterface dialog,
-                                               int id) {
-                                           ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);        
-                                           
-                                           NetworkInfo mWifi = connManager
-                                                   .getNetworkInfo(ConnectivityManager.TYPE_WIFI); 
-                                           if (mWifi.isConnected()){
-                                               setConnection();
-                                           }
-                                       }
-                                   })
-                           .setNegativeButton("No",
-                                   new DialogInterface.OnClickListener() {
-                                       public void onClick(DialogInterface dialog,
-                                               int id) {
-                                           dialog.cancel();
-                                       }
-                                   });
-                   // AlertDialog alert = builder.create();
-                   builder.show();
-                 }
-               });
-       }  
-       else if( mobile.isAvailable() )
-       {            
-           NET_CONNECTION = true;
-           System.out.println("Mobile 3G"); 
-           
-           Activity activity=(Activity) this.context;
-           activity.runOnUiThread(new Runnable() {
-               public void run() {
-                   AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                   builder.setTitle("Possible Data Usage");
-                   builder.setMessage(
-                           "Wifi not available. You might get charged for Mobile Data Usage. Would you like to continue?")
-                           .setCancelable(false)
-                           .setPositiveButton("Yes",
-                                   new DialogInterface.OnClickListener() {
-                                       public void onClick(DialogInterface dialog,
-                                               int id) {
-                                           //setConnection();
-                                           ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);        
-                                           
-                                           NetworkInfo mMobile = connManager
-                                                   .getNetworkInfo(ConnectivityManager.TYPE_MOBILE); 
-                                           if (mMobile.isConnected()){
-                                               setConnection();
-                                               handler.sendEmptyMessage(0);
-                                           }                                            
-                                       }
-                                   })
-                           .setNegativeButton("No",
-                                   new DialogInterface.OnClickListener() {
-                                       public void onClick(DialogInterface dialog,
-                                               int id) {
-                                           dialog.cancel();
-                                       }
-                                   });
-                   // AlertDialog alert = builder.create();
-                   builder.show();
-                 }
-               });
-       }*/
-       
-       /*else  
-       {Toast.makeText(this, "No Network " , Toast.LENGTH_LONG).show();} */
-    
-        /*else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("No Net Connection Available");
-            builder.setMessage(  
-                    "Not Connected to Network")
-                    .setNegativeButton("No",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,
-                                        int id) {
-                                    dialog.cancel();
-                                }
-                            });
-            // AlertDialog alert = builder.create();
-            builder.show();            
-       }*/
-             
-        /*else{
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Not Connected to Network");
-            builder.setMessage(
-                    "No network connection available?")
-                    .setCancelable(false)                    
-                    .setNegativeButton("Ok",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,
-                                        int id) {
-                                    dialog.cancel();
-                                }
-                            });
-            builder.show();
-        }    */  
+    /* (non-Javadoc)
+     * @see java.lang.Runnable#run()
+     */
+    public void run() {        
         setConnection();
         handler.sendEmptyMessage(0);
     }
     
+    /**
+     * Sets the connection.
+     */
     public void setConnection(){
         try {
             String solvingFor = globalVariables.getSolvingFor();
             if (solvingFor != null && !solvingFor.isEmpty()) {
                 String URL;
-                //if (solvingFor.equals(SolutionTypeEnum.POWER.getId()))
                 String enumPower = getString(R.string.enum_power_value);
                 if (enumPower.equals(solvingFor))
                     URL = SERVICE_URL + "power";
                 else
                     URL = SERVICE_URL + "samplesize";
 
-                ClientResource cr = new ClientResource(URL);
-                                    
-                /*Series<Cookie> cookies= cr.getCookies();
-                if(cookies.getValues(GLIMMPSE_COOKIE) == null){
-                    cookies.removeAll(GLIMMPSE_COOKIE);
-                }
-                    cookies.add(GLIMMPSE_COOKIE, "StudyDesign");
-                
-                System.out.println("------------------------------");
-                System.out.println("Cookies Saved : "+cr.getCookies().size());
-                System.out.println("------------------------------");*/
+                ClientResource cr = new ClientResource(URL);                                                   
 
                 StudyDesign studyDesign = globalVariables.getStudyDesign();
                 globalVariables.setDefaults();
                
-                System.out.println(studyDesign);
+                //System.out.println(studyDesign);
                 double[][] d =studyDesign.getCovarianceFromSet("__RESPONSE_COVARIANCE__").getBlob().getData();
-                System.out.println(d[0][0]);
+                //System.out.println(d[0][0]);
 
                 Representation repr = cr.post(studyDesign);
 
@@ -847,16 +624,20 @@ public class TabViewActivity extends Activity implements Runnable,
     }
     
     
-    @SuppressWarnings("deprecation")
+    /**
+     * Calculate button disabled.
+     */
     private void calculateButtonDisabled(){
-        calculateButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.inactive_button_selector));
+        calculateButton.setBackgroundResource(R.drawable.inactive_button_selector);
         calculateButton.setEnabled(false);
         calculateButton.setClickable(false);
     }
     
-    @SuppressWarnings("deprecation")
+    /**
+     * Calculate button enabled.
+     */
     private void calculateButtonEnabled(){ 
-        calculateButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.calculate_button_selector));
+        calculateButton.setBackgroundResource(R.drawable.calculate_button_selector);
         calculateButton.setEnabled(true);
         calculateButton.setClickable(true);
     }
