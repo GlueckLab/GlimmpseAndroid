@@ -37,8 +37,9 @@
     <property name="tmp.dir" value="${basedir}/tmp" />
     <property name="artifacts.dir" value="${basedir}/artifacts" />
 	<property name="javadoc.dir" value="${tmp.dir}/${app.name}-${app.version}-javadoc" />
-	<property name="thirdparty.dir" value="${basedir}/../../thirdparty" />
+	<property name="thirdparty.dir" value="${basedir}/../../thirdparty" />	
 	<property name="gen.dir" value="${basedir}/../gen" />
+	<!-- <property name="gen.lib.dir" value="${gen.dir}/edu/ucdenver/bios/glimmpseandroid" /> -->
 	<property name="webservicecommon.lib" 
 		value="${basedir}/../../WebServiceCommon/build/artifacts/edu.ucdenver.bios.webservice.common-android-dev.jar" />
 	<!-- <property name="webservicecommon.lib" 
@@ -56,12 +57,23 @@
         <!-- End : Resltet jars -->
         <include name="Android/4.0.3/lib/android.jar" />
     </fileset>
-    
+    	
     <!-- complete classpath -->
 	<path id="library.path">
 		<fileset refid="thirdparty.libs"/>
 		<fileset file="${webservicecommon.lib}" />
 	</path>
+	
+	<!-- <fileset id="android.R.lib" dir="${gen.lib.dir}">	    		
+        <include name="R.java" />        
+    </fileset>
+    
+	<path id="Rlibrary.path">
+	    <fileset refid="thirdparty.libs"/>
+		<fileset file="${webservicecommon.lib}" />
+	    <fileset refid="android.R.lib"/>
+    </path> -->
+    
 	
 	
 	<!-- ******************************************************* -->
@@ -92,7 +104,7 @@
     <target
         name="compile"
         depends="setup" >
-        <!-- <javac
+        <javac
             classpathref="library.path"
             bootclasspath="Android/4.0.3/lib/android.jar"
             debug="${debug}"
@@ -104,7 +116,7 @@
             source="1.5">      
             <src path="${source.dir}"/>
             <src path="${gen.dir}"/>            
-        </javac> -->        
+        </javac>        
     </target>
 	
 	<!-- Build the project's war file. MIGHT BE ABLE TO DELETE? -->
@@ -118,8 +130,47 @@
     
     <target name="javadoc"
     	description="Generates the API specification (javadoc)">
+        <!-- <javadoc packagenames="edu.ucdenver.bios.*"
+                 access="public"
+                 classpath="${basedir}/tmp/classes" 
+                 destdir="${javadoc.dir}"
+                 use="true"
+                 author="true"
+                 version="true"
+                 windowtitle="${owner}: Glimmpse Android Application Java API (${app.version}) Specification"
+                 doctitle="${owner}: Glimmpse Android Application Java API (${app.version}) Specification">
+             <fileset dir="${source.dir}" defaultexcludes="yes">
+                 <include name="**/*.java"/>
+            </fileset>
+            <classpath>
+                <path refid="library.path" />
+            </classpath>
+            <header><![CDATA[<p><b>Glimmpse Android Application ${app.version}</b></p>]]></header>
+            <bottom><![CDATA[<font size=1>${owner}</font>]]></bottom>
+            <link href="http://java.sun.com/javase/6/docs/api"/>
+        </javadoc> -->
+        <!-- <javadoc packagenames="edu.ucdenver.bios.*"
+                 access="public"
+                 destdir="${javadoc.dir}"
+                 use="true"
+                 author="true"
+                 version="true"
+                 windowtitle="${owner}: Glimmpse Android Application Java API (${app.version}) Specification"
+                 doctitle="${owner}: Glimmpse Android Application Java API (${app.version}) Specification">
+             <fileset dir="${source.dir}" defaultexcludes="yes">
+                 <include name="**/*.java"/>
+            </fileset>
+            <classpath>                
+                <path refid="Rlibrary.path" />
+                
+            </classpath>
+            <header><![CDATA[<p><b>Glimmpse Android Application ${app.version}</b></p>]]></header>
+            <bottom><![CDATA[<font size=1>${owner}</font>]]></bottom>
+            <link href="http://java.sun.com/javase/6/docs/api"/>
+        </javadoc> -->
         <javadoc packagenames="edu.ucdenver.bios.*"
                  access="public"
+                 classpath="${basedir}/tmp/classes" 
                  destdir="${javadoc.dir}"
                  use="true"
                  author="true"
@@ -886,9 +937,9 @@
                 <compilerarg line="${java.compilerargs}" />
             </javac>
 	
-            <copy todir="${tmp.dir}/classes">
+            <!-- <copy todir="${tmp.dir}/classes">
 			    <fileset dir="${out.classes.absolute.dir}"/>
-		  	</copy>
+		  	</copy> -->
             
             <!-- if the project is instrumented, intrument the classes -->
             <if condition="${build.is.instrumented}">
