@@ -3,6 +3,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <!-- Min version 8 not supported yet -->
     <uses-sdk
         android:minSdkVersion="9"
         android:targetSdkVersion="15" />
@@ -96,7 +97,7 @@
         <!-- Sample Size - Design Screen -->
         <activity
             android:name=".activity.design.SampleSizeActivity"
-            android:configChanges="keyboard"
+            android:configChanges="keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" >
         </activity>
