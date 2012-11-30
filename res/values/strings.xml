@@ -85,6 +85,8 @@
 	<string name="reset_message">This action will clear any unsaved study design information.  Continue?</string> 
 	<string name="yes">Yes</string>
 	<string name="no">No</string>
+	<string name="feedback_mail_subject">Glimmpse Lite Queries</string>
+    <string name="no_mail_client_error">There are no email clients installed.</string>
 
     <!-- About Us Screen -->
     <!-- Text View -->
@@ -162,7 +164,8 @@
     <string name="description_alpha">Enter Type I Error rate for the analysis.</string>
 
     <!-- Smallest Group Size Screen -->
-    <string name="description_smallest_group_size">Specify the smallest number of participants in the smallest group.</string>
+    <string name="description_smallest_group_size">Specify the number of study participants in the smallest group.
+	\nYou may add up to five values: power or sample size will be calculated for each value you choose.</string>
 
     <!-- Solving For Screen -->
     <string name="description_solving_for">\nTo begin your calculation, please indicate whether you would like to solve for power or total sample size.</string>
