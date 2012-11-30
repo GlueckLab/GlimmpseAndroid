@@ -121,8 +121,10 @@ public class StuyDesignContext {
     /** The Constant DEFAULT_MEAN_COLUMN. */
     private static final int DEFAULT_MEAN_COLUMN = 0;
     
+    /** The Constant ENUM_POWER_VALUE. */
     private static final String ENUM_POWER_VALUE = "Power";
     
+    /** The Constant ENUM_SAMPLE_SIZE_VALUE. */
     private static final String ENUM_SAMPLE_SIZE_VALUE = "Sample Size";
 
     /** The Constant DEFAULT_CORELATION_MATRIX. */
@@ -332,7 +334,10 @@ public class StuyDesignContext {
     }
 
     /**
-     * Convenience Method which returns Number of Groups
+     * Convenience Method which returns Number of Groups.
+     *
+     * @param groups the groups
+     * @return the between participant factor
      */    
     private BetweenParticipantFactor createCategory(int groups) {
         List<Category> categoryList = new ArrayList<Category>();
