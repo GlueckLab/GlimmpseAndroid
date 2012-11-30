@@ -256,23 +256,26 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
                     }
                 }
                 Uri url = null;
+                if( file != null ){
                 url = Uri.fromFile(file);
-                uris.add(url);
+                uris.add(url);}
                 
                 Uri url1 = null;
+                if( file1 != null ){
                 url1 = Uri.fromFile(file1);                                             
-                uris.add(url1);
+                uris.add(url1);}
                                                
-
-                Intent sendIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT, resources.getString(R.string.mail_subject));
-                sendIntent.putExtra(Intent.EXTRA_TEXT, resources.getString(R.string.mail_body));
-                //sendIntent.putExtra(Intent.EXTRA_STREAM, url);
-                sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);                
-                // sendIntent.setType("text/html");
-                sendIntent.setType("message/rfc822");
-                startActivity(sendIntent);
-
+                if(uris != null){
+                    Intent sendIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, resources.getString(R.string.mail_subject));
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, resources.getString(R.string.mail_body));
+                    //sendIntent.putExtra(Intent.EXTRA_STREAM, url);
+                    sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);                
+                    // sendIntent.setType("text/html");
+                    sendIntent.setType("message/rfc822");
+                    startActivity(sendIntent);
+                }
+                
             }
         });
 
