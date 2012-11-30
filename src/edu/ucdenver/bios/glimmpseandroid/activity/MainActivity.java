@@ -42,17 +42,19 @@ import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
  */
 public class MainActivity extends Activity {
 
+    /** The Constant TAB_ID. */
     public static final String TAB_ID = "tab_id";
-    
+
+    /** The Constant ZERO. */
     public static final int ZERO = 0;
-    
-    public static final int ONE = 1; 
-    
+
+    /** The Constant ONE. */
+    public static final int ONE = 1;
+
     /**
-     * This method is called when the Activity is first started. From the
-     * incoming Intent, it determines what kind of editing is desired, and then
-     * does it.
-     * 
+     * Called when an Activity is first started. From the incoming Intent, it
+     * determines what kind of editing is desired, and then does it.
+     *  
      * @param savedInstanceState
      *            the saved instance state
      */
@@ -60,9 +62,9 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         /* Initialize required activity. */
         super.onCreate(savedInstanceState);
-        
-        //Debug.startMethodTracing("GllimpseLiteTrace");
-        
+
+        // Debug.startMethodTracing("GllimpseLiteTrace");
+
         /* Setting custom title bar. */
         final Window window = getWindow();
         boolean useTitleFeature = false;
@@ -81,13 +83,13 @@ public class MainActivity extends Activity {
             homeButton.setVisibility(View.GONE);
 
             Resources res = getResources();
-            TextView title = (TextView) findViewById(R.id.window_title);
+            TextView title = (TextView) findViewById(R.id.window_title);            // Setting action event for Window Title.
             title.setText(res.getString(R.string.title_home));
 
         }
 
         Button start = (Button) this.findViewById(R.id.start_button_home);
-        start.setOnClickListener(new OnClickListener() {
+        start.setOnClickListener(new OnClickListener() {                            // Setting action event for Start Button.
 
             public void onClick(View v) {
                 Intent tabIntent = new Intent(v.getContext(),
@@ -102,7 +104,7 @@ public class MainActivity extends Activity {
 
         Button learnMore = (Button) this
                 .findViewById(R.id.learn_more_button_home);
-        learnMore.setOnClickListener(new OnClickListener() {
+        learnMore.setOnClickListener(new OnClickListener() {                        // Setting action event for Back Button.
 
             public void onClick(View v) {
                 Intent tabIntent = new Intent(v.getContext(),
@@ -115,28 +117,35 @@ public class MainActivity extends Activity {
 
         });
     }
-    
-    
 
+    /*
+     * Called when the screen is no longer visible to the user. Next possible
+     * methods to receive could be either onRestart(), onDestroy(), or nothing,
+     * depending on later user activity.
+     */
     @Override
     protected void onStop() {
         super.onStop();
-        
-        //Debug.stopMethodTracing();
+        // Debug.stopMethodTracing();
     }
-
-
 
     /**
      * Method called when a new hardware key event occurs.
+     * 
+     * @param keyCode
+     *            the key code
+     * @param event
+     *            the event
+     * @return true, if successful
      */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+            // Finish the activity if user presses back key from keyboard. 
             StuyDesignContext.resetInstance();
             finish();
             return true;
         }
         return super.onKeyDown(keyCode, event);
     }
-    
+
 }
