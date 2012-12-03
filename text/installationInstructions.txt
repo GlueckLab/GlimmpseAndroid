@@ -1,0 +1,36 @@
+GLIMMPSE (General Linear Multivariate Model Power and Sample size)
+Copyright (C) 2010 Regents of the University of Colorado.  
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ 
+------------------------------
+1. Through Google Play Store
+------------------------------
+On Google Play Store tap on the Apps link. Here you can search the app you want to install.
+Each app on Google Play Store has its own page where an user can find details, reviews, ratings and download size.
+Since GLIMMPSELite is a free app, you will see a button named Install.
+
+While installing the app from web interface, user will be asked to choose a device from drop down menu to install the app on.
+
+Please see the Android documentation at https://play.google.com/store/apps/details?id=com.zeptolab.ctr.paid&feature=app_collections
+ for details on Android app installation.
+
+------------------------------
+2. Sideloading
+------------------------------
+User has to go into the device settings and enable “Unknown Sources”.
+
+GLIMMPSELite.apk file will be available for download on SampleSizeShop website at following link http://glimmpse.samplesizeshop.com/
+User can then install the downloaded apk file.
