@@ -775,6 +775,12 @@
         <echo level="info">----------</echo>
         <echo level="info">Resolving Dependencies for ${ant.project.name}...</echo>                  
         
+        <copy todir="${jar.libs.absolute.dir}">
+	    <fileset 
+	      dir="${basedir}/../libs" 
+	      includes="*.jar" />
+	  	</copy>	
+        
         <dependency
                 libraryFolderPathOut="project.library.folder.path"
                 libraryPackagesOut="project.library.packages"
