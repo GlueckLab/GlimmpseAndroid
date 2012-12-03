@@ -165,7 +165,7 @@
 
     <!-- Smallest Group Size Screen -->
     <string name="description_smallest_group_size">Specify the number of study participants in the smallest group.
-	\nYou may add up to five values: power or sample size will be calculated for each value you choose.</string>
+	\n\nYou may add up to five values: power or sample size will be calculated for each value you choose.</string>
 
     <!-- Solving For Screen -->
     <string name="description_solving_for">\nTo begin your calculation, please indicate whether you would like to solve for power or total sample size.</string>
