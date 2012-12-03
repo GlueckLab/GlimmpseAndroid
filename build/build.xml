@@ -107,6 +107,7 @@
         <javac
             classpathref="library.path"
             bootclasspath="Android/4.0.3/lib/android.jar"
+            includeantruntime="false"
             debug="${debug}"
             destdir="${tmp.dir}/classes"
             encoding="ascii"
@@ -1752,7 +1753,8 @@
     <!-- ******************************************************* -->
 	
 	<target name="distribution.binary">
-	    <echo>${out.absolute.dir}/${glimmpselite}-debug.apk</echo>		
+	    <!-- <echo>${out.absolute.dir}/${glimmpselite}-debug.apk</echo>		 -->
+	    <echo>${out.absolute.dir}/${glimmpselite}-release.apk</echo>		
 		<zip destfile="${artifacts.dir}/${app.name}-${app.version}-binary.zip" >
 		    <!-- Debug Mode -->
 			<!-- <zipfileset file="${out.absolute.dir}/${glimmpselite}-debug.apk" />	 -->
