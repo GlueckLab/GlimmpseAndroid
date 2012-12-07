@@ -1,6 +1,6 @@
 /*
  * Mobile - Android, User Interface for the GLIMMPSE Software System.  Allows
- * users to perform power, sample size calculations. 
+ * users to perform power and sample size calculations. 
  * 
  * Copyright (C) 2010 Regents of the University of Colorado.  
  *
@@ -35,41 +35,68 @@ import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class MainActivity deals with the HomeScreen of the GLIMMPSE LITE
+ * The Class MainActivity deals with the 'Home' screen of the GLIMMPSE LITE
  * Application.
  * 
  * @author Uttara Sakhadeo
+ * @version 1.0.0
  */
 public class MainActivity extends Activity {
 
-    /** The Constant TAB_ID. */
+    /**
+     * The Constant TAB_ID.
+     * 
+     * <p>
+     * TAB_ID is passed to TabViewActivity along with actual tab number.
+     * </p>
+     */
     public static final String TAB_ID = "tab_id";
 
-    /** The Constant ZERO. */
+    /**
+     * The Constant ZERO.
+     * 
+     * <p>
+     * If user clicks on 'Learn More' button, which is available on Home Screen
+     * then TAB_ID and ZERO parameters are bundled together and passed to
+     * TabViewActivity. With the help of these parameters tab 'Tutorial' is set
+     * as active tab on TabViewActivity screen.
+     * </p>
+     */
     public static final int ZERO = 0;
 
-    /** The Constant ONE. */
+    /**
+     * The Constant ONE.
+     * 
+     * <p>
+     * If user clicks on 'Start' button, which is available on Home Screen then
+     * TAB_ID and ONE parameters are bundled together and passed to
+     * TabViewActivity. With the help of these parameters tab 'Design' is set as
+     * active tab on TabViewActivity screen.
+     * </p>
+     */
     public static final int ONE = 1;
 
     /**
      * Called when an Activity is first started. From the incoming Intent, it
      * determines what kind of editing is desired, and then does it.
-     *  
+     * 
      * @param savedInstanceState
      *            the saved instance state
+     * 
+     * @see android.app.Activity#onCreate(android.os.Bundle)
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         /* Initialize required activity. */
         super.onCreate(savedInstanceState);
 
-        // Debug.startMethodTracing("GllimpseLiteTrace");
-
         /* Setting custom title bar. */
         final Window window = getWindow();
         boolean useTitleFeature = false;
-        // If the window has a container, then we are not free
-        // to request window features.
+        /*
+         * If the window has a container, then we are not free to request window
+         * features.
+         */
         if (window.getContainer() == null) {
             useTitleFeature = window
                     .requestFeature(Window.FEATURE_CUSTOM_TITLE);
@@ -83,13 +110,15 @@ public class MainActivity extends Activity {
             homeButton.setVisibility(View.GONE);
 
             Resources res = getResources();
-            TextView title = (TextView) findViewById(R.id.window_title);            // Setting action event for Window Title.
+            /* Setting Window Title. */
+            TextView title = (TextView) findViewById(R.id.window_title);
             title.setText(res.getString(R.string.title_home));
 
         }
 
         Button start = (Button) this.findViewById(R.id.start_button_home);
-        start.setOnClickListener(new OnClickListener() {                            // Setting action event for Start Button.
+        /* Setting action event for Start Button. */
+        start.setOnClickListener(new OnClickListener() {
 
             public void onClick(View v) {
                 Intent tabIntent = new Intent(v.getContext(),
@@ -104,7 +133,8 @@ public class MainActivity extends Activity {
 
         Button learnMore = (Button) this
                 .findViewById(R.id.learn_more_button_home);
-        learnMore.setOnClickListener(new OnClickListener() {                        // Setting action event for Back Button.
+        /* Setting action event for Back Button. */
+        learnMore.setOnClickListener(new OnClickListener() {
 
             public void onClick(View v) {
                 Intent tabIntent = new Intent(v.getContext(),
@@ -118,15 +148,16 @@ public class MainActivity extends Activity {
         });
     }
 
-    /*
+    /**
      * Called when the screen is no longer visible to the user. Next possible
      * methods to receive could be either onRestart(), onDestroy(), or nothing,
      * depending on later user activity.
+     * 
+     * @see android.app.Activity#onStop()
      */
     @Override
     protected void onStop() {
         super.onStop();
-        // Debug.stopMethodTracing();
     }
 
     /**
@@ -140,7 +171,7 @@ public class MainActivity extends Activity {
      */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            // Finish the activity if user presses back key from keyboard. 
+            /* Finish the activity if user presses back key from keyboard. */
             StuyDesignContext.resetInstance();
             finish();
             return true;
