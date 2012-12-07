@@ -1,7 +1,6 @@
 <!--
- * User Interface for the GLIMMPSE Software System.  Allows
- * users to perform power, sample size, and detectable difference
- * calculations. 
+ * Mobile - Android, User Interface for the GLIMMPSE Software System.  Allows
+ * users to perform power and sample size calculations. 
  * 
  * Copyright (C) 2010 Regents of the University of Colorado.  
  *
@@ -25,12 +24,17 @@
 			should be specified. Appropriate changes to the manifest and source
 			code will be performed by the build -->
 	<property name="app.version" value="dev" />
+	<condition property="webservicecommon.version" value="dev">
+	   <not>  
+	      <isset property=""/>
+	   </not>
+	</condition>
 
     <!-- main properties -->    
     <property name="owner" value="University of Colorado Denver, 
 		Department of Biostatistics and Informatics" />
 	<property name="author" value="Uttara Sakhadeo" />
-	<property name="glimmpselite" value="Glimmpse Lite" />
+	<property name="glimmpselite" value="GLIMMPSELite" />
 	<property name="app.name" value="edu.ucdenver.bios.glimmpseandroid" />
 	<property name="debug" value="FALSE" />
 	<property name="source.dir" value="${basedir}/../src" />
@@ -39,13 +43,9 @@
 	<property name="javadoc.dir" value="${tmp.dir}/${app.name}-${app.version}-javadoc" />
 	<property name="thirdparty.dir" value="${basedir}/../../thirdparty" />	
 	<property name="gen.dir" value="${basedir}/../gen" />
-	<!-- <property name="gen.lib.dir" value="${gen.dir}/edu/ucdenver/bios/glimmpseandroid" /> -->
 	<property name="webservicecommon.lib" 
-		value="${basedir}/../../WebServiceCommon/build/artifacts/edu.ucdenver.bios.webservice.common-android-dev.jar" />
-	<!-- <property name="webservicecommon.lib" 
-		value="${basedir}/../../WebServiceCommon/build/artifacts/edu.ucdenver.bios.webservice.common-android-1.0.0.jar" /> -->
-		
-		
+		value="${basedir}/../../WebServiceCommon/build/artifacts/edu.ucdenver.bios.webservice.common-android-${webservicecommon.version}.jar" />	
+				
 	
 	<!-- Third party libraries -->
 	<fileset id="thirdparty.libs" dir="${thirdparty.dir}">	    
@@ -63,19 +63,7 @@
 		<fileset refid="thirdparty.libs"/>
 		<fileset file="${webservicecommon.lib}" />
 	</path>
-	
-	<!-- <fileset id="android.R.lib" dir="${gen.lib.dir}">	    		
-        <include name="R.java" />        
-    </fileset>
-    
-	<path id="Rlibrary.path">
-	    <fileset refid="thirdparty.libs"/>
-		<fileset file="${webservicecommon.lib}" />
-	    <fileset refid="android.R.lib"/>
-    </path> -->
-    
-	
-	
+		
 	<!-- ******************************************************* -->
     <!-- *** Target for remove artifacts from previous build *** -->
     <!-- ******************************************************* -->
@@ -131,44 +119,6 @@
     
     <target name="javadoc"
     	description="Generates the API specification (javadoc)">
-        <!-- <javadoc packagenames="edu.ucdenver.bios.*"
-                 access="public"
-                 classpath="${basedir}/tmp/classes" 
-                 destdir="${javadoc.dir}"
-                 use="true"
-                 author="true"
-                 version="true"
-                 windowtitle="${owner}: Glimmpse Android Application Java API (${app.version}) Specification"
-                 doctitle="${owner}: Glimmpse Android Application Java API (${app.version}) Specification">
-             <fileset dir="${source.dir}" defaultexcludes="yes">
-                 <include name="**/*.java"/>
-            </fileset>
-            <classpath>
-                <path refid="library.path" />
-            </classpath>
-            <header><![CDATA[<p><b>Glimmpse Android Application ${app.version}</b></p>]]></header>
-            <bottom><![CDATA[<font size=1>${owner}</font>]]></bottom>
-            <link href="http://java.sun.com/javase/6/docs/api"/>
-        </javadoc> -->
-        <!-- <javadoc packagenames="edu.ucdenver.bios.*"
-                 access="public"
-                 destdir="${javadoc.dir}"
-                 use="true"
-                 author="true"
-                 version="true"
-                 windowtitle="${owner}: Glimmpse Android Application Java API (${app.version}) Specification"
-                 doctitle="${owner}: Glimmpse Android Application Java API (${app.version}) Specification">
-             <fileset dir="${source.dir}" defaultexcludes="yes">
-                 <include name="**/*.java"/>
-            </fileset>
-            <classpath>                
-                <path refid="Rlibrary.path" />
-                
-            </classpath>
-            <header><![CDATA[<p><b>Glimmpse Android Application ${app.version}</b></p>]]></header>
-            <bottom><![CDATA[<font size=1>${owner}</font>]]></bottom>
-            <link href="http://java.sun.com/javase/6/docs/api"/>
-        </javadoc> -->
         <javadoc packagenames="edu.ucdenver.bios.*"
                  access="public"
                  classpath="${basedir}/tmp/classes" 
@@ -1203,8 +1153,8 @@
 
     <target name="-set-debug-files" depends="-set-mode-check">
 
-        <property name="out.packaged.file" location="${out.absolute.dir}/${glimmpselite}-debug-unaligned.apk" />
-        <property name="out.final.file" location="${out.absolute.dir}/${glimmpselite}-debug.apk" />
+        <property name="out.packaged.file" location="${out.absolute.dir}/${glimmpselite}-${app.version}-debug-unaligned.apk" />
+        <property name="out.final.file" location="${out.absolute.dir}/${glimmpselite}-${app.version}-debug.apk" />
         <property name="build.is.mode.set" value="true" />
     </target>
 
@@ -1312,8 +1262,8 @@
 
     <target name="-set-release-mode" depends="-set-mode-check">
                        
-        <property name="out.packaged.file" location="${out.absolute.dir}/${glimmpselite}-release-unsigned.apk" />
-        <property name="out.final.file" location="${out.absolute.dir}/${glimmpselite}-release.apk" />
+        <property name="out.packaged.file" location="${out.absolute.dir}/${glimmpselite}-${app.version}-release-unsigned.apk" />
+        <property name="out.final.file" location="${out.absolute.dir}/${glimmpselite}-${app.version}.apk" />
         <property name="build.is.mode.set" value="true" />
 
         <!-- record the current build target -->
@@ -1753,13 +1703,14 @@
     <!-- ******************************************************* -->
 	
 	<target name="distribution.binary">
-	    <!-- <echo>${out.absolute.dir}/${glimmpselite}-debug.apk</echo>		 -->
-	    <echo>${out.absolute.dir}/${glimmpselite}-release.apk</echo>		
+	    <!-- <echo>${out.absolute.dir}/${out.final.file}</echo> -->		
+	    <echo>${out.final.file}</echo>		
 		<zip destfile="${artifacts.dir}/${app.name}-${app.version}-binary.zip" >
 		    <!-- Debug Mode -->
 			<!-- <zipfileset file="${out.absolute.dir}/${glimmpselite}-debug.apk" />	 -->
 			<!-- Release Mode -->
-			<zipfileset file="${out.absolute.dir}/${glimmpselite}-release.apk" />
+			<!-- <zipfileset file="${out.absolute.dir}/${out.final.file}" /> -->
+			<zipfileset file="${out.final.file}" />
 			<zipfileset file="${basedir}/../LICENSE-gpl2.0.txt"/>
 		    <zipfileset file="${basedir}/../README.txt"/>
 		</zip>
