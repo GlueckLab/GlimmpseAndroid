@@ -66,6 +66,15 @@
     <string name="tutorial_smallest_group_size_description">Smallest Group Size</string>
     <string name="tutorial_power_description">Power</string>
     <string name="tutorial_means_and_variance_description">Means and Variance</string>
+    
+    <!-- Pop Up Labels -->
+    <string name="ok">OK</string>
+    
+    <string name="no_net_connection_title">No internet Connection</string>
+    <string name="no_net_connection_description">Not connected to internet</string>
+    <string name="calculation_error_title">Could not calculate</string>
+    <string name="calculation_error_description">Sorry we could not calculate the results.</string>
+        
 
     <!-- Home Screen -->
     <!-- Text View -->
@@ -165,7 +174,7 @@
 
     <!-- Smallest Group Size Screen -->
     <string name="description_smallest_group_size">Specify the number of study participants in the smallest group.
-	\n\nYou may add up to five values: power or sample size will be calculated for each value you choose.</string>
+	\nYou may add up to five values: power or sample size will be calculated for each value you choose.</string>
 
     <!-- Solving For Screen -->
     <string name="description_solving_for">\nTo begin your calculation, please indicate whether you would like to solve for power or total sample size.</string>
@@ -182,12 +191,17 @@
     <string name="description_relative_group_size">Select the relative group size for each group. For equal group sizes, select  "1" for all groups.</string>
     <string name="relative_group_size_list_header_group">Group</string>
     <string name="relative_group_size_list_header_value">Relative Group Size</string>
+    <string name="equal_relative_group_size">Equal</string>
+    <string name="unequal_relative_group_size">Unequal</string>
 
     <!-- Power Screen -->
     <string name="description_power">Please update the Power details.</string>
 
     <!-- Sample Size Screen -->
     <string name="description_sample_size">Please update the Sample Size details.</string>
+    
+    <!-- Design Screen -->
+    <string name="complete">Complete</string>
     
     <!-- Result Screen -->
     <string name="total_sample_size">Total Sample Size</string>
