@@ -1,6 +1,6 @@
 /*
  * Mobile - Android, User Interface for the GLIMMPSE Software System.  Allows
- * users to perform power, sample size calculations. 
+ * users to perform power and sample size calculations. 
  * 
  * Copyright (C) 2010 Regents of the University of Colorado.  
  *
@@ -43,30 +43,21 @@ import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class RelativeGroupSizeActivity.
+ * The Class RelativeGroupSizeActivity deals with the 'Relative Group Size'
+ * screen of the GLIMMPSE LITE Application.
+ * 
  * @author Uttara Sakhadeo
+ * @version 1.0.0
  */
-public class RelativeGroupSizeActivity extends Activity implements OnClickListener,SimpleGestureListener {
-//public class RelativeGroupSizeActivity extends Activity implements OnClickListener {
+public class RelativeGroupSizeActivity extends Activity implements
+        OnClickListener, SimpleGestureListener {
+
     /** The relative group size list view. */
-private ListView relativeGroupSizeListView;
-    
+    private ListView relativeGroupSizeListView;
+
     /** The detector. */
     private static GestureFilter detector;
-    
-    /*protected void onResume() {
-        super.onResume();
-        relativeGroupSizeListPopulate();
-        // If current screen is Design
-        if (mTabHost.getCurrentTab() == 1) {
-            designListPopulate();
-            globalVariables = StuyDesignContext.getInstance();
-            ProgressBar inputProgress = (ProgressBar) findViewById(R.id.input_progress);
-            // System.out.println("Tab View total progress : "+globalVariables.getTotalProgress());
-            inputProgress.setProgress(globalVariables.getTotalProgress());
-        }
-    }*/
-    
+
     /**
      * This method is called by Android when the Activity is first started. From
      * the incoming Intent, it determines what kind of editing is desired, and
@@ -80,9 +71,11 @@ private ListView relativeGroupSizeListView;
         super.onCreate(savedInstanceState);
         final Window window = getWindow();
         boolean useTitleFeature = false;
-        detector = new GestureFilter(this,this);
-        // If the window has a container, then we are not free
-        // to request window features.
+        detector = new GestureFilter(this, this);
+        /*
+         * If the window has a container, then we are not free to request window
+         * features.
+         */
         if (window.getContainer() == null) {
             useTitleFeature = window
                     .requestFeature(Window.FEATURE_CUSTOM_TITLE);
@@ -95,126 +88,109 @@ private ListView relativeGroupSizeListView;
         Button homeButton = (Button) findViewById(R.id.home_button);
         homeButton.setText(getResources().getString(R.string.title_design));
         homeButton.setOnClickListener(this);
-        
+
         Button resetButton = (Button) findViewById(R.id.reset_button);
         resetButton.setOnClickListener(new OnClickListener() {
-            
+
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 StuyDesignContext.getInstance().setDefaultRelativeGroupSize();
                 relativeGroupSizeListPopulate();
             }
         });
 
-        /*Button back = (Button) findViewById(R.id.back_button);
-        back.setOnClickListener(this);*/
-
         TextView title = (TextView) findViewById(R.id.window_title);
-        title.setText(getResources().getString(R.string.title_relative_group_size));
-        
-        /*relativeGroupSizeListView = (ListView)findViewById(R.id.relative_group_size_list_view);
-        View header =  getLayoutInflater().inflate(R.layout.design_relative_group_size_list_header, null, false);
-        if(relativeGroupSizeListView.getHeaderViewsCount() == 0)
-            relativeGroupSizeListView.addHeaderView(header);
-        int groups = StuyDesignContext.getInstance().getGroups();
-        if(groups > 0)
-            relativeGroupSizeListView.setAdapter(new RelativeGroupSizeAdapter(RelativeGroupSizeActivity.this,groups));
-        else{
-            
-        }*/
+        title.setText(getResources().getString(
+                R.string.title_relative_group_size));
+
         relativeGroupSizeListPopulate();
-        
+
     }
-    
+
     /**
      * Relative group size list populate.
      */
-    private void relativeGroupSizeListPopulate(){
-        relativeGroupSizeListView = (ListView)findViewById(R.id.relative_group_size_list_view);
-        View header =  getLayoutInflater().inflate(R.layout.design_relative_group_size_list_header, null, false);
-        if(relativeGroupSizeListView.getHeaderViewsCount() == 0)
+    private void relativeGroupSizeListPopulate() {
+        relativeGroupSizeListView = (ListView) findViewById(R.id.relative_group_size_list_view);
+        View header = getLayoutInflater().inflate(
+                R.layout.design_relative_group_size_list_header, null, false);
+        if (relativeGroupSizeListView.getHeaderViewsCount() == 0)
             relativeGroupSizeListView.addHeaderView(header);
-        //int groups = StuyDesignContext.getInstance().getGroups();
-        //if(groups > 0)
-            //relativeGroupSizeListView.setAdapter(new RelativeGroupSizeAdapter(RelativeGroupSizeActivity.this,groups));
-        relativeGroupSizeListView.setAdapter(new RelativeGroupSizeAdapter(RelativeGroupSizeActivity.this));        
+        relativeGroupSizeListView.setAdapter(new RelativeGroupSizeAdapter(
+                RelativeGroupSizeActivity.this));
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
      */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             finish();
             return true;
-         }
-         return super.onKeyDown(keyCode, event);
+        }
+        return super.onKeyDown(keyCode, event);
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see android.view.View.OnClickListener#onClick(android.view.View)
      */
     public void onClick(View v) {
-        /*
-         * // TODO Auto-generated method stub Bundle bundle = new Bundle();
-         * bundle.putInt("design_list_item", 2); value = (TextView)
-         * findViewById(R.id.see_progress); bundle.putInt("group_count",
-         * Integer.parseInt(value.getText().toString())); Intent result=new
-         * Intent(GroupCountActivity.this,DesignListAdapter.class); //Intent
-         * result=new Intent(); result.putExtras(bundle); setResult(0, result);
-         */
-        //stuyDesignContext.setGroups(groups);            
         finish();
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see android.app.Activity#dispatchTouchEvent(android.view.MotionEvent)
      */
-    public boolean dispatchTouchEvent(MotionEvent me){
-        //System.out.println("dispatchTouchEvent");
-        if(detector != null)
+    public boolean dispatchTouchEvent(MotionEvent me) {
+        if (detector != null)
             detector.onTouchEvent(me);
-       return super.dispatchTouchEvent(me);
-      }
+        return super.dispatchTouchEvent(me);
+    }
 
-    /* (non-Javadoc)
-     * @see edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener#onSwipe(int)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener
+     * #onSwipe(int)
      */
     public void onSwipe(int direction) {
-        // TODO Auto-generated method stub
-        if(direction == 3)
+        if (direction == 3)
             finish();
-             
-            switch (direction) {
-             
-            case GestureFilter.SWIPE_RIGHT :
-                                                    finish();
-                                                     break;
-            /*case GestureFilter.SWIPE_LEFT : break;
-            case GestureFilter.SWIPE_DOWN :  break;
-            case GestureFilter.SWIPE_UP :     break;*/
-                                                      
-            }
-             //Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+
+        switch (direction) {
+
+        case GestureFilter.SWIPE_RIGHT:
+            finish();
+            break;
+        }
     }
 
-    /* (non-Javadoc)
-     * @see edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener#onDoubleTap()
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener
+     * #onDoubleTap()
      */
     public void onDoubleTap() {
-        // TODO Auto-generated method stub
-        
+
     }
-    
+
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.home_screen_menu, menu);
         return true;
     }
-    
-    private boolean menuSelection(MenuItem item){
-        switch (item.getItemId()) { 
-        case R.id.menu_tutorial: 
+
+    private boolean menuSelection(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.menu_tutorial:
             finish();
             Intent tabIntent = new Intent(this.getBaseContext(),
                     TabViewActivity.class);
@@ -224,25 +200,24 @@ private ListView relativeGroupSizeListView;
             tabIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(tabIntent);
             return true;
-        case R.id.menu_start:           
-            finish();           
-            return true;
-        case R.id.menu_aboutus:             
+        case R.id.menu_start:
             finish();
-            tabIntent = new Intent(this.getBaseContext(),
-                    TabViewActivity.class);
+            return true;
+        case R.id.menu_aboutus:
+            finish();
+            tabIntent = new Intent(this.getBaseContext(), TabViewActivity.class);
             bundle = new Bundle();
             bundle.putInt("tab_id", 2);
             tabIntent.putExtras(bundle);
             tabIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(tabIntent);
             return true;
-        default: 
-            return super.onOptionsItemSelected(item); 
-            }
-    }
-    
-    public boolean onOptionsItemSelected(MenuItem item) { // Handle
-         return menuSelection(item);
+        default:
+            return super.onOptionsItemSelected(item);
         }
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) { // Handle
+        return menuSelection(item);
+    }
 }
