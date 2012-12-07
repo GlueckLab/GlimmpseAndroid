@@ -1,6 +1,6 @@
 /*
  * Mobile - Android, User Interface for the GLIMMPSE Software System.  Allows
- * users to perform power, sample size calculations. 
+ * users to perform power and sample size calculations. 
  * 
  * Copyright (C) 2010 Regents of the University of Colorado.  
  *
@@ -49,13 +49,12 @@ import edu.ucdenver.bios.webservice.common.enums.SolutionTypeEnum;
 import edu.ucdenver.bios.webservice.common.enums.StatisticalTestTypeEnum;
 import edu.ucdenver.bios.webservice.common.enums.StudyDesignViewTypeEnum;
 
-
-
 // TODO: Auto-generated Javadoc
 /**
- * Wizar context for study design.
+ * Wizard context for study design.
  * 
  * @author Uttara Sakhadeo
+ * @version 1.0.0
  */
 public class StuyDesignContext {
     /*--------------------
@@ -91,9 +90,6 @@ public class StuyDesignContext {
     /** The Constant DEFAULT_GROUP_NAME. */
     private static final String DEFAULT_GROUP_NAME = "Group";
 
-    /** The Constant DEFAULT_SMALLEST_GROUP_SIZE. */
-    //private static final int DEFAULT_SMALLEST_GROUP_SIZE = 0;
-
     /** The Constant DEFAULT_GROUPS. */
     private static final int DEFAULT_GROUPS = 2;
 
@@ -120,17 +116,14 @@ public class StuyDesignContext {
 
     /** The Constant DEFAULT_MEAN_COLUMN. */
     private static final int DEFAULT_MEAN_COLUMN = 0;
-    
+
     /** The Constant ENUM_POWER_VALUE. */
     private static final String ENUM_POWER_VALUE = "Power";
-    
+
     /** The Constant ENUM_SAMPLE_SIZE_VALUE. */
     private static final String ENUM_SAMPLE_SIZE_VALUE = "Sample Size";
 
     /** The Constant DEFAULT_CORELATION_MATRIX. */
-    /*
-     * private static final double[][] DEFAULT_CORELATION_MATRIX = { { 1 } };
-     */
 
     /** The Constant MATRIX_BETA. */
     private static final String MATRIX_BETA = "beta";
@@ -154,7 +147,7 @@ public class StuyDesignContext {
 
     /**
      * Get the study design object associated with this context.
-     *
+     * 
      * @return the study design
      */
     public StudyDesign getStudyDesign() {
@@ -213,7 +206,7 @@ public class StuyDesignContext {
         int sum = 0;
         int index = 0;
         while (index < progress.length) {
-            sum = sum + progress[index++];        
+            sum = sum + progress[index++];
         }
         return sum;
     }
@@ -273,16 +266,16 @@ public class StuyDesignContext {
      * # Groups
      *--------------------*/
     /**
-     * convenience Method which sets default Number of Groups.
-     * Stores the between participant factor information to the StudyDesign.
-     */       
+     * convenience Method which sets default Number of Groups. Stores the
+     * between participant factor information to the StudyDesign.
+     */
     public void setDefaultGroups() {
         setGroups(DEFAULT_GROUPS);
     }
 
     /**
-     * convenience Method which sets given Number of Groups.
-     * Stores the between participant factor information to the StudyDesign.
+     * convenience Method which sets given Number of Groups. Stores the between
+     * participant factor information to the StudyDesign.
      * 
      * @param groups
      *            the new groups
@@ -310,10 +303,10 @@ public class StuyDesignContext {
 
     /**
      * Convenience Method which returns Number of Groups.
-     *
+     * 
      * @return the groups
-     */    
-    
+     */
+
     public int getGroups() {
         List<BetweenParticipantFactor> list = studyDesign
                 .getBetweenParticipantFactorList();
@@ -335,10 +328,11 @@ public class StuyDesignContext {
 
     /**
      * Convenience Method which returns Number of Groups.
-     *
-     * @param groups the groups
+     * 
+     * @param groups
+     *            the groups
      * @return the between participant factor
-     */    
+     */
     private BetweenParticipantFactor createCategory(int groups) {
         List<Category> categoryList = new ArrayList<Category>();
         int index = 0;
@@ -354,7 +348,7 @@ public class StuyDesignContext {
      *--------------------*/
     /**
      * Convenience Method which sets default type i error.
-     */   
+     */
     public void setDefaultTypeIError() {
         setTypeIError(DEFAULT_ALPHA);
     }
@@ -366,13 +360,6 @@ public class StuyDesignContext {
      *            the new type i error
      */
     public void setTypeIError(Double alpha) {
-        /*
-         * List<TypeIError> list = studyDesign.getAlphaList(); if (list == null
-         * || list.isEmpty()) { list = new ArrayList<TypeIError>(1); } else { if
-         * (list.size() > 0) {
-         * 
-         * System.gc(); } }
-         */
         List<TypeIError> list = new ArrayList<TypeIError>(1);
         list.add(0, new TypeIError(alpha));
         studyDesign.setAlphaList(list);
@@ -394,7 +381,7 @@ public class StuyDesignContext {
             }
         }
         return list.get(0).getAlphaValue();
-    }   
+    }
 
     /*--------------------
      * Relative Group Size
@@ -437,7 +424,7 @@ public class StuyDesignContext {
                 if (list.get(position) != null) {
                     System.out.println("list.get(position) != null");
                     list.set(position, new RelativeGroupSize(relativeGroupSize));
-                    System.out.println("list size "+list.size());
+                    System.out.println("list size " + list.size());
                 } else {
                     System.out.println("list.get(position) == null");
                     list.add(position, new RelativeGroupSize(relativeGroupSize));
@@ -449,30 +436,6 @@ public class StuyDesignContext {
         }
         studyDesign.setRelativeGroupSizeList(list);
         setProgress(RELATIVE_GROUP_SIZE_ROW);
-        
-        /*List<RelativeGroupSize> relGpSzList = studyDesign.getRelativeGroupSizeList();
-        int size;
-        if (relGpSzList == null || relGpSzList.isEmpty()) {
-            relGpSzList = new ArrayList<RelativeGroupSize>(getGroups());
-            relGpSzList.add(new RelativeGroupSize(relativeGroupSize));
-        } else if (relGpSzList.size() - 1 > position) {
-            relGpSzList.set(position, new RelativeGroupSize(relativeGroupSize));
-            System.gc();
-        } else if (relGpSzList.size() == position) {
-            relGpSzList.add(new RelativeGroupSize(relativeGroupSize));
-        } else {
-            size = relGpSzList.size();
-            int additionalIndices = position - size;
-            for (int inc = 0; inc < additionalIndices; inc++) {
-                if (position == size + inc) {
-                    relGpSzList.add(new RelativeGroupSize(relativeGroupSize));
-                } else {
-                    relGpSzList.add(new RelativeGroupSize());
-                }
-            }
-        }
-        studyDesign.setRelativeGroupSizeList(relGpSzList);
-        setProgress(RELATIVE_GROUP_SIZE_ROW);*/
     }
 
     /**
@@ -517,15 +480,14 @@ public class StuyDesignContext {
             int originalRows = beta.getRows();
             double[][] originalData = beta.getData().getData();
             index = originalRows - numberOfGroups;
-            // System.out.println("rows after removing : "+index);
             double[][] changedData = new double[index][1];
             for (int inc = 0; inc < index; inc++) {
-                // System.out.println("transfering data ...");
                 changedData[inc][0] = originalData[inc][0];
             }
             beta.setRows(index);
             beta.setDataFromArray(changedData);
-            System.out.println("in synchForRemovedGroups: removed groups="+numberOfGroups+" remaining groups="+index);
+            System.out.println("in synchForRemovedGroups: removed groups="
+                    + numberOfGroups + " remaining groups=" + index);
         }
         studyDesign.setNamedMatrix(beta);
         System.gc();
@@ -543,12 +505,7 @@ public class StuyDesignContext {
         int index = 0;
         if (list != null && !list.isEmpty())
             index = list.size();
-        /*
-         * while (index < numberOfGroups) {
-         * setDefaultRelativeGroupSize(index++); }
-         */
         for (int inc = index; inc < index + numberOfGroups; inc++) {
-            // System.out.println("added group at "+inc);
             setDefaultRelativeGroupSize(inc);
         }
         /* Variance */
@@ -565,7 +522,6 @@ public class StuyDesignContext {
      */
     public void synchForGroupChanges(int numberOfGroupsChanged) {
         if (numberOfGroupsChanged > 0) {
-            // System.out.println("removed groups "+numberOfGroupsChanged);
             synchForRemovedGroups(numberOfGroupsChanged);
         } else if (numberOfGroupsChanged < 0) {
             int groups = Math.abs(numberOfGroupsChanged);
@@ -603,14 +559,13 @@ public class StuyDesignContext {
      */
     public void setSolvingFor(String solutionType) {
         if (solutionType != null) {
-            //if (SolutionTypeEnum.SAMPLE_SIZE.getId().equals(solutionType))            
             if (ENUM_SAMPLE_SIZE_VALUE.equals(solutionType))
                 studyDesign.setSolutionTypeEnum(SolutionTypeEnum.SAMPLE_SIZE);
             else
                 studyDesign.setSolutionTypeEnum(SolutionTypeEnum.POWER);
         }
         setProgress(SOLVING_FOR_ROW);
-        resetProgress(POWER_OR_SAMPLE_SIZE_ROW);        
+        resetProgress(POWER_OR_SAMPLE_SIZE_ROW);
     }
 
     /**
@@ -622,11 +577,10 @@ public class StuyDesignContext {
         SolutionTypeEnum solvingFor = studyDesign.getSolutionTypeEnum();
         if (solvingFor == null || solvingFor.equals("")) {
             return null;
-        }
-        else if(solvingFor.equals(SolutionTypeEnum.POWER))
-                return ENUM_POWER_VALUE;
+        } else if (solvingFor.equals(SolutionTypeEnum.POWER))
+            return ENUM_POWER_VALUE;
         else
-            return ENUM_SAMPLE_SIZE_VALUE;         
+            return ENUM_SAMPLE_SIZE_VALUE;
     }
 
     /*--------------------
@@ -664,17 +618,11 @@ public class StuyDesignContext {
                 Blob2DArray blob = cov.getBlob();
                 if (blob != null) {
                     covarianceMatrixData = blob.getData();
-                    if (covarianceMatrixData != null){                        
+                    if (covarianceMatrixData != null) {
                         return covarianceMatrixData[0][0];
                     }
                 }
             }
-
-            /*
-             * return Math.pow(((Covariance) studyDesign.getCovariance()
-             * .iterator().next()).getStandardDeviationList().get(0)
-             * .getValue(), 2);
-             */
         }
         return DEFAULT_VARIANCE;
     }
@@ -713,7 +661,7 @@ public class StuyDesignContext {
                 covarianceSet.clear();
             }
         }
-        covariance = createCovariance(variance);        
+        covariance = createCovariance(variance);
         studyDesign.addCovariance(covariance);
     }
 
@@ -729,9 +677,9 @@ public class StuyDesignContext {
         covariance.setType(DEFAULT_COVARIANCE_TYPE);
         covariance.setName(DEFAULT_COVARIANCE_NAME);
         covarianceMatrixData[0][0] = variance;
-        covariance.setBlobFromArray(covarianceMatrixData);    
+        covariance.setBlobFromArray(covarianceMatrixData);
         covariance.setRows(1);
-        covariance.setColumns(1);        
+        covariance.setColumns(1);
         return covariance;
     }
 
@@ -743,11 +691,11 @@ public class StuyDesignContext {
      * Sets the default relative group size.
      */
     public void setDefaultMeansAndVariance() {
-        int groups = getGroups();        
+        int groups = getGroups();
         setDefaultMeans(groups);
         setDefaultVariance();
     }
-    
+
     /**
      * Sets the default means.
      * 
@@ -755,7 +703,7 @@ public class StuyDesignContext {
      *            the new default means
      */
     private void setDefaultMeans(int numberOfGroups) {
-        //int index = 0;
+        // int index = 0;
         NamedMatrix beta = studyDesign.getNamedMatrix(MATRIX_BETA);
         if (beta == null) {
             beta = buildBetaMatrix(numberOfGroups);
@@ -768,22 +716,8 @@ public class StuyDesignContext {
         beta.setRows(numberOfGroups);
         studyDesign.setNamedMatrix(beta);
         System.gc();
-        /*
-         * index = 0; NamedMatrix beta =
-         * studyDesign.getNamedMatrix(MATRIX_BETA); double[][] originalData =
-         * null; if (beta != null) { System.out.println("BetaMeatrix not null");
-         * index = beta.getRows(); originalData = beta.getData().getData(); }
-         * else { beta = buildBetaMatrix(numberOfGroups); } int totalRows =
-         * index + numberOfGroups; System.out.println("new groups "+totalRows);
-         * double[][] changedData = new double[totalRows][1]; for (int inc = 0;
-         * inc < index ; inc++) { System.out.println("transfering data ....");
-         * changedData[inc][0] = originalData[inc][0]; } for (int inc = index;
-         * inc < totalRows; inc++) { System.out.println("mean added at "+inc);
-         * changedData[inc][0] = DEFAULT_MEAN; }
-         * beta.setDataFromArray(changedData);
-         */
     }
-    
+
     /**
      * Sets the default means.
      * 
@@ -811,21 +745,6 @@ public class StuyDesignContext {
         beta.setDataFromArray(changedData);
         beta.setRows(totalRows);
         studyDesign.setNamedMatrix(beta);
-
-        /*
-         * index = 0; NamedMatrix beta =
-         * studyDesign.getNamedMatrix(MATRIX_BETA); double[][] originalData =
-         * null; if (beta != null) { System.out.println("BetaMeatrix not null");
-         * index = beta.getRows(); originalData = beta.getData().getData(); }
-         * else { beta = buildBetaMatrix(numberOfGroups); } int totalRows =
-         * index + numberOfGroups; System.out.println("new groups "+totalRows);
-         * double[][] changedData = new double[totalRows][1]; for (int inc = 0;
-         * inc < index ; inc++) { System.out.println("transfering data ....");
-         * changedData[inc][0] = originalData[inc][0]; } for (int inc = index;
-         * inc < totalRows; inc++) { System.out.println("mean added at "+inc);
-         * changedData[inc][0] = DEFAULT_MEAN; }
-         * beta.setDataFromArray(changedData);
-         */
     }
 
     /**
@@ -874,7 +793,7 @@ public class StuyDesignContext {
      *            the position
      * @return the mean
      */
-    public double getMean(int position) {        
+    public double getMean(int position) {
         NamedMatrix beta = studyDesign.getNamedMatrix(MATRIX_BETA);
         double[][] data = beta.getData().getData();
         return data[position][DEFAULT_MEAN_COLUMN];
@@ -925,11 +844,6 @@ public class StuyDesignContext {
      * @return the power
      */
     public double getPower(int position) {
-        /*
-         * List<Double> powerList = studyDesign.getNominalPowerListValues();
-         * if(powerList != null && !powerList.isEmpty()) { if(powerList.size() >
-         * position) return powerList.get(position); } return -1;
-         */
         List<NominalPower> powerList = studyDesign.getNominalPowerList();
         if (powerList != null && !powerList.isEmpty()) {
             if (powerList.size() > position && powerList.get(position) != null)
@@ -962,12 +876,6 @@ public class StuyDesignContext {
             if (size > 1) {
                 System.out.println("size > 1");
                 newPowerList = new ArrayList<NominalPower>(size - 1);
-                /*
-                 * Iterator<NominalPower> iterator =
-                 * originalPowerList.iterator(); while(iterator.hasNext()) {
-                 * 
-                 * newPowerList.set(location, object) }
-                 */
                 int count = 0;
                 int index = 0;
                 while (count < size) {
@@ -976,12 +884,12 @@ public class StuyDesignContext {
                         newPowerList.add(index++, np);
                     }
                     count++;
-                }                                
-            }else {
+                }
+            } else {
                 System.out.println("size <= 1");
                 newPowerList = null;
                 resetProgress(POWER_OR_SAMPLE_SIZE_ROW);
-            }   
+            }
             studyDesign.setNominalPowerList(newPowerList);
             originalPowerList.clear();
             System.gc();
@@ -1047,12 +955,6 @@ public class StuyDesignContext {
      * @return the sample size
      */
     public int getSampleSize(int position) {
-        /*
-         * List<Double> sampleSizeList =
-         * studyDesign.getNominalPowerListValues(); if(sampleSizeList != null &&
-         * !sampleSizeList.isEmpty()) { if(sampleSizeList.size() > position)
-         * return sampleSizeList.get(position); } return -1;
-         */
         List<SampleSize> sampleSizeList = studyDesign.getSampleSizeList();
         if (sampleSizeList != null && !sampleSizeList.isEmpty()) {
             if (sampleSizeList.size() > position
@@ -1068,7 +970,7 @@ public class StuyDesignContext {
     public void clearSampleSizeList() {
         studyDesign.setSampleSizeList(null);
         resetProgress(POWER_OR_SAMPLE_SIZE_ROW);
-        System.gc();        
+        System.gc();
     }
 
     /**
@@ -1085,12 +987,6 @@ public class StuyDesignContext {
             int size = originalSampleSizeList.size();
             if (size > 1) {
                 newSampleSizeList = new ArrayList<SampleSize>(size - 1);
-                /*
-                 * Iterator<NominalPower> iterator =
-                 * originalPowerList.iterator(); while(iterator.hasNext()) {
-                 * 
-                 * newPowerList.set(location, object) }
-                 */
                 int count = 0;
                 int index = 0;
                 while (count < size) {
@@ -1119,7 +1015,6 @@ public class StuyDesignContext {
         List<SampleSize> sampleSizeList = studyDesign.getSampleSizeList();
         if (sampleSizeList != null && !sampleSizeList.isEmpty())
             return sampleSizeList.size();
-        // if(sampleSizeList != null && !sampleSizeList.isEmpty()) {
         else
             return 0;
     }
@@ -1161,19 +1056,6 @@ public class StuyDesignContext {
         List<SigmaScale> sigmaScaleList = new ArrayList<SigmaScale>(1);
         sigmaScaleList.add(new SigmaScale(1.0));
         studyDesign.setSigmaScaleList(sigmaScaleList);
-
-        // Add Sigma Scale List
-
-        // build the design eseence matrix
-        /*
-         * RealMatrix matrix = MatrixUtils.createRealIdentityMatrix(2);
-         * NamedMatrix namedMatrix = new NamedMatrix();
-         * namedMatrix.setDataFromArray(matrix.getData());
-         * namedMatrix.setName("design");
-         * namedMatrix.setColumns(matrix.getColumnDimension());
-         * namedMatrix.setRows(matrix.getRowDimension());
-         * studyDesign.setNamedMatrix(namedMatrix);
-         */
     }
 
     /**
@@ -1184,9 +1066,7 @@ public class StuyDesignContext {
      * @return the named matrix
      */
     private NamedMatrix buildBetaMatrix(int groups) {
-        // double [][] betaData = {{0},{1}};
         NamedMatrix beta = new NamedMatrix(MATRIX_BETA);
-        // beta.setDataFromArray(betaData);
         beta.setRows(groups);
         beta.setColumns(1);
         return beta;
