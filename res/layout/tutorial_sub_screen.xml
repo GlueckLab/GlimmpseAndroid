@@ -16,37 +16,14 @@
 
   	You should have received a copy of the GNU General Public License
   	along with this program; if not, write to the Free Software
-  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tutorial_subview"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/white"
     android:layout_marginTop="5dp"
-     android:id="@+id/tutorial_subview" >
-
-    <!-- <Button
-        android:id="@+id/back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_below="@+id/description_textView_tutorial_sub_screen"
-        android:layout_centerHorizontal="true"
-        android:text="@string/back_button_label"
-        android:textColor="@color/button_label_black"
-        android:textSize="10dp" /> -->
-
-    <!-- <TextView
-        android:id="@+id/title_textView_tutorial_sub_screen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/description_textView_tutorial_sub_screen"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:gravity="center|center_vertical|center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/black"
-        android:textSize="16dp"
-        android:lineSpacingExtra="3dp" /> -->
+    android:background="@color/white" >
 
     <TextView
         android:id="@+id/description_textView_tutorial_sub_screen"
@@ -54,15 +31,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:fadeScrollbars="false"
         android:lineSpacingExtra="3dp"
-        android:typeface="sans"
+        android:scrollbars="vertical"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/black"
         android:textSize="16dp"
-        android:scrollbars="vertical"
-        android:fadeScrollbars="false" />
+        android:typeface="sans" />
 
 </RelativeLayout>

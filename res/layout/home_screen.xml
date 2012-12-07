@@ -16,7 +16,7 @@
 
   	You should have received a copy of the GNU General Public License
   	along with this program; if not, write to the Free Software
-  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
@@ -36,7 +36,7 @@
         android:textColor="@color/black"
         android:textSize="17dp"
         android:textStyle="bold" />
-
+
     <TextView
         android:id="@+id/description_textView_home"
         android:layout_width="280dp"

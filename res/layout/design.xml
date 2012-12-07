@@ -16,22 +16,13 @@
 
   	You should have received a copy of the GNU General Public License
   	along with this program; if not, write to the Free Software
-  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/start_view"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"    
-    android:orientation="vertical"
-     >
-
-    <!--
-         <FrameLayout
-        android:id="@+id/group_panel"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center" >
-    -->
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
 
     <RelativeLayout
         android:id="@+id/groupadd"
@@ -54,38 +45,7 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:typeface="serif" />
-<!--         <Button
-            android:id="@+id/calculate_button"
-            android:layout_width="200dp"
-            android:layout_height="45dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/back_button_selector"
-            android:gravity="center"
-            android:text="@string/calculate_button"
-            android:textColor="@color/button_label_black"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            android:typeface="serif" /> -->
     </RelativeLayout>
-
-    <!-- </FrameLayout> -->
-
-
-    <!--
-    <ListView
-        android:id="@+id/design_list_view"
-        android:layout_width="match_parent"
-        android:layout_height="260dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="15dp"
-        android:cacheColorHint="#0000"
-        android:headerDividersEnabled="true"
-        android:background="@android:drawable/divider_horizontal_bright"
-        android:textColor="@color/black" >
-    </ListView>
-    -->
 
     <ListView
         android:id="@+id/design_list_view"
@@ -113,21 +73,10 @@
             android:layout_centerHorizontal="true"
             android:background="@drawable/start_button_selector"
             android:text="@string/reset_button_label"
-            android:textSize="19dp"
             android:textColor="@color/button_label_white"
+            android:textSize="19dp"
             android:textStyle="bold"
             android:typeface="serif" />
     </RelativeLayout>
-
-    <!--
-    <edu.ucdenver.bios.SlideExpandableListView
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/tutorial_list"
-	android:layout_height="match_parent"
-	android:layout_width="wrap_content"
-	android:layout_marginTop="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginLeft="10dp"/>
-    -->
 
 </LinearLayout>

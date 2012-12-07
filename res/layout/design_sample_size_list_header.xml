@@ -16,7 +16,7 @@
 
   	You should have received a copy of the GNU General Public License
   	along with this program; if not, write to the Free Software
-  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
@@ -31,17 +31,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"        
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
         android:ems="7"
         android:imeOptions="actionDone"
         android:inputType="number"
         android:singleLine="true"
         android:textSize="14dp"
         android:textStyle="bold"
-        android:layout_marginLeft="5dp" 
-        android:layout_marginRight="5dp" 
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp" >
+        android:maxLength="9" >
 
         <requestFocus />
     </EditText>
@@ -51,10 +52,10 @@
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/sample_size_value"
         android:text="@string/add_button_label"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
         android:textSize="14dp" />
 
     <Button
@@ -62,12 +63,12 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/add_button"
         android:layerType="software"
         android:text="@string/delete_all_button_label"
         android:textColor="@color/button_label_black"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
         android:textSize="15dp" />
 
 </RelativeLayout>

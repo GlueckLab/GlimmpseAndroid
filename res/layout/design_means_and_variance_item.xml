@@ -16,56 +16,56 @@
 
   	You should have received a copy of the GNU General Public License
   	along with this program; if not, write to the Free Software
-  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
-<!-- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="40dip" 
-    android:layout_marginTop="2dp" > -->
-
-     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-         android:id="@+id/design_item"
-         android:layout_width="wrap_content"
-         android:layout_height="45dip"
-         android:orientation="horizontal" >
+    android:layout_marginTop="2dp" >
+-->
 
-         <TextView
-             android:id="@+id/list_item_textView_group"
-             android:layout_width="fill_parent"
-             android:layout_height="fill_parent"
-             android:gravity="center_vertical"
-             android:padding="6dp"
-             android:text="Hello World"
-             android:textStyle="bold"
-             android:textColor="@color/black"
-             android:textSize="15dp" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/design_item"
+    android:layout_width="wrap_content"
+    android:layout_height="45dip"
+    android:orientation="horizontal" >
 
-         <EditText
-             android:id="@+id/variance"
-             android:layout_width="80dp"
-             android:layout_height="40dp"
-             android:layout_alignParentRight="true"
-             android:layout_centerVertical="true"
-             android:ems="2"
-             android:inputType="numberDecimal"
-             android:textColor="@color/black"
-             android:textSize="15dp" >
-			
-         </EditText>
+    <TextView
+        android:id="@+id/list_item_textView_group"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_vertical"
+        android:padding="6dp"
+        android:text="Hello World"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:textStyle="bold" />
 
-         <EditText
-             android:id="@+id/mean"
-             android:layout_width="80dp"
-             android:layout_height="40dp"
-             android:layout_alignBaseline="@+id/variance"
-             android:layout_centerHorizontal="true"
-             android:ems="2"
-             android:inputType="numberDecimal|numberSigned"
-             android:textColor="@color/black"
-             android:textSize="15dp">
-             <requestFocus/>
-           </EditText>
-			
-     </RelativeLayout>
+    <EditText
+        android:id="@+id/variance"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:ems="2"
+        android:inputType="numberDecimal"
+        android:textColor="@color/black"
+        android:textSize="15dp" >
+    </EditText>
 
-<!-- </LinearLayout> -->
+    <EditText
+        android:id="@+id/mean"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_alignBaseline="@+id/variance"
+        android:layout_centerHorizontal="true"
+        android:ems="2"
+        android:inputType="numberDecimal|numberSigned"
+        android:textColor="@color/black"
+        android:textSize="15dp" >
+
+        <requestFocus />
+    </EditText>
+
+</RelativeLayout><!-- </LinearLayout> -->

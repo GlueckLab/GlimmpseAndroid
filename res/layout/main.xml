@@ -21,8 +21,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:background="@color/white" >
+    android:background="@color/white"
+    android:orientation="vertical" >
 
     <TabHost
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -33,8 +33,7 @@
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="vertical"
-             >
+            android:orientation="vertical" >
 
             <View
                 android:layout_width="fill_parent"
@@ -45,9 +44,9 @@
                 android:id="@android:id/tabs"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:layout_marginLeft="0dip"
-                android:layout_marginRight="0dip"
-                android:layout_alignParentBottom="true" />
+                android:layout_marginRight="0dip" />
 
             <View
                 android:layout_width="fill_parent"
@@ -63,14 +62,14 @@
                 android:id="@android:id/tabcontent"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" >
-                
-                <include layout="@layout/tutorial"/>
-                <include layout="@layout/design"/>
-                <include layout="@layout/aboutus"/>
-                
-             </FrameLayout>
-            	
-       </RelativeLayout>
+
+                <include layout="@layout/tutorial" />
+
+                <include layout="@layout/design" />
+
+                <include layout="@layout/aboutus" />
+            </FrameLayout>
+        </RelativeLayout>
     </TabHost>
 
 </LinearLayout>

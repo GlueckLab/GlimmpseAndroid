@@ -19,70 +19,40 @@
   	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:background="@drawable/list_item_bottom_border">
-    		    
-	<RelativeLayout
-			android:layout_width="wrap_content"
-			android:layout_height="40dip"
-			android:orientation="horizontal"
-			android:id="@+id/item">			   	   
-	    
-		<TextView
-				android:layout_width="fill_parent"
-				android:layout_height="fill_parent"
-				android:id="@+id/list_item_textView_tutorial"
-				android:textColor="@color/black"
-				android:textSize="16dp"
-				android:typeface="serif"
-				android:padding="6dp"
-				android:gravity="center_vertical"
-				android:text="Hello World"/>
-		
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_item_bottom_border"
+    android:orientation="vertical" >
 
-		<!-- <ImageButton 
-		    	android:id="@+id/expandable_toggle_button"
-		    	android:contentDescription="@+id/expandable_toggle_button"				
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignBottom="@+id/list_item_textView_tutorial"
-				android:layout_alignParentRight="true"
-				android:layout_alignTop="@id/list_item_textView_tutorial"
-				android:background="@drawable/ic_list_expand"/> -->
-		
-		<TextView
-		    android:id="@+id/expandable_toggle_button_details"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignBottom="@+id/list_item_textView_tutorial"
-		   android:layout_alignTop="@+id/list_item_textView_tutorial"
-		    android:text="@string/details_tutorial"		    
-		    android:gravity="center"
-		    android:padding="2dp"
-		    android:layout_alignParentRight="true"		    
-		    android:textColor="@color/green"
-		    android:textSize="14dp" />
+    <RelativeLayout
+        android:id="@+id/item"
+        android:layout_width="wrap_content"
+        android:layout_height="40dip"
+        android:orientation="horizontal" >
 
-	</RelativeLayout>
+        <TextView
+            android:id="@+id/list_item_textView_tutorial"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:padding="6dp"
+            android:text="Hello World"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:typeface="serif" />
 
-	<!-- <LinearLayout
-			android:layout_width="fill_parent"
-			android:layout_height="50dip"
-			android:orientation="horizontal"
-			android:id="@+id/expandable"
-			android:background="#aaaaaa">
+        <TextView
+            android:id="@+id/expandable_toggle_button_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/list_item_textView_tutorial"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/list_item_textView_tutorial"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="@string/details_tutorial"
+            android:textColor="@color/green"
+            android:textSize="14dp" />
+    </RelativeLayout>
 
-		<TextView
-		    android:id="@+id/tutorial_list_item_description"
-		    android:layout_width="wrap_content"
-		    android:textColor="@color/black"
-		    android:layout_height="wrap_content"
-		    android:text="Small Text"
-		    android:padding="6dp"
-		    android:textSize="9dp"
-		    android:textAppearance="?android:attr/textAppearanceSmall" />
-		
-	</LinearLayout> -->
 </LinearLayout>
