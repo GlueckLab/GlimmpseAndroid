@@ -1,6 +1,6 @@
 /*
  * Mobile - Android, User Interface for the GLIMMPSE Software System.  Allows
- * users to perform power, sample size calculations. 
+ * users to perform power and sample size calculations. 
  * 
  * Copyright (C) 2010 Regents of the University of Colorado.  
  *
@@ -39,27 +39,32 @@ import edu.ucdenver.bios.webservice.common.domain.PowerResultList;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ResultsListAdapter.
+ * 
  * @author Uttara Sakhadeo
+ * @version 1.0.0
  */
-public class ResultsListAdapter extends BaseAdapter{
-    
+public class ResultsListAdapter extends BaseAdapter {
+
     /** The count. */
     private static int count;
-    
+
     /** The m layout inflater. */
     private LayoutInflater mLayoutInflater;
-    
+
     /** The list. */
     private static PowerResultList list;
-    
+
     private static final int MAX_PRECISION = 3;
-    private static final MathContext mc = new MathContext(MAX_PRECISION, RoundingMode.HALF_EVEN);
+    private static final MathContext mc = new MathContext(MAX_PRECISION,
+            RoundingMode.HALF_EVEN);
 
     /**
      * Instantiates a new results list adapter.
-     *
-     * @param context the context
-     * @param powerResultList the power result list
+     * 
+     * @param context
+     *            the context
+     * @param powerResultList
+     *            the power result list
      */
     public ResultsListAdapter(Context context, PowerResultList powerResultList) {
 
@@ -67,13 +72,14 @@ public class ResultsListAdapter extends BaseAdapter{
         mLayoutInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        // this.mcontext = context;   
         list = powerResultList;
         count = list.size();
 
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see android.widget.Adapter#getItem(int)
      */
     public Object getItem(int i) {
@@ -81,7 +87,9 @@ public class ResultsListAdapter extends BaseAdapter{
     }
 
     // get the position id of the item from the list
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see android.widget.Adapter#getItemId(int)
      */
     public long getItemId(int i) {
@@ -92,58 +100,62 @@ public class ResultsListAdapter extends BaseAdapter{
      * The Class ViewHolder.
      */
     static class ViewHolder {
-        
+
         /** The power line. */
         TextView powerLine;
-        
+
         /** The sample size line. */
-        TextView sampleSizeLine;        
+        TextView sampleSizeLine;
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see android.widget.Adapter#getCount()
      */
     public int getCount() {
         // TODO Auto-generated method stub
         return count;
     }
-    
-    
-    /* (non-Javadoc)
-     * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see android.widget.Adapter#getView(int, android.view.View,
+     * android.view.ViewGroup)
      */
     public View getView(final int position, View view, ViewGroup viewGroup) {
         ViewHolder holder;
-        
-        view = mLayoutInflater.inflate(
-                R.layout.results_list_item, null);
+
+        view = mLayoutInflater.inflate(R.layout.results_list_item, null);
         holder = new ViewHolder();
         holder.powerLine = (TextView) view
                 .findViewById(R.id.list_item_textView_power);
-        holder.sampleSizeLine = (TextView) view.findViewById(R.id.list_item_textView_sample_size);
-        
-        PowerResult result = list.get(position);        
-        //double power = new BigDecimal(result.getActualPower(), mc).doubleValue();
-        double power = new BigDecimal(result.getNominalPower().getValue(), mc).doubleValue();
+        holder.sampleSizeLine = (TextView) view
+                .findViewById(R.id.list_item_textView_sample_size);
+
+        PowerResult result = list.get(position);
+
+        double power = new BigDecimal(result.getNominalPower().getValue(), mc)
+                .doubleValue();
         int sampleSize = result.getTotalSampleSize();
-                
+
         holder.powerLine.setText(Double.toString(power));
-        holder.sampleSizeLine.setText(Integer.toString(sampleSize));        
-        
+        holder.sampleSizeLine.setText(Integer.toString(sampleSize));
+
         String solvingFor = StuyDesignContext.getInstance().getSolvingFor();
-        if(solvingFor != null){
-         //if(solvingFor.equals(SolutionTypeEnum.POWER.getId())){
-            String enumPower = mLayoutInflater.getContext().getString(R.string.enum_power_value);
+        if (solvingFor != null) {
+
+            String enumPower = mLayoutInflater.getContext().getString(
+                    R.string.enum_power_value);
             if (enumPower.equals(solvingFor)) {
-             //holder.powerLine.setBackgroundColor(Color.BLUE);
-             holder.powerLine.setBackgroundColor(Color.argb(10, 10, 10, 10));
-         }
-         else{
-             //holder.sampleSizeLine.setBackgroundColor(Color.BLUE);
-             holder.sampleSizeLine.setBackgroundColor(Color.argb(10, 10, 10, 10));
-         }
-        }            
-        
+                holder.powerLine.setBackgroundColor(Color.argb(10, 10, 10, 10));
+            } else {
+                holder.sampleSizeLine.setBackgroundColor(Color.argb(10, 10, 10,
+                        10));
+            }
+        }
+
         return view;
     }
 }
