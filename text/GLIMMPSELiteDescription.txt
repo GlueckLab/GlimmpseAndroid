@@ -1,0 +1,61 @@
+GLIMMPSE (General Linear Multivariate Model Power and Sample size)
+Copyright (C) 2010 Regents of the University of Colorado.  
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ 
+------------------------------
+ Description
+------------------------------
+
+'GLIMMPSE Lite' is a free, user friendly and open source smart-phone application
+which helps students, statisticians and researchers in creating their one way ANOVA 
+study designs even while they are traveling.
+
+'GLIMMPSE Lite' is functionally a subset of our existing free, user friendly and 
+open source web application GLIMMPSE. GLIMMPSE calculates power and sample size
+for normally distributed outcomes.
+
+Currently 'GLIMMPSE Lite' is supported on Android and iOS platforms which according 
+to International Data Corporation (IDC) together hold a biggest market share of
+mobile platforms.
+
+'GLIMMPSE Lite' has gone through a rigorous testing and code refactoring for memory 
+consumption. ‘GLIMMPSE Lite’ has an simple, uncluttered and readable user interface.
+
+------------------------------
+ Description for Google Play
+------------------------------
+
+Prepare your One Way ANOVA study designs from anywhere you go. 
+
+‘GLIMMPSE Lite’ assists you with simple and through tutorials.
+Readable and simple user interface makes it even more efficient.
+
+All you need to do is to provide six simple inputs;
+	1.	Solving for value: Choose between solving for a) Power or b) Sample Size.
+	2.	Enlist Power value/s, if solving for Sample Size.
+		OR
+		Enlist Sample Size value/s, if solving for Power.
+	3.	Type an acceptable Type One Error or Alpha value. Defaulted to 0.05.
+	4.	Select the Numbers of groups under consideration. At least two groups are required.
+	5.	Provide Relative Group Size for each group.
+	6.	Provide Means of the groups and a single Variance value.
+
+‘GLIMMPSE Lite’ also lets you; email your results.
+Currently ‘GLIMMPSE Lite’ is supported on Android and iOS platforms.
+
+Note:
+Downloads and Documentations are available at http://samplesizeshop.org/software-downloads/glimmpse/glimmpse-mobile/
+
