@@ -36,7 +36,6 @@
             android:layout_height="fill_parent"
             android:gravity="center_vertical"
             android:padding="6dp"
-            android:text="Hello World"
             android:textColor="@color/black"
             android:textSize="16dp"
             android:typeface="serif" />

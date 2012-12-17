@@ -40,7 +40,6 @@
             android:background="@drawable/learn_more_button_selector"
             android:gravity="center_vertical"
             android:padding="6dp"
-            android:text="Hello World"
             android:textColor="@color/black"
             android:textSize="17dp"
             android:textStyle="bold" />

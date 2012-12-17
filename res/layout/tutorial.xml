@@ -56,8 +56,6 @@
         android:id="@+id/tutorial_list_view"
         android:layout_width="match_parent"
         android:layout_height="340dp"
-        android:layout_alignLeft="@+id/description_textView_tutorial"
-        android:layout_alignParentTop="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
