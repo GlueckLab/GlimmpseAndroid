@@ -16,7 +16,7 @@
 
   	You should have received a copy of the GNU General Public License
   	along with this program; if not, write to the Free Software
-  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
@@ -38,73 +38,6 @@
         android:headerDividersEnabled="true"
         android:textColor="@color/black" >
     </ListView>
-
-    <!--
-         <Button
-        android:id="@+id/delete_all_button"
-        android:layout_width="90dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layerType="software"
-        android:text="@string/delete_all_button_label"
-        android:textColor="@color/button_label_black"
-        android:textSize="15dp" />
-    -->
-
-
-    <!--
-        <SlidingDrawer
-	     android:id="@+id/drawer"
-	     android:layout_width="wrap_content"
-	     android:layout_height="wrap_content"
-	     android:padding="10dip"	
-	     android:handle="@+id/handle"
-	     android:content="@+id/button_container">
-	     
-             <ImageButton 
-                 android:id="@id/handle"
-		         android:layout_width="88dip"
-		         android:layout_height="44dip"
-		         android:src="@drawable/attachment" />
-             
-             <RelativeLayout
-                 android:id="@+id/button_container"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:background="@color/black"
-                 android:gravity="center"
-                 android:scrollbars="vertical" >
-	
-	            <Button
-	                android:id="@+id/back_button"
-	                android:layout_width="220dp"
-	                android:layout_height="45dp"
-	                android:layout_marginTop="20dp"
-	                android:background="@drawable/learn_more_button_selector"
-	                android:text="@string/back_button_label"
-	                android:textColor="@color/learn_more_button_label_color"
-	                android:textSize="18dp"
-	                android:textStyle="bold"
-	                android:typeface="serif" />
-	
-	            <Button
-	                android:id="@+id/save_email_button"
-	                android:layout_width="220dp"
-	                android:layout_height="45dp"
-	                android:layout_below="@+id/back_button"
-	                android:layout_marginTop="20dp"
-	                android:background="@drawable/learn_more_button_selector"
-	                android:gravity="center"
-	                android:text="@string/save_email_button_label"
-	                android:textColor="@color/learn_more_button_label_color"
-	                android:textSize="18dp"
-	                android:textStyle="bold"
-	                android:typeface="serif" />
-        </RelativeLayout>
-
- 		</SlidingDrawer>
-    -->
 
     <Button
         android:id="@+id/back_button"

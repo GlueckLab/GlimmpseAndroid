@@ -16,7 +16,7 @@
 
   	You should have received a copy of the GNU General Public License
   	along with this program; if not, write to the Free Software
-  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
@@ -25,7 +25,6 @@
     android:background="@color/home_screen_gray"
     android:scrollbars="vertical" >
 
-
     <TextView
         android:id="@+id/description_textView_sample_size"
         android:layout_width="270dp"
@@ -33,10 +32,10 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
+        android:lineSpacingExtra="3dp"
         android:text="@string/description_smallest_group_size"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/black"
-        android:lineSpacingExtra="3dp"
         android:textSize="15dp" />
 
     <ListView
@@ -45,37 +44,13 @@
         android:layout_height="200dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/description_textView_sample_size"
-        android:layout_marginTop="15dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
         android:cacheColorHint="#0000"
         android:dividerHeight="0px"
         android:headerDividersEnabled="true"
         android:textColor="@color/black" >
     </ListView>
-
-    <!-- <Button
-        android:id="@+id/delete_all_button"
-        android:layout_width="90dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layerType="software"
-        android:text="@string/delete_all_button_label"
-        android:textColor="@color/button_label_black"
-        android:textSize="15dp" /> -->
-
-    <!-- <Button
-        android:id="@+id/back_button"
-        android:layout_width="200dp"
-        android:layout_height="45dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/back_button_selector"
-        android:text="@string/back_button_label"
-        android:textColor="@color/button_label_black"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        android:typeface="serif" /> -->
 
 </RelativeLayout>

@@ -16,58 +16,51 @@
 
   	You should have received a copy of the GNU General Public License
   	along with this program; if not, write to the Free Software
-  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" 
-   android:background="@color/white">
-    
-    <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
-		    android:id="@android:id/tabhost"
-		    android:layout_width="fill_parent"
-		    android:layout_height="fill_parent"
-		    >
-		
-		    <RelativeLayout
-		        android:layout_width="fill_parent"
-		        android:layout_height="fill_parent">
-		        
-		        <View
+    android:layout_height="fill_parent"
+    android:background="@color/white" >
+
+    <TabHost
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@android:id/tabhost"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <View
                 android:layout_width="fill_parent"
                 android:layout_height="0.5dip"
-                android:background="#000"
-                 />
-		
-		        <TabWidget
-		            android:id="@android:id/tabs"
-		            android:layout_width="fill_parent"
-		            android:layout_height="wrap_content"
-		            android:layout_alignParentBottom="true"
-		            android:background="#D7D7D7"/>
-		        
-		        <View
+                android:background="#000" />
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="#D7D7D7" />
+
+            <View
                 android:layout_width="fill_parent"
                 android:layout_height="2dip"
                 android:background="#696969" />
 
-            	<View
+            <View
                 android:layout_width="fill_parent"
                 android:layout_height="2dip"
                 android:background="#000" />
-		
-		        <FrameLayout
-		            android:id="@android:id/tabcontent"
-		            android:layout_width="fill_parent"
-            		android:layout_height="0dp"
-		            android:padding="2dp" />
-            	<!-- <FrameLayout
-		            android:id="@android:id/tabcontent"
-		            android:layout_width="fill_parent"
-            		android:layout_height="0dp"
-		            android:padding="2dp" /> -->
-		    </RelativeLayout>
-		
-	</TabHost>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:padding="2dp" />
+        </RelativeLayout>
+    </TabHost>
 
 </LinearLayout>

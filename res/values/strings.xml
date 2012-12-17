@@ -185,7 +185,7 @@
     <string name="description_means_and_variance">Please fill in the details for mean and variance.</string>
     <string name="means_variance_list_header_group">Group</string>
     <string name="means_variance_list_header_mean">Mean</string>
-    <string name="means_variance_list_header_variance">Variance</string>
+    <string name="means_variance_list_header_variance">Standard Deviation</string>
 
     <!-- Relative Group Size Screen -->
     <string name="description_relative_group_size">Select the relative group size for each group. For equal group sizes, select  "1" for all groups.</string>

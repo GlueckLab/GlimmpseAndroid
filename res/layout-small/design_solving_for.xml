@@ -16,7 +16,7 @@
 
   	You should have received a copy of the GNU General Public License
   	along with this program; if not, write to the Free Software
-  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
@@ -36,20 +36,6 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/black"
         android:textSize="15dp" />
-
-    <!-- <Button
-        android:id="@+id/back_button"
-        android:layout_width="200dp"
-        android:layout_height="45dp"
-        android:layout_below="@+id/radioGroup_solvingFor"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="58dp"
-        android:background="@drawable/back_button_selector"
-        android:text="@string/back_button_label"
-        android:textColor="@color/button_label_black"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        android:typeface="serif" /> -->
 
     <RadioGroup
         android:id="@+id/radioGroup_solvingFor"

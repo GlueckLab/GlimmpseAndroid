@@ -16,72 +16,42 @@
 
   	You should have received a copy of the GNU General Public License
   	along with this program; if not, write to the Free Software
-  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:background="@drawable/list_item_bottom_border" >
-    		    
-	<RelativeLayout
-			android:layout_width="wrap_content"
-			android:layout_height="40dip"
-			android:orientation="horizontal"
-			android:id="@+id/design_item">			   	   
-	    
-		<TextView
-				android:layout_width="fill_parent"
-				android:layout_height="fill_parent"
-				android:id="@+id/list_item_textView_design"
-				android:textColor="@color/black"
-				android:textSize="30dp"
-				android:padding="6dp"
-				android:gravity="center_vertical"
-				android:typeface="serif"
-				android:text="Hello World"/>
-		
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_item_bottom_border"
+    android:orientation="vertical" >
 
-		<!-- <ImageButton 
-		    	android:id="@+id/details_toggle_button"
-		    	android:contentDescription="@+id/details_toggle_button"				
-				android:layout_width="wrap_content"
-				android:layout_height="
-				android:layout_alignBottom="@+id/list_item_textView_design"
-				android:layout_alignParentRight="true"
-				android:layout_alignTop="@id/list_item_textView_design"
-				android:background="@drawable/ic_list_expand"/> -->
+    <RelativeLayout
+        android:id="@+id/design_item"
+        android:layout_width="wrap_content"
+        android:layout_height="40dip"
+        android:orientation="horizontal" >
 
-		<TextView
-		    android:id="@+id/text_view_value_design"
-		    android:layout_width="wrap_content"
-		    android:layout_height="30dp"
-		    android:layout_alignBaseline="@+id/list_item_textView_design"
-		    android:layout_alignBottom="@+id/list_item_textView_design"
-		    android:layout_alignParentRight="true"
-		    android:gravity="center_vertical"
-		    android:padding="2dp"
-		    android:textColor="@color/green"
-		    android:textSize="14dp" />
+        <TextView
+            android:id="@+id/list_item_textView_design"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:padding="6dp"
+            android:text="Hello World"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            android:typeface="serif" />
 
-	</RelativeLayout>
+        <TextView
+            android:id="@+id/text_view_value_design"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignBaseline="@+id/list_item_textView_design"
+            android:layout_alignBottom="@+id/list_item_textView_design"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:padding="2dp"
+            android:textColor="@color/green"
+            android:textSize="14dp" />
+    </RelativeLayout>
 
-	<!-- <LinearLayout
-			android:layout_width="fill_parent"
-			android:layout_height="50dip"
-			android:orientation="horizontal"
-			android:id="@+id/expandable"
-			android:background="#aaaaaa">
-
-		<TextView
-		    android:id="@+id/tutorial_list_item_description"
-		    android:layout_width="wrap_content"
-		    android:textColor="@color/black"
-		    android:layout_height="wrap_content"
-		    android:text="Small Text"
-		    android:padding="6dp"
-		    android:textSize="9dp"
-		    android:textAppearance="?android:attr/textAppearanceSmall" />
-		
-	</LinearLayout> -->
 </LinearLayout>

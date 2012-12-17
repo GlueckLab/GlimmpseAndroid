@@ -16,59 +16,47 @@
 
   	You should have received a copy of the GNU General Public License
   	along with this program; if not, write to the Free Software
-  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/title_bar"
-        android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:background="@color/black">
+    android:id="@+id/title_bar"
+    android:layout_width="fill_parent"
+    android:layout_height="40dip"
+    android:background="@color/black" >
 
-        <TextView
-            android:id="@+id/window_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@color/black"
-            android:gravity="center|center_vertical|center_horizontal"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:padding="1dp"
-            android:textSize="16dp" />
+    <TextView
+        android:id="@+id/window_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@color/black"
+        android:gravity="center|center_vertical|center_horizontal"
+        android:padding="1dp"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:padding="1dp"
-            android:src="@drawable/ic_launcher_glimmpse" />
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:padding="1dp"
+        android:src="@drawable/ic_launcher_glimmpse" />
 
-        <!-- <Button
-            android:id="@+id/home_button"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="8dp"
-            android:background="@color/blue_bk"
-            android:text="@string/menu_home"
-            android:textColor="@color/white"
-            android:textSize="10dp" /> -->
-        <Button
-            android:id="@+id/home_button"
-            android:layout_width="70dp"
-            android:layout_height="30dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="2dp"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/button1"
-            android:text="@string/menu_home"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textSize="14dp" />
-               
+    <Button
+        android:id="@+id/home_button"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/button1"
+        android:text="@string/menu_home"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        android:textStyle="bold" />
 
- </RelativeLayout>
+</RelativeLayout>

@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+	Mobile - Android, User Interface for the GLIMMPSE Software System.  Allows
+  	users to perform power, sample size calculations. 
+  	Copyright (C) 2010 Regents of the University of Colorado.  
+  	
+  	This program is free software; you can redistribute it and/or
+  	modify it under the terms of the GNU General Public License
+  	as published by the Free Software Foundation; either version 2
+  	of the License, or (at your option) any later version.
+
+	  This program is distributed in the hope that it will be useful,
+  	but WITHOUT ANY WARRANTY; without even the implied warranty of
+  	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  	GNU General Public License for more details.
+
+  	You should have received a copy of the GNU General Public License
+  	along with this program; if not, write to the Free Software
+  	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_marginTop="2dp"
     android:background="@color/white" >
-
+
     <TextView
         android:id="@+id/description_textView_type_one_error"
         android:layout_width="274dp"
@@ -17,19 +37,6 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/black"
         android:textSize="15dp" />
-
-    <!-- <Button
-        android:id="@+id/back_button"
-        android:layout_width="200dp"
-        android:layout_height="45dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/back_button_selector"
-        android:text="@string/back_button_label"
-        android:textColor="@color/button_label_black"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        android:typeface="serif" /> -->
 
     <EditText
         android:id="@+id/alpha"
