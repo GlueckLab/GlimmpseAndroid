@@ -420,17 +420,12 @@ public class StuyDesignContext {
             list.add(position, new RelativeGroupSize(relativeGroupSize));
         } else {
             if (list.size() > position) {
-                System.out.println("list.size > position");
                 if (list.get(position) != null) {
-                    System.out.println("list.get(position) != null");
-                    list.set(position, new RelativeGroupSize(relativeGroupSize));
-                    System.out.println("list size " + list.size());
+                    list.set(position, new RelativeGroupSize(relativeGroupSize));                    
                 } else {
-                    System.out.println("list.get(position) == null");
                     list.add(position, new RelativeGroupSize(relativeGroupSize));
                 }
             } else {
-                System.out.println("list.size !> position");
                 list.add(position, new RelativeGroupSize(relativeGroupSize));
             }
         }
@@ -485,9 +480,7 @@ public class StuyDesignContext {
                 changedData[inc][0] = originalData[inc][0];
             }
             beta.setRows(index);
-            beta.setDataFromArray(changedData);
-            System.out.println("in synchForRemovedGroups: removed groups="
-                    + numberOfGroups + " remaining groups=" + index);
+            beta.setDataFromArray(changedData);            
         }
         studyDesign.setNamedMatrix(beta);
         System.gc();
@@ -873,8 +866,7 @@ public class StuyDesignContext {
         if (originalPowerList != null && !originalPowerList.isEmpty()) {
             List<NominalPower> newPowerList = null;
             int size = originalPowerList.size();
-            if (size > 1) {
-                System.out.println("size > 1");
+            if (size > 1) {                
                 newPowerList = new ArrayList<NominalPower>(size - 1);
                 int count = 0;
                 int index = 0;
@@ -885,8 +877,7 @@ public class StuyDesignContext {
                     }
                     count++;
                 }
-            } else {
-                System.out.println("size <= 1");
+            } else {                
                 newPowerList = null;
                 resetProgress(POWER_OR_SAMPLE_SIZE_ROW);
             }
@@ -921,7 +912,6 @@ public class StuyDesignContext {
      *            the position
      */
     public void setSampleSize(int sampleSize, int position) {
-        // System.out.println("in setSampleSize()");
         List<SampleSize> sampleSizeList = studyDesign.getSampleSizeList();
         int size;
         if (sampleSizeList == null || sampleSizeList.isEmpty()) {
