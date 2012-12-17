@@ -47,6 +47,7 @@ import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
  */
 public class MeansAndVarianceAdapter extends BaseAdapter {
 
+    /** The RO w_ one. */
     private final int ROW_ONE = 0;
 
     /** The groups. */
@@ -58,20 +59,20 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
     /** The img. */
     static Drawable img;
 
-    /** The variance. */
-    static double variance;
+    /** The standard deviation. */
+    static double standardDeviation;
 
     /** The mean. */
     static double mean;
 
-    /** The Constant DEFAULT_VARIANCE. */
-    static final double DEFAULT_VARIANCE = 1;
+    /** The Constant DEFAULT_STANDARD_DEVIATION. */
+    static final double DEFAULT_STANDARD_DEVIATION = 1;
 
     /** The Constant DEFAULT_MEAN. */
     static final double DEFAULT_MEAN = 0;
 
-    /** The variance text. */
-    static EditText varianceText;
+    /** The standard deviation text. */
+    static EditText standardDeviationText;
 
     /** The mean text. */
     static EditText meanText;
@@ -86,8 +87,8 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
      *            the context
      * @param groups
      *            the groups
-     * @param img
-     *            the img
+     * @param image
+     *            the image
      */
     public MeansAndVarianceAdapter(Context context, int groups, Drawable image) {
 
@@ -205,15 +206,16 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
         });
 
         if (position == ROW_ONE) {
-            variance = StuyDesignContext.getInstance().getVariance();
-            temp = variance % 1;
+            standardDeviation = StuyDesignContext.getInstance()
+                    .getStandardDeviation();
+            temp = standardDeviation % 1;
             format = new DecimalFormat("#.0");
             temp = Double.parseDouble(format.format(temp));
             if (temp != 0.0)
-                holder.varianceLine.setText(Double.toString(variance));
+                holder.varianceLine.setText(Double.toString(standardDeviation));
             else {
                 holder.varianceLine.setText(Integer
-                        .toString(((Double) variance).intValue()));
+                        .toString(((Double) standardDeviation).intValue()));
             }
             holder.varianceLine.setSelection(holder.varianceLine.getText()
                     .length());
@@ -222,9 +224,10 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
             holder.varianceLine.addTextChangedListener(new TextWatcher() {
 
                 public void afterTextChanged(Editable s) {
-                    if (variance < 1)
-                        variance = 1.0;
-                    StuyDesignContext.getInstance().setVariance(variance);
+                    if (standardDeviation < 1)
+                        standardDeviation = 1.0;
+                    StuyDesignContext.getInstance().setStandardDeviation(
+                            standardDeviation);
                 }
 
                 public void beforeTextChanged(CharSequence s, int start,
@@ -240,19 +243,19 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
                         try {
                             String value = String.valueOf(s);
                             if (value != null && !value.isEmpty()) {
-                                variance = Double.parseDouble(value);
-                                varianceText.setCompoundDrawables(null, null,
-                                        img, null);
+                                standardDeviation = Double.parseDouble(value);
+                                standardDeviationText.setCompoundDrawables(
+                                        null, null, img, null);
                             } else {
-                                variance = DEFAULT_VARIANCE;
+                                standardDeviation = DEFAULT_STANDARD_DEVIATION;
                             }
                         } catch (Exception e) {
                             System.out.println("Exception : " + e.getMessage());
-                            variance = DEFAULT_VARIANCE;
+                            standardDeviation = DEFAULT_STANDARD_DEVIATION;
                         }
                     } else {
-                        varianceText.setCompoundDrawables(null, null, null,
-                                null);
+                        standardDeviationText.setCompoundDrawables(null, null,
+                                null, null);
                     }
                 }
 
@@ -260,11 +263,12 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
             holder.varianceLine.setOnTouchListener(new OnTouchListener() {
 
                 public boolean onTouch(View v, MotionEvent arg1) {
-                    varianceText = (EditText) v.findViewById(R.id.variance);
-                    if (arg1.getX() > varianceText.getWidth()
+                    standardDeviationText = (EditText) v
+                            .findViewById(R.id.variance);
+                    if (arg1.getX() > standardDeviationText.getWidth()
                             - img.getIntrinsicWidth() + 10) {
-                        varianceText.setText("");
-                        variance = DEFAULT_VARIANCE;
+                        standardDeviationText.setText("");
+                        standardDeviation = DEFAULT_STANDARD_DEVIATION;
                     }
                     return false;
                 }
