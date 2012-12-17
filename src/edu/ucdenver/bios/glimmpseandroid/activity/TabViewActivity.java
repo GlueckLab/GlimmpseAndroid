@@ -677,8 +677,7 @@ public class TabViewActivity extends Activity implements Runnable,
                             builder.show();
                         }
 
-                    } else {
-                        System.out.println("repr null");
+                    } else {                        
                     }               
             }
 

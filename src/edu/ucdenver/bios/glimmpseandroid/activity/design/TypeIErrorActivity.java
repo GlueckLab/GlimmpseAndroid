@@ -244,8 +244,7 @@ public class TypeIErrorActivity extends Activity implements OnClickListener,
     public void onBackPressed() {
         // TODO Auto-generated method stub
         super.onBackPressed();
-        isKeyboardVisible = false;
-        System.out.println("On Back Pressed");
+        isKeyboardVisible = false;        
 
     }
 
@@ -255,8 +254,7 @@ public class TypeIErrorActivity extends Activity implements OnClickListener,
      * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
      */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            System.out.println("key -> back");
+        if (keyCode == KeyEvent.KEYCODE_BACK) {            
             if (stuyDesignContext.getTypeIError() == 0.0)
                 stuyDesignContext.setDefaultTypeIError();
             else

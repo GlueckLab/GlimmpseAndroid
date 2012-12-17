@@ -222,7 +222,6 @@ public class SampleSizeActivity extends Activity implements OnClickListener,
      * @see android.app.Activity#dispatchTouchEvent(android.view.MotionEvent)
      */
     public boolean dispatchTouchEvent(MotionEvent me) {
-        // System.out.println("dispatchTouchEvent");
         detector.onTouchEvent(me);
         return super.dispatchTouchEvent(me);
     }

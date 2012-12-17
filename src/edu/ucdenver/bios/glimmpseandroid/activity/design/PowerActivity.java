@@ -197,8 +197,7 @@ public class PowerActivity extends Activity implements OnClickListener,
         valueText = (EditText) findViewById(R.id.power_value);
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(valueText.getWindowToken(), 0);
-        String data = String.valueOf(valueText.getText());
-        System.out.println("Data : " + data);
+        String data = String.valueOf(valueText.getText());        
         if (data != null && !data.isEmpty()) {
             if (!data.equals(".")) {
                 Double value = Double.parseDouble(data);

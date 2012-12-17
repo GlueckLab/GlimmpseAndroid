@@ -117,11 +117,8 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
         resources = getResources();
 
         Bundle extras = this.getIntent().getExtras();
-        if (extras != null) {
-
-            System.out.println("Extras not null");
-            String jsonString = extras.getString("results");
-            System.out.println("JsonString : " + jsonString);
+        if (extras != null) {            
+            String jsonString = extras.getString("results");            
             ListView resultsListView = (ListView) findViewById(R.id.results_list_view);
             View header1 = getLayoutInflater().inflate(
                     R.layout.results_list_header, null, false);
@@ -195,8 +192,7 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
                 File file1 = null;
                 File root = Environment.getExternalStorageDirectory();
                 if (root.canWrite()) {
-                    File dir = new File(root.getAbsolutePath() + RESULTS_DIR);
-                    System.out.println(dir);
+                    File dir = new File(root.getAbsolutePath() + RESULTS_DIR);                    
                     dir.mkdirs();
                     file = new File(dir, resources
                             .getString(R.string.power_results_file));
