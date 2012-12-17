@@ -19,17 +19,6 @@
   	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <!-- 
-    <item android:drawable="@drawable/button1" android:state_focused="true" android:state_pressed="false"/>
-    Selected Button
-    <item android:drawable="@drawable/button1" android:state_focused="true" android:state_pressed="true"/>
-    Pressed Button
-    <item android:drawable="@color/transparent" android:state_pressed="true"/>
-    Active Button
-    <item android:drawable="@drawable/button1" android:state_focused="false" android:state_pressed="true"/>
-    <item android:drawable="@drawable/button1"/> -->
-    
     
     <!--  Active button -->
 	<item android:state_selected="true" android:state_focused="false"
