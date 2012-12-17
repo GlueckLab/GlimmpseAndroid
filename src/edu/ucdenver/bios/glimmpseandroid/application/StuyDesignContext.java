@@ -39,6 +39,7 @@ import edu.ucdenver.bios.webservice.common.domain.RelativeGroupSize;
 import edu.ucdenver.bios.webservice.common.domain.ResponseNode;
 import edu.ucdenver.bios.webservice.common.domain.SampleSize;
 import edu.ucdenver.bios.webservice.common.domain.SigmaScale;
+import edu.ucdenver.bios.webservice.common.domain.StandardDeviation;
 import edu.ucdenver.bios.webservice.common.domain.StatisticalTest;
 import edu.ucdenver.bios.webservice.common.domain.StudyDesign;
 import edu.ucdenver.bios.webservice.common.domain.TypeIError;
@@ -103,13 +104,13 @@ public class StuyDesignContext {
     private static final int DEFAULT_RELATIVE_GROUP_SIZE = 1;
 
     /** The Constant DEFAULT_COVARIANCE_TYPE. */
-    private static final CovarianceTypeEnum DEFAULT_COVARIANCE_TYPE = CovarianceTypeEnum.UNSTRUCTURED_COVARIANCE;
+    private static final CovarianceTypeEnum DEFAULT_COVARIANCE_TYPE = CovarianceTypeEnum.UNSTRUCTURED_CORRELATION;
 
     /** The Constant DEFAULT_COVARIANCE_NAME. */
     private static final String DEFAULT_COVARIANCE_NAME = "__RESPONSE_COVARIANCE__";
 
     /** The Constant DEFAULT_VARIANCE. */
-    private static final double DEFAULT_VARIANCE = 1;
+    private static final double DEFAULT_STANDARD_DEVIATION = 1;
 
     /** The Constant DEFAULT_MEAN. */
     private static final double DEFAULT_MEAN = 0;
@@ -128,8 +129,8 @@ public class StuyDesignContext {
     /** The Constant MATRIX_BETA. */
     private static final String MATRIX_BETA = "beta";
 
-    /** The covariance matrix data. */
-    private static double[][] covarianceMatrixData = new double[1][1];
+    /** The standard deviation data. */
+    private static StandardDeviation standardDeviationData = new StandardDeviation();
 
     /*--------------------
      * Constructors
@@ -421,7 +422,7 @@ public class StuyDesignContext {
         } else {
             if (list.size() > position) {
                 if (list.get(position) != null) {
-                    list.set(position, new RelativeGroupSize(relativeGroupSize));                    
+                    list.set(position, new RelativeGroupSize(relativeGroupSize));
                 } else {
                     list.add(position, new RelativeGroupSize(relativeGroupSize));
                 }
@@ -480,7 +481,7 @@ public class StuyDesignContext {
                 changedData[inc][0] = originalData[inc][0];
             }
             beta.setRows(index);
-            beta.setDataFromArray(changedData);            
+            beta.setDataFromArray(changedData);
         }
         studyDesign.setNamedMatrix(beta);
         System.gc();
@@ -501,8 +502,8 @@ public class StuyDesignContext {
         for (int inc = index; inc < index + numberOfGroups; inc++) {
             setDefaultRelativeGroupSize(inc);
         }
-        /* Variance */
-        setVariance(getVariance());
+        /* Standard Deviation */
+        setStandardDeviation(getStandardDeviation());
         /* Means */
         setOriginalMeans(numberOfGroups);
     }
@@ -592,48 +593,57 @@ public class StuyDesignContext {
         if (!itr.hasNext())
             return false;
         Covariance covariance = (Covariance) itr.next();
-        Blob2DArray blob = covariance.getBlob();
-        if (blob == null)
+        /*
+         * Blob2DArray blob = covariance.getBlob(); if (blob == null) return
+         * false; return true;
+         */
+        List<StandardDeviation> sdList = covariance.getStandardDeviationList();
+        if (sdList != null && !sdList.isEmpty()) {
             return false;
-        return true;
+        } else
+            return true;
     }
 
     /**
-     * Gets the variance.
+     * Gets the standard deviation.
      * 
-     * @return the variance
+     * @return the standard deviation
      */
-    public double getVariance() {
+    public double getStandardDeviation() {
         if (hasCovariance()) {
             Covariance cov = (Covariance) studyDesign.getCovariance()
                     .iterator().next();
             if (cov != null) {
-                Blob2DArray blob = cov.getBlob();
-                if (blob != null) {
-                    covarianceMatrixData = blob.getData();
-                    if (covarianceMatrixData != null) {
-                        return covarianceMatrixData[0][0];
-                    }
+                /*
+                 * Blob2DArray blob = cov.getBlob(); if (blob != null) {
+                 * covarianceMatrixData = blob.getData(); if
+                 * (covarianceMatrixData != null) { return
+                 * covarianceMatrixData[0][0]; } }
+                 */
+                List<StandardDeviation> sdList = cov.getStandardDeviationList();
+                if (sdList != null && !sdList.isEmpty()) {
+                    standardDeviationData = sdList.get(0);
+                    return standardDeviationData.getValue();
                 }
             }
         }
-        return DEFAULT_VARIANCE;
+        return DEFAULT_STANDARD_DEVIATION;
     }
 
     /**
-     * Sets the default variance.
+     * Sets the default standard deviation.
      */
-    public void setDefaultVariance() {
-        setVariance(DEFAULT_VARIANCE);
+    public void setDefaultStandardDeviation() {
+        setStandardDeviation(DEFAULT_STANDARD_DEVIATION);
     }
 
     /**
-     * Sets the variance.
+     * Sets the standard deviation.
      * 
-     * @param variance
-     *            the new variance
+     * @param standardDeviation
+     *            the new standard deviation
      */
-    public void setVariance(double variance) {
+    public void setStandardDeviation(double standardDeviation) {
         Set<Covariance> covarianceSet = studyDesign.getCovariance();
         Covariance covariance;
         Iterator<Covariance> itr;
@@ -654,25 +664,30 @@ public class StuyDesignContext {
                 covarianceSet.clear();
             }
         }
-        covariance = createCovariance(variance);
+        covariance = createCovariance(standardDeviation);
         studyDesign.addCovariance(covariance);
     }
 
     /**
      * Creates the covariance.
      * 
-     * @param variance
-     *            the variance
+     * @param standardDeviation
+     *            the standard deviation
      * @return the covariance
      */
-    public Covariance createCovariance(double variance) {
+    public Covariance createCovariance(double standardDeviation) {
         Covariance covariance = new Covariance();
         covariance.setType(DEFAULT_COVARIANCE_TYPE);
         covariance.setName(DEFAULT_COVARIANCE_NAME);
-        covarianceMatrixData[0][0] = variance;
+        double[][] covarianceMatrixData = new double[1][1];
+        covarianceMatrixData[0][0] = 1;
         covariance.setBlobFromArray(covarianceMatrixData);
         covariance.setRows(1);
         covariance.setColumns(1);
+        standardDeviationData.setValue(standardDeviation);
+        List<StandardDeviation> list = new ArrayList<StandardDeviation>(1);
+        list.add(standardDeviationData);
+        covariance.setStandardDeviationList(list);
         return covariance;
     }
 
@@ -686,7 +701,7 @@ public class StuyDesignContext {
     public void setDefaultMeansAndVariance() {
         int groups = getGroups();
         setDefaultMeans(groups);
-        setDefaultVariance();
+        setDefaultStandardDeviation();
     }
 
     /**
@@ -866,7 +881,7 @@ public class StuyDesignContext {
         if (originalPowerList != null && !originalPowerList.isEmpty()) {
             List<NominalPower> newPowerList = null;
             int size = originalPowerList.size();
-            if (size > 1) {                
+            if (size > 1) {
                 newPowerList = new ArrayList<NominalPower>(size - 1);
                 int count = 0;
                 int index = 0;
@@ -877,7 +892,7 @@ public class StuyDesignContext {
                     }
                     count++;
                 }
-            } else {                
+            } else {
                 newPowerList = null;
                 resetProgress(POWER_OR_SAMPLE_SIZE_ROW);
             }
