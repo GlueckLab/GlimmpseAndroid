@@ -222,12 +222,10 @@ public class GestureFilter extends SimpleOnGestureListener {
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
             float velocityY) {
-        // System.out.println("onFling");
         final float xDistance = Math.abs(e1.getX() - e2.getX());
         final float yDistance = Math.abs(e1.getY() - e2.getY());
 
-        if (xDistance > swipe_max_distance || yDistance > swipe_max_distance) {
-            System.out.println("returning false");
+        if (xDistance > swipe_max_distance || yDistance > swipe_max_distance) {            
             return false;
         }
 

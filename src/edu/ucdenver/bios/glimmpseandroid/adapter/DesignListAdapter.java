@@ -180,8 +180,7 @@ public class DesignListAdapter extends BaseAdapter implements Filterable {
         // check to see if the reused view is null or not, if is not null then
         // reuse it
         if (view == null) {
-            view = mLayoutInflater.inflate(R.layout.design_list_item, null);
-            System.out.println();
+            view = mLayoutInflater.inflate(R.layout.design_list_item, null);            
             holder = new ViewHolder();
             holder.textLine = (TextView) view
                     .findViewById(R.id.list_item_textView_design);
