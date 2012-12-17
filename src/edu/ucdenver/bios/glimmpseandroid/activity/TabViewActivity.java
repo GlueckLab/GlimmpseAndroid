@@ -72,10 +72,10 @@ public class TabViewActivity extends Activity implements Runnable,
     public String exceptionMessage = null;
 
     /** The Constant SERVICE_URL. */
-    private static final String SERVICE_URL = "http://glimmpse.samplesizeshop.com/power/";
+    private static final String SERVICE_URL = "http://glimmpse.samplesizeshop.org/power/";
 
     /** The Constant FEEDBACK_ADDRESS. */
-    private static final String FEEDBACK_ADDRESS = "feedback@glimmpse.samplesizeshop.com";
+    private static final String FEEDBACK_ADDRESS = "samplesizeshop@gmail.com";
 
     /** The Constant TAB_ID. */
     public static final String TAB_ID = "tab_id";
@@ -646,7 +646,7 @@ public class TabViewActivity extends Activity implements Runnable,
 
                 StudyDesign studyDesign = globalVariables.getStudyDesign();
                 globalVariables.setDefaults();
-
+                System.out.println(studyDesign);
                 /*
                  * double[][] d = studyDesign
                  * .getCovarianceFromSet("__RESPONSE_COVARIANCE__")
