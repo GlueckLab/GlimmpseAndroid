@@ -587,18 +587,20 @@ public class StuyDesignContext {
      */
     public boolean hasCovariance() {
         Set<Covariance> covarianceSet = studyDesign.getCovariance();
-        if (covarianceSet == null || covarianceSet.isEmpty())
+        if (covarianceSet == null || covarianceSet.isEmpty()){            
             return false;
+        }
         Iterator<Covariance> itr = covarianceSet.iterator();
-        if (!itr.hasNext())
+        if (!itr.hasNext()){           
             return false;
+        }
         Covariance covariance = (Covariance) itr.next();
         /*
          * Blob2DArray blob = covariance.getBlob(); if (blob == null) return
          * false; return true;
          */
         List<StandardDeviation> sdList = covariance.getStandardDeviationList();
-        if (sdList != null && !sdList.isEmpty()) {
+        if (sdList != null && sdList.isEmpty()) {            
             return false;
         } else
             return true;
@@ -613,19 +615,13 @@ public class StuyDesignContext {
         if (hasCovariance()) {
             Covariance cov = (Covariance) studyDesign.getCovariance()
                     .iterator().next();
-            if (cov != null) {
-                /*
-                 * Blob2DArray blob = cov.getBlob(); if (blob != null) {
-                 * covarianceMatrixData = blob.getData(); if
-                 * (covarianceMatrixData != null) { return
-                 * covarianceMatrixData[0][0]; } }
-                 */
+            if (cov != null) {                
                 List<StandardDeviation> sdList = cov.getStandardDeviationList();
                 if (sdList != null && !sdList.isEmpty()) {
-                    standardDeviationData = sdList.get(0);
+                    standardDeviationData = sdList.get(0);                    
                     return standardDeviationData.getValue();
-                }
-            }
+                }                
+            }            
         }
         return DEFAULT_STANDARD_DEVIATION;
     }
@@ -664,7 +660,7 @@ public class StuyDesignContext {
                 covarianceSet.clear();
             }
         }
-        covariance = createCovariance(standardDeviation);
+        covariance = createCovariance(standardDeviation);        
         studyDesign.addCovariance(covariance);
     }
 
