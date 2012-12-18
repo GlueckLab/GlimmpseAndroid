@@ -23,6 +23,7 @@ package edu.ucdenver.bios.glimmpseandroid.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -77,6 +78,9 @@ public class TutorialSubScreenActivity extends Activity implements
 
     /** The Constant RESULTS_ROW. */
     public static final int RESULTS_ROW = 8;
+    
+    /** The menu flag. */
+    private static boolean menuFlag = false;
 
     /**
      * This method is called by Android when the Activity is first started. From
@@ -113,6 +117,7 @@ public class TutorialSubScreenActivity extends Activity implements
 
             TextView description = (TextView) findViewById(R.id.description_textView_tutorial_sub_screen);
             description.setMovementMethod(new ScrollingMovementMethod());
+            
 
             Bundle extras = this.getIntent().getExtras();
             if (extras != null) {
@@ -176,7 +181,7 @@ public class TutorialSubScreenActivity extends Activity implements
                     break;
                 }
                 title.setText(subTitle);
-                description.setText(data);
+                description.setText(Html.fromHtml(data));
 
             } else {
 
@@ -200,9 +205,11 @@ public class TutorialSubScreenActivity extends Activity implements
      * @see android.app.Activity#dispatchTouchEvent(android.view.MotionEvent)
      */
     public boolean dispatchTouchEvent(MotionEvent me) {
-        if (detector != null)
+        if (detector != null){
             detector.onTouchEvent(me);
-        return super.dispatchTouchEvent(me);
+            return super.dispatchTouchEvent(me);
+        }        
+        return false;        
     }
 
     /*
@@ -216,6 +223,7 @@ public class TutorialSubScreenActivity extends Activity implements
         switch (direction) {
 
         case GestureFilter.SWIPE_RIGHT:
+            menuFlag = false;
             finish();
             break;
         }
@@ -237,8 +245,15 @@ public class TutorialSubScreenActivity extends Activity implements
      * @see android.app.Activity#onTouchEvent(android.view.MotionEvent)
      */
     public boolean onTouchEvent(MotionEvent event) {
-        this.openOptionsMenu();
-        return true;
+        if(!menuFlag){
+            menuFlag = true;
+            this.openOptionsMenu();
+            return true;
+        }
+        else{
+            menuFlag = false;
+            return false;
+        }
     }
 
     /*

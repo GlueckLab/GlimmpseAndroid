@@ -185,10 +185,12 @@ public class TabViewActivity extends Activity implements Runnable,
         boolean useTitleFeature = false;
 
         context = TabViewActivity.this;
+        
+        resources = getResources();
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Please Wait!!");
-        progressDialog.setMessage("Wait!!");
+        progressDialog.setTitle(resources.getString(R.string.progress_dialog_title));
+        progressDialog.setMessage(resources.getString(R.string.progress_dialog_message));
         progressDialog.setCancelable(false);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
@@ -259,8 +261,7 @@ public class TabViewActivity extends Activity implements Runnable,
 
         if (useTitleFeature) {
             window.setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-        }
-        resources = getResources();
+        }        
 
         labels = resources.getStringArray(R.array.tab_labels);
 
@@ -410,7 +411,7 @@ public class TabViewActivity extends Activity implements Runnable,
             if (enumSampleSize.equals(solvingFor)) {
                 designList[1] = getString(R.string.enum_power_value);
             } else {
-                designList[1] = "Smallest Group Size";
+                designList[1] = resources.getString(R.string.title_smallest_group_size);
             }
         }
 
@@ -592,7 +593,7 @@ public class TabViewActivity extends Activity implements Runnable,
             return MOBILE_NETWORK_AVAILABLE;
         } else {
             Toast.makeText(getApplicationContext(),
-                    "Please make sure your Network Connection is ON ",
+                    resources.getString(R.string.net_connection_error),
                     Toast.LENGTH_SHORT).show();
         }
         return 0;
@@ -601,10 +602,10 @@ public class TabViewActivity extends Activity implements Runnable,
     /**
      * Display loading.
      */
-    private void displayLoading() {
+    private void displayLoading() {        
         progressDialog = ProgressDialog.show(context,
                 resources.getString(R.string.calculating_message) + " "
-                        + globalVariables.getSolvingFor(),
+                        + globalVariables.getSolvingFor().toLowerCase(),
                 resources.getString(R.string.loading), true, false);
 
         Thread thread = new Thread(TabViewActivity.this,
@@ -645,13 +646,7 @@ public class TabViewActivity extends Activity implements Runnable,
                 ClientResource cr = new ClientResource(URL);
 
                 StudyDesign studyDesign = globalVariables.getStudyDesign();
-                globalVariables.setDefaults();
-                System.out.println(studyDesign);
-                /*
-                 * double[][] d = studyDesign
-                 * .getCovarianceFromSet("__RESPONSE_COVARIANCE__")
-                 * .getBlob().getData();
-                 */
+                globalVariables.setDefaults();                
                 
                     Representation repr = cr.post(studyDesign);
                     if (repr != null) {
