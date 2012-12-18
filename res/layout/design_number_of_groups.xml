@@ -45,7 +45,7 @@
         android:layout_below="@+id/description_textView_group_count"
         android:layout_marginTop="80dp"
         android:max="@string/defined_max_groups"
-        android:minWidth="240dp" />
+        android:minWidth="235dp" />
 
     <TextView
         android:id="@+id/see_progress"

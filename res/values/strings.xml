@@ -17,6 +17,13 @@
     <string name="title_results">Results</string>
     <string name="title_power">Power</string>
     <!-- <string name="title_sample_size">Sample Size</string> -->
+    
+    <!-- Error Messages -->
+    <string name="net_connection_error">Please make sure your Network Connection is ON</string>
+    
+    <!-- Progress Dialog -->
+    <string name="progress_dialog_title">Please Wait!!</string>
+    <string name="progress_dialog_message">Wait</string>
 
     <!-- Menu -->
     <string name="menu_home">Home</string>
@@ -78,7 +85,10 @@
 
     <!-- Home Screen -->
     <!-- Text View -->
-    <string name="description_home">Glimmpse Lite calculates power and sample size for one-way ANOVA designs with normally distributed outcomes.The software was developed at the Colorado School of Public Health, Department of Biostatistics and Informatics at the University of Colorado Denver.
+    <string name="description_home">Glimmpse Lite calculates power and sample size for one-way ANOVA designs with normally distributed outcomes.The software was developed by
+        <a href="http://samplesizeshop.org/about-us/staff-and-students/uttara-sakhadeo/">Uttara Sakhadeo</a>,
+        <a href="http://samplesizeshop.org/about-us/staff-and-students/aarti-munjal/">Drs. Aarti Munjal</a> and
+        <a href="http://samplesizeshop.org/about-us/staff-and-students/sarah-kreidler/">Drs. Sarah Kreidler</a>
         \n\nFunding was procided by NIDCR 1 R01 DE020832-01A1 to the University of Florida (Keith Muller, PI; Deborah Glueck, University of Colorado site PI).       	</string>
 
     <!-- Button Label -->
@@ -99,14 +109,18 @@
 
     <!-- About Us Screen -->
     <!-- Text View -->
-    <string name="description_aboutus">Glimmpse Lite was developed at the University of Colorado, Denver by Uttara Sakhadeo, Dr. Aarti Munjal and Vijay Akula with support from  Drs. Sarah Kreidler and Deborah Glueck
+    <string name="description_aboutus">Glimmpse Lite was developed at the University of Colorado, Denver by 
+        <a href="http://samplesizeshop.org/about-us/staff-and-students/uttara-sakhadeo/">Uttara Sakhadeo</a>,
+        <a href="http://samplesizeshop.org/about-us/staff-and-students/aarti-munjal/">Drs. Aarti Munjal</a> and Vijay Akula with support from 
+        <a href="http://samplesizeshop.org/about-us/staff-and-students/sarah-kreidler/">Drs. Sarah Kreidler</a> and 
+        <a href="http://samplesizeshop.org/about-us/investigators/dr-deborah-glueck/">Deborah Glueck</a>
       \n\nIt is a part of a large research project to provide researchers such as behavioral and social scientists with tools and education related to the following aspects of study design.
-      \n\n-Calculating power and sample size for any univariate or multivariate test for the general linear multivariate model, assuming fixed predictors.
-      \n-Producing confidence intervals on power estimates for designs with fixed predictors.
-      \n-Producing power calculations for designs with a single Gaussian covariate.
-      \n-Supporting designs with unequal group sizes and complicated covariance structures.
-      \n-Creating basic power curves.
-      \n\nAdditional documentation, publications and related software products are available from <a href="http://samplesizeshop.com">http://samplesizeshop.com</a>
+      \n\n• Calculating power and sample size for any univariate or multivariate test for the general linear multivariate model, assuming fixed predictors.
+      \n• Producing confidence intervals on power estimates for designs with fixed predictors.
+      \n• Producing power calculations for designs with a single Gaussian covariate.
+      \n• Supporting designs with unequal group sizes and complicated covariance structures.
+      \n• Creating basic power curves.
+      \n\nAdditional documentation, publications and related software products are available from <a href="http://samplesizeshop.org">http://samplesizeshop.org</a>
       \n\nFor questions or report a bug, please contact us.</string>         
 
     <!-- Tutorial Screen -->
@@ -116,54 +130,60 @@
 
     <!-- Tutorial Getting Started Screen -->
     <string name="description_tutorial_getting_started">Glimmpse Lite calculates power and sample size for ANOVA. To perform a calculation, you will need to: 
-		\n\n<ol><li>Indicate if you would like to solve for power or sample size.</li> 
-		\n<li>If solving for sample size, you will specify the desired power.</li> 
-		\n<li>Specify the Type I error rate.</li>
-		\n<li>Input the total number of groups.</li>
-		\n<li>If solving for power, you will specify the size of the smallest group.</li>
-		\n<li>Select equal or unequal group sizes.</li>
-		\n<li>Enter choices for group means and within-group variance.</li>
+		&lt;br>&lt;br><ol><li>• Indicate if you would like to solve for power or sample size.</li> 
+		&lt;br><li>• Specify the desired power if solving for sample size.</li> 
+		&lt;br><li>• Specify the Type I error rate.</li>
+		&lt;br><li>• Input the total number of groups.</li>
+		&lt;br><li>• Specify the size of the smallest group if solving for power.</li>
+		&lt;br><li>• Select equal or unequal group sizes.</li>
+		&lt;br><li>• Enter choices for group means and within-group variance.</li>
 		</ol>
-		\n\nAfter inputting the study design, click the "Calculate" button to obtain your results.  
-		\nTo  access the individual help page for each of these inputs, please click the link below.		
+		&lt;br>&lt;br>After inputting the study design, click the "Calculate" button to obtain your results.  		
+		&lt;br>	
 		</string>		
 		
     <!-- Tutorial Solving For Screen -->
-    <string name="description_tutorial_solving_for">		    To begin your calculation, you will indicate whether you would like to solve for power or total sample size.
-			\n\nPower: If you have a rough idea of the number of research participants you will be able to recruite, then solving for power may be more beneficial.
-			\n\nSample Size: If you have fewer restrictions on recruitment and would like to ensure a well-powered study, then solving for sample size is likely to be more useful.</string>
+    <string name="description_tutorial_solving_for">To begin your calculation, indicate whether you would like to solve for power or total sample size.
+			&lt;br>&lt;br>• &lt;u>Power:&lt;/u>  If you have a rough idea of the number of research participants you will be able to recruit, then solving for power may be more beneficial.
+			&lt;br>&lt;br>• &lt;u>Sample Size:&lt;/u>  If you have fewer restrictions on recruitment and would like to ensure a well-powered study, then solving for sample size is likely to be more useful.</string>
 
     <!-- Tutorial Type I Error Screen -->
     <string name="description_tutorial_alpha"><p>A Type I error occurs when a scientist declares a difference when none is actually present.
-        \n\nThe Type I error rate is the probability of a Type I error occuring and is often referred to as alpha value. Type I error rates range from 0 to 1. The most commonly used values are 0.01, 0.05 and 0.1.
-        \n\nThe Type I error screen allowes you to specify a single Type I error rate.</p></string>
+        &lt;br>&lt;br>•  The Type I error rate is the probability of a Type I error occuring and is often referred to as α.
+        &lt;br>• Type I error rates range from 0 to 1.
+        &lt;br>• The most commonly used values are 0.01, 0.05 and 0.1.
+        &lt;br>&lt;br>The Type I error screen allowes you to specify a &lt;u>single Type I error rate&lt;/u>.</p></string>
 
     <!-- Tutorial Number Of Groups Screen -->
-    <string name="description_tutorial_groups"><p>A one-way ANOVA design compares means amongst two or more groups. Use the seek bar to specify the number of groups in your study design.
-        \nGlimmpse Lite currently supports designs with up to ten groups.</p></string>
+    <string name="description_tutorial_groups"><p>A one-way ANOVA design compares means amongst two or more groups.
+        &lt;br>&lt;br>Use the seek bar to specify the number of groups in your study design.
+        &lt;br>&lt;br>Glimmpse Lite currently supports designs with up to &lt;u>ten groups&lt;/u>.</p></string>
 
     <!-- Tutorial Relative Group Size Screen -->
-    <string name="description_tutorial_relative_size"><p>Specify whether the study subgroups are of equal or unequal size.
-			\n\nFor equal sizes, select a "1" using the seek bar next to each study subgroup. This is the default study design.
-			\n\nFor unequal group sizes, you will specify the ratio of the group sizes. For example, cosider a design with an active drug group and a placebo group. If twice as many study participants receive the placebo, a value of "2" would be selected for the placebo group, and a value of "1" would be selected for the active drug group.</p></string>
+    <string name="description_tutorial_relative_size"><p>GLIMMPSE Lite allows the user to calculate power and sample size for ANOVA designs with equal or unequal group sizes.
+			&lt;br>&lt;br>• &lt;u>For equal sizes&lt;/u>, select a "1" using the seek bar next to each study subgroup. This is the default study design.
+			&lt;br>&lt;br>• &lt;u>For unequal group sizes&lt;/u>, specify the ratio of the group sizes. For example, consider a design with an active drug group and a placebo group. If twice as many study participants receive the placebo, a value of "2" would be selected for the placebo group, and a value of "1" would be selected for the active drug group.</p></string>
 
     <!-- Tutorial Smallest Group Size Screen -->
     <string name="description_tutorial_smallest_group"><p>If you are solving for power, you will need to specify the sample size for your study.
-        \n\nOn the Smallest Group Size screen, you will enter the number of participants in the smallest group in the study. If your group sizes are equal, the value is the same for all groups.</p></string>
+        &lt;br>&lt;br>On the Smallest Group Size screen, enter the number of participants in the smallest group in the study.
+        &lt;br>&lt;br>You may add up to five values: power or sample size will be calculated for each value you choose.</p></string>
         
     <!-- Tutorial Power Screen -->
-    <string name="description_tutorial_power"><p>When solving for sample size, you will need to specify the desired power for your study. 
-        \n\nPower values are numbers between 0 and 1. Higher values correspond to a greater likelihood of rejecting the null hypothesis. Common values are 0.8 or 0.9, although 0.9 or higher is usually preferred.
-        \n\nOn the Power screen, enter the desired power for your study in the textbox and click the "Add" button.</p></string>
+    <string name="description_tutorial_power"><p>If you are solving for sample size, you will need to specify the sample size for your study.        
+        &lt;br>&lt;br>On the Power screen, enter the desired power for your study in the textbox and click the "Add" button.
+        &lt;br>&lt;br>You may add up to five values: power or sample size will be calculated for each value you choose.</p></string>
 
     <!-- Tutorial Means And Variance Screen -->
-    <string name="description_tutorial_mean_variance"><p>In power analysis it is necessary to provide means and variances. The values are often obtained from published results or pilot data. Glimmpse Lite currently assumes equal variance across the groups.
-			\n\nTo access the Means and Variance screen, you will first need to specify the number of groups. The Means and Variance screen allows the user to eneter the mean values they expect to observe for each study group. The user will also enter a single within group variance which will be shared across the groups.</p></string>
+    <string name="description_tutorial_mean_variance"><p>In power analysis it is necessary to provide values for group means and variances. The values are often obtained from published results or pilot data.
+        &lt;br>&lt;br>Glimmpse Lite currently assumes equal variance across the groups.
+		&lt;br>&lt;br>To access the Means and Variance screen, you will first need to specify the number of groups. The Means and Variance screen allows the user to enter the mean values they expect to observe for each study group. The user will also enter a single within group variance which will be shared across the groups.</p></string>
 
     <!-- Tutorial Results Screen -->
-    <string name="description_tutorial_results">Power results are displayed in a table with each row representing an individual power calculation. If multiple values are specified for desired power or smallest group size, then multiple rows will be displayed in the table.
-		\nEach row shows the total sample size for the study and the associated power value.
-		\n\nThe user may email the results in a comma delimited format by clicking the “Email” button.
+    <string name="description_tutorial_results">Power results are displayed in a table with each row representing an individual power calculation.
+        &lt;br>&lt;br>If multiple values are specified for desired power or smallest group size, then multiple rows will be displayed in the table.
+		&lt;br>&lt;br>Each row shows the total sample size for the study and the associated power value.
+		&lt;br>&lt;br>The user may email the results in a comma delimited format by clicking the &lt;u>“Email”&lt;/u> button.
 	</string>
 
     <!-- Groups Screen -->
@@ -182,10 +202,10 @@
     <string name="sample_size">Sample Size</string>
 
     <!-- Means and Variance Screen -->
-    <string name="description_means_and_variance">Please fill in the details for mean and variance.</string>
+    <string name="description_means_and_variance">Enter the mean for each group and a common standard deviation.</string>
     <string name="means_variance_list_header_group">Group</string>
     <string name="means_variance_list_header_mean">Mean</string>
-    <string name="means_variance_list_header_variance">Standard Deviation</string>
+    <string name="means_variance_list_header_variance">Standard\nDeviation</string>
 
     <!-- Relative Group Size Screen -->
     <string name="description_relative_group_size">Select the relative group size for each group. For equal group sizes, select  "1" for all groups.</string>
@@ -195,10 +215,8 @@
     <string name="unequal_relative_group_size">Unequal</string>
 
     <!-- Power Screen -->
-    <string name="description_power">Please update the Power details.</string>
-
-    <!-- Sample Size Screen -->
-    <string name="description_sample_size">Please update the Sample Size details.</string>
+    <string name="description_power">Please update the Power details.
+    \nYou may add up to five values: power or sample size will be calculated for each value you choose.</string>    
     
     <!-- Design Screen -->
     <string name="complete">Complete</string>
