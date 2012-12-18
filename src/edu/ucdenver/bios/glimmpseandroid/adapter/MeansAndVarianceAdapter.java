@@ -47,7 +47,7 @@ import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
  */
 public class MeansAndVarianceAdapter extends BaseAdapter {
 
-    /** The RO w_ one. */
+    /** The ROW_ONE constant. */
     private final int ROW_ONE = 0;
 
     /** The groups. */
@@ -206,8 +206,7 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
         });
 
         if (position == ROW_ONE) {
-            standardDeviation = StuyDesignContext.getInstance()
-                    .getStandardDeviation();
+            standardDeviation = StuyDesignContext.getInstance().getStandardDeviation();            
             temp = standardDeviation % 1;
             format = new DecimalFormat("#.0");
             temp = Double.parseDouble(format.format(temp));
