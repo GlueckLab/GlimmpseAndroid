@@ -109,12 +109,11 @@
 
     <!-- About Us Screen -->
     <!-- Text View -->
-    <string name="description_aboutus">Glimmpse Lite was developed at the University of Colorado, Denver by 
+    <string name="description_aboutus">Glimmpse Lite was developed by 
         <a href="http://samplesizeshop.org/about-us/staff-and-students/uttara-sakhadeo/">Uttara Sakhadeo</a>,
-        <a href="http://samplesizeshop.org/about-us/staff-and-students/aarti-munjal/">Drs. Aarti Munjal</a> and Vijay Akula with support from 
-        <a href="http://samplesizeshop.org/about-us/staff-and-students/sarah-kreidler/">Drs. Sarah Kreidler</a> and 
-        <a href="http://samplesizeshop.org/about-us/investigators/dr-deborah-glueck/">Deborah Glueck</a>
-      \n\nIt is a part of a large research project to provide researchers such as behavioral and social scientists with tools and education related to the following aspects of study design.
+        <a href="http://samplesizeshop.org/about-us/staff-and-students/aarti-munjal/">Drs. Aarti Munjal</a> and 
+        <a href="http://samplesizeshop.org/about-us/staff-and-students/sarah-kreidler/">Drs. Sarah Kreidler</a>. Additional support was contributed by Vijay Chander Akula.        
+      \n\nGLIMMPSE Lite is a part of a large research project to provide researchers such as behavioral and social scientists with tools and education related to the following aspects of study design:
       \n\n• Calculating power and sample size for any univariate or multivariate test for the general linear multivariate model, assuming fixed predictors.
       \n• Producing confidence intervals on power estimates for designs with fixed predictors.
       \n• Producing power calculations for designs with a single Gaussian covariate.
