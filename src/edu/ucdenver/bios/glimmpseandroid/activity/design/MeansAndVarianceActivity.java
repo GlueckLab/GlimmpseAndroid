@@ -42,6 +42,7 @@ import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureList
 import edu.ucdenver.bios.glimmpseandroid.adapter.MeansAndVarianceAdapter;
 import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class MeansAndVarianceActivity deals with the 'Means and Variance' screen
  * of the GLIMMPSE LITE Application.
@@ -51,8 +52,14 @@ import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
  */
 public class MeansAndVarianceActivity extends Activity implements
         OnClickListener, SimpleGestureListener {
+
+    /** The mean variance list. */
     private ListView meanVarianceList;
+
+    /** The img. */
     static Drawable img;
+
+    /** The detector. */
     private static GestureFilter detector;
 
     /**
@@ -120,6 +127,11 @@ public class MeansAndVarianceActivity extends Activity implements
                     MeansAndVarianceActivity.this, groups, img));
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+     */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             finish();
@@ -128,30 +140,66 @@ public class MeansAndVarianceActivity extends Activity implements
         return false;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see android.view.View.OnClickListener#onClick(android.view.View)
+     */
     public void onClick(View v) {
         finish();
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see android.app.Activity#dispatchTouchEvent(android.view.MotionEvent)
+     */
     public boolean dispatchTouchEvent(MotionEvent me) {
         detector.onTouchEvent(me);
         return super.dispatchTouchEvent(me);
     }
 
-    public void onSwipe(int direction) {        
-        if(direction == GestureFilter.SWIPE_RIGHT)
-            finish();        
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener
+     * #onSwipe(int)
+     */
+    public void onSwipe(int direction) {
+        if (direction == GestureFilter.SWIPE_RIGHT)
+            finish();
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener
+     * #onDoubleTap()
+     */
     public void onDoubleTap() {
 
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+     */
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.home_screen_menu, menu);
         return true;
     }
 
+    /**
+     * Menu selection.
+     * 
+     * @param item
+     *            the item
+     * @return true, if successful
+     */
     private boolean menuSelection(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.menu_tutorial:
@@ -181,6 +229,11 @@ public class MeansAndVarianceActivity extends Activity implements
         }
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+     */
     public boolean onOptionsItemSelected(MenuItem item) { // Handle
         return menuSelection(item);
     }
