@@ -88,7 +88,7 @@
         <!-- replace version for the validation reports -->
     	<replace file="${res.dir}/values/strings.xml" 
     		token="_VERSION_NUMBER_" value="${module.version}"/>
-    	<replace file="${base.dir}/../AndroidManifest.xml" 
+    	<replace file="${basedir}/../AndroidManifest.xml" 
     		token="_VERSION_NUMBER_" value="${module.version}"/>
     </target>
     
