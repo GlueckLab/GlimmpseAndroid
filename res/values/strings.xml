@@ -1,7 +1,8 @@
 <resources>
 
     <!-- Version -->
-    <string name="version">Version 1.0.0</string>
+    <string name="version">Version</string>
+    <string name="_VERSION_NUMBER_">1.0.0</string>
 
     <!-- Screen Titles -->
     <string name="title_home">GLIMMPSE Lite</string>
@@ -222,8 +223,8 @@
     
     <!-- Result Screen -->
     <string name="total_sample_size">Total Sample Size</string>
-    <string name="mail_body">Thank you for using the GLIMMPSE software.  Your power results are attached to this email. \n\nTo learn more about power and sample size, please visit http://samplesizeshop.org.</string>    
-	<string name="mail_subject">GLIMMPSE Power Results</string>    
+    <string name="mail_body">Thank you for using the GLIMMPSE Lite application.  Your power results are attached to this email. \n\nTo learn more about power and sample size, please visit http://samplesizeshop.org.</string>    
+	<string name="mail_subject">GLIMMPSE Lite Power Results</string>    
 	<string name="column_string">"\"test\",\"actualPower\",\"sampleSize\",\"betaScale\",\"sigmaScale\",\"alpha\",\"nominalPower\",\"powerMethod\",\"quantile\",\"ciLower\",\"ciUpper\""</string>    
 	<string name="power_results_file">GLIMMPSEPowerResults.csv</string>    
 	<string name="study_design_file">GLIMMPSEStudyDesign.json</string>    
