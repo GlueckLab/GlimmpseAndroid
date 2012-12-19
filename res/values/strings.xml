@@ -87,9 +87,9 @@
     <!-- Home Screen -->
     <!-- Text View -->
     <string name="description_home">Glimmpse Lite calculates power and sample size for one-way ANOVA designs with normally distributed outcomes.The software was developed by
-        <a href="http://samplesizeshop.org/about-us/staff-and-students/uttara-sakhadeo/">Uttara Sakhadeo</a>,
-        <a href="http://samplesizeshop.org/about-us/staff-and-students/aarti-munjal/">Drs. Aarti Munjal</a> and
-        <a href="http://samplesizeshop.org/about-us/staff-and-students/sarah-kreidler/">Drs. Sarah Kreidler</a>
+        <a href="http://samplesizeshop.org/about-us/staff-and-students/uttara-sakhadeo/">Uttara Sakhadeo</a>, Drs.
+        <a href="http://samplesizeshop.org/about-us/staff-and-students/aarti-munjal/">Aarti Munjal</a> and
+        <a href="http://samplesizeshop.org/about-us/staff-and-students/sarah-kreidler/">Sarah Kreidler</a>
         \n\nFunding was procided by NIDCR 1 R01 DE020832-01A1 to the University of Florida (Keith Muller, PI; Deborah Glueck, University of Colorado site PI).       	</string>
 
     <!-- Button Label -->
@@ -111,9 +111,9 @@
     <!-- About Us Screen -->
     <!-- Text View -->
     <string name="description_aboutus">Glimmpse Lite was developed by 
-        <a href="http://samplesizeshop.org/about-us/staff-and-students/uttara-sakhadeo/">Uttara Sakhadeo</a>,
-        <a href="http://samplesizeshop.org/about-us/staff-and-students/aarti-munjal/">Drs. Aarti Munjal</a> and 
-        <a href="http://samplesizeshop.org/about-us/staff-and-students/sarah-kreidler/">Drs. Sarah Kreidler</a>. Additional support was contributed by Vijay Chander Akula.        
+        <a href="http://samplesizeshop.org/about-us/staff-and-students/uttara-sakhadeo/">Uttara Sakhadeo</a>, Drs. 
+        <a href="http://samplesizeshop.org/about-us/staff-and-students/aarti-munjal/">Aarti Munjal</a> and 
+        <a href="http://samplesizeshop.org/about-us/staff-and-students/sarah-kreidler/">Sarah Kreidler</a>. Additional support was contributed by Vijay Chander Akula.        
       \n\nGLIMMPSE Lite is a part of a large research project to provide researchers such as behavioral and social scientists with tools and education related to the following aspects of study design:
       \n\n• Calculating power and sample size for any univariate or multivariate test for the general linear multivariate model, assuming fixed predictors.
       \n• Producing confidence intervals on power estimates for designs with fixed predictors.
