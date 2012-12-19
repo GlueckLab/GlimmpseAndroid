@@ -42,7 +42,10 @@
     <!-- <string name="title_sample_size">Sample Size</string> -->
     
     <!-- Error Messages -->
-    <string name="net_connection_error">Please make sure your Network Connection is ON</string>
+    <string name="net_connection_error">Please make sure that you are connected to network.</string>
+    <string name="power_value_error">"Please type a decimal number in the range of 0 to 1."</string>
+    <string name="power_values_upper_limit">"You may only add up to 5 power values."</string>
+    <string name="sample_size_value_upper_limit">"You may only add up to 5 sample size values."</string>
     
     <!-- Progress Dialog -->
     <string name="progress_dialog_title">Please Wait!!</string>
