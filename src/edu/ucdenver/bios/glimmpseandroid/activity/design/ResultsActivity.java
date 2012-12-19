@@ -145,8 +145,7 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
                 resultsListView.setAdapter(new ResultsListAdapter(
                         ResultsActivity.this, list));
             } catch (Exception e) {
-                Log.e("Exception while reading results." + this.getClass(),
-                        e.getMessage());
+                Log.e("Tag: " + this.getClass(), "Error: "+e);                 
             }
         }
 
@@ -214,17 +213,17 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
                     try {
                         out = new FileOutputStream(file);
                     } catch (FileNotFoundException e) {
-                        Log.e("" + this.getClass(), e.getMessage());                        
+                        Log.e("Tag: " + this.getClass(), "Error: "+e);                         
                     }
                     try {
                         out.write(combinedString.getBytes());
                     } catch (IOException e) {
-                        Log.e("" + this.getClass(), e.getMessage());
+                        Log.e("Tag: " + this.getClass(), "Error: "+e); 
                     }
                     try {
                         out.close();
                     } catch (IOException e) {
-                        Log.e("" + this.getClass(), e.getMessage());
+                        Log.e("Tag: " + this.getClass(), "Error: "+e); 
                     }
 
                     file1 = new File(dir, resources
@@ -233,19 +232,19 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
                     try {
                         out1 = new FileOutputStream(file1);
                     } catch (FileNotFoundException e) {
-                        Log.e("" + this.getClass(), e.getMessage());
+                        Log.e("Tag: " + this.getClass(), "Error: "+e); 
                     }
                     try {
                         ObjectMapper m = new ObjectMapper();
                         m.writeValue(out1, StuyDesignContext.getInstance()
                                 .getStudyDesign());
                     } catch (IOException e) {
-                        Log.e("" + this.getClass(), e.getMessage());
+                        Log.e("Tag: " + this.getClass(), "Error: "+e); 
                     }
                     try {
                         out1.close();
                     } catch (IOException e) {
-                        Log.e("" + this.getClass(), e.getMessage());
+                        Log.e("Tag: " + this.getClass(), "Error: "+e); 
                     }
                 }
                 Uri url = null;

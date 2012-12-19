@@ -25,7 +25,6 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -42,7 +41,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -208,7 +206,12 @@ public class TypeIErrorActivity extends Activity implements OnClickListener,
             try {
                 alpha = (Double.parseDouble(String.valueOf(s))) % 1;
             } catch (Exception e) {
-                Log.e("" + this.getClass(), e.getMessage());
+                if(e != null && ( e.getMessage() != null || !e.getMessage().isEmpty())){
+                    Log.e("Tag: " + this.getClass(), "Error: "+e.getMessage());
+                }
+                else{
+                    Log.e("Tag: " + this.getClass(), "Error");
+                }
                 alpha = 0.0;
                 value.setCompoundDrawables(null, null, null, null);
             }

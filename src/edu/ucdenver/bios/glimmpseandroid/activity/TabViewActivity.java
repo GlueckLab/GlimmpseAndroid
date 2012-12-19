@@ -22,7 +22,6 @@ package edu.ucdenver.bios.glimmpseandroid.activity;
 
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
-import org.restlet.resource.ResourceException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -619,8 +618,7 @@ public class TabViewActivity extends Activity implements Runnable,
         try {
             thread.join(2);
         } catch (InterruptedException e) {
-            Log.e("Exception while contacting server." + this.getClass(),
-                    e.getMessage());
+            Log.e("Tag: " + this.getClass(), "Error: "+e);             
         }
     }
 
@@ -682,8 +680,7 @@ public class TabViewActivity extends Activity implements Runnable,
             }
 
         } catch (Exception e) {
-            Log.e("Exception while setting connection with server."
-                    + this.getClass(), e.getMessage());
+            Log.e("Tag: " + this.getClass(), "Error: "+e); 
         }
     }
 
