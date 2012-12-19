@@ -20,9 +20,14 @@
  */
 package edu.ucdenver.bios.glimmpseandroid.activity.design;
 
+import java.util.List;
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -48,6 +53,8 @@ import edu.ucdenver.bios.glimmpseandroid.activity.TabViewActivity;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener;
 import edu.ucdenver.bios.glimmpseandroid.adapter.PowerListAdapter;
+import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
+import edu.ucdenver.bios.webservice.common.domain.NominalPower;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -71,6 +78,12 @@ public class PowerActivity extends Activity implements OnClickListener,
 
     /** The detector. */
     private static GestureFilter detector;
+
+    /** The global variables. */
+    private static StuyDesignContext globalVariables;
+
+    /** The resources. */
+    private static Resources resources;
 
     /*
      * (non-Javadoc)
@@ -97,24 +110,30 @@ public class PowerActivity extends Activity implements OnClickListener,
             window.setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
         }
 
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        globalVariables = StuyDesignContext.getInstance();
+        resources = getResources();
+
+        DisplayMetrics metrics = resources.getDisplayMetrics();
         float density = metrics.density;
         int measurement = (int) (density * 20);
 
-        img = getResources().getDrawable(R.drawable.clear_button);
+        img = resources.getDrawable(R.drawable.clear_button);
         img.setBounds(0, 0, measurement, measurement);
 
         TextView title = (TextView) findViewById(R.id.window_title);
-        title.setText(getResources().getString(R.string.title_power));
+        title.setText(resources.getString(R.string.title_power));
 
         Button homeButton = (Button) findViewById(R.id.home_button);
-        homeButton.setText(getResources().getString(R.string.title_design));
+        homeButton.setText(resources.getString(R.string.title_design));
         homeButton.setOnClickListener(this);
 
         powerListPopulate();
 
     }
 
+    /**
+     * Clear text.
+     */
     private void clearText() {
         valueText.setText("");
         valueText.requestFocusFromTouch();
@@ -168,6 +187,7 @@ public class PowerActivity extends Activity implements OnClickListener,
         addButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 addValue();
+
             }
         });
 
@@ -194,27 +214,55 @@ public class PowerActivity extends Activity implements OnClickListener,
      * Adds the value.
      */
     private void addValue() {
-        valueText = (EditText) findViewById(R.id.power_value);
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(valueText.getWindowToken(), 0);
-        String data = String.valueOf(valueText.getText());        
-        if (data != null && !data.isEmpty()) {
-            if (!data.equals(".")) {
-                Double value = Double.parseDouble(data);
-                if (value < 1 && value != 0) {
-                    powerListView.setAdapter(new PowerListAdapter(
-                            PowerActivity.this, value));
-                } else {
-                    (Toast.makeText(
-                            getBaseContext(),
-                            "Please type a decimal number in the range of 0 to 1 !!!",
-                            Toast.LENGTH_SHORT)).show();
-                }
+        boolean flag = true;
+        List<NominalPower> list = globalVariables.getStudyDesign()
+                .getNominalPowerList();
+        if (list != null && !list.isEmpty()) {
+            if (list.size() == 5) {
+                flag = false;
+                AlertDialog.Builder builder = new AlertDialog.Builder(
+                        PowerActivity.this);
+                builder.setMessage(
+                        resources.getString(R.string.power_values_upper_limit))
+                        .setCancelable(false)
+                        .setPositiveButton(resources.getString(R.string.ok),
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,
+                                            int id) {
+
+                                    }
+                                });
+                builder.show();
             }
-            clearText();
+        }
+        if (flag) {
+            valueText = (EditText) findViewById(R.id.power_value);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(valueText.getWindowToken(), 0);
+            String data = String.valueOf(valueText.getText());
+            if (data != null && !data.isEmpty()) {
+                if (!data.equals(".")) {
+                    Double value = Double.parseDouble(data);
+                    if (value < 1 && value != 0) {
+                        powerListView.setAdapter(new PowerListAdapter(
+                                PowerActivity.this, value));
+                    } else {
+                        (Toast.makeText(
+                                getBaseContext(),
+                                resources.getString(R.string.power_value_error),
+                                Toast.LENGTH_LONG)).show();
+                    }
+                }
+                clearText();
+            }
         }
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+     */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             addValue();
@@ -224,16 +272,33 @@ public class PowerActivity extends Activity implements OnClickListener,
         return super.onKeyDown(keyCode, event);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see android.view.View.OnClickListener#onClick(android.view.View)
+     */
     public void onClick(View v) {
         addValue();
         finish();
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see android.app.Activity#dispatchTouchEvent(android.view.MotionEvent)
+     */
     public boolean dispatchTouchEvent(MotionEvent me) {
         detector.onTouchEvent(me);
         return super.dispatchTouchEvent(me);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener
+     * #onSwipe(int)
+     */
     public void onSwipe(int direction) {
         switch (direction) {
 
@@ -255,12 +320,24 @@ public class PowerActivity extends Activity implements OnClickListener,
 
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+     */
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.home_screen_menu, menu);
         return true;
     }
 
+    /**
+     * Menu selection.
+     * 
+     * @param item
+     *            the item
+     * @return true, if successful
+     */
     private boolean menuSelection(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.menu_tutorial:
@@ -293,6 +370,11 @@ public class PowerActivity extends Activity implements OnClickListener,
         }
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+     */
     public boolean onOptionsItemSelected(MenuItem item) { // Handle
         return menuSelection(item);
     }

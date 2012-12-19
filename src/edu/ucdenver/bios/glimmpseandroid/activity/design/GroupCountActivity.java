@@ -137,6 +137,7 @@ public class GroupCountActivity extends Activity implements OnClickListener,
      */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+            stuyDesignContext.setGroups(groups);
             finish();
             return true;
         }

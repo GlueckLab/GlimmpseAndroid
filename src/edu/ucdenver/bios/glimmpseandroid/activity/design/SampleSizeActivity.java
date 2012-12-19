@@ -20,9 +20,14 @@
  */
 package edu.ucdenver.bios.glimmpseandroid.activity.design;
 
+import java.util.List;
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -47,6 +52,8 @@ import edu.ucdenver.bios.glimmpseandroid.activity.TabViewActivity;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter;
 import edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener;
 import edu.ucdenver.bios.glimmpseandroid.adapter.SampleSizeAdapter;
+import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
+import edu.ucdenver.bios.webservice.common.domain.SampleSize;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -70,6 +77,12 @@ public class SampleSizeActivity extends Activity implements OnClickListener,
 
     /** The detector. */
     private GestureFilter detector;
+
+    /** The global variables. */
+    private static StuyDesignContext globalVariables;
+
+    /** The resources. */
+    private static Resources resources;
 
     /**
      * This method is called by Android when the Activity is first started. From
@@ -99,19 +112,21 @@ public class SampleSizeActivity extends Activity implements OnClickListener,
             window.setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
         }
 
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        globalVariables = StuyDesignContext.getInstance();
+        resources = getResources();
+
+        DisplayMetrics metrics = resources.getDisplayMetrics();
         float density = metrics.density;
         int measurement = (int) (density * 20);
 
-        img = getResources().getDrawable(R.drawable.clear_button);
+        img = resources.getDrawable(R.drawable.clear_button);
         img.setBounds(0, 0, measurement, measurement);
 
         TextView title = (TextView) findViewById(R.id.window_title);
-        title.setText(getResources().getString(
-                R.string.title_smallest_group_size));
+        title.setText(resources.getString(R.string.title_smallest_group_size));
 
         Button homeButton = (Button) findViewById(R.id.home_button);
-        homeButton.setText(getResources().getString(R.string.title_design));
+        homeButton.setText(resources.getString(R.string.title_design));
         homeButton.setOnClickListener(this);
 
         sampleSizeListPopulate();
@@ -192,16 +207,40 @@ public class SampleSizeActivity extends Activity implements OnClickListener,
      * Adds the value.
      */
     private void addValue() {
-        valueText = (EditText) findViewById(R.id.sample_size_value);
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(valueText.getWindowToken(), 0);
-        String data = String.valueOf(valueText.getText());
-        if (data != null && !data.isEmpty()) {
-            int value = Integer.parseInt(data);
-            sampleSizeListView.setAdapter(new SampleSizeAdapter(
-                    SampleSizeActivity.this, value));
-            valueText.setText("");
-            valueText.requestFocusFromTouch();
+        boolean flag = true;
+        List<SampleSize> list = globalVariables.getStudyDesign()
+                .getSampleSizeList();
+        if (list != null && !list.isEmpty()) {
+            if (list.size() == 5) {
+                flag = false;
+                AlertDialog.Builder builder = new AlertDialog.Builder(
+                        SampleSizeActivity.this);
+                builder.setMessage(
+                        resources
+                                .getString(R.string.sample_size_value_upper_limit))
+                        .setCancelable(false)
+                        .setPositiveButton(resources.getString(R.string.ok),
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,
+                                            int id) {
+
+                                    }
+                                });
+                builder.show();
+            }
+        }
+        if (flag) {
+            valueText = (EditText) findViewById(R.id.sample_size_value);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(valueText.getWindowToken(), 0);
+            String data = String.valueOf(valueText.getText());
+            if (data != null && !data.isEmpty()) {
+                int value = Integer.parseInt(data);
+                sampleSizeListView.setAdapter(new SampleSizeAdapter(
+                        SampleSizeActivity.this, value));
+                valueText.setText("");
+                valueText.requestFocusFromTouch();
+            }
         }
     }
 
