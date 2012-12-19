@@ -188,7 +188,7 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
                         mean = Double.parseDouble(value);
                         meanText.setCompoundDrawables(null, null, img, null);
                     } catch (Exception e) {
-                        Log.e("" + this.getClass(), e.getMessage());
+                        Log.e("Tag: " + this.getClass(), "Error: "+e); 
                         mean = DEFAULT_MEAN;
                     }
                 } else {
@@ -250,7 +250,7 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
                                 standardDeviation = DEFAULT_STANDARD_DEVIATION;
                             }
                         } catch (Exception e) {
-                            Log.e("" + this.getClass(), e.getMessage());
+                            Log.e("Tag: " + this.getClass(), "Error: "+e); 
                             standardDeviation = DEFAULT_STANDARD_DEVIATION;
                         }
                     } else {
