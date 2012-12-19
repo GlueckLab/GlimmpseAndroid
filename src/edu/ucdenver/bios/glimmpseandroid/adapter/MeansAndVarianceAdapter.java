@@ -26,6 +26,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -187,7 +188,7 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
                         mean = Double.parseDouble(value);
                         meanText.setCompoundDrawables(null, null, img, null);
                     } catch (Exception e) {
-                        System.out.println("Exception : " + e.getMessage());
+                        Log.e("" + this.getClass(), e.getMessage());
                         mean = DEFAULT_MEAN;
                     }
                 } else {
@@ -249,7 +250,7 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
                                 standardDeviation = DEFAULT_STANDARD_DEVIATION;
                             }
                         } catch (Exception e) {
-                            System.out.println("Exception : " + e.getMessage());
+                            Log.e("" + this.getClass(), e.getMessage());
                             standardDeviation = DEFAULT_STANDARD_DEVIATION;
                         }
                     } else {
