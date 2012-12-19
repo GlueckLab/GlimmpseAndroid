@@ -32,6 +32,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -84,9 +85,9 @@ public class TypeIErrorActivity extends Activity implements OnClickListener,
     /** The detector. */
     private static GestureFilter detector;
 
-    private static InputMethodManager imm;
+    //private static InputMethodManager imm;
 
-    private boolean isKeyboardVisible = true;
+    //private boolean isKeyboardVisible = true;
 
     /**
      * This method is called by Android when the Activity is first started. From
@@ -145,11 +146,11 @@ public class TypeIErrorActivity extends Activity implements OnClickListener,
 
         });
 
-        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        /*imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null) {
-            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 1);
             isKeyboardVisible = true;
-        }
+        }*/
 
         if (stuyDesignContext.getTypeIError() == 0.0)
             stuyDesignContext.setDefaultTypeIError();
@@ -207,7 +208,7 @@ public class TypeIErrorActivity extends Activity implements OnClickListener,
             try {
                 alpha = (Double.parseDouble(String.valueOf(s))) % 1;
             } catch (Exception e) {
-                System.out.println("Exception : " + e);
+                Log.e("" + this.getClass(), e.getMessage());
                 alpha = 0.0;
                 value.setCompoundDrawables(null, null, null, null);
             }
@@ -216,13 +217,7 @@ public class TypeIErrorActivity extends Activity implements OnClickListener,
         }
     }
 
-    private void exit() {
-        if (imm != null) {
-            if (isKeyboardVisible) {
-                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-                isKeyboardVisible = false;
-            }
-        }
+    private void exit() {        
         if (alpha == 0.0)
             stuyDesignContext.setDefaultTypeIError();
         else {
@@ -230,6 +225,12 @@ public class TypeIErrorActivity extends Activity implements OnClickListener,
                     .doubleValue());
         }
         finish();
+        /*if (imm != null) {            
+            if (isKeyboardVisible) {
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+                isKeyboardVisible = false;
+            }
+        }*/
     }
 
     /*
@@ -245,7 +246,7 @@ public class TypeIErrorActivity extends Activity implements OnClickListener,
     public void onBackPressed() {
         // TODO Auto-generated method stub
         super.onBackPressed();
-        isKeyboardVisible = false;        
+        //isKeyboardVisible = false;        
 
     }
 

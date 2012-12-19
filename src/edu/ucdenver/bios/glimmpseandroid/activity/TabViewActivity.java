@@ -40,6 +40,7 @@ import android.os.Message;
 import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -185,12 +186,14 @@ public class TabViewActivity extends Activity implements Runnable,
         boolean useTitleFeature = false;
 
         context = TabViewActivity.this;
-        
+
         resources = getResources();
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle(resources.getString(R.string.progress_dialog_title));
-        progressDialog.setMessage(resources.getString(R.string.progress_dialog_message));
+        progressDialog.setTitle(resources
+                .getString(R.string.progress_dialog_title));
+        progressDialog.setMessage(resources
+                .getString(R.string.progress_dialog_message));
         progressDialog.setCancelable(false);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
@@ -261,7 +264,7 @@ public class TabViewActivity extends Activity implements Runnable,
 
         if (useTitleFeature) {
             window.setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-        }        
+        }
 
         labels = resources.getStringArray(R.array.tab_labels);
 
@@ -411,7 +414,8 @@ public class TabViewActivity extends Activity implements Runnable,
             if (enumSampleSize.equals(solvingFor)) {
                 designList[1] = getString(R.string.enum_power_value);
             } else {
-                designList[1] = resources.getString(R.string.title_smallest_group_size);
+                designList[1] = resources
+                        .getString(R.string.title_smallest_group_size);
             }
         }
 
@@ -602,7 +606,7 @@ public class TabViewActivity extends Activity implements Runnable,
     /**
      * Display loading.
      */
-    private void displayLoading() {        
+    private void displayLoading() {
         progressDialog = ProgressDialog.show(context,
                 resources.getString(R.string.calculating_message) + " "
                         + globalVariables.getSolvingFor().toLowerCase(),
@@ -615,7 +619,8 @@ public class TabViewActivity extends Activity implements Runnable,
         try {
             thread.join(2);
         } catch (InterruptedException e) {
-            System.out.println("Inturrupted Exception : " + e.getMessage());
+            Log.e("Exception while contacting server." + this.getClass(),
+                    e.getMessage());
         }
     }
 
@@ -646,40 +651,39 @@ public class TabViewActivity extends Activity implements Runnable,
                 ClientResource cr = new ClientResource(URL);
 
                 StudyDesign studyDesign = globalVariables.getStudyDesign();
-                globalVariables.setDefaults();                
-                
-                    Representation repr = cr.post(studyDesign);
-                    if (repr != null) {
-                        jsonStr = repr.getText();
-                        if (jsonStr == null || jsonStr.isEmpty()) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(
-                                    context);
-                            builder.setTitle(resources
-                                    .getString(R.string.calculation_error_title));
-                            builder.setMessage(
-                                    resources
-                                            .getString(R.string.calculation_error_description))
-                                    .setCancelable(false)
-                                    .setPositiveButton(
-                                            resources.getString(R.string.ok),
-                                            new DialogInterface.OnClickListener() {
-                                                public void onClick(
-                                                        DialogInterface dialog,
-                                                        int id) {
+                globalVariables.setDefaults();
 
-                                                }
-                                            });
-                            builder.show();
-                        }
+                Representation repr = cr.post(studyDesign);
+                if (repr != null) {
+                    jsonStr = repr.getText();
+                    if (jsonStr == null || jsonStr.isEmpty()) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(
+                                context);
+                        builder.setTitle(resources
+                                .getString(R.string.calculation_error_title));
+                        builder.setMessage(
+                                resources
+                                        .getString(R.string.calculation_error_description))
+                                .setCancelable(false)
+                                .setPositiveButton(
+                                        resources.getString(R.string.ok),
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(
+                                                    DialogInterface dialog,
+                                                    int id) {
 
-                    } else {                        
-                    }               
+                                            }
+                                        });
+                        builder.show();
+                    }
+
+                } else {
+                }
             }
 
-        } catch (Exception e) {            
-            exceptionMessage = e.getMessage();
-            System.out.println("testPower Failed to retrieve: "
-                    + exceptionMessage);
+        } catch (Exception e) {
+            Log.e("Exception while setting connection with server."
+                    + this.getClass(), e.getMessage());
         }
     }
 

@@ -34,6 +34,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -144,7 +145,8 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
                 resultsListView.setAdapter(new ResultsListAdapter(
                         ResultsActivity.this, list));
             } catch (Exception e) {
-                System.out.println("Exception: " + e.getMessage());
+                Log.e("Exception while reading results." + this.getClass(),
+                        e.getMessage());
             }
         }
 
@@ -212,17 +214,17 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
                     try {
                         out = new FileOutputStream(file);
                     } catch (FileNotFoundException e) {
-                        System.out.println(e.getMessage());
+                        Log.e("" + this.getClass(), e.getMessage());                        
                     }
                     try {
                         out.write(combinedString.getBytes());
                     } catch (IOException e) {
-                        System.out.println(e.getMessage());
+                        Log.e("" + this.getClass(), e.getMessage());
                     }
                     try {
                         out.close();
                     } catch (IOException e) {
-                        System.out.println(e.getMessage());
+                        Log.e("" + this.getClass(), e.getMessage());
                     }
 
                     file1 = new File(dir, resources
@@ -231,19 +233,19 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
                     try {
                         out1 = new FileOutputStream(file1);
                     } catch (FileNotFoundException e) {
-                        System.out.println(e.getMessage());
+                        Log.e("" + this.getClass(), e.getMessage());
                     }
                     try {
                         ObjectMapper m = new ObjectMapper();
                         m.writeValue(out1, StuyDesignContext.getInstance()
                                 .getStudyDesign());
                     } catch (IOException e) {
-                        System.out.println(e.getMessage());
+                        Log.e("" + this.getClass(), e.getMessage());
                     }
                     try {
                         out1.close();
                     } catch (IOException e) {
-                        System.out.println(e.getMessage());
+                        Log.e("" + this.getClass(), e.getMessage());
                     }
                 }
                 Uri url = null;
