@@ -4,7 +4,7 @@
     	<item name="android:background">#444444</item>        
 	</style>
 	
-	<style name="MyTheme" parent="android:Theme">
+	<style name="app_theme" parent="android:Theme">
 	    <item name="android:windowTitleBackgroundStyle">@style/MyWindowTitleBackground</item>	    
 	   	<item name="android:windowTitleSize">40dip</item>
 	</style>
