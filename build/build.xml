@@ -23,8 +23,8 @@
     <!-- when releasing software, this is the only place the version information
 			should be specified. Appropriate changes to the manifest and source
 			code will be performed by the build -->
-	<property name="app.version" value="dev" />
-	<property name="webservicecomman.version" value="dev" />
+	<property name="app.version" value="1.0.0" />
+	<property name="webservicecomman.version" value="1.1.0" />
 	<condition property="webservicecommon.version" value="dev">
 	   <not>  
 	      <isset property=""/>
