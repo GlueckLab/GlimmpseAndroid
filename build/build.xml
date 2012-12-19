@@ -88,8 +88,8 @@
         <!-- replace version for the validation reports -->
     	<replace file="${res.dir}/values/strings.xml" 
     		token="_VERSION_NUMBER_" value="${app.version}"/>
-    	<replace file="${basedir}/../AndroidManifest.xml" 
-    		token="_VERSION_NUMBER_" value="${app.version}"/>
+    	<!-- <replace file="${basedir}/../AndroidManifest.xml" 
+    		token="_VERSION_NUMBER_" value="${app.version}"/> -->
     </target>
     
 	<!-- ******************************************************* -->
