@@ -1,4 +1,5 @@
-GLIMMPSE (General Linear Multivariate Model Power and Sample size)
+GLIMMPSE Lite for Android calculates power and sample size for
+one-way analysis of variance.
 Copyright (C) 2010 Regents of the University of Colorado.  
 
 This program is free software; you can redistribute it and/or
@@ -14,48 +15,46 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- 
-------------------------------
- Description
-------------------------------
-
-'GLIMMPSE Lite' is a free, user friendly and open source smart-phone application
-which helps students, statisticians and researchers in creating their one way ANOVA 
-study designs even while they are traveling.
-
-'GLIMMPSE Lite' is functionally a subset of our existing free, user friendly and 
-open source web application GLIMMPSE. GLIMMPSE calculates power and sample size
-for normally distributed outcomes.
-
-Currently 'GLIMMPSE Lite' is supported on Android and iOS platforms which according 
-to International Data Corporation (IDC) together hold a biggest market share of
-mobile platforms.
-
-'GLIMMPSE Lite' has gone through a rigorous testing and code refactoring for memory 
-consumption. ‘GLIMMPSE Lite’ has an simple, uncluttered and readable user interface.
 
 ------------------------------
  Description for Google Play
 ------------------------------
 
-Prepare your One Way ANOVA study designs from anywhere you go. 
+Power your study designs wherever you go. 
 
-‘GLIMMPSE Lite’ assists you with simple and through tutorials.
-Readable and simple user interface makes it even more efficient.
+'GLIMMPSE Lite' is a free, user-friendly and open source smart-phone application
+which allows students, researchers, and statisticians to calculate power and sample
+size for one way analysis of variance.
 
-All you need to do is to provide six simple inputs;
-	1.	Solving for value: Choose between solving for a) Power or b) Sample Size.
-	2.	Enlist Power value/s, if solving for Sample Size.
-		OR
-		Enlist Sample Size value/s, if solving for Power.
-	3.	Type an acceptable Type One Error or Alpha value. Defaulted to 0.05.
-	4.	Select the Numbers of groups under consideration. At least two groups are required.
-	5.	Provide Relative Group Size for each group.
-	6.	Provide Means of the groups and a single Variance value.
+The simple user interface allows scientists to quickly enter information 
+about the number of groups, the Type I Error rate, and choices for means 
+and standard deviations.  Integrated tutorials provide guidance on appropriate 
+inputs for the power or sample size calculation. The researcher may solve 
+for either power or sample size, and save the results. 
 
-‘GLIMMPSE Lite’ also lets you; email your results.
-Currently ‘GLIMMPSE Lite’ is supported on Android and iOS platforms.
+Additional documentation, validation results, and theoretical details are available at
 
-Note:
-Downloads and Documentations are available at http://samplesizeshop.org/software-downloads/glimmpse/glimmpse-mobile/
+http://samplesizeshop.org/.
+
+'GLIMMPSE Lite' provides a subset of the functionality of GLIMMPSE, a 
+a free, user-friendly and open source web application which calculates 
+power and sample size for the general linear multivariate model with normally 
+distributed outcomes.  GLIMMPSE is hosted at
+
+http://glimmpse.samplesizeshop.org/.
+
+‘GLIMMPSE Lite’ is supported on both Android and iOS platforms. 
+
+Licensing
+
+Copyright 2012 Regents of the University of Colorado Denver.
+GLIMMPSE is released under the GNU Public License version 2.0 
+(http://www.gnu.org/licenses/gpl-2.0.html).
+
+Funding
+
+GLIMMPSE Lite 1.0.0 is funded by NIDCR 1 R01 DE020832-01A1 issued to the University of 
+Florida (Keith E. Muller, PI; Deborah Glueck, University of Colorado site PI).  Previous funding 
+was received from an American Recovery and Re-investment Act supplement 
+(3K07CA088811-06S) for NCI grant K07CA088811 (Deborah Glueck, PI). 
 

@@ -1,4 +1,5 @@
-GLIMMPSE (General Linear Multivariate Model Power and Sample size)
+GLIMMPSE Lite for Android calculates power and sample size for
+one-way analysis of variance.
 Copyright (C) 2010 Regents of the University of Colorado.  
 
 This program is free software; you can redistribute it and/or
@@ -19,8 +20,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 1. INTRODUCTION
 ------------------------------
 
-The GlimmpseAndroid project is the an android app for the
-solving power and sample size (http://glimmpse.samplesizeshop.com/).
+The GlimmpseAndroid project is a native Android app for calculating
+power and sample size for one-way analysis of variance. The app is
+named GLIMMPSE Lite, and implements a subset of the full functionality
+provided by the GLIMMPSE web application at
+
+http://glimmpse.samplesizeshop.org/
 
 The power calculations are based on the work of Professor Keith E. Muller
 and colleagues.  A full list of related publications are available at:
@@ -39,20 +44,22 @@ Version 1.0.0
 
 Documentation is available from the project web site:
 
-http://samplesizeshop.com/documentation/glimmpse/
+http://samplesizeshop.org/documentation/glimmpse/
 
 ------------------------------
 4. DEPENDENCIES
 ------------------------------
 
-The interface has been tested in Apache Httpd 2.2.x
+The interface has been tested in Google Samsung Nexus S,
+Samsung Stratosphere, Samsung Galaxy S3
 
 == University of Colorado Denver dependencies ==
-Web Service Common library 1.0.0
+
+Web Service Common library 1.1.0
 
 ==Third-party dependencies==
 
-Android API 15 
+Android API 15 (http://developer.android.com/sdk/index.html)
 Restlet for Android 2.0.14
 Jackson 1.9.4
 
@@ -83,7 +90,7 @@ The build script assumes that the directories WebServiceCommon
 and thirdparty are installed at the same directory level as 
 ${GLIMMPSE_ANDROID_HOME}. Distributions for these libraries are available at
 
-http://samplesizeshop.com/software-downloads/glimmpse-software-downloads/
+http://samplesizeshop.org/software-downloads/glimmpse/
 
 To build WebServiceCommon, run the ant script found in 
 ${WEB_SERVICE_COMMON_HOME}/build
@@ -92,17 +99,13 @@ ${WEB_SERVICE_COMMON_HOME}/build
 7. CONTRIBUTORS / ACKNOWLEDGEMENTS
 ------------------------------
 
-The GlimmpseAndroid project was created by Uttara Sakhadeo, Dr. Sarah Kreidler and Dr. Deb Glueck
-at the University of Colorado Denver, Department of Biostatistics and Informatics.
+The GlimmpseAndroid project was created by Uttara Sakhadeo, Dr. Aarti Munjal,
+Dr. Sarah Kreidler and Dr. Deb Glueck at the University of Colorado Denver, 
+Department of Biostatistics and Informatics.
 
 Special thanks to the following individuals were instrumental in completion of this project:
 Professor Keith E. Muller
-Dr. Anis Karimpour-Fard
-Dr. Jackie Johnson
-Uttara Sakhadeo
-Vijay Akula
 Brandy Ringham
-Yi Guo
 Zacc Coker-Dukowitz
 
 
