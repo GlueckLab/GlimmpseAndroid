@@ -25,7 +25,7 @@
     android:background="@drawable/tab_bg_selector"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="8dip" >
+    android:padding="7dip" >
 
     <TextView
         android:id="@+id/tabsText"
