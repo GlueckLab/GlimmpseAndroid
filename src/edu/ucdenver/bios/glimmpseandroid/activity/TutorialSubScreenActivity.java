@@ -80,7 +80,7 @@ public class TutorialSubScreenActivity extends Activity implements
     public static final int RESULTS_ROW = 8;
     
     /** The menu flag. */
-    private static boolean menuFlag = false;
+    //private static boolean menuFlag = false;
 
     /**
      * This method is called by Android when the Activity is first started. From
@@ -223,7 +223,7 @@ public class TutorialSubScreenActivity extends Activity implements
         switch (direction) {
 
         case GestureFilter.SWIPE_RIGHT:
-            menuFlag = false;
+            //menuFlag = false;
             finish();
             break;
         }
@@ -244,7 +244,7 @@ public class TutorialSubScreenActivity extends Activity implements
      * 
      * @see android.app.Activity#onTouchEvent(android.view.MotionEvent)
      */
-    public boolean onTouchEvent(MotionEvent event) {
+    /*public boolean onTouchEvent(MotionEvent event) {
         if(!menuFlag){
             menuFlag = true;
             this.openOptionsMenu();
@@ -254,7 +254,7 @@ public class TutorialSubScreenActivity extends Activity implements
             menuFlag = false;
             return false;
         }
-    }
+    }*/
 
     /*
      * (non-Javadoc)

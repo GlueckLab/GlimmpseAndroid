@@ -220,6 +220,7 @@ public class TypeIErrorActivity extends Activity implements OnClickListener,
         if (imm != null) {
             if (isKeyboardVisible) {
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+                isKeyboardVisible = false;
             }
         }
         if (alpha == 0.0)

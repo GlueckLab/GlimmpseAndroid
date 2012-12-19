@@ -116,6 +116,13 @@ public class MainActivity extends Activity {
 
         }
 
+        Resources resources = getResources();
+
+        TextView version = (TextView) this
+                .findViewById(R.id.version_textView_home);
+        version.setText(resources.getString(R.string.version) + " "
+                + resources.getString(R.string._VERSION_NUMBER_));
+
         Button start = (Button) this.findViewById(R.id.start_button_home);
         /* Setting action event for Start Button. */
         start.setOnClickListener(new OnClickListener() {
