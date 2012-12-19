@@ -23,7 +23,7 @@
     <!-- when releasing software, this is the only place the version information
 			should be specified. Appropriate changes to the manifest and source
 			code will be performed by the build -->
-	<property name="app.version" value="dev" />
+	<property name="webservicecomman.version" value="dev" />
 	<condition property="webservicecommon.version" value="dev">
 	   <not>  
 	      <isset property=""/>
@@ -36,15 +36,17 @@
 	<property name="author" value="Uttara Sakhadeo" />
 	<property name="glimmpselite" value="GLIMMPSELite" />
 	<property name="app.name" value="edu.ucdenver.bios.glimmpseandroid" />
+	<property name="module.version" value="dev" />
 	<property name="debug" value="FALSE" />
 	<property name="source.dir" value="${basedir}/../src" />
+	<property name="res.dir" value="${basedir}/../res" />
     <property name="tmp.dir" value="${basedir}/tmp" />
     <property name="artifacts.dir" value="${basedir}/artifacts" />
 	<property name="javadoc.dir" value="${tmp.dir}/${app.name}-${app.version}-javadoc" />
 	<property name="thirdparty.dir" value="${basedir}/../../thirdparty" />	
 	<property name="gen.dir" value="${basedir}/../gen" />
 	<property name="webservicecommon.lib" 
-		value="${basedir}/../../WebServiceCommon/build/artifacts/edu.ucdenver.bios.webservice.common-android-${webservicecommon.version}.jar" />	
+		value="${basedir}/../../WebServiceCommon/build/artifacts/edu.ucdenver.bios.webservice.common-android-${webservicecomman.version}.jar" />	
 				
 	
 	<!-- Third party libraries -->
@@ -83,6 +85,11 @@
     	<mkdir dir="${tmp.dir}/classes"/>
         <mkdir dir="${artifacts.dir}"/>     
         <mkdir dir="${javadoc.dir}"/>
+        <!-- replace version for the validation reports -->
+    	<replace file="${res.dir}/values/strings.xml" 
+    		token="_VERSION_NUMBER_" value="${module.version}"/>
+    	<replace file="${base.dir}/../AndroidManifest.xml" 
+    		token="_VERSION_NUMBER_" value="${module.version}"/>
     </target>
     
 	<!-- ******************************************************* -->
