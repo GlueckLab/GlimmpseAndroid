@@ -49,6 +49,7 @@ import edu.ucdenver.bios.glimmpseandroid.application.StuyDesignContext;
 import edu.ucdenver.bios.webservice.common.domain.PowerResult;
 import edu.ucdenver.bios.webservice.common.domain.PowerResultList;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class ResultsActivity deals with the 'Result' Screen of the GLIMMPSE LITE
  * Application.
@@ -57,13 +58,24 @@ import edu.ucdenver.bios.webservice.common.domain.PowerResultList;
  * @version 1.0.0
  */
 public class ResultsActivity extends Activity implements SimpleGestureListener {
+
+    /** The detector. */
     private static GestureFilter detector;
+
+    /** The list. */
     private static PowerResultList list;
+
+    /** The resources. */
     private Resources resources;
+
+    /** The Constant RESULTS_DIR. */
     public static final String RESULTS_DIR = "/PowerResultData";
 
     // private StuyDesignContext globalVariables;
 
+    /**
+     * Instantiates a new results activity.
+     */
     public ResultsActivity() {
         // TODO Auto-generated constructor stub
 
@@ -117,8 +129,8 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
         resources = getResources();
 
         Bundle extras = this.getIntent().getExtras();
-        if (extras != null) {            
-            String jsonString = extras.getString("results");            
+        if (extras != null) {
+            String jsonString = extras.getString("results");
             ListView resultsListView = (ListView) findViewById(R.id.results_list_view);
             View header1 = getLayoutInflater().inflate(
                     R.layout.results_list_header, null, false);
@@ -128,7 +140,7 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
             ObjectMapper mapper = new ObjectMapper();
             try {
                 list = mapper.readValue(jsonString, PowerResultList.class);
-                
+
                 resultsListView.setAdapter(new ResultsListAdapter(
                         ResultsActivity.this, list));
             } catch (Exception e) {
@@ -192,7 +204,7 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
                 File file1 = null;
                 File root = Environment.getExternalStorageDirectory();
                 if (root.canWrite()) {
-                    File dir = new File(root.getAbsolutePath() + RESULTS_DIR);                    
+                    File dir = new File(root.getAbsolutePath() + RESULTS_DIR);
                     dir.mkdirs();
                     file = new File(dir, resources
                             .getString(R.string.power_results_file));
@@ -263,16 +275,35 @@ public class ResultsActivity extends Activity implements SimpleGestureListener {
 
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener
+     * #onDoubleTap()
+     */
     public void onDoubleTap() {
 
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see android.app.Activity#dispatchTouchEvent(android.view.MotionEvent)
+     */
     public boolean dispatchTouchEvent(MotionEvent me) {
         if (detector != null)
             detector.onTouchEvent(me);
         return super.dispatchTouchEvent(me);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * edu.ucdenver.bios.glimmpseandroid.adapter.GestureFilter.SimpleGestureListener
+     * #onSwipe(int)
+     */
     public void onSwipe(int direction) {
         switch (direction) {
 
