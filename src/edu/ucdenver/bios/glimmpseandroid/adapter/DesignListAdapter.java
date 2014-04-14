@@ -295,7 +295,7 @@ public class DesignListAdapter extends BaseAdapter implements Filterable {
                     if (groups < 2
                             && (position == MEANS_VARIANCE_ROW || position == RELATIVE_GROUP_SIZE_ROW)) {
                         (Toast.makeText(v.getContext(),
-                                "Please select the number of groups first !!!",
+                                "Please Select Number of Groups First",
                                 Toast.LENGTH_SHORT)).show();
                     } else {
                         callIntent(v, pos);

@@ -25,19 +25,19 @@
         <item>@string/tutorial_getting_started</item>
         <item>@string/tutorial_solving_for</item>
         <item>@string/tutorial_power</item>
-        <item>@string/tutorial_smallest_group_size</item>        
 		<item>@string/tutorial_type_one_error</item>
 		<item>@string/tutorial_number_of_groups</item>
-		<item>@string/tutorial_relative_group_size</item>		
+		<item>@string/tutorial_relative_group_size</item>
+        <item>@string/tutorial_smallest_group_size</item>
 		<item>@string/tutorial_means_and_variance</item>
 		<item>@string/tutorial_results</item>
     </string-array>
     <string-array name="design_list">        
         <item>@string/tutorial_solving_for</item>
-        <item>@string/tutorial_smallest_group_size</item>
 		<item>@string/tutorial_type_one_error</item>
 		<item>@string/tutorial_number_of_groups</item>
-		<item>@string/tutorial_relative_group_size</item>		
+		<item>@string/tutorial_relative_group_size</item>
+        <item>@string/tutorial_smallest_group_size</item>
 		<item>@string/tutorial_means_and_variance</item>		
     </string-array>
 </resources>
