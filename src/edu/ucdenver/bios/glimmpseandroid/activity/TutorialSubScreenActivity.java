@@ -143,12 +143,6 @@ public class TutorialSubScreenActivity extends Activity implements
                     data = getResources().getString(
                             R.string.description_tutorial_power);
                     break;
-                case SAMPLE_SIZE_ROW:
-                    subTitle = getResources().getString(
-                            R.string.tutorial_smallest_group_size);
-                    data = getResources().getString(
-                            R.string.description_tutorial_smallest_group);
-                    break;
                 case TYPE_I_ERROR_ROW:
                     subTitle = getResources().getString(
                             R.string.tutorial_type_one_error);
@@ -167,6 +161,12 @@ public class TutorialSubScreenActivity extends Activity implements
                     data = getResources().getString(
                             R.string.description_tutorial_relative_size);
                     break;
+                case SAMPLE_SIZE_ROW:
+                                    subTitle = getResources().getString(
+                                            R.string.tutorial_smallest_group_size);
+                                    data = getResources().getString(
+                                            R.string.description_tutorial_smallest_group);
+                                    break;
                 case MEANS_VARIANCE_ROW:
                     subTitle = getResources().getString(
                             R.string.tutorial_means_and_variance);
