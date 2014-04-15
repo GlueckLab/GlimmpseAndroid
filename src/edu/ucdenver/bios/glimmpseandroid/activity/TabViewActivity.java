@@ -412,9 +412,16 @@ public class TabViewActivity extends Activity implements Runnable,
             String enumSampleSize = getString(R.string.enum_sample_size_value);
             if (enumSampleSize.equals(solvingFor)) {
                 designList[1] = getString(R.string.enum_power_value);
+                designList[2] = resources.getString(R.string.title_type_i_error);
+                designList[3] = resources.getString(R.string.title_title_groups);
+                designList[4] = resources.getString(R.string.title_relative_group_size);
+                designList[5] = resources.getString(R.string.title_means_and_variance);
             } else {
-                designList[4] = resources
-                        .getString(R.string.title_smallest_group_size);
+                designList[1] = resources.getString(R.string.title_type_i_error);
+                designList[2] = resources.getString(R.string.title_title_groups);
+                designList[3] = resources.getString(R.string.title_smallest_group_size);
+                designList[4] = resources.getString(R.string.title_smallest_group_size);
+                designList[5] = resources.getString(R.string.title_means_and_variance);
             }
         }
 
