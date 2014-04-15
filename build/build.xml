@@ -46,7 +46,7 @@
 	<property name="thirdparty.dir" value="${basedir}/../../thirdparty" />	
 	<property name="gen.dir" value="${basedir}/../gen" />
 	<property name="webservicecommon.lib" 
-		value="${basedir}/../../WebServiceCommon/build/artifacts/edu.ucdenver.bios.webservice.common-android-${webservicecomman.version}.jar" />	
+		value="${basedir}/../WebServiceCommon/build/artifacts/edu.ucdenver.bios.webservice.common-android-${webservicecomman.version}.jar" />	
 				
 	
 	<!-- Third party libraries -->
