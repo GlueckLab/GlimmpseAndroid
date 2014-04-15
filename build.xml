@@ -72,7 +72,7 @@
             -pre-clean
     -->
     <target name="-pre-build" description="copy webservice common jar file to libs" >
-		<copy file="${basedir}/../../WebServiceCommon/build/artifacts/edu.ucdenver.bios.webservice.common-android-${webservicecommon.version}.jar" 
+		<copy file="${basedir}/../WebServiceCommon/build/artifacts/edu.ucdenver.bios.webservice.common-android-${webservicecommon.version}.jar" 
 		     todir="libs"/>	
     </target>
     
