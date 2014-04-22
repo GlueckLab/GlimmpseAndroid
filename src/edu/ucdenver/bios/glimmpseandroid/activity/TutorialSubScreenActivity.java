@@ -61,17 +61,17 @@ public class TutorialSubScreenActivity extends Activity implements
     /** The Constant POWER_ROW. */
     public static final int POWER_ROW = 2;
 
-    /** The Constant SAMPLE_SIZE_ROW. */
-    public static final int SAMPLE_SIZE_ROW = 3;
-
     /** The Constant TYPE_I_ERROR_ROW. */
-    public static final int TYPE_I_ERROR_ROW = 4;
+    public static final int TYPE_I_ERROR_ROW = 3;
 
     /** The Constant NUMBER_OF_GROUPS_ROW. */
-    public static final int NUMBER_OF_GROUPS_ROW = 5;
+    public static final int NUMBER_OF_GROUPS_ROW = 4;
 
     /** The Constant RELATIVE_GROUP_SIZE_ROW. */
-    public static final int RELATIVE_GROUP_SIZE_ROW = 6;
+    public static final int RELATIVE_GROUP_SIZE_ROW = 5;
+
+    /** The Constant SAMPLE_SIZE_ROW. */
+    public static final int SAMPLE_SIZE_ROW = 6;
 
     /** The Constant MEANS_VARIANCE_ROW. */
     public static final int MEANS_VARIANCE_ROW = 7;
