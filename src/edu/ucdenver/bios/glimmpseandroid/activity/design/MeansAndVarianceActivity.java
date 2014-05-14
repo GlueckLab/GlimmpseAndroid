@@ -117,6 +117,13 @@ public class MeansAndVarianceActivity extends Activity implements
      */
     private void listPopulate() {
         meanVarianceList = (ListView) findViewById(R.id.means_and_variance_list_view);
+        /*
+    	 * Begin : Updating as per reviewers comments for glimmpselite paper.
+    	 */ 
+        meanVarianceList.setDescendantFocusability(ListView.FOCUS_AFTER_DESCENDANTS);
+    	 /*
+    	  * End : Updating as per reviewers comments for glimmpselite paper.
+    	  */
         View header = getLayoutInflater().inflate(
                 R.layout.design_means_and_variance_list_header, null, false);
         if (meanVarianceList.getHeaderViewsCount() == 0)
