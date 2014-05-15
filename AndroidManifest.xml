@@ -22,7 +22,7 @@
     package="edu.ucdenver.bios.glimmpseandroid"
     android:installLocation="preferExternal"
     android:versionCode="1"
-    android:versionName="1.0.0" >
+    android:versionName="1.0.1" >
 
     <!-- Android OS Gingerbread onwards supported.Min version 8 not supported. -->
     <uses-sdk
