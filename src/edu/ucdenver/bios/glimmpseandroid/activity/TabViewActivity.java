@@ -411,11 +411,11 @@ public class TabViewActivity extends Activity implements Runnable,
         if (solvingFor != null) {
             String enumSampleSize = getString(R.string.enum_sample_size_value);
             if (enumSampleSize.equals(solvingFor)) {
-                designList[1] = getString(R.string.enum_power_value);
-            } else {
-                designList[1] = resources
-                        .getString(R.string.title_smallest_group_size);
-            }
+                            designList[1] = getString(R.string.enum_power_value);
+                        } else {
+                            designList[1] = resources
+                                    .getString(R.string.title_smallest_group_size);
+                        }
         }
 
         designListView = (ListView) findViewById(R.id.design_list_view);
@@ -608,7 +608,7 @@ public class TabViewActivity extends Activity implements Runnable,
     private void displayLoading() {
         progressDialog = ProgressDialog.show(context,
                 resources.getString(R.string.calculating_message) + " "
-                        + globalVariables.getSolvingFor().toLowerCase(),
+                        + globalVariables.getSolvingFor().toLowerCase() + "...",
                 resources.getString(R.string.loading), true, false);
 
         Thread thread = new Thread(TabViewActivity.this,

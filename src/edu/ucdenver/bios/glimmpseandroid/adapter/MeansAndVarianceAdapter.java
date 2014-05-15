@@ -30,6 +30,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -123,7 +124,7 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
      */
     public long getItemId(int i) {
         return 0;
-    }
+    }      
 
     /*
      * (non-Javadoc)
@@ -135,10 +136,10 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
         v = view;
         ViewHolder holder;
         // check to see if the reused view is null or not, if is not null then
-        // reuse it
+        // reuse it        
         view = mLayoutInflater.inflate(R.layout.design_means_and_variance_item,
-                null);
-
+                null);        
+        
         holder = new ViewHolder();
         holder.textLine = (TextView) view
                 .findViewById(R.id.list_item_textView_group);
@@ -206,20 +207,50 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
             }
         });
 
+        /*
+    	 * Begin : Updating as per reviewers comments for glimmpselite paper.
+    	 */         
+        standardDeviation = StuyDesignContext.getInstance().getStandardDeviation();            
+        temp = standardDeviation % 1;
+        format = new DecimalFormat("#.0");
+        temp = Double.parseDouble(format.format(temp));
+        if (temp != 0.0)
+            holder.varianceLine.setText(Double.toString(standardDeviation));
+        else {
+            holder.varianceLine.setText(Integer
+                    .toString(((Double) standardDeviation).intValue()));
+        }                    
+        
+        holder.meanLine.setOnFocusChangeListener(new OnFocusChangeListener() {          
+        	@Override
+            public void onFocusChange(View v, boolean hasFocus) {
+        		
+        	}
+        });        
+        /*
+    	 * End : Updating as per reviewers comments for glimmpselite paper.
+    	 */
+        
         if (position == ROW_ONE) {
-            standardDeviation = StuyDesignContext.getInstance().getStandardDeviation();            
-            temp = standardDeviation % 1;
-            format = new DecimalFormat("#.0");
-            temp = Double.parseDouble(format.format(temp));
-            if (temp != 0.0)
-                holder.varianceLine.setText(Double.toString(standardDeviation));
-            else {
-                holder.varianceLine.setText(Integer
-                        .toString(((Double) standardDeviation).intValue()));
-            }
+            
             holder.varianceLine.setSelection(holder.varianceLine.getText()
                     .length());
             holder.varianceLine.setCompoundDrawables(null, null, img, null);
+            
+            /*
+        	 * Begin : Updating as per reviewers comments for glimmpselite paper.
+        	 */ 
+            holder.varianceLine.setOnFocusChangeListener(new OnFocusChangeListener() {          
+            	@Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if(!hasFocus){                    	
+                    	notifyDataSetChanged();
+                    }
+                }
+            });
+            /*
+        	 * End : Updating as per reviewers comments for glimmpselite paper.
+        	 */
 
             holder.varianceLine.addTextChangedListener(new TextWatcher() {
 
@@ -227,7 +258,7 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
                     if (standardDeviation < 1)
                         standardDeviation = 1.0;
                     StuyDesignContext.getInstance().setStandardDeviation(
-                            standardDeviation);
+                            standardDeviation);                    
                 }
 
                 public void beforeTextChanged(CharSequence s, int start,
@@ -275,7 +306,16 @@ public class MeansAndVarianceAdapter extends BaseAdapter {
 
             });
         } else {
-            holder.varianceLine.setVisibility(View.GONE);
+        	/*
+        	 * Begin : Updating as per reviewers comments for glimmpselite paper.
+        	 */
+           // holder.varianceLine.setVisibility(View.GONE);        	
+        	holder.varianceLine.setBackgroundColor(view.getResources().getColor(android.R.color.darker_gray));
+        	holder.varianceLine.setEnabled(false);
+        	holder.varianceLine.setFocusable(false);        	
+        	/*
+        	 * End : Updating as per reviewers comments for glimmpselite paper.
+        	 */
         }
 
         String stringItem = "Group " + (position + 1);
