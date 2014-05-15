@@ -24,7 +24,7 @@
 
     <!-- Version -->
     <string name="version">Version</string>
-    <string name="_VERSION_NUMBER_">1.0.0</string>
+    <string name="_VERSION_NUMBER_">1.0.1</string>
 
     <!-- Screen Titles -->
     <string name="title_home">GLIMMPSE Lite</string>
